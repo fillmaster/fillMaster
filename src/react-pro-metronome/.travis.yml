@@ -1,0 +1,24 @@
+sudo: required
+language: node_js
+cache:
+  directories:
+    - ~/.npm
+notifications:
+  email: false
+node_js:
+  - '10'
+  - '8'
+dist: trusty
+addons:
+  chrome: stable
+before_install:
+  - npm install codecov.io coveralls
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+after_success:
+  - cat ./coverage/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js
+  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+  - npm run build
+  - npm run travis-deploy-once "npm run semantic-release"
+branches:
+  only:
+    - master
