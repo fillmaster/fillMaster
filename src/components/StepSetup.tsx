@@ -1,10 +1,10 @@
 import { Typography } from '@mui/material';
-import beatIdeas from './consts/beatIdeas';
-import fillStarts from './consts/fillStarts';
-import fills from './consts/fillTypes';
+import beatIdeas from '../consts/beatIdeas';
+import fillStarts from '../consts/fillStarts';
+import fills from '../consts/fillTypes';
 import Randomiser from './Randomiser';
 import TempoChooser from './TempoChooser';
-import getStringArrayBetweenTwoValues from './utils/getArrayBetweenValues';
+import getStringArrayBetweenTwoValues from '../utils/getArrayBetweenValues';
 
 interface SetupStepProps {
   index: number;

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import shuffleArray from './utils/randomFunctions';
+import shuffleArray from '../utils/randomFunctions';
 
 interface RandomAnimatorProps {
   arrayToRandomise: Array<string>;

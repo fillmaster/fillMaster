@@ -1,11 +1,11 @@
 import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
-import DivisionChooser from './elements/DivisionChooser';
+import DivisionChooser from '../elements/DivisionChooser';
 
 // permanent fix needed
 // eslint-disable-next-line import/no-relative-packages
-import ProMetronome from './react-pro-metronome/src';
-import PatternMaker, { PlayFillOn, PlayNotes } from './utils/stringMaker';
+import ProMetronome from '../react-pro-metronome/src';
+import PatternMaker, { PlayFillOn, PlayNotes } from '../utils/stringMaker';
 
 interface MetronomeProps {
   play: boolean;

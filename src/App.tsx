@@ -1,5 +1,5 @@
 import './App.css';
-import StepMenu from './StepMenu';
+import StepMenu from './components/StepMenu';
 
 const App = () => {
   return (
