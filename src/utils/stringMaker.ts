@@ -8,10 +8,6 @@ interface PatternSettings {
 
 // this class is for 4/4
 export default class PatternMaker {
-  // This is a 'hack' to create a Singleton so that only one PatternMaker is instantiated, eslint
-  // is incorrect here.
-  // eslint-disable-next-line no-use-before-define
-  private static instance: PatternMaker;
 
   private defaultSettingsForPattern: PatternSettings;
 
@@ -21,6 +17,14 @@ export default class PatternMaker {
 
   private metronomeStringWithFill!: string;
 
+  public countInString: string;
+
+  // This is a 'hack' to create a Singleton so that only one PatternMaker can be instantiated, eslint
+  // is incorrect here. PatternMaker can only be instantiated by using 'PatternMaker.getInstance();'.
+  // Cannot call new PatternMaker();
+  // eslint-disable-next-line no-use-before-define
+  private static instance: PatternMaker;
+
   private constructor() {
     this.defaultSettingsForPattern = {
       playNotes: 'quarterNotes',
@@ -28,9 +32,9 @@ export default class PatternMaker {
     };
     this.customSettingsForPattern = this.defaultSettingsForPattern;
     this.setMetronomeStrings(this.defaultSettingsForPattern);
+    this.countInString = '1000100010001000';
   }
 
-  // Part of singleton 'hack'.
   public static getInstance(): PatternMaker {
     if (!PatternMaker.instance) {
       PatternMaker.instance = new PatternMaker();
@@ -38,6 +42,7 @@ export default class PatternMaker {
 
     return PatternMaker.instance;
   }
+  // end of singleton 'hack'.
 
   public setCustomSettingsForPattern = (patternSettings: PatternSettings) => {
     this.customSettingsForPattern = patternSettings;
@@ -98,7 +103,6 @@ export default class PatternMaker {
   public setCustomSettingsForPatternToDefault = () => {
     this.customSettingsForPattern = this.defaultSettingsForPattern;
     this.setMetronomeStrings(this.customSettingsForPattern);
-    // this.setRhythmStringWithFill(this.customSettingsForPattern)
   };
 
   public getMetronomeString = () => {
