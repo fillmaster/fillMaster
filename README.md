@@ -1,6 +1,8 @@
 # Introduction
 This project has been created to inspire ideas for drummers by enforcing rules to use whilst practicing the improvisation of drum beats, particularly fills. It can help beginner improvisers practice playing fills on time and can help any level of player get out of their comfort zone by playing things outside their usual style.
 
+The project is Open Source under GNU GENERAL PUBLIC LICENSE Version 3.
+
 ## Getting started
 
 Clone the repo and run `npm i`
