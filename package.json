@@ -29,7 +29,7 @@
     "compile": "npx tsc",
     "eject": "react-scripts eject",
     "deploy": "npm run build && firebase deploy",
-    "test": "mocha"
+    "test": "npm run compile && mocha"
   },
   "type": "module",
   "browserslist": {
