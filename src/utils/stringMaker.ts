@@ -69,7 +69,7 @@ export default class PatternMaker {
     this.setRhythmStringWithFill(patternSettings);
   };
 
-  private setFillStringWith = (startFillAtNoteNumber: number) => {
+  private createFillString = (startFillAtNoteNumber: number) => {
     const rhythmArray = this.metronomeString.split('');
     rhythmArray[startFillAtNoteNumber - 1] = '3';
     this.metronomeStringWithFill = rhythmArray.join('');
@@ -79,16 +79,16 @@ export default class PatternMaker {
     switch (patternSettings.playFillOn) {
       // eventually add 1e, 1& up to 4a
       case '1':
-        this.setFillStringWith(1);
+        this.createFillString(1);
         break;
       case '2':
-        this.setFillStringWith(5);
+        this.createFillString(5);
         break;
       case '3':
-        this.setFillStringWith(9);
+        this.createFillString(9);
         break;
       case '4':
-        this.setFillStringWith(13);
+        this.createFillString(13);
         break;
       default:
         break;
