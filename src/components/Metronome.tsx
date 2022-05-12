@@ -69,7 +69,9 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
   return (
     <div className="App">
       <DivisionChooser handleSetNoteDivision={handleSetNoteDivision} noteDivision={noteDivision} />
+
       {barCount === 0 ? (
+        // COUNT-IN
         <ProMetronome
           bpm={Number(tempo)}
           subdivision={4}
@@ -88,6 +90,7 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
           )}
         />
       ) : (
+        // METRONOME START
         <ProMetronome
           bpm={Number(tempo)}
           subdivision={4}
