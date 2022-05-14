@@ -8,6 +8,5 @@
   "theme_color": "#ffffff",
   "background_color": "#076AE0",
   "display": "standalone",
-  "orientation": "portrait",
   "categories": ["education", "entertainment", "music"]
 }
