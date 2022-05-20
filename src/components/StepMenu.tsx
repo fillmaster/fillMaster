@@ -14,7 +14,7 @@ const steps = [
   {
     label: 'Choose a Tempo Range',
     description:
-      'Choose the tempo range you&apos;d like to play in and a random tempo will be chosen for you.',
+      "Choose the tempo range you'd like to play in and a random tempo will be chosen for you.",
   },
   {
     label: 'Now think of a drum pattern:',
