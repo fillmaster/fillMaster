@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useState } from 'react';
-import { PlayNotes } from '../../utils/classes/stringMaker';
+import { PlayNotes } from '../../utils/classes/patternMaker';
 
 interface DivisionChooserProps {
   handleSetNoteDivision: (division: PlayNotes) => void;

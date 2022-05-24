@@ -5,7 +5,7 @@ import DivisionChooser from './elements/DivisionChooser';
 // permanent fix needed
 // eslint-disable-next-line import/no-relative-packages
 import ProMetronome from '../react-pro-metronome/src';
-import PatternMaker, { PlayFillOn, PlayNotes } from '../utils/classes/stringMaker';
+import PatternMaker, { PlayFillOn, PlayNotes } from '../utils/classes/patternMaker';
 
 interface MetronomeProps {
   play: boolean;
