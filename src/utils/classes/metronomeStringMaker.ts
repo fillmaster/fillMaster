@@ -1,9 +1,11 @@
-export type PlayNotes =
-  | 'firstNoteOnly'
-  | 'halfNotes'
-  | 'quarterNotes'
-  | 'eighthNotes'
-  | 'sixteenthNotes';
+export type PlayNotes = {
+  firstNoteOnly: null;
+  halfNotes: number;
+  quarterNotes: number;
+  eighthNotes: number;
+  sixteenthNotes: number;
+};
+
 export type PlayFillOn = '1' | '2' | '3' | '4';
 
 type metronomeSound = '0' | '1' | '2' | '3';
@@ -52,11 +54,11 @@ export default class MetronomeStringMaker {
 
   private constructor() {
     this.defaultSettingsForPattern = {
-      playNotes: 'quarterNotes',
+      playNotes: this.playNotes.quarterNotes,
       playFillOn: '4',
     };
     this.settingsForPattern = this.defaultSettingsForPattern;
-    this.countInString = this.createMetronomeString('quarterNotes');
+    this.countInString = this.createMetronomeString(this.playNotes.quarterNotes);
   }
 
   public static getInstance(): MetronomeStringMaker {
@@ -72,7 +74,7 @@ export default class MetronomeStringMaker {
     return this.createMetronomeString(this.settingsForPattern.playNotes);
   };
 
-  private createMetronomeString(playNotes_: PlayNotes, isCountIn_: boolean = false) {
+  private createMetronomeString(playNotes_: number, isCountIn_: boolean = false) {
     let metronomeSubDivisionSound = this.metronomeSoundLo;
     if (isCountIn_) {
       metronomeSubDivisionSound = this.metronomeSoundCountIn;
