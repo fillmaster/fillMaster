@@ -6,9 +6,8 @@ interface PatternSettings {
   playFillOn: PlayFillOn;
 }
 
-// this class is for 4/4
+// this class is for 4/4 only
 export default class PatternMaker {
-
   private defaultSettingsForPattern: PatternSettings;
 
   private customSettingsForPattern: PatternSettings;
@@ -19,9 +18,8 @@ export default class PatternMaker {
 
   public countInString: string;
 
-  // This is a 'hack' to create a Singleton so that only one PatternMaker can be instantiated, eslint
-  // is incorrect here. PatternMaker can only be instantiated by using 'PatternMaker.getInstance();'.
-  // Cannot call new PatternMaker();
+  // The following code makes this class a singleton. PatternMaker can only be instantiated once, by using 'PatternMaker.getInstance();'.
+  // Cannot call new PatternMaker() - the following eslint error is incorrect.
   // eslint-disable-next-line no-use-before-define
   private static instance: PatternMaker;
 
@@ -42,7 +40,7 @@ export default class PatternMaker {
 
     return PatternMaker.instance;
   }
-  // end of singleton 'hack'.
+  // end of singleton.
 
   public setCustomSettingsForPattern = (patternSettings: PatternSettings) => {
     this.customSettingsForPattern = patternSettings;
