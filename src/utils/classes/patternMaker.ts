@@ -31,7 +31,7 @@ type BeatsPerBar =
   | '15'
   | '16';
 
-type BeatPosition = BeatsPerBar;
+export type BeatPosition = BeatsPerBar;
 
 type MetronomeSound = '0' | '1' | '2' | '3';
 

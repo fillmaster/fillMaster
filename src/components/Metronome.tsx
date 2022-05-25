@@ -5,7 +5,7 @@ import DivisionChooser from './elements/DivisionChooser';
 // permanent fix needed
 // eslint-disable-next-line import/no-relative-packages
 import ProMetronome from '../react-pro-metronome/src';
-import PatternMaker, { PlayNotes } from '../utils/classes/patternMaker';
+import PatternMaker, { BeatPosition, PlayNotes } from '../utils/classes/patternMaker';
 
 interface MetronomeProps {
   play: boolean;
@@ -47,7 +47,7 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
   useEffect(() => {
     patternMaker.setCustomSettingsForPattern({
       playNotes: noteDivision as PlayNotes,
-      playFillOn: { beat: '4', subBeat: '0' },
+      playFillOn: { beat: fillStart as BeatPosition, subBeat: '0' },
       beatsPerBar: '4',
     });
     setMetronomeString(patternMaker.getMetronomeString());
