@@ -13,7 +13,11 @@ describe('PatternMaker', function () {
 
   describe('Test custom pattern with no first-note-only', () => {
     it('should return 100000000000000', () => {
-      patternMaker.setCustomSettingsForPattern({ playNotes: 'firstNoteOnly' });
+      patternMaker.setCustomSettingsForPattern({
+        playNotes: 'firstNoteOnly',
+        playFillOn: { beat: '4', subBeat: '0' },
+        beatsPerBar: '4',
+      });
       assert.equal(patternMaker.getMetronomeString(), '1000000000000000');
       assert.equal(patternMaker.getMetronomeString().length, 16);
     });
@@ -21,7 +25,11 @@ describe('PatternMaker', function () {
 
   describe('Test custom pattern with quarter-notes', () => {
     it('should return 1000200020002000', () => {
-      patternMaker.setCustomSettingsForPattern({ playNotes: 'quarterNotes' });
+      patternMaker.setCustomSettingsForPattern({
+        playNotes: 'quarterNotes',
+        playFillOn: { beat: '4', subBeat: '0' },
+        beatsPerBar: '4',
+      });
       assert.equal(patternMaker.getMetronomeString(), '1000200020002000');
       assert.equal(patternMaker.getMetronomeString().length, 16);
     });
@@ -29,7 +37,11 @@ describe('PatternMaker', function () {
 
   describe('Test custom pattern with eight-notes', () => {
     it('should return 1020202020202020', () => {
-      patternMaker.setCustomSettingsForPattern({ playNotes: 'eighthNotes' });
+      patternMaker.setCustomSettingsForPattern({
+        playNotes: 'eighthNotes',
+        playFillOn: { beat: '4', subBeat: '0' },
+        beatsPerBar: '4',
+      });
       assert.equal(patternMaker.getMetronomeString(), '1020202020202020');
       assert.equal(patternMaker.getMetronomeString().length, 16);
     });
@@ -37,7 +49,11 @@ describe('PatternMaker', function () {
 
   describe('Test custom pattern with sixteenth-notes', () => {
     it('should return 1222222222222222', () => {
-      patternMaker.setCustomSettingsForPattern({ playNotes: 'sixteenthNotes' });
+      patternMaker.setCustomSettingsForPattern({
+        playNotes: 'sixteenthNotes',
+        playFillOn: { beat: '4', subBeat: '0' },
+        beatsPerBar: '4',
+      });
       assert.equal(patternMaker.getMetronomeString(), '1222222222222222');
       assert.equal(patternMaker.getMetronomeString().length, 16);
     });
@@ -45,9 +61,11 @@ describe('PatternMaker', function () {
 
   describe('Test custom pattern with sixteenth-notes', () => {
     it('should return 1222222222222222', () => {
-      patternMaker.setCustomSettingsForPattern({ playNotes: 'quarterNotes' });
-      patternMaker.setCustomSettingsForPattern({ playNotes: 'eighthNotes' });
-      patternMaker.setCustomSettingsForPattern({ playNotes: 'sixteenthNotes' });
+      patternMaker.setCustomSettingsForPattern({
+        playNotes: 'sixteenthNotes',
+        playFillOn: { beat: '4', subBeat: '0' },
+        beatsPerBar: '4',
+      });
       assert.equal(patternMaker.getMetronomeString(), '1222222222222222');
       assert.equal(patternMaker.getMetronomeString().length, 16);
     });
@@ -55,7 +73,11 @@ describe('PatternMaker', function () {
 
   describe('Test custom pattern set to default', () => {
     it('should return 1000200020002000', () => {
-      patternMaker.setCustomSettingsForPattern({ playNotes: 'sixteenthNotes' });
+      patternMaker.setCustomSettingsForPattern({
+        playNotes: 'sixteenthNotes',
+        playFillOn: { beat: '4', subBeat: '0' },
+        beatsPerBar: '4',
+      });
       patternMaker.setCustomSettingsForPatternToDefault();
       assert.equal(patternMaker.getMetronomeString(), '1000200020002000');
       assert.equal(patternMaker.getMetronomeString().length, 16);
@@ -64,9 +86,17 @@ describe('PatternMaker', function () {
 
   describe('Test custom pattern set to default and back', () => {
     it('should return 1000000000000000', () => {
-      patternMaker.setCustomSettingsForPattern({ playNotes: 'sixteenthNotes' });
+      patternMaker.setCustomSettingsForPattern({
+        playNotes: 'sixteenthNotes',
+        playFillOn: { beat: '4', subBeat: '0' },
+        beatsPerBar: '4',
+      });
       patternMaker.setCustomSettingsForPatternToDefault();
-      patternMaker.setCustomSettingsForPattern({ playNotes: 'firstNoteOnly' });
+      patternMaker.setCustomSettingsForPattern({
+        playNotes: 'firstNoteOnly',
+        playFillOn: { beat: '4', subBeat: '0' },
+        beatsPerBar: '4',
+      });
       assert.equal(patternMaker.getMetronomeString(), '1000000000000000');
       assert.equal(patternMaker.getMetronomeString().length, 16);
     });
@@ -76,7 +106,8 @@ describe('PatternMaker', function () {
     it('should return 3000200020002000', () => {
       patternMaker.setCustomSettingsForPattern({
         playNotes: 'quarterNotes',
-        playFillOn: { beat: 1, subBeat: 0 },
+        playFillOn: { beat: '1', subBeat: '0' },
+        beatsPerBar: '4',
       });
       assert.equal(patternMaker.getMetronomeString(), '1000200020002000');
       assert.equal(patternMaker.getMetronomeString().length, 16);
@@ -89,7 +120,8 @@ describe('PatternMaker', function () {
     it('should return 1000300020002000', () => {
       patternMaker.setCustomSettingsForPattern({
         playNotes: 'quarterNotes',
-        playFillOn: { beat: 2, subBeat: 0 },
+        playFillOn: { beat: '2', subBeat: '0' },
+        beatsPerBar: '4',
       });
       assert.equal(patternMaker.getMetronomeStringWithFill(), '1000300020002000');
       assert.equal(patternMaker.getMetronomeStringWithFill().length, 16);
@@ -100,7 +132,8 @@ describe('PatternMaker', function () {
     it('should return 1020202030202020', () => {
       patternMaker.setCustomSettingsForPattern({
         playNotes: 'eighthNotes',
-        playFillOn: { beat: 3, subBeat: 0 },
+        playFillOn: { beat: '3', subBeat: '0' },
+        beatsPerBar: '4',
       });
       assert.equal(patternMaker.getMetronomeStringWithFill(), '1020202030202020');
       assert.equal(patternMaker.getMetronomeStringWithFill().length, 16);
@@ -111,7 +144,8 @@ describe('PatternMaker', function () {
     it('should return 1000000000003000', () => {
       patternMaker.setCustomSettingsForPattern({
         playNotes: 'firstNoteOnly',
-        playFillOn: { beat: 4, subBeat: 0 },
+        playFillOn: { beat: '4', subBeat: '0' },
+        beatsPerBar: '4',
       });
       assert.equal(patternMaker.getMetronomeStringWithFill(), '1000000000003000');
       assert.equal(patternMaker.getMetronomeStringWithFill().length, 16);

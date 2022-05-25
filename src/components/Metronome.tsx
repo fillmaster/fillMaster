@@ -47,8 +47,8 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
   useEffect(() => {
     patternMaker.setCustomSettingsForPattern({
       playNotes: noteDivision as PlayNotes,
-      playFillOn: { beat: 4, subBeat: 0 },
-      beatsPerBar: 4,
+      playFillOn: { beat: '4', subBeat: '0' },
+      beatsPerBar: '4',
     });
     setMetronomeString(patternMaker.getMetronomeString());
   }, [noteDivision, fillStart]);

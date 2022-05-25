@@ -7,13 +7,31 @@ export type PlayNotes =
 
 export type PlayFillOn = { beat: BeatPosition; subBeat: SubBeatPosition };
 
+// Kept as union of numbers instead of strings as this will never be set by the UI directly.
+// This is only used for calculations and will not be directly part of a metronomeString.
 type Subdivision = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 
-type BeatsPerBar = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16;
+type SubBeatPosition = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8';
+
+type BeatsPerBar =
+  | '1'
+  | '2'
+  | '3'
+  | '4'
+  | '5'
+  | '6'
+  | '7'
+  | '8'
+  | '9'
+  | '10'
+  | '11'
+  | '12'
+  | '13'
+  | '14'
+  | '15'
+  | '16';
 
 type BeatPosition = BeatsPerBar;
-
-type SubBeatPosition = Subdivision | 0;
 
 type MetronomeSound = '0' | '1' | '2' | '3';
 
@@ -36,7 +54,7 @@ export default class PatternMaker {
 
   private subDivision: Subdivision = 4;
 
-  private beatsPerBar: BeatsPerBar = 4;
+  // private beatsPerBar: BeatsPerBar = '4';
 
   private defaultSettingsForPattern: PatternSettings;
 
@@ -49,8 +67,8 @@ export default class PatternMaker {
   private constructor() {
     this.defaultSettingsForPattern = {
       playNotes: 'quarterNotes',
-      playFillOn: { beat: 4, subBeat: 0 },
-      beatsPerBar: 4,
+      playFillOn: { beat: '4', subBeat: '0' },
+      beatsPerBar: '4',
     };
     this.customSettingsForPattern = this.defaultSettingsForPattern;
   }
@@ -105,7 +123,11 @@ export default class PatternMaker {
       metronomeFirstNoteSound = this.metronomeSoundCountIn;
     }
 
-    const blankString = getBlankString(this.beatsPerBar, this.subDivision, this.metronomeSoundOff);
+    const blankString = getBlankString(
+      this.customSettingsForPattern.beatsPerBar,
+      this.subDivision,
+      this.metronomeSoundOff
+    );
 
     let stringWithDivisions = blankString;
     const nth = getNth(this.customSettingsForPattern.playNotes, this.subDivision);
@@ -121,10 +143,12 @@ export default class PatternMaker {
 
 // returns an index to use with replaceCharacter for the fill start.
 function getIndexForFillCharacter(
-  beat: BeatPosition,
+  beat_: BeatPosition,
   division: Subdivision,
-  subBeat: SubBeatPosition
+  subBeat_: SubBeatPosition
 ) {
+  const beat = Number(beat_);
+  const subBeat = Number(subBeat_);
   let output = 0;
   for (let i = 1; i < beat; i++) {
     output += division;
@@ -172,7 +196,8 @@ function getNth(playNotes: PlayNotes, subDivision: number) {
   return nth;
 }
 // returns a blank metronome string of the correct length, depending on the number of beat plus subdivisions
-function getBlankString(beatsPerBar: number, subDivision: number, character: MetronomeSound) {
+function getBlankString(beatsPerBar_: BeatsPerBar, subDivision: number, character: MetronomeSound) {
+  const beatsPerBar = Number(beatsPerBar_);
   const multiplier = beatsPerBar * subDivision;
   return character.repeat(multiplier);
 }
