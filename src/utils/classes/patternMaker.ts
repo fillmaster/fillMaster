@@ -1,36 +1,58 @@
-export type PlayNotes = 'firstNoteOnly' | 'quarterNotes' | 'eighthNotes' | 'sixteenthNotes';
-export type PlayFillOn = '1' | '2' | '3' | '4';
+export type PlayNotes =
+  | 'firstNoteOnly'
+  | 'halfNotes'
+  | 'quarterNotes'
+  | 'eighthNotes'
+  | 'sixteenthNotes';
+
+export type PlayFillOn = { beat: BeatPosition; subBeat: SubBeatPosition };
+
+type Subdivision = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+
+type BeatsPerBar = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16;
+
+type BeatPosition = BeatsPerBar;
+
+type SubBeatPosition = Subdivision | 0;
+
+type MetronomeSound = '0' | '1' | '2' | '3';
 
 interface PatternSettings {
   playNotes: PlayNotes;
   playFillOn: PlayFillOn;
+  beatsPerBar: BeatsPerBar;
 }
 
-// this class is for 4/4 only
 export default class PatternMaker {
+  private metronomeSoundOff: MetronomeSound = '0';
+
+  private metronomeSoundHi: MetronomeSound = '1';
+
+  private metronomeSoundLo: MetronomeSound = '2';
+
+  private metronomeSoundFill: MetronomeSound = '3';
+
+  private metronomeSoundCountIn: MetronomeSound = '1';
+
+  private subDivision: Subdivision = 4;
+
+  private beatsPerBar: BeatsPerBar = 4;
+
   private defaultSettingsForPattern: PatternSettings;
 
   private customSettingsForPattern: PatternSettings;
 
-  private metronomeString!: string;
-
-  private metronomeStringWithFill!: string;
-
-  public countInString: string;
-
-  // The following code makes this class a singleton. PatternMaker can only be instantiated once, by using 'PatternMaker.getInstance();'.
-  // Cannot call new PatternMaker() - the following eslint error is incorrect.
-  // eslint-disable-next-line no-use-before-define
+  // SINGLETON. PatternMaker can only be instantiated once,
+  // by using 'PatternMaker.getInstance();'.
   private static instance: PatternMaker;
 
   private constructor() {
     this.defaultSettingsForPattern = {
       playNotes: 'quarterNotes',
-      playFillOn: '4',
+      playFillOn: { beat: 4, subBeat: 0 },
+      beatsPerBar: 4,
     };
     this.customSettingsForPattern = this.defaultSettingsForPattern;
-    this.setMetronomeStrings(this.defaultSettingsForPattern);
-    this.countInString = '1000100010001000';
   }
 
   public static getInstance(): PatternMaker {
@@ -40,78 +62,117 @@ export default class PatternMaker {
 
     return PatternMaker.instance;
   }
-  // end of singleton.
+  // END OF SINGLETON.
 
   public setCustomSettingsForPattern = (patternSettings: PatternSettings) => {
     this.customSettingsForPattern = patternSettings;
-    this.setMetronomeStrings(patternSettings);
-  };
-
-  public setMetronomeStrings = (patternSettings: PatternSettings) => {
-    // set final metronome string based on custom or default settings
-
-    let rhythmString: string;
-    switch (patternSettings.playNotes) {
-      case 'firstNoteOnly':
-        rhythmString = '1000000000000000';
-        break;
-      case 'quarterNotes':
-        rhythmString = '1000200020002000';
-        break;
-      case 'eighthNotes':
-        rhythmString = '1020202020202020';
-        break;
-      case 'sixteenthNotes':
-        rhythmString = '1222222222222222';
-        break;
-      default:
-        rhythmString = '1000100010001000'; // not DRY as repeated on Metronome.tsx
-    }
-    this.metronomeString = rhythmString;
-    this.metronomeStringWithFill = rhythmString;
-    this.setRhythmStringWithFill(patternSettings);
-  };
-
-  private createFillString = (startFillAtNoteNumber: number) => {
-    const rhythmArray = this.metronomeString.split('');
-    rhythmArray[startFillAtNoteNumber - 1] = '3';
-    this.metronomeStringWithFill = rhythmArray.join('');
-  };
-
-  private setRhythmStringWithFill = (patternSettings: PatternSettings) => {
-    switch (patternSettings.playFillOn) {
-      // eventually add 1e, 1& up to 4a
-      case '1':
-        this.createFillString(1);
-        break;
-      case '2':
-        this.createFillString(5);
-        break;
-      case '3':
-        this.createFillString(9);
-        break;
-      case '4':
-        this.createFillString(13);
-        break;
-      default:
-        break;
-    }
   };
 
   public setCustomSettingsForPatternToDefault = () => {
     this.customSettingsForPattern = this.defaultSettingsForPattern;
-    this.setMetronomeStrings(this.customSettingsForPattern);
-  };
-
-  public getMetronomeString = () => {
-    return this.metronomeString;
-  };
-
-  public getMetronomeStringWithFill = () => {
-    return this.metronomeStringWithFill;
   };
 
   public getCustomSettingsForPattern = () => {
     return this.customSettingsForPattern;
   };
+
+  public getMetronomeStringWithFill = () => {
+    const { beat, subBeat } = this.customSettingsForPattern.playFillOn;
+    const metronomeString = this.createMetronomeString();
+    const fillIndex = getIndexForFillCharacter(beat, this.subDivision, subBeat);
+    const metronomeFillString = replaceCharacter(
+      metronomeString,
+      fillIndex,
+      this.metronomeSoundFill
+    );
+    return metronomeFillString;
+  };
+
+  public getMetronomeString = () => {
+    return this.createMetronomeString();
+  };
+
+  public getMetronomeCountInString = () => {
+    return this.createMetronomeString({ isCountIn: true });
+  };
+
+  private createMetronomeString({ isCountIn } = { isCountIn: false }) {
+    let metronomeSubDivisionSound = this.metronomeSoundLo;
+    let metronomeFirstNoteSound = this.metronomeSoundHi;
+
+    if (isCountIn) {
+      metronomeSubDivisionSound = this.metronomeSoundCountIn;
+      metronomeFirstNoteSound = this.metronomeSoundCountIn;
+    }
+
+    const blankString = getBlankString(this.beatsPerBar, this.subDivision, this.metronomeSoundOff);
+
+    let stringWithDivisions = blankString;
+    const nth = getNth(this.customSettingsForPattern.playNotes, this.subDivision);
+    if (nth !== null) {
+      stringWithDivisions = replaceEachNthChar(blankString, nth, metronomeSubDivisionSound);
+    }
+
+    // replace first character with the first note sound.
+    const metronomeString = replaceCharacter(stringWithDivisions, 0, metronomeFirstNoteSound);
+    return metronomeString;
+  }
+}
+
+// returns an index to use with replaceCharacter for the fill start.
+function getIndexForFillCharacter(
+  beat: BeatPosition,
+  division: Subdivision,
+  subBeat: SubBeatPosition
+) {
+  let output = 0;
+  for (let i = 1; i < beat; i++) {
+    output += division;
+  }
+  return output + subBeat;
+}
+
+function replaceCharacter(str: string, index: number, replaceWith: MetronomeSound) {
+  const stringAsArray = str.split('');
+  stringAsArray[index] = replaceWith;
+  return stringAsArray.join('');
+}
+
+// replaces a blank metronome string with a character (e.g. '2') every nth number of characters.
+// starts at the correct position for the first sub division, i.e. does not include the first character.
+function replaceEachNthChar(str: string, nth: number, replaceWith: MetronomeSound) {
+  const stringAsArray = str.split('');
+  for (let i = nth; i < str.length; i += nth) {
+    stringAsArray[i] = replaceWith;
+  }
+  return stringAsArray.join('');
+}
+
+function getNth(playNotes: PlayNotes, subDivision: number) {
+  let nth: number | null;
+  switch (playNotes) {
+    case 'firstNoteOnly':
+      nth = null;
+      break;
+    case 'halfNotes':
+      nth = subDivision * 2;
+      break;
+    case 'quarterNotes':
+      nth = subDivision * 1;
+      break;
+    case 'eighthNotes':
+      nth = subDivision / 2;
+      break;
+    case 'sixteenthNotes':
+      nth = subDivision / 4;
+      break;
+    default:
+      nth = null;
+  }
+  return nth;
+}
+// returns a blank metronome string of the correct length, depending on the number of beat plus subdivisions
+function getBlankString(beatsPerBar: number, subDivision: number, character: MetronomeSound) {
+  const multiplier = beatsPerBar * subDivision;
+  return character.repeat(multiplier);
 }
