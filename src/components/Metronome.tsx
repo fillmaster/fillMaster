@@ -53,14 +53,6 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
     setMetronomeString(patternMaker.getMetronomeString());
   }, [noteDivision, fillStart]);
 
-  // useEffect(() => {
-  //   patternMaker.setCustomSettingsForPattern({
-  //     playNotes: noteDivision as PlayNotes,
-  //     playFillOn: fillStart as PlayFillOn,
-  //   });
-  //   setMetronomeString(patternMaker.getMetronomeString());
-  // }, [noteDivision, fillStart]);
-
   useEffect(() => {
     if (barCount % 4 === 0) {
       setMetronomeString(patternMaker.getMetronomeStringWithFill());
