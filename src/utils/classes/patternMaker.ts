@@ -54,8 +54,6 @@ export default class PatternMaker {
 
   private subDivision: Subdivision = 4;
 
-  // private beatsPerBar: BeatsPerBar = '4';
-
   private defaultSettingsForPattern: PatternSettings;
 
   private customSettingsForPattern: PatternSettings;
@@ -156,6 +154,7 @@ function getIndexForFillCharacter(
   return output + subBeat;
 }
 
+// replaces a character in a string at a given index.
 function replaceCharacter(str: string, index: number, replaceWith: MetronomeSound) {
   const stringAsArray = str.split('');
   stringAsArray[index] = replaceWith;
