@@ -22,9 +22,9 @@ module.exports = {
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
     'react-hooks/exhaustive-deps': 'off',
+    'no-underscore-dangle': 'off',
     'no-use-before-define': 'off',
-    'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': ['warn'],
+    'no-unused-vars': 'off', // covered by TypeScript
     'arrow-body-style': ['off'],
     'react/require-render-return': ['warn'],
     'prettier/prettier': ['warn'],
