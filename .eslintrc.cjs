@@ -2,6 +2,7 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    jest: true,
   },
   extends: ['airbnb', 'prettier', 'plugin:react/recommended', 'plugin:react/jsx-runtime'],
   parser: '@typescript-eslint/parser',

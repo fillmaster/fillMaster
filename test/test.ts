@@ -1,16 +1,18 @@
-import PatternMaker from '../dist/utils/classes/patternMaker.js';
-import { strict as assert } from 'assert';
+import assert from 'assert';
+import PatternMaker from '../src/utils/classes/patternMaker';
 
-const patternMaker = new PatternMaker();
+const patternMaker = PatternMaker.getInstance();
 
 // Original Tests
-describe('PatternMaker', function () {
+
+describe('PatternMaker', () => {
   describe('Test default string on creation', () => {
     it('should return 1000200020002000', () => {
       assert.equal(patternMaker.getMetronomeString(), '1000200020002000');
       assert.equal(patternMaker.getMetronomeString().length, 16);
     });
   });
+});
 
 describe('Test custom pattern with no first-note-only', () => {
   it('should return 100000000000000', () => {
@@ -186,5 +188,4 @@ describe('Test fill start on the e of 2', () => {
     assert.equal(patternMaker.getMetronomeStringWithFill(), '1000230020002000');
     assert.equal(patternMaker.getMetronomeStringWithFill().length, 16);
   });
-});
 });
