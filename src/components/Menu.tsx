@@ -27,8 +27,15 @@ const TemporaryDrawer = () => {
   return (
     <div>
       <MenuIcon onClick={toggleDrawer('right', true)} />
-      <Drawer anchor="right" open={state.right} onClose={toggleDrawer('right', false)}>
-        <Box sx={{ width: 500 }}>
+      <Drawer
+        anchor="right"
+        open={state.right}
+        onClose={toggleDrawer('right', false)}
+        PaperProps={{
+          sx: { width: '90%' },
+        }}
+      >
+        <Box>
           <BasicTabs />
           <Divider />
           <List>Other stuff...</List>
