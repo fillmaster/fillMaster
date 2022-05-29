@@ -1,7 +1,7 @@
 import { useState, KeyboardEvent, MouseEvent } from 'react';
+import MenuIcon from '@mui/icons-material/Menu';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
@@ -31,7 +31,7 @@ const TemporaryDrawer = () => {
 
   return (
     <div>
-      <Button onClick={toggleDrawer('right', true)}>X</Button>
+      <MenuIcon onClick={toggleDrawer('right', true)} />
       <Drawer anchor="right" open={state.right} onClose={toggleDrawer('right', false)}>
         <Box
           sx={{ width: 500 }}
