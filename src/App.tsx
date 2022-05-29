@@ -1,5 +1,5 @@
 import './App.css';
-import TemporaryDrawer from './components/Menu';
+import MenuDrawer from './components/Menu';
 import StepMenu from './components/StepMenu';
 
 const App = () => {
@@ -7,7 +7,7 @@ const App = () => {
     <>
       <header className="App-header">Fill Master</header>
       <StepMenu />
-      <TemporaryDrawer />
+      <MenuDrawer />
     </>
   );
 };
