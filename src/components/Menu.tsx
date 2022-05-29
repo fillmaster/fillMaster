@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
+import BasicTabs from './MenuTabs';
 
 type Anchor = 'right';
 
@@ -27,12 +28,8 @@ const TemporaryDrawer = () => {
     <div>
       <MenuIcon onClick={toggleDrawer('right', true)} />
       <Drawer anchor="right" open={state.right} onClose={toggleDrawer('right', false)}>
-        <Box
-          sx={{ width: 500 }}
-          onClick={toggleDrawer('right', false)}
-          onKeyDown={toggleDrawer('right', false)}
-        >
-          About stuff...
+        <Box sx={{ width: 500 }}>
+          <BasicTabs />
           <Divider />
           <List>Other stuff...</List>
         </Box>
