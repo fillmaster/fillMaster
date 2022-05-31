@@ -31,6 +31,7 @@
     "build": "react-scripts build",
     "compile": "npx tsc",
     "eject": "react-scripts eject",
+    "serve": "npm run build && npx serve build",
     "deploy": "npm run build && firebase deploy",
     "test": "npx jest"
   },
