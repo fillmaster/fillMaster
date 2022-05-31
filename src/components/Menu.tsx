@@ -1,4 +1,4 @@
-import { useState, KeyboardEvent, MouseEvent } from 'react';
+import { useState, KeyboardEvent, MouseEvent, SyntheticEvent } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import Box from '@mui/material/Box';
 import { SwipeableDrawer } from '@mui/material';
@@ -6,12 +6,21 @@ import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import MenuTabs from './MenuTabs';
 
+export type TabName = 'Settings' | 'Help' | 'About';
 type Anchor = 'right';
+export interface BasicTabsProps {
+  tab: TabName;
+  handleSetTab: (event: SyntheticEvent, newValue: TabName) => void;
+}
 
 const TemporaryDrawer = () => {
   const [state, setState] = useState({
     right: false,
   });
+  const [tab, setTab] = useState<TabName>('Settings');
+  const handleSetTab = (event: SyntheticEvent, newValue: TabName) => {
+    setTab(newValue);
+  };
 
   const toggleDrawer = (anchor: Anchor, open: boolean) => (event: KeyboardEvent | MouseEvent) => {
     if (
@@ -40,7 +49,7 @@ const TemporaryDrawer = () => {
         }}
       >
         <Box>
-          <MenuTabs />
+          <MenuTabs tab={tab} handleSetTab={handleSetTab} />
           <Divider />
           <List>Other stuff...</List>
         </Box>
