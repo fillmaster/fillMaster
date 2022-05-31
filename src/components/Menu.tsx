@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { useState, KeyboardEvent, MouseEvent } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import Box from '@mui/material/Box';
