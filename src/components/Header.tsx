@@ -9,7 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import { Button, MenuItem } from '@mui/material';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['Settings', 'Help', 'About'];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
