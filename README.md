@@ -20,6 +20,7 @@ In the project directory, you can run:
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open http://yourip:3000 on your mobile to view on mobile.
 
 The page will reload if you make edits.
 
@@ -36,6 +37,9 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
+
+### `npm run serve`
+Builds the app and runs the server so that you can then go to: http://yourip:3000 on your mobile to view the built app (i.e. not the slower, dev environment app).
 
 ## About the project:
 
