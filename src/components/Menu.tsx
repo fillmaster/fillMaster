@@ -15,6 +15,7 @@ const TemporaryDrawer = () => {
 
   const toggleDrawer = (anchor: Anchor, open: boolean) => (event: KeyboardEvent | MouseEvent) => {
     if (
+      event &&
       event.type === 'keydown' &&
       ((event as KeyboardEvent).key === 'Tab' || (event as KeyboardEvent).key === 'Shift')
     ) {
