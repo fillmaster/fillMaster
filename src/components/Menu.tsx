@@ -1,10 +1,10 @@
 import { useState, KeyboardEvent, MouseEvent } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import Box from '@mui/material/Box';
-import { SwipeableDrawer } from '@mui/material';
+import { Drawer } from '@mui/material';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
-import BasicTabs from './MenuTabs';
+import MenuTabs from './MenuTabs';
 
 type Anchor = 'right';
 
@@ -27,21 +27,20 @@ const TemporaryDrawer = () => {
   return (
     <div>
       <MenuIcon onClick={toggleDrawer('right', true)} />
-      <SwipeableDrawer
+      <Drawer
         anchor="right"
         open={state.right}
         onClose={toggleDrawer('right', false)}
-        onOpen={toggleDrawer('right', true)}
         PaperProps={{
-          sx: { width: '90%' },
+          sx: { width: '80%' },
         }}
       >
         <Box>
-          <BasicTabs />
+          <MenuTabs />
           <Divider />
           <List>Other stuff...</List>
         </Box>
-      </SwipeableDrawer>
+      </Drawer>
     </div>
   );
 };
