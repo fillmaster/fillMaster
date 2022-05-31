@@ -2,9 +2,11 @@ import { useState, KeyboardEvent, MouseEvent, SyntheticEvent } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import Box from '@mui/material/Box';
 import { SwipeableDrawer } from '@mui/material';
-import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import MenuTabs from './MenuTabs';
+import MenuSettings from './MenuPages/MenuSettings';
+import MenuHelp from './MenuPages/MenuHelp';
+import MenuAbout from './MenuPages/MenuAbout';
 
 export type TabName = 'Settings' | 'Help' | 'About';
 type Anchor = 'right';
@@ -20,6 +22,19 @@ const TemporaryDrawer = () => {
   const [tab, setTab] = useState<TabName>('Settings');
   const handleSetTab = (event: SyntheticEvent, newValue: TabName) => {
     setTab(newValue);
+  };
+
+  const renderTab = () => {
+    switch (tab) {
+      case 'Settings':
+        return <MenuSettings />;
+      case 'Help':
+        return <MenuHelp />;
+      case 'About':
+        return <MenuAbout />;
+      default:
+        return <MenuSettings />;
+    }
   };
 
   const toggleDrawer = (anchor: Anchor, open: boolean) => (event: KeyboardEvent | MouseEvent) => {
@@ -51,7 +66,7 @@ const TemporaryDrawer = () => {
         <Box>
           <MenuTabs tab={tab} handleSetTab={handleSetTab} />
           <Divider />
-          <List>Other stuff...</List>
+          {renderTab()}
         </Box>
       </SwipeableDrawer>
     </>
