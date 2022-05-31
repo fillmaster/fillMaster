@@ -6,7 +6,6 @@ const App = () => {
   return (
     <>
       <Header />
-      <header className="App-header">Fill Master</header>
       <StepMenu />
     </>
   );

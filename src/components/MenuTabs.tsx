@@ -14,7 +14,7 @@ const BasicTabs = () => {
     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
       <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
         <Tab label="Settings" value="Settings" />
-        <Tab label="How to use" value="HowTo" />
+        <Tab label="Help" value="Help" />
         <Tab label="About" value="About" />
       </Tabs>
     </Box>
