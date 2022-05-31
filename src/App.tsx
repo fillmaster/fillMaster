@@ -1,6 +1,5 @@
 import './App.css';
 import Header from './components/Header';
-import MenuOptions from './components/Menu';
 import StepMenu from './components/StepMenu';
 
 const App = () => {
@@ -8,7 +7,6 @@ const App = () => {
     <>
       <Header />
       <header className="App-header">Fill Master</header>
-      <MenuOptions />
       <StepMenu />
     </>
   );

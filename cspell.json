@@ -4,7 +4,8 @@
   "dictionaryDefinitions": [],
   "dictionaries": [],
   "words": [
-    "consts"
+    "consts",
+    "Swipeable"
   ],
   "ignoreWords": [
     "plusplus",
