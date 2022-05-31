@@ -24,11 +24,13 @@ const TemporaryDrawer = () => {
 
     setState({ ...state, [anchor]: open });
   };
-
+  const iOS = typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent);
   return (
     <>
       <MenuIcon onClick={toggleDrawer('right', true)} />
       <SwipeableDrawer
+        disableBackdropTransition={!iOS}
+        disableDiscovery={iOS}
         anchor="right"
         open={state.right}
         onClose={toggleDrawer('right', false)}
