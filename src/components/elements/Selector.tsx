@@ -77,19 +77,17 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
 
 export default PositionedMenu;
 
-type Indexes = {
-  default: number;
-  selected: number;
-};
-
 function getDefaultAndSelectedIndexes(array: SelectorItems) {
-  ensureNoMultipleDefaultOrSelected(array);
-  const indexes: Indexes = { default: -1, selected: -1 };
+  const indexes = { default: -1, selected: -1 };
   for (let i = 0; i < array.length; i++) {
     if (array[i].default) {
+      if (indexes.default !== -1)
+        throw new Error('SelectorItems must only contain ONE default value.');
       indexes.default = i;
     }
     if (array[i].selected) {
+      if (indexes.selected !== -1)
+        throw new Error('SelectorItems must only contain ONE selected value.');
       indexes.selected = i;
     }
   }
@@ -97,19 +95,4 @@ function getDefaultAndSelectedIndexes(array: SelectorItems) {
   if (indexes.selected === -1) throw new Error("SelectorItems must contain a 'selected' value.");
 
   return indexes;
-}
-
-function ensureNoMultipleDefaultOrSelected(array: SelectorItems) {
-  let defaultCount = 0;
-  let selectedCount = 0;
-  for (let i = 0; i < array.length; i++) {
-    if (array[i].default) {
-      defaultCount += 1;
-    }
-    if (array[i].selected) {
-      selectedCount += 1;
-    }
-    if (defaultCount > 1) throw new Error('SelectorItems must only contain ONE default value.');
-    if (selectedCount > 1) throw new Error('SelectorItems must only contain ONE selected value.');
-  }
 }
