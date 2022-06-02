@@ -27,7 +27,14 @@ const MetronomeContainer = ({
       <button type="button" onClick={() => setIsPlaying(!isPlaying)}>
         {isPlaying ? 'STOP' : 'PLAY'}
       </button>
-      <Selector selectorItems={[{ name: 'test', default: true, selected: true }]} />
+      <Selector
+        selectorItems={[
+          { name: 'test', default: false, selected: true },
+          { name: 'test2', default: false, selected: false },
+          { name: 'test3', default: false, selected: false },
+          { name: 'test4', default: true, selected: false },
+        ]}
+      />
     </div>
   );
 };

@@ -4,7 +4,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Box } from '@mui/material';
 
-const HEIGHT = '30px';
+const HEIGHT = 20;
 const FONT_SIZE = '10px';
 
 export type SelectorItem = {
@@ -49,7 +49,10 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
           horizontal: 'center',
         }}
         transformOrigin={{
-          vertical: -500,
+          vertical: getTransformVerticalOffset(
+            getDefaultAndSelectedIndexes(selectorItems).default,
+            HEIGHT
+          ),
           horizontal: 'center',
         }}
       >
@@ -58,7 +61,7 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
             '& > *': {
               fontSize: FONT_SIZE,
               height: HEIGHT,
-              minHeight: '0px', // needed to override
+              minHeight: '0px', // need to override so height works correctly
             },
           }}
         >
@@ -76,6 +79,10 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
 };
 
 export default PositionedMenu;
+
+function getTransformVerticalOffset(defaultIndex: number, height: number) {
+  return defaultIndex * height + height / 2;
+}
 
 function getDefaultAndSelectedIndexes(array: SelectorItems) {
   const indexes = { default: -1, selected: -1 };
