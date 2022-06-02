@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Selector from './elements/Selector';
 import Metronome from './Metronome';
 
 interface MetronomeContainerProps {
@@ -26,6 +27,7 @@ const MetronomeContainer = ({
       <button type="button" onClick={() => setIsPlaying(!isPlaying)}>
         {isPlaying ? 'STOP' : 'PLAY'}
       </button>
+      <Selector selectorItems={[{ name: 'test', default: true, selected: true }]} />
     </div>
   );
 };
