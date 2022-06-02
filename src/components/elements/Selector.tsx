@@ -29,6 +29,8 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
     setAnchorEl(null);
   };
 
+  const getDefault = () => getDefaultAndSelectedIndexes(selectorItems).default;
+
   return (
     <div>
       <Button
@@ -38,7 +40,7 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
         onClick={handleClick}
         sx={{ fontSize: FONT_SIZE }}
       >
-        Dashboard
+        {selectorItems[getDefault()].name}
       </Button>
       <Menu
         anchorEl={anchorEl}
@@ -49,10 +51,7 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
           horizontal: 'center',
         }}
         transformOrigin={{
-          vertical: getTransformVerticalOffset(
-            getDefaultAndSelectedIndexes(selectorItems).default,
-            HEIGHT
-          ),
+          vertical: getTransformVerticalOffset(getDefault(), HEIGHT),
           horizontal: 'center',
         }}
       >
