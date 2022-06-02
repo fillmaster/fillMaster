@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Box } from '@mui/material';
+import { LegendToggleTwoTone } from '@mui/icons-material';
 
 const HEIGHT = '30px';
 const FONT_SIZE = '10px';
@@ -76,3 +77,40 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
 };
 
 export default PositionedMenu;
+
+type Indexes = {
+  default: number;
+  selected: number;
+};
+
+function getDefaultAndSelectedIndexes(array: SelectorItems) {
+  ensureNoMultipleDefaultOrSelected(array);
+  const indexes: Indexes = { default: -1, selected: -1 };
+  for (let i = 0; i < array.length; i++) {
+    if (array[i].default) {
+      indexes.default = i;
+    }
+    if (array[i].selected) {
+      indexes.selected = i;
+    }
+  }
+  if (indexes.default === -1) throw new Error("SelectorItems must contain a 'default' value.");
+  if (indexes.selected === -1) throw new Error("SelectorItems must contain a 'selected' value.");
+
+  return indexes;
+}
+
+function ensureNoMultipleDefaultOrSelected(array: SelectorItems) {
+  let defaultCount = 0;
+  let selectedCount = 0;
+  for (let i = 0; i < array.length; i++) {
+    if (array[i].default) {
+      defaultCount += 1;
+    }
+    if (array[i].selected) {
+      selectedCount += 1;
+    }
+    if (defaultCount > 1) throw new Error('SelectorItems must only contain ONE default value.');
+    if (selectedCount > 1) throw new Error('SelectorItems must only contain ONE selected value.');
+  }
+}
