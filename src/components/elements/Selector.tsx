@@ -3,7 +3,6 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Box } from '@mui/material';
-import { LegendToggleTwoTone } from '@mui/icons-material';
 
 const HEIGHT = '30px';
 const FONT_SIZE = '10px';
