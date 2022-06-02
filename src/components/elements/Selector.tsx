@@ -68,8 +68,6 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
             paddingRight: '4px',
           },
           '& li': {
-            paddingTop: '2px',
-            paddingBottom: '2px',
             minHeight: 'auto', // needed to remove size change on < 600px screen width
           },
         }}
@@ -79,7 +77,6 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
             '& *': {
               fontSize: FONT_SIZE,
               height: HEIGHT,
-              minHeight: '0px', // need to override so height works correctly
             },
           }}
         >
