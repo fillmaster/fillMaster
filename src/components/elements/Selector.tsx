@@ -4,8 +4,14 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Box } from '@mui/material';
 
+/**
+ * This component is a wrapper for MuiMenu to make it have the default
+ * item centered. It also adds some styling based on selected items and changes the
+ * activation to mouse down.
+ */
 const HEIGHT = 20;
-const FONT_SIZE = '10px';
+const FONT_SIZE = '1em';
+const PAD = 8;
 
 export type SelectorItem = {
   name: string;
@@ -51,8 +57,16 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
           horizontal: 'center',
         }}
         transformOrigin={{
-          vertical: getTransformVerticalOffset(getDefault(), HEIGHT),
+          vertical: getTransformVerticalOffset(getDefault(), HEIGHT, PAD),
           horizontal: 'center',
+        }}
+        sx={{
+          '& ul': {
+            paddingTop: `${PAD}px ${PAD}px`,
+            paddingBottom: `${PAD}px ${PAD}px`,
+            paddingLeft: '4px',
+            paddingRight: '4px',
+          },
         }}
       >
         <Box
@@ -79,8 +93,9 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
 
 export default PositionedMenu;
 
-function getTransformVerticalOffset(defaultIndex: number, height: number) {
-  return defaultIndex * height + height / 2;
+function getTransformVerticalOffset(defaultIndex: number, height: number, padding: number) {
+  const offset = defaultIndex * height + height / 2 + padding + padding / 4;
+  return offset;
 }
 
 function getDefaultAndSelectedIndexes(array: SelectorItems) {

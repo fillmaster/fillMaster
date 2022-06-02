@@ -5,6 +5,7 @@ import fills from '../consts/fillTypes';
 import Randomiser from './Randomiser';
 import TempoChooser from './TempoChooser';
 import getStringArrayBetweenTwoValues from '../utils/getArrayBetweenValues';
+import Selector from './elements/Selector';
 
 interface SetupStepProps {
   index: number;
@@ -36,6 +37,14 @@ const SetupStep = ({
           <Randomiser arrayToRandomise={beatIdeas} handleSetItem={handleSetBeatIdea} />
         </b>
         <div>When you&apos;ve thought of something, continue...</div>
+        <Selector
+          selectorItems={[
+            { name: 'test', default: false, selected: true },
+            { name: 'test2', default: false, selected: false },
+            { name: 'test3', default: true, selected: false },
+            { name: 'test4', default: false, selected: false },
+          ]}
+        />
       </>
     );
   if (index === 2)
