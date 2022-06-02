@@ -62,16 +62,21 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
         }}
         sx={{
           '& ul': {
-            paddingTop: `${PAD}px ${PAD}px`,
-            paddingBottom: `${PAD}px ${PAD}px`,
+            paddingTop: `${PAD}px`,
+            paddingBottom: `${PAD}px`,
             paddingLeft: '4px',
             paddingRight: '4px',
+          },
+          '& li': {
+            paddingTop: '2px',
+            paddingBottom: '2px',
+            minHeight: 'auto', // needed to remove size change on < 600px screen width
           },
         }}
       >
         <Box
           sx={{
-            '& > *': {
+            '& *': {
               fontSize: FONT_SIZE,
               height: HEIGHT,
               minHeight: '0px', // need to override so height works correctly
