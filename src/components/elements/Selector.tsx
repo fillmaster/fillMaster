@@ -88,7 +88,8 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
 export default PositionedMenu;
 
 function getTransformVerticalOffset(defaultIndex: number, height: number) {
-  const PADDING = 8;
+  const PADDING = 8; // padding must match what is set by Mui, overriding padding of the menu
+  // can cause issues.
   const offset = defaultIndex * height + height / 2 + PADDING + PADDING / 4;
   return offset;
 }
