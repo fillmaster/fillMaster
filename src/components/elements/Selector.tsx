@@ -10,8 +10,7 @@ import { Box } from '@mui/material';
  * activation to mouse down.
  */
 const HEIGHT = 20;
-const FONT_SIZE = '1em';
-const PAD = 8;
+const PAD = 5;
 
 export type SelectorItem = {
   name: string;
@@ -36,6 +35,7 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
   };
 
   const getDefault = () => getDefaultAndSelectedIndexes(selectorItems).default;
+  const offset = getTransformVerticalOffset(getDefault(), HEIGHT, PAD);
 
   return (
     <div>
@@ -44,10 +44,10 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
-        sx={{ fontSize: FONT_SIZE }}
       >
         {selectorItems[getDefault()].name}
       </Button>
+
       <Menu
         anchorEl={anchorEl}
         open={open}
@@ -57,15 +57,13 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
           horizontal: 'center',
         }}
         transformOrigin={{
-          vertical: getTransformVerticalOffset(getDefault(), HEIGHT, PAD),
+          vertical: offset,
           horizontal: 'center',
         }}
         sx={{
-          '& ul': {
+          '& > ul': {
             paddingTop: `${PAD}px`,
             paddingBottom: `${PAD}px`,
-            paddingLeft: '4px',
-            paddingRight: '4px',
           },
           '& li': {
             minHeight: 'auto', // needed to remove size change on < 600px screen width
@@ -75,7 +73,6 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
         <Box
           sx={{
             '& *': {
-              fontSize: FONT_SIZE,
               height: HEIGHT,
             },
           }}
