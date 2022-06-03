@@ -10,7 +10,6 @@ import { Box } from '@mui/material';
  * activation to mouse down.
  */
 const HEIGHT = 20;
-const PAD = 5;
 
 export type SelectorItem = {
   name: string;
@@ -35,7 +34,7 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
   };
 
   const getDefault = () => getDefaultAndSelectedIndexes(selectorItems).default;
-  const offset = getTransformVerticalOffset(getDefault(), HEIGHT, PAD);
+  const offset = getTransformVerticalOffset(getDefault(), HEIGHT);
 
   return (
     <div>
@@ -61,10 +60,6 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
           horizontal: 'center',
         }}
         sx={{
-          '& > ul': {
-            paddingTop: `${PAD}px`,
-            paddingBottom: `${PAD}px`,
-          },
           '& li': {
             minHeight: 'auto', // needed to remove size change on < 600px screen width
           },
@@ -92,8 +87,9 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
 
 export default PositionedMenu;
 
-function getTransformVerticalOffset(defaultIndex: number, height: number, padding: number) {
-  const offset = defaultIndex * height + height / 2 + padding + padding / 4;
+function getTransformVerticalOffset(defaultIndex: number, height: number) {
+  const PADDING = 8;
+  const offset = defaultIndex * height + height / 2 + PADDING + PADDING / 4;
   return offset;
 }
 
