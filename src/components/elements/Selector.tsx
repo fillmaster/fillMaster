@@ -26,11 +26,17 @@ interface PositionedMenuProps {
 const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-  const handleClick = (event: MouseEvent<HTMLElement>) => {
+  const handleClickButton = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleClickMenuItem = (event: MouseEvent<HTMLElement>) => {
+    const { myValue } = event.currentTarget.dataset;
+    console.log(myValue);
+    handleClose();
   };
 
   const getDefault = () => getDefaultAndSelectedIndexes(selectorItems).default;
@@ -42,7 +48,7 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
         aria-controls={open ? 'demo-positioned-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
+        onClick={handleClickButton}
       >
         {selectorItems[getDefault()].name}
       </Button>
@@ -74,7 +80,7 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
         >
           {selectorItems.map((item) => {
             return (
-              <MenuItem key={item.name} onClick={handleClose}>
+              <MenuItem key={item.name} data-my-value={item.name} onClick={handleClickMenuItem}>
                 {item.name}
               </MenuItem>
             );
