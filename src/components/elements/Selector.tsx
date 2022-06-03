@@ -72,8 +72,6 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
           '& li': {
             minHeight: 'auto', // needed to remove size change on < 600px screen width
           },
-          // '& li:hover': { backgroundColor: 'transparent' }, // maybe reintroduce hover when
-          // // mui hover bug fixed, but generally irrelevant for phone use.
         }}
         TransitionComponent={Zoom}
         transitionDuration={{ appear: 10, enter: 200, exit: 400 }}
@@ -100,8 +98,7 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
                       item.name === selectedOption
                         ? 'hsla(230, 30%, 40%, 0.3)'
                         : 'hsla(230, 30%, 40%, 0.07)',
-                  }, // maybe reintroduce hover when
-                  // mui hover bug fixed, but generally irrelevant for phone use.
+                  },
                 }}
               >
                 {item.name}
