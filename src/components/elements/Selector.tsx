@@ -14,7 +14,6 @@ const HEIGHT = 20;
 export type SelectorItem = {
   name: string;
   default: boolean;
-  selected: boolean;
 };
 
 export type SelectorItems = SelectorItem[];
@@ -91,11 +90,13 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
                 onClick={handleClickMenuItem}
                 sx={{
                   outline: item.default ? '1px solid hsl(200, 30%, 60%)' : 'none',
-                  backgroundColor: item.selected ? 'hsla(230, 30%, 40%, 0.4)' : 'transparent',
+                  backgroundColor:
+                    item.name === selectedOption ? 'hsla(230, 30%, 40%, 0.4)' : 'transparent',
                   '&:hover': {
-                    backgroundColor: item.selected
-                      ? 'hsla(230, 30%, 40%, 0.5)'
-                      : 'hsla(230, 30%, 40%, 0.1)',
+                    backgroundColor:
+                      item.name === selectedOption
+                        ? 'hsla(230, 30%, 40%, 0.5)'
+                        : 'hsla(230, 30%, 40%, 0.1)',
                   }, // maybe reintroduce hover when
                   // mui hover bug fixed, but generally irrelevant for phone use.
                 }}
@@ -124,17 +125,11 @@ function getDefaultAndSelectedIndexes(array: SelectorItems) {
   for (let i = 0; i < array.length; i++) {
     if (array[i].default) {
       if (indexes.default !== -1)
-        throw new Error('SelectorItems must only contain ONE default value.');
+        throw new Error('SelectorItems must contain only ONE default value.');
       indexes.default = i;
-    }
-    if (array[i].selected) {
-      if (indexes.selected !== -1)
-        throw new Error('SelectorItems must only contain ONE selected value.');
-      indexes.selected = i;
     }
   }
   if (indexes.default === -1) throw new Error("SelectorItems must contain a 'default' value.");
-  if (indexes.selected === -1) throw new Error("SelectorItems must contain a 'selected' value.");
 
   return indexes;
 }

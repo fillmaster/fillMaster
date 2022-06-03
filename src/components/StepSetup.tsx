@@ -39,10 +39,10 @@ const SetupStep = ({
         <div>When you&apos;ve thought of something, continue...</div>
         <Selector
           selectorItems={[
-            { name: 'test', default: false, selected: true },
-            { name: 'test2', default: false, selected: false },
-            { name: 'test3', default: true, selected: false },
-            { name: 'test4', default: false, selected: false },
+            { name: 'test', default: false },
+            { name: 'test2', default: false },
+            { name: 'test3', default: true },
+            { name: 'test4', default: false },
           ]}
         />
       </>
