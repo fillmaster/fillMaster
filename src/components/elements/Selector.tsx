@@ -72,6 +72,8 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
           '& li': {
             minHeight: 'auto', // needed to remove size change on < 600px screen width
           },
+          // '& li:hover': { backgroundColor: 'transparent' }, // maybe reintroduce hover when
+          // // mui hover bug fixed, but generally irrelevant for phone use.
         }}
       >
         <Box
@@ -83,7 +85,21 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
         >
           {selectorItems.map((item) => {
             return (
-              <MenuItem key={item.name} data-my-value={item.name} onClick={handleClickMenuItem}>
+              <MenuItem
+                key={item.name}
+                data-my-value={item.name}
+                onClick={handleClickMenuItem}
+                sx={{
+                  outline: item.default ? '1px solid hsl(200, 30%, 60%)' : 'none',
+                  backgroundColor: item.selected ? 'hsla(230, 30%, 40%, 0.4)' : 'transparent',
+                  '&:hover': {
+                    backgroundColor: item.selected
+                      ? 'hsla(230, 30%, 40%, 0.5)'
+                      : 'hsla(230, 30%, 40%, 0.1)',
+                  }, // maybe reintroduce hover when
+                  // mui hover bug fixed, but generally irrelevant for phone use.
+                }}
+              >
                 {item.name}
               </MenuItem>
             );
