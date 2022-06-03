@@ -94,12 +94,12 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
                 sx={{
                   outline: item.default ? '1px solid hsl(200, 30%, 60%)' : 'none',
                   backgroundColor:
-                    item.name === selectedOption ? 'hsla(230, 30%, 40%, 0.4)' : 'transparent',
+                    item.name === selectedOption ? 'hsla(230, 30%, 40%, 0.23)' : 'transparent',
                   '&:hover': {
                     backgroundColor:
                       item.name === selectedOption
-                        ? 'hsla(230, 30%, 40%, 0.5)'
-                        : 'hsla(230, 30%, 40%, 0.1)',
+                        ? 'hsla(230, 30%, 40%, 0.3)'
+                        : 'hsla(230, 30%, 40%, 0.07)',
                   }, // maybe reintroduce hover when
                   // mui hover bug fixed, but generally irrelevant for phone use.
                 }}
