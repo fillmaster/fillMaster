@@ -24,7 +24,10 @@ interface PositionedMenuProps {
 }
 
 const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
+  const getDefault = () => getDefaultAndSelectedIndexes(selectorItems).default;
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [menuOption, setMenuOption] = useState(selectorItems[getDefault()].name);
   const open = Boolean(anchorEl);
   const handleClickButton = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -35,11 +38,10 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
 
   const handleClickMenuItem = (event: MouseEvent<HTMLElement>) => {
     const { myValue } = event.currentTarget.dataset;
-    console.log(myValue);
+    if (myValue !== undefined) setMenuOption(myValue);
     handleClose();
   };
 
-  const getDefault = () => getDefaultAndSelectedIndexes(selectorItems).default;
   const offset = getTransformVerticalOffset(getDefault(), HEIGHT);
 
   return (
@@ -49,8 +51,9 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClickButton}
+        sx={{ outline: '1px solid', height: HEIGHT }}
       >
-        {selectorItems[getDefault()].name}
+        {menuOption}
       </Button>
 
       <Menu
