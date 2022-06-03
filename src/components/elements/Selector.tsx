@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Box } from '@mui/material';
+import Zoom from '@mui/material/Zoom';
 
 /**
  * This component is a wrapper for MuiMenu to make it have the default
@@ -74,6 +75,8 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
           // '& li:hover': { backgroundColor: 'transparent' }, // maybe reintroduce hover when
           // // mui hover bug fixed, but generally irrelevant for phone use.
         }}
+        TransitionComponent={Zoom}
+        transitionDuration={{ appear: 10, enter: 200, exit: 400 }}
       >
         <Box
           sx={{
