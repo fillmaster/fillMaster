@@ -27,7 +27,7 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
   const getDefault = () => getDefaultAndSelectedIndexes(selectorItems).default;
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [menuOption, setMenuOption] = useState(selectorItems[getDefault()].name);
+  const [selectedOption, setSelectedOption] = useState(selectorItems[getDefault()].name);
   const open = Boolean(anchorEl);
   const handleClickButton = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -38,7 +38,7 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
 
   const handleClickMenuItem = (event: MouseEvent<HTMLElement>) => {
     const { myValue } = event.currentTarget.dataset;
-    if (myValue !== undefined) setMenuOption(myValue);
+    if (myValue !== undefined) setSelectedOption(myValue);
     handleClose();
   };
 
@@ -53,7 +53,7 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
         onClick={handleClickButton}
         sx={{ outline: '1px solid', height: HEIGHT }}
       >
-        {menuOption}
+        {selectedOption}
       </Button>
 
       <Menu
