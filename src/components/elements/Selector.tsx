@@ -1,4 +1,4 @@
-import { useState, MouseEvent, useEffect } from 'react';
+import { useState, MouseEvent, useEffect, useMemo } from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -33,9 +33,12 @@ const PositionedMenu = ({ selectorItems, handleSetItem }: PositionedMenuProps) =
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedOptionName, setSelectedOptionName] = useState(selectorItems[getDefault()].name);
+  const selectedOption = useMemo(() => {
+    return getSelectorObjectByName(selectorItems, selectedOptionName);
+  }, [selectedOptionName]);
 
   useEffect(() => {
-    handleSetItem(getSelectorObjectByName(selectorItems, selectedOptionName).stateName);
+    handleSetItem(selectedOption.stateName);
   }, [selectedOptionName]);
 
   const open = Boolean(anchorEl);
