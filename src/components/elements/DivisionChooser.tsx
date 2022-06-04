@@ -52,13 +52,13 @@ const DivisionChooser = ({ handleSetNoteDivision, noteDivision }: DivisionChoose
             vertical: 'top',
             horizontal: 'left',
           }}
+          sx={{ '& *': { fontFamily: "'Noto Music'" } }}
         >
           <MenuItem
             onClick={() => {
               handleSetNoteDivision('firstNoteOnly');
               handleClose();
             }}
-            sx={{ fontFamily: "'Noto Music'" }}
           >
             𝅝 First Note of the bar only
           </MenuItem>
