@@ -6,7 +6,8 @@
   "words": [
     "appbar",
     "consts",
-    "Swipeable"
+    "Swipeable",
+    "webfonts"
   ],
   "ignoreWords": [
     "plusplus",
