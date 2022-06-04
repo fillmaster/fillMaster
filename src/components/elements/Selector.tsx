@@ -7,8 +7,8 @@ import Zoom from '@mui/material/Zoom';
 
 /**
  * This component is a wrapper for MuiMenu to make it have the default
- * item centered. It also adds some styling based on selected items and changes the
- * activation to mouse down.
+ * item centered (vertically on top of the button). It also adds some styling based and includes fonts to read
+ * the musical unicode values.
  */
 const HEIGHT = 20;
 
