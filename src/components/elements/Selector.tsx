@@ -64,9 +64,9 @@ const PositionedMenu = ({ selectorItems, handleSetItem }: PositionedMenuProps) =
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClickButton}
-        sx={{ outline: '1px solid', height: HEIGHT }}
+        sx={{ outline: '1px solid', height: HEIGHT, fontFamily: 'Noto Music' }}
       >
-        {selectedOptionName}
+        {selectedOption.previewName ? selectedOption.previewName : selectedOption.name}
       </Button>
 
       <Menu
@@ -103,6 +103,7 @@ const PositionedMenu = ({ selectorItems, handleSetItem }: PositionedMenuProps) =
                 data-my-value={item.name}
                 onClick={handleClickMenuItem}
                 sx={{
+                  fontFamily: 'Noto Music',
                   outline: item.default ? '1px solid hsl(200, 30%, 60%)' : 'none',
                   backgroundColor:
                     item.name === selectedOptionName ? 'hsla(230, 30%, 40%, 0.23)' : 'transparent',
@@ -114,7 +115,7 @@ const PositionedMenu = ({ selectorItems, handleSetItem }: PositionedMenuProps) =
                   },
                 }}
               >
-                {item.name}
+                {item.previewName ? `${item.previewName} ${item.name}` : item.name}
               </MenuItem>
             );
           })}
