@@ -23,6 +23,10 @@ type SelectorItemWithPreview = {
   previewName: string;
 };
 
+export type SelectorItem = SelectorItemBasic | SelectorItemWithPreview;
+
+// must combine SelectorItemBasic and SelectorItemWithPreview and not use an array
+// of SelectorItem to assure only one or other is used.
 export type SelectorItems = SelectorItemBasic[] | SelectorItemWithPreview[];
 
 interface PositionedMenuProps {
@@ -30,10 +34,11 @@ interface PositionedMenuProps {
 }
 
 const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
-  const getDefault = () => getDefaultAndSelectedIndexes(selectorItems).default;
+  const getDefault = () => getDefaultIndex(selectorItems).default;
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [selectedOption, setSelectedOption] = useState(selectorItems[getDefault()].name);
+  const [selectedOptionName, setSelectedOptionName] = useState(selectorItems[getDefault()].name);
+
   const open = Boolean(anchorEl);
   const handleClickButton = (event: MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -44,7 +49,7 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
 
   const handleClickMenuItem = (event: MouseEvent<HTMLElement>) => {
     const { myValue } = event.currentTarget.dataset;
-    if (myValue !== undefined) setSelectedOption(myValue);
+    if (myValue !== undefined) setSelectedOptionName(myValue);
     handleClose();
   };
 
@@ -59,7 +64,7 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
         onClick={handleClickButton}
         sx={{ outline: '1px solid', height: HEIGHT }}
       >
-        {selectedOption}
+        {selectedOptionName}
       </Button>
 
       <Menu
@@ -98,10 +103,10 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
                 sx={{
                   outline: item.default ? '1px solid hsl(200, 30%, 60%)' : 'none',
                   backgroundColor:
-                    item.name === selectedOption ? 'hsla(230, 30%, 40%, 0.23)' : 'transparent',
+                    item.name === selectedOptionName ? 'hsla(230, 30%, 40%, 0.23)' : 'transparent',
                   '&:hover': {
                     backgroundColor:
-                      item.name === selectedOption
+                      item.name === selectedOptionName
                         ? 'hsla(230, 30%, 40%, 0.3)'
                         : 'hsla(230, 30%, 40%, 0.07)',
                   },
@@ -126,7 +131,7 @@ function getTransformVerticalOffset(defaultIndex: number, height: number) {
   return offset;
 }
 
-function getDefaultAndSelectedIndexes(array: SelectorItems) {
+function getDefaultIndex(array: SelectorItems) {
   const indexes = { default: -1, selected: -1 };
   for (let i = 0; i < array.length; i++) {
     if (array[i].default) {
