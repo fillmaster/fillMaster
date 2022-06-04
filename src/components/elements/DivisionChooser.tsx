@@ -52,7 +52,7 @@ const DivisionChooser = ({ handleSetNoteDivision, noteDivision }: DivisionChoose
             vertical: 'top',
             horizontal: 'left',
           }}
-          sx={{ '& *': { fontFamily: "'Noto Music'" } }}
+          sx={{ '& li': { fontFamily: "'Noto Music'" } }}
         >
           <MenuItem
             onClick={() => {
