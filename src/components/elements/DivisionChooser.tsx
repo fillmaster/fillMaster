@@ -33,6 +33,7 @@ const DivisionChooser = ({ handleSetNoteDivision, noteDivision }: DivisionChoose
           sx={{ fontFamily: "'Noto Music'" }}
         >
           {noteDivision === 'firstNoteOnly' && '𝅝'}
+          {noteDivision === 'halfNotes' && '𝅗𝅥'}
           {noteDivision === 'quarterNotes' && '♩'}
           {noteDivision === 'eighthNotes' && '♫'}
           {noteDivision === 'sixteenthNotes' && '♬♬'}
@@ -60,6 +61,14 @@ const DivisionChooser = ({ handleSetNoteDivision, noteDivision }: DivisionChoose
             sx={{ fontFamily: "'Noto Music'" }}
           >
             𝅝 First Note of the bar only
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              handleSetNoteDivision('halfNotes');
+              handleClose();
+            }}
+          >
+            𝅗𝅥 Half Notes
           </MenuItem>
           <MenuItem
             onClick={() => {
