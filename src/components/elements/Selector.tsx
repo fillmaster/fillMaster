@@ -23,12 +23,12 @@ type SelectorItem = {
 // of SelectorItem to assure only one or other is used.
 export type SelectorItems = SelectorItem[];
 
-interface PositionedMenuProps {
+interface SelectorProps {
   selectorItems: SelectorItems;
   handleSetItem: (param: string) => void;
 }
 
-const PositionedMenu = ({ selectorItems, handleSetItem }: PositionedMenuProps) => {
+const Selector = ({ selectorItems, handleSetItem }: SelectorProps) => {
   const getDefault = () => getDefaultIndex(selectorItems).default;
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -131,7 +131,7 @@ const PositionedMenu = ({ selectorItems, handleSetItem }: PositionedMenuProps) =
   );
 };
 
-export default PositionedMenu;
+export default Selector;
 
 function getSelectorObjectByName(selectorItems: SelectorItems, name: string) {
   for (let i = 0; i < selectorItems.length; i++) {

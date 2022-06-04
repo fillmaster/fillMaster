@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 // eslint-disable-next-line import/no-relative-packages
 import ProMetronome from '../react-pro-metronome/src';
 import PatternMaker, { BeatPosition, PlayNotes } from '../utils/classes/patternMaker';
-import Selector from './elements/Selector';
+import NoteDivisionSelector from './elements/NoteDivisionSelector';
 
 interface MetronomeProps {
   play: boolean;
@@ -69,8 +69,7 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
 
   return (
     <div className="App">
-      {/* Choose Note Division */}
-      <Selector
+      <NoteDivisionSelector
         selectorItems={[
           {
             name: 'Whole Notes',
