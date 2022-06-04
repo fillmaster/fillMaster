@@ -70,41 +70,44 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
   return (
     <div className="App">
       {/* Choose Note Division */}
-      <Selector
-        selectorItems={[
-          {
-            name: 'Whole Notes',
-            default: false,
-            previewName: '&#119133;',
-            stateName: 'firstNoteOnly',
-          },
-          {
-            name: 'Half Notes',
-            default: false,
-            previewName: '&#119134;',
-            stateName: 'halfNotes',
-          },
-          {
-            name: 'Quarter Notes',
-            default: false,
-            previewName: '♩',
-            stateName: 'quarterNotes',
-          },
-          {
-            name: 'Eighth Notes',
-            default: true,
-            previewName: '♫',
-            stateName: 'eighthNotes',
-          },
-          {
-            name: 'Sixteenth Notes',
-            default: false,
-            previewName: '♬♬',
-            stateName: 'sixteenthNotes',
-          },
-        ]}
-        handleSetItem={handleSetNoteDivision}
-      />
+      <Box sx={{ '& *': { fontFamily: 'Noto Music' } }}>
+        <Selector
+          selectorItems={[
+            {
+              name: 'Whole Notes',
+              default: false,
+              previewName: '𝅝',
+              stateName: 'firstNoteOnly',
+            },
+            {
+              name: 'Half Notes',
+              default: false,
+              previewName: '𝅗𝅥',
+              stateName: 'halfNotes',
+            },
+            {
+              name: 'Quarter Notes',
+              default: true,
+              previewName: '𝅘𝅥',
+              stateName: 'quarterNotes',
+            },
+            {
+              name: 'Eighth Notes',
+              default: false,
+              previewName: '𝅘𝅥𝅮',
+              stateName: 'eighthNotes',
+            },
+            {
+              name: 'Sixteenth Notes',
+              default: false,
+              previewName: '𝅘𝅥𝅯',
+              stateName: 'sixteenthNotes',
+            },
+          ]}
+          handleSetItem={handleSetNoteDivision}
+        />
+      </Box>
+      <br />
 
       {barCount === 0 ? (
         // COUNT-IN
