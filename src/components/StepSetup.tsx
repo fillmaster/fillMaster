@@ -39,10 +39,11 @@ const SetupStep = ({
         <div>When you&apos;ve thought of something, continue...</div>
         <Selector
           selectorItems={[
-            { name: 'test', default: false },
-            { name: 'test2', default: false },
-            { name: 'test3', default: true },
-            { name: 'test4', default: false },
+            { name: 'Whole Notes', default: false, previewName: 'o' },
+            { name: 'Half Notes', default: false, previewName: 'o' },
+            { name: 'Quarter Notes', default: false, previewName: '♩' },
+            { name: 'Eighth Notes', default: true, previewName: '♫' },
+            { name: 'Sixteenth Notes', default: false, previewName: '♬♬' },
           ]}
         />
       </>

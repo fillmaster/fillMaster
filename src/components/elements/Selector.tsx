@@ -12,12 +12,18 @@ import Zoom from '@mui/material/Zoom';
  */
 const HEIGHT = 20;
 
-export type SelectorItem = {
+type SelectorItemBasic = {
   name: string;
   default: boolean;
 };
 
-export type SelectorItems = SelectorItem[];
+type SelectorItemWithPreview = {
+  name: string;
+  default: boolean;
+  previewName: string;
+};
+
+export type SelectorItems = SelectorItemBasic[] | SelectorItemWithPreview[];
 
 interface PositionedMenuProps {
   selectorItems: SelectorItems;
