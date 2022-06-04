@@ -1,4 +1,4 @@
-import { useState, MouseEvent } from 'react';
+import { useState, MouseEvent, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -13,9 +13,10 @@ import Zoom from '@mui/material/Zoom';
 const HEIGHT = 20;
 
 type SelectorItem = {
-  name: string;
+  name: string; // Name to display on menu drop down.
   default: boolean;
-  previewName?: string;
+  previewName?: string; // Name to display on button. Defaults to name.
+  stateName: string; // name of state, handled where function was called from. Defaults to name.
 };
 
 // must combine SelectorItemBasic and SelectorItemWithPreview and not use an array
@@ -24,13 +25,18 @@ export type SelectorItems = SelectorItem[];
 
 interface PositionedMenuProps {
   selectorItems: SelectorItems;
+  handleSetItem: (param: string) => void;
 }
 
-const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
+const PositionedMenu = ({ selectorItems, handleSetItem }: PositionedMenuProps) => {
   const getDefault = () => getDefaultIndex(selectorItems).default;
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedOptionName, setSelectedOptionName] = useState(selectorItems[getDefault()].name);
+
+  useEffect(() => {
+    handleSetItem(getSelectorObjectByName(selectorItems, selectedOptionName).stateName);
+  }, [selectedOptionName]);
 
   const open = Boolean(anchorEl);
   const handleClickButton = (event: MouseEvent<HTMLElement>) => {
@@ -116,6 +122,15 @@ const PositionedMenu = ({ selectorItems }: PositionedMenuProps) => {
 };
 
 export default PositionedMenu;
+
+function getSelectorObjectByName(selectorItems: SelectorItems, name: string) {
+  for (let i = 0; i < selectorItems.length; i++) {
+    if (selectorItems[i].name === name) {
+      return selectorItems[i];
+    }
+  }
+  throw new Error('No matching name found in SelectorItems');
+}
 
 function getTransformVerticalOffset(defaultIndex: number, height: number) {
   const PADDING = 8; // padding must match what is set by Mui, overriding padding of the menu

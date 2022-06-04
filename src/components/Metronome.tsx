@@ -1,11 +1,11 @@
 import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
-import DivisionChooser from './elements/DivisionChooser';
 
 // permanent fix needed
 // eslint-disable-next-line import/no-relative-packages
 import ProMetronome from '../react-pro-metronome/src';
 import PatternMaker, { BeatPosition, PlayNotes } from '../utils/classes/patternMaker';
+import Selector from './elements/Selector';
 
 interface MetronomeProps {
   play: boolean;
@@ -40,7 +40,7 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
   const [barCount, setBarCount] = useState(-1);
   const [metronomeString, setMetronomeString] = useState(patternMaker.getMetronomeString());
 
-  const handleSetNoteDivision = (division: PlayNotes) => {
+  const handleSetNoteDivision = (division: string) => {
     setNoteDivision(division);
   };
 
@@ -69,7 +69,42 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
 
   return (
     <div className="App">
-      <DivisionChooser handleSetNoteDivision={handleSetNoteDivision} noteDivision={noteDivision} />
+      {/* Choose Note Division */}
+      <Selector
+        selectorItems={[
+          {
+            name: 'Whole Notes',
+            default: false,
+            previewName: '&#119133;',
+            stateName: 'firstNoteOnly',
+          },
+          {
+            name: 'Half Notes',
+            default: false,
+            previewName: '&#119134;',
+            stateName: 'halfNotes',
+          },
+          {
+            name: 'Quarter Notes',
+            default: false,
+            previewName: '♩',
+            stateName: 'quarterNotes',
+          },
+          {
+            name: 'Eighth Notes',
+            default: true,
+            previewName: '♫',
+            stateName: 'eighthNotes',
+          },
+          {
+            name: 'Sixteenth Notes',
+            default: false,
+            previewName: '♬♬',
+            stateName: 'sixteenthNotes',
+          },
+        ]}
+        handleSetItem={handleSetNoteDivision}
+      />
 
       {barCount === 0 ? (
         // COUNT-IN
