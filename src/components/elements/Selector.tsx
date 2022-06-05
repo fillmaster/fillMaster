@@ -1,4 +1,4 @@
-import { useState, MouseEvent, useEffect, useMemo } from 'react';
+import { useState, MouseEvent, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -33,9 +33,7 @@ const Selector = ({ selectorItems, handleSetItem }: SelectorProps) => {
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedOptionName, setSelectedOptionName] = useState(selectorItems[getDefault()].name);
-  const selectedOption = useMemo(() => {
-    return getSelectorObjectByName(selectorItems, selectedOptionName);
-  }, [selectedOptionName]);
+  const selectedOption = getSelectorObjectByName(selectorItems, selectedOptionName);
 
   useEffect(() => {
     handleSetItem(selectedOption.stateName);
