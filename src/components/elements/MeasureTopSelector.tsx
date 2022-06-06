@@ -1,4 +1,4 @@
-import { BeatsPerBar } from '../../utils/classes/patternMaker';
+import { BeatsPerBar } from '../../consts/beatsPerBar';
 import Selector from './Selector';
 
 type MeasureTopSelectorItem = {

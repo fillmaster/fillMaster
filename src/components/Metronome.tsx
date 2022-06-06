@@ -1,16 +1,11 @@
 import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { BeatsPerBar, BEATS_PER_BAR } from '../consts/beatsPerBar';
+import { MeasureDivision, MEASURE_DIVISIONS } from '../consts/measureDivisions';
 // permanent fix needed
 // eslint-disable-next-line import/no-relative-packages
 import ProMetronome from '../react-pro-metronome/src';
-import PatternMaker, {
-  BeatPosition,
-  BeatsPerBar,
-  BEATS_PER_BAR,
-  MeasureDivision,
-  MEASURE_DIVISIONS,
-  PlayNotes,
-} from '../utils/classes/patternMaker';
+import PatternMaker, { BeatPosition, PlayNotes } from '../utils/classes/patternMaker';
 import MeasureBottomSelector from './elements/MeasureBottomSelector';
 import MeasureTopSelector from './elements/MeasureTopSelector';
 import NoteDivisionSelector from './elements/NoteDivisionSelector';

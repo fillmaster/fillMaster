@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material';
-import beatIdeas from '../consts/beatIdeas';
-import fillStarts from '../consts/fillStarts';
-import fills from '../consts/fillTypes';
+import beatIdeas from '../consts/forRandomiser/beatIdeas';
+import fillStarts from '../consts/forRandomiser/fillStarts';
+import fills from '../consts/forRandomiser/fillTypes';
 import Randomiser from './Randomiser';
 import TempoChooser from './TempoChooser';
 import getStringArrayBetweenTwoValues from '../utils/getArrayBetweenValues';

@@ -1,4 +1,4 @@
-const beatIdeas = [
+const BEAT_IDEAS = [
   "Add a kick on the 'e' of 1",
   "Add a kick on the '&' of 1",
   "Add a kick on the 'a' of 1",
@@ -13,4 +13,4 @@ const beatIdeas = [
   "Add a kick on the 'a' of 4",
 ];
 
-export default beatIdeas;
+export default BEAT_IDEAS;

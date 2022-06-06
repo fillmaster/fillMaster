@@ -1,4 +1,4 @@
-const fills = [
+const FILLS = [
   'More Kicks',
   'Less Kicks',
   'More Snare',
@@ -12,4 +12,4 @@ const fills = [
   'Freestyle',
 ];
 
-export default fills;
+export default FILLS;

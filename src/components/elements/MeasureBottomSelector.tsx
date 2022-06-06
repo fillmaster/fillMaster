@@ -1,4 +1,4 @@
-import { MeasureDivision } from '../../utils/classes/patternMaker';
+import { MeasureDivision } from '../../consts/measureDivisions';
 import Selector from './Selector';
 
 type MeasureBottomSelectorItem = {
