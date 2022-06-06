@@ -8,14 +8,14 @@ export type PlayNotes =
 export type PlayFillOn = { beat: BeatPosition; subBeat: SubBeatPosition };
 
 // converts BEATS_PER_BAR array to Type. Array is need to iterate over.
-const BEATS_PER_BAR = [
+export const BEATS_PER_BAR = [
   '1',
   '2',
   '3',
   '4',
   '5',
   '6',
-  '7,',
+  '7',
   '8',
   '9',
   '10',
@@ -25,14 +25,16 @@ const BEATS_PER_BAR = [
   '14',
   '15',
   '16',
-];
+] as const;
 type BeatsPerBarType = typeof BEATS_PER_BAR;
 export type BeatsPerBar = BeatsPerBarType[number];
+// end of conversion
 
 // converts MEASURE_DIVISIONS array to Type. Array is needed to iterate over.
-const MEASURE_DIVISIONS = ['2', '4', '8', '16'] as const;
+export const MEASURE_DIVISIONS = ['2', '4', '8', '16'] as const;
 type MeasureDivisionsType = typeof MEASURE_DIVISIONS;
 export type MeasureDivision = MeasureDivisionsType[number];
+// end of conversion
 
 export type TimeSignature = { beats: BeatsPerBar; division: MeasureDivision };
 

@@ -1,10 +1,17 @@
 import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
-
 // permanent fix needed
 // eslint-disable-next-line import/no-relative-packages
 import ProMetronome from '../react-pro-metronome/src';
-import PatternMaker, { BeatPosition, PlayNotes } from '../utils/classes/patternMaker';
+import PatternMaker, {
+  BeatPosition,
+  BeatsPerBar,
+  BEATS_PER_BAR,
+  MeasureDivision,
+  MEASURE_DIVISIONS,
+  PlayNotes,
+} from '../utils/classes/patternMaker';
+import MeasureBottomSelector from './elements/MeasureBottomSelector';
 import MeasureTopSelector from './elements/MeasureTopSelector';
 import NoteDivisionSelector from './elements/NoteDivisionSelector';
 
@@ -40,9 +47,9 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
   const [timeSignatureTop, setTimeSignatureTop] = useState(
     patternMaker.getCustomSettingsForPattern().timeSignature.beats as string
   );
-  // const [timeSignatureBottom, setTimeSignatureBottom] = useState(
-  //   patternMaker.getCustomSettingsForPattern().timeSignature.division as string
-  // );
+  const [timeSignatureBottom, setTimeSignatureBottom] = useState(
+    patternMaker.getCustomSettingsForPattern().timeSignature.division as string
+  );
   const [quarterNote, setQuarterNote] = useState(null);
   const [barCount, setBarCount] = useState(-1);
   const [metronomeString, setMetronomeString] = useState(patternMaker.getMetronomeString());
@@ -55,9 +62,9 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
     setTimeSignatureTop(beats);
   };
 
-  // const handleSetTimeSignatureBottom = (division: string) => {
-  //   setTimeSignatureBottom(division);
-  // };
+  const handleSetTimeSignatureBottom = (division: string) => {
+    setTimeSignatureBottom(division);
+  };
 
   useEffect(() => {
     patternMaker.setCustomSettingsForPattern({
@@ -84,16 +91,16 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
 
   return (
     <div className="App">
-      <MeasureTopSelector
-        selectorItems={[
-          {
-            name: '1',
-            default: true,
-            stateName: '1',
-          },
-        ]}
-        handleSetItem={handleSetTimeSignatureTop}
-      />
+      <div>
+        <MeasureTopSelector
+          selectorItems={getMeasureTopSelectorValues([...BEATS_PER_BAR], '4')}
+          handleSetItem={handleSetTimeSignatureTop}
+        />
+        <MeasureBottomSelector
+          selectorItems={getMeasureBottomSelectorValues([...MEASURE_DIVISIONS], '4')}
+          handleSetItem={handleSetTimeSignatureBottom}
+        />
+      </div>
       <NoteDivisionSelector
         selectorItems={[
           {
@@ -198,3 +205,28 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
 };
 
 export default Metronome;
+
+function getMeasureTopSelectorValues(beatArray: Array<BeatsPerBar>, default_: BeatsPerBar) {
+  const array = [];
+  for (let i = 0; i < beatArray.length; i++) {
+    const name = beatArray[i];
+    const defaultVar = beatArray[i] === default_;
+    const stateName = beatArray[i];
+    array.push({ name, default: defaultVar, stateName });
+  }
+  return array;
+}
+
+function getMeasureBottomSelectorValues(
+  divisionArray: Array<MeasureDivision>,
+  default_: MeasureDivision
+) {
+  const array = [];
+  for (let i = 0; i < divisionArray.length; i++) {
+    const name = divisionArray[i];
+    const defaultVar = divisionArray[i] === default_;
+    const stateName = divisionArray[i];
+    array.push({ name, default: defaultVar, stateName });
+  }
+  return array;
+}

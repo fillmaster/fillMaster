@@ -13,7 +13,7 @@ import Zoom from '@mui/material/Zoom';
 const HEIGHT = 20;
 const WIDTH = '2rem';
 
-type SelectorItem = {
+export type SelectorItem = {
   name: string; // Name to display on menu drop down.
   default: boolean;
   previewName?: string; // Name to display on button. Defaults to name.
