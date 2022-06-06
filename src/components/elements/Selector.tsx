@@ -11,6 +11,7 @@ import Zoom from '@mui/material/Zoom';
  * the musical unicode values.
  */
 const HEIGHT = 20;
+const WIDTH = '2rem';
 
 type SelectorItem = {
   name: string; // Name to display on menu drop down.
@@ -65,6 +66,8 @@ const Selector = ({ selectorItems, handleSetItem }: SelectorProps) => {
         sx={{
           outline: '1px solid',
           height: HEIGHT,
+          width: WIDTH,
+          minWidth: WIDTH,
           fontFamily: selectedOption.previewName ? 'Noto Music' : 'inherit',
         }}
       >
