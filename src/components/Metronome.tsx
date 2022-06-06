@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 // eslint-disable-next-line import/no-relative-packages
 import ProMetronome from '../react-pro-metronome/src';
 import PatternMaker, { BeatPosition, PlayNotes } from '../utils/classes/patternMaker';
+import MeasureTopSelector from './elements/MeasureTopSelector';
 import NoteDivisionSelector from './elements/NoteDivisionSelector';
 
 interface MetronomeProps {
@@ -36,6 +37,12 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
   const [noteDivision, setNoteDivision] = useState(
     patternMaker.getCustomSettingsForPattern().playNotes as string
   );
+  const [timeSignatureTop, setTimeSignatureTop] = useState(
+    patternMaker.getCustomSettingsForPattern().timeSignature.beats as string
+  );
+  // const [timeSignatureBottom, setTimeSignatureBottom] = useState(
+  //   patternMaker.getCustomSettingsForPattern().timeSignature.division as string
+  // );
   const [quarterNote, setQuarterNote] = useState(null);
   const [barCount, setBarCount] = useState(-1);
   const [metronomeString, setMetronomeString] = useState(patternMaker.getMetronomeString());
@@ -44,11 +51,19 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
     setNoteDivision(division);
   };
 
+  const handleSetTimeSignatureTop = (beats: string) => {
+    setTimeSignatureTop(beats);
+  };
+
+  // const handleSetTimeSignatureBottom = (division: string) => {
+  //   setTimeSignatureBottom(division);
+  // };
+
   useEffect(() => {
     patternMaker.setCustomSettingsForPattern({
       playNotes: noteDivision as PlayNotes,
       playFillOn: { beat: fillStart as BeatPosition, subBeat: '0' },
-      beatsPerBar: '4',
+      timeSignature: { beats: '4', division: '4' },
     });
     setMetronomeString(patternMaker.getMetronomeString());
   }, [noteDivision, fillStart]);
@@ -69,6 +84,16 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
 
   return (
     <div className="App">
+      <MeasureTopSelector
+        selectorItems={[
+          {
+            name: '1',
+            default: true,
+            stateName: '1',
+          },
+        ]}
+        handleSetItem={handleSetTimeSignatureTop}
+      />
       <NoteDivisionSelector
         selectorItems={[
           {

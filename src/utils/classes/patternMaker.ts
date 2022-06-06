@@ -7,38 +7,49 @@ export type PlayNotes =
 
 export type PlayFillOn = { beat: BeatPosition; subBeat: SubBeatPosition };
 
+// converts BEATS_PER_BAR array to Type. Array is need to iterate over.
+const BEATS_PER_BAR = [
+  '1',
+  '2',
+  '3',
+  '4',
+  '5',
+  '6',
+  '7,',
+  '8',
+  '9',
+  '10',
+  '11',
+  '12',
+  '13',
+  '14',
+  '15',
+  '16',
+];
+type BeatsPerBarType = typeof BEATS_PER_BAR;
+export type BeatsPerBar = BeatsPerBarType[number];
+
+// converts MEASURE_DIVISIONS array to Type. Array is needed to iterate over.
+const MEASURE_DIVISIONS = ['2', '4', '8', '16'] as const;
+type MeasureDivisionsType = typeof MEASURE_DIVISIONS;
+export type MeasureDivision = MeasureDivisionsType[number];
+
+export type TimeSignature = { beats: BeatsPerBar; division: MeasureDivision };
+
+export type BeatPosition = BeatsPerBar; // alias for clarity when choosing fill-start.
+
 // Kept as union of numbers instead of strings as this will never be set by the UI directly.
 // This is only used for calculations and will not be directly part of a metronomeString.
 type Subdivision = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 
 type SubBeatPosition = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8';
 
-type BeatsPerBar =
-  | '1'
-  | '2'
-  | '3'
-  | '4'
-  | '5'
-  | '6'
-  | '7'
-  | '8'
-  | '9'
-  | '10'
-  | '11'
-  | '12'
-  | '13'
-  | '14'
-  | '15'
-  | '16';
-
-export type BeatPosition = BeatsPerBar;
-
 type MetronomeSound = '0' | '1' | '2' | '3';
 
 interface PatternSettings {
   playNotes: PlayNotes;
   playFillOn: PlayFillOn;
-  beatsPerBar: BeatsPerBar;
+  timeSignature: TimeSignature;
 }
 
 export default class PatternMaker {
@@ -66,7 +77,7 @@ export default class PatternMaker {
     this.defaultSettingsForPattern = {
       playNotes: 'quarterNotes',
       playFillOn: { beat: '4', subBeat: '0' },
-      beatsPerBar: '4',
+      timeSignature: { beats: '4', division: '4' },
     };
     this.customSettingsForPattern = this.defaultSettingsForPattern;
   }
@@ -122,7 +133,7 @@ export default class PatternMaker {
     }
 
     const blankString = getBlankString(
-      this.customSettingsForPattern.beatsPerBar,
+      this.customSettingsForPattern.timeSignature.beats,
       this.subDivision,
       this.metronomeSoundOff
     );
