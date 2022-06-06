@@ -96,6 +96,7 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
           handleSetItem={handleSetTimeSignatureBottom}
         />
       </div>
+      <br />
       <NoteDivisionSelector
         selectorItems={[
           {

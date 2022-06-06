@@ -18,7 +18,8 @@ export type BeatPosition = BeatsPerBar; // alias for clarity when choosing fill-
 // This is only used for calculations and will not be directly part of a metronomeString.
 type Subdivision = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 
-type SubBeatPosition = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8';
+// based on max subDivisions (8). '0' is on beat.
+type SubBeatPosition = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7';
 
 type MetronomeSound = '0' | '1' | '2' | '3';
 
@@ -53,7 +54,7 @@ export default class PatternMaker {
     this.defaultSettingsForPattern = {
       playNotes: 'quarterNotes',
       playFillOn: { beat: '4', subBeat: '0' },
-      timeSignature: { beats: '4', division: '4' },
+      timeSignature: { beats: '3', division: '4' },
     };
     this.customSettingsForPattern = this.defaultSettingsForPattern;
   }
