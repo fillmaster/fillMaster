@@ -53,7 +53,7 @@ export default class PatternMaker {
   private constructor() {
     this.defaultSettingsForPattern = {
       playNotes: 'quarterNotes',
-      playFillOn: { beat: '4', subBeat: '0' },
+      playFillOn: { beat: '3', subBeat: '0' },
       timeSignature: { beats: '3', division: '4' },
     };
     this.customSettingsForPattern = this.defaultSettingsForPattern;

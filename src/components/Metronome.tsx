@@ -65,7 +65,7 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
     patternMaker.setCustomSettingsForPattern({
       playNotes: noteDivision as PlayNotes,
       playFillOn: { beat: fillStart as BeatPosition, subBeat: '0' },
-      timeSignature: { beats: '4', division: '4' },
+      timeSignature: { beats: '3', division: '4' },
     });
     setMetronomeString(patternMaker.getMetronomeString());
   }, [noteDivision, fillStart]);
@@ -142,13 +142,16 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
           isPlaying={play}
           soundEnabled
           soundPattern="1000100010001000"
+          beatsPerBar={Number(patternMaker.getCustomSettingsForPattern().timeSignature.beats)}
           // temporary any for props and state
           render={(props: any, state: any) => (
             <div>
               {setQuarterNote(state.qNote)}
               <div style={{ height: '1em' }}>
                 <p>Get ready!</p>
-                {5 - state.qNote}
+                {Number(patternMaker.getCustomSettingsForPattern().timeSignature.beats) -
+                  state.qNote +
+                  1}
               </div>
             </div>
           )}

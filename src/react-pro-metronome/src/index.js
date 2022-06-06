@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
+import PropTypes, { number } from 'prop-types'
 import { Howl } from 'howler'
 
 import { numberInRange, stringWithLength } from '../utils/advanced-prop-types'
@@ -58,7 +58,8 @@ class ProMetronome extends PureComponent {
       }))
     } else {
       this.setState(prevState => ({
-        qNote: prevState.qNote === 4 ? 1 : prevState.qNote + 1,
+        // modification: prevState.qNote === X (Beats per Bar)
+        qNote: prevState.qNote === this.props.beatsPerBar ? 1 : prevState.qNote + 1,
         subNote: 1
       }))
     }
@@ -115,8 +116,10 @@ ProMetronome.propTypes = {
   isPlaying: PropTypes.bool,
   soundEnabled: PropTypes.bool,
   soundPattern: (props, propName, componentName) =>
-    stringWithLength(4 * props['subdivision'])(props, propName, componentName),
-  render: PropTypes.func.isRequired
+    stringWithLength(beatsPerBar * props['subdivision'])(props, propName, componentName),
+  render: PropTypes.func.isRequired,
+  // modification: add beatsPerBar prop
+  beatsPerBar: PropTypes.number,
 }
 
 ProMetronome.defaultProps = {
@@ -124,7 +127,9 @@ ProMetronome.defaultProps = {
   subdivision: 1,
   isPlaying: true,
   soundEnabled: false,
-  soundPattern: ''
+  soundPattern: '',
+  // modification: default beats of 4
+  beatsPerBar: 4,
 }
 
 export default ProMetronome
