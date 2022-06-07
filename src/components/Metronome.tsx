@@ -67,10 +67,13 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
     patternMaker.setCustomSettingsForPattern({
       playNotes: noteDivision as PlayNotes,
       playFillOn: { beat: fillStart as BeatPosition, subBeat: '0' },
-      timeSignature: { beats: '3', division: '4' },
+      timeSignature: {
+        beats: timeSignatureTop as BeatsPerBar,
+        division: timeSignatureBottom as MeasureDivision,
+      },
     });
     setMetronomeString(patternMaker.getMetronomeString());
-  }, [noteDivision, fillStart]);
+  }, [noteDivision, fillStart, timeSignatureTop, timeSignatureBottom]);
 
   useEffect(() => {
     if (barCount % 4 === 0) {
