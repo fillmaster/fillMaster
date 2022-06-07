@@ -117,6 +117,9 @@ ProMetronome.propTypes = {
   soundEnabled: PropTypes.bool,
   beatsPerBar: PropTypes.number,
   soundPattern: (props, propName, componentName) =>
+  // pretty sure props['beatsPerBar'] is correct for prop access within propTypes
+  // it follows the props['subdivision'] pattern, look more into propTypes checks as I believe
+  // these are for error checking (console, or test). Probably redundant after upgrade to typescript
     stringWithLength(props['beatsPerBar'] * props['subdivision'])(props, propName, componentName),
   render: PropTypes.func.isRequired,
 }
