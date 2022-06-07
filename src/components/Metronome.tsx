@@ -49,6 +49,8 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
   const [barCount, setBarCount] = useState(-1);
   const [metronomeString, setMetronomeString] = useState(patternMaker.getMetronomeString());
 
+  const beatsPerBar = Number(patternMaker.getCustomSettingsForPattern().timeSignature.beats);
+
   const handleSetNoteDivision = (division: string) => {
     setNoteDivision(division);
   };
@@ -141,8 +143,8 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
           subdivision={4}
           isPlaying={play}
           soundEnabled
-          soundPattern="1000100010001000"
-          beatsPerBar={Number(patternMaker.getCustomSettingsForPattern().timeSignature.beats)}
+          soundPattern={patternMaker.getMetronomeCountInString()}
+          beatsPerBar={beatsPerBar}
           // temporary any for props and state
           render={(props: any, state: any) => (
             <div>
@@ -164,6 +166,7 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
           soundEnabled
           isPlaying={play}
           soundPattern={metronomeString}
+          beatsPerBar={beatsPerBar}
           // temporary any for props and state
           render={(props: any, state: any) => (
             <Box>
