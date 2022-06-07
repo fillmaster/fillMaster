@@ -48,6 +48,7 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
   const [quarterNote, setQuarterNote] = useState(null);
   const [barCount, setBarCount] = useState(-1);
   const [metronomeString, setMetronomeString] = useState(patternMaker.getMetronomeString());
+  const [key, setKey] = useState(0);
 
   const beatsPerBar = Number(patternMaker.getCustomSettingsForPattern().timeSignature.beats);
 
@@ -57,6 +58,7 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
 
   const handleSetTimeSignatureTop = (beats: string) => {
     setTimeSignatureTop(beats);
+    setKey(key + 1);
   };
 
   const handleSetTimeSignatureBottom = (division: string) => {
@@ -170,6 +172,7 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
           isPlaying={play}
           soundPattern={metronomeString}
           beatsPerBar={beatsPerBar}
+          key={key}
           // temporary any for props and state
           render={(props: any, state: any) => (
             <Box>
