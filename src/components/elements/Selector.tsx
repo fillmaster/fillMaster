@@ -108,6 +108,7 @@ const Selector = ({ selectorItems, handleSetItem }: SelectorProps) => {
                 data-my-value={item.name}
                 onClick={handleClickMenuItem}
                 sx={{
+                  justifyContent: 'center',
                   outline: item.default ? '1px solid hsl(200, 30%, 60%)' : 'none',
                   backgroundColor:
                     item.name === selectedOptionName ? 'hsla(230, 30%, 40%, 0.23)' : 'transparent',
