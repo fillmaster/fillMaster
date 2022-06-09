@@ -75,7 +75,6 @@ const Metronome = ({ play, tempo, fillStart, patternMaker }: MetronomeProps) => 
       },
     });
     setMetronomeString(patternMaker.getMetronomeString());
-    console.log('settings:', patternMaker.getCustomSettingsForPattern());
   }, [noteDivision, fillStart, timeSignatureTop, timeSignatureBottom]);
 
   useEffect(() => {
