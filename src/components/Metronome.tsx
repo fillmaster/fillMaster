@@ -47,6 +47,7 @@ const Metronome = ({ play, tempo, fillStart, patternMaker }: MetronomeProps) => 
   );
   const [quarterNote, setQuarterNote] = useState(null);
   const [barCount, setBarCount] = useState(-1);
+  const isCountIn = barCount === 0;
   const [metronomeString, setMetronomeString] = useState(patternMaker.getMetronomeString());
   const [key, setKey] = useState(0);
 
@@ -68,7 +69,7 @@ const Metronome = ({ play, tempo, fillStart, patternMaker }: MetronomeProps) => 
   useEffect(() => {
     patternMaker.setCustomSettingsForPattern({
       playNotes: noteDivision as PlayNotes,
-      playFillOn: { beat: 'fillStart' as BeatPosition, subBeat: '0' },
+      playFillOn: { beat: fillStart as BeatPosition, subBeat: '0' },
       timeSignature: {
         beats: timeSignatureTop as BeatsPerBar,
         division: timeSignatureBottom as MeasureDivision,
@@ -154,7 +155,7 @@ const Metronome = ({ play, tempo, fillStart, patternMaker }: MetronomeProps) => 
       />
       <br />
 
-      {barCount === 0 ? (
+      {isCountIn ? (
         // COUNT-IN
         <ProMetronome
           bpm={Number(tempo)}
