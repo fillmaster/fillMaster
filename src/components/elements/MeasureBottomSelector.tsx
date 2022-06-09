@@ -5,6 +5,7 @@ type MeasureBottomSelectorItem = {
   name: string; // Name to display on menu drop down.
   default: boolean;
   stateName: MeasureDivision; // name of state, handled where function was called from. Defaults to name.
+  selected: boolean;
 };
 type MeasureBottomSelectorItems = MeasureBottomSelectorItem[];
 

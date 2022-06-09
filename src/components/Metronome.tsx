@@ -68,7 +68,7 @@ const Metronome = ({ play, tempo, fillStart, patternMaker }: MetronomeProps) => 
   useEffect(() => {
     patternMaker.setCustomSettingsForPattern({
       playNotes: noteDivision as PlayNotes,
-      playFillOn: { beat: fillStart as BeatPosition, subBeat: '0' },
+      playFillOn: { beat: 'fillStart' as BeatPosition, subBeat: '0' },
       timeSignature: {
         beats: timeSignatureTop as BeatsPerBar,
         division: timeSignatureBottom as MeasureDivision,
@@ -96,11 +96,19 @@ const Metronome = ({ play, tempo, fillStart, patternMaker }: MetronomeProps) => 
     <div className="App">
       <div>
         <MeasureTopSelector
-          selectorItems={getMeasureTopSelectorValues([...BEATS_PER_BAR], '4')}
+          selectorItems={getMeasureTopSelectorValues(
+            [...BEATS_PER_BAR],
+            '4',
+            patternMaker.getCustomSettingsForPattern().timeSignature.beats
+          )}
           handleSetItem={handleSetTimeSignatureTop}
         />
         <MeasureBottomSelector
-          selectorItems={getMeasureBottomSelectorValues([...MEASURE_DIVISIONS], '4')}
+          selectorItems={getMeasureBottomSelectorValues(
+            [...MEASURE_DIVISIONS],
+            '4',
+            patternMaker.getCustomSettingsForPattern().timeSignature.division
+          )}
           handleSetItem={handleSetTimeSignatureBottom}
         />
       </div>
@@ -112,30 +120,35 @@ const Metronome = ({ play, tempo, fillStart, patternMaker }: MetronomeProps) => 
             default: false,
             previewName: '𝅝',
             stateName: 'firstNoteOnly',
+            selected: false,
           },
           {
             name: 'Half Notes',
             default: false,
             previewName: '𝅗𝅥',
             stateName: 'halfNotes',
+            selected: false,
           },
           {
             name: 'Quarter Notes',
             default: true,
             previewName: '𝅘𝅥',
             stateName: 'quarterNotes',
+            selected: true,
           },
           {
             name: 'Eighth Notes',
             default: false,
             previewName: '𝅘𝅥𝅮',
             stateName: 'eighthNotes',
+            selected: false,
           },
           {
             name: 'Sixteenth Notes',
             default: false,
             previewName: '𝅘𝅥𝅯',
             stateName: 'sixteenthNotes',
+            selected: false,
           },
         ]}
         handleSetItem={handleSetNoteDivision}
@@ -215,27 +228,34 @@ const Metronome = ({ play, tempo, fillStart, patternMaker }: MetronomeProps) => 
 
 export default Metronome;
 
-function getMeasureTopSelectorValues(beatArray: Array<BeatsPerBar>, default_: BeatsPerBar) {
+function getMeasureTopSelectorValues(
+  beatArray: Array<BeatsPerBar>,
+  default_: BeatsPerBar,
+  selected_: BeatsPerBar
+) {
   const array = [];
   for (let i = 0; i < beatArray.length; i++) {
     const name = beatArray[i];
     const defaultVar = beatArray[i] === default_;
+    const selected = beatArray[i] === selected_;
     const stateName = beatArray[i];
-    array.push({ name, default: defaultVar, stateName });
+    array.push({ name, default: defaultVar, selected, stateName });
   }
   return array;
 }
 
 function getMeasureBottomSelectorValues(
   divisionArray: Array<MeasureDivision>,
-  default_: MeasureDivision
+  default_: MeasureDivision,
+  selected_: MeasureDivision
 ) {
   const array = [];
   for (let i = 0; i < divisionArray.length; i++) {
     const name = divisionArray[i];
     const defaultVar = divisionArray[i] === default_;
+    const selected = divisionArray[i] === selected_;
     const stateName = divisionArray[i];
-    array.push({ name, default: defaultVar, stateName });
+    array.push({ name, default: defaultVar, selected, stateName });
   }
   return array;
 }

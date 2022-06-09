@@ -5,6 +5,7 @@ type MeasureTopSelectorItem = {
   name: BeatsPerBar; // Name to display on menu drop down.
   default: boolean;
   stateName: BeatsPerBar; // name of state, handled where function was called from. Defaults to name.
+  selected: boolean;
 };
 type MeasureTopSelectorItems = MeasureTopSelectorItem[];
 

@@ -18,6 +18,7 @@ export type SelectorItem = {
   default: boolean;
   previewName?: string; // Name to display on button. Defaults to name.
   stateName: string; // name of state, handled where function was called from. Defaults to name.
+  selected: boolean;
 };
 
 // must combine SelectorItemBasic and SelectorItemWithPreview and not use an array
@@ -30,10 +31,11 @@ interface SelectorProps {
 }
 
 const Selector = ({ selectorItems, handleSetItem }: SelectorProps) => {
-  const getDefault = () => getDefaultIndex(selectorItems).default;
+  const getDefault = () => getDefaultAndSelectedIndexes(selectorItems).default;
+  const getSelected = () => getDefaultAndSelectedIndexes(selectorItems).selected;
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [selectedOptionName, setSelectedOptionName] = useState(selectorItems[getDefault()].name);
+  const [selectedOptionName, setSelectedOptionName] = useState(selectorItems[getSelected()].name);
   const selectedOption = getSelectorObjectByName(selectorItems, selectedOptionName);
 
   useEffect(() => {
@@ -151,16 +153,22 @@ function getTransformVerticalOffset(defaultIndex: number, height: number) {
   return offset;
 }
 
-function getDefaultIndex(array: SelectorItems) {
+function getDefaultAndSelectedIndexes(array: SelectorItems) {
   const indexes = { default: -1, selected: -1 };
   for (let i = 0; i < array.length; i++) {
     if (array[i].default) {
       if (indexes.default !== -1)
-        throw new Error('SelectorItems must contain only ONE default value.');
+        throw new Error('SelectorItems must only contain ONE default value.');
       indexes.default = i;
+    }
+    if (array[i].selected) {
+      if (indexes.selected !== -1)
+        throw new Error('SelectorItems must only contain ONE selected value.');
+      indexes.selected = i;
     }
   }
   if (indexes.default === -1) throw new Error("SelectorItems must contain a 'default' value.");
+  if (indexes.selected === -1) throw new Error("SelectorItems must contain a 'selected' value.");
 
   return indexes;
 }
