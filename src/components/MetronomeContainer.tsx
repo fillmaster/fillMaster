@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PatternMaker from '../utils/classes/patternMaker';
 import Metronome from './Metronome';
 
 interface MetronomeContainerProps {
@@ -6,6 +7,7 @@ interface MetronomeContainerProps {
   restartMetronome: () => void;
   tempo: string;
   fillStart: string;
+  patternMaker: PatternMaker;
 }
 
 const MetronomeContainer = ({
@@ -13,13 +15,14 @@ const MetronomeContainer = ({
   restartMetronome,
   tempo,
   fillStart,
+  patternMaker,
 }: MetronomeContainerProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   return (
     <div style={{ height: '50px', padding: '50px' }}>
       {render ? (
-        <Metronome play={isPlaying} tempo={tempo} fillStart={fillStart} />
+        <Metronome play={isPlaying} tempo={tempo} fillStart={fillStart} patternMaker={patternMaker}/>
       ) : (
         restartMetronome()
       )}

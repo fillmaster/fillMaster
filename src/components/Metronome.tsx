@@ -14,6 +14,7 @@ interface MetronomeProps {
   play: boolean;
   tempo: string;
   fillStart: string;
+  patternMaker: PatternMaker;
 }
 
 const counterOff = {
@@ -34,8 +35,7 @@ const counterOn = {
   margin: '10px',
 };
 
-const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
-  const patternMaker = PatternMaker.getInstance();
+const Metronome = ({ play, tempo, fillStart, patternMaker }: MetronomeProps) => {
   const [noteDivision, setNoteDivision] = useState(
     patternMaker.getCustomSettingsForPattern().playNotes as string
   );
@@ -75,6 +75,7 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
       },
     });
     setMetronomeString(patternMaker.getMetronomeString());
+    console.log('settings:', patternMaker.getCustomSettingsForPattern());
   }, [noteDivision, fillStart, timeSignatureTop, timeSignatureBottom]);
 
   useEffect(() => {

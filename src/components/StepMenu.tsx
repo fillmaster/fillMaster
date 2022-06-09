@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import { useState } from 'react';
 import SetupStep from './StepSetup';
 import MetronomeContainer from './MetronomeContainer';
+import PatternMaker from '../utils/classes/patternMaker';
 
 const steps = [
   {
@@ -33,7 +34,11 @@ const steps = [
   },
 ];
 
-const VerticalLinearStepper = () => {
+interface VerticalLinearStepperProps {
+  patternMaker: PatternMaker;
+}
+
+const VerticalLinearStepper = ({ patternMaker }: VerticalLinearStepperProps) => {
   const [activeStep, setActiveStep] = useState(0);
   const [beatIdea, setBeatIdea] = useState('');
   const [fillStart, setFillStart] = useState('');
@@ -123,6 +128,7 @@ const VerticalLinearStepper = () => {
             restartMetronome={restartMetronome}
             tempo={tempo}
             fillStart={fillStart}
+            patternMaker={patternMaker}
           />
           <button type="button" onClick={() => setRender(false)}>
             restart
