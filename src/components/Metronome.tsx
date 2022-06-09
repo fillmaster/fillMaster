@@ -159,27 +159,30 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
       <br />
 
       {barCount === 0 ? (
-        // COUNT-IN
-        <ProMetronome
-          bpm={Number(tempo)}
-          subdivision={4}
-          isPlaying={play}
-          soundEnabled
-          soundPattern={patternMaker.getMetronomeCountInString()}
-          beatsPerBar={beatsPerBar}
-          // temporary any for props and state
-          render={(props: any, state: any) => (
-            <div>
-              {setQuarterNote(state.qNote)}
-              <div style={{ height: '1em' }}>
-                <p>Get ready!</p>
-                {Number(patternMaker.getCustomSettingsForPattern().timeSignature.beats) -
-                  state.qNote +
-                  1}
+        // SETUP & COUNT-IN
+        <>
+          <ProMetronome
+            bpm={Number(tempo)}
+            subdivision={4}
+            isPlaying={play}
+            soundEnabled
+            soundPattern={patternMaker.getMetronomeCountInString()}
+            beatsPerBar={beatsPerBar}
+            // temporary any for props and state
+            render={(props: any, state: any) => (
+              <div>
+                {setQuarterNote(state.qNote)}
+                <div style={{ height: '1em' }}>
+                  {isCountIn() &&
+                    Number(patternMaker.getCustomSettingsForPattern().timeSignature.beats) -
+                      state.qNote +
+                      1}
+                </div>
               </div>
-            </div>
-          )}
-        />
+            )}
+          />
+          <br />
+        </>
       ) : (
         // METRONOME START
         <ProMetronome
