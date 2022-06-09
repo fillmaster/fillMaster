@@ -1,4 +1,4 @@
-import PatternMaker, { PlayNotes } from '../../utils/classes/patternMaker';
+import { PlayNotes } from '../../utils/classes/patternMaker';
 import Selector from './Selector';
 
 type NoteDivisionSelectorItem = {
