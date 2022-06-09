@@ -2,10 +2,11 @@ import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { BeatsPerBar, BEATS_PER_BAR } from '../consts/beatsPerBar';
 import { MeasureDivision, MEASURE_DIVISIONS } from '../consts/measureDivisions';
+import { PlayNotes } from '../consts/playNotes';
 // permanent fix needed
 // eslint-disable-next-line import/no-relative-packages
 import ProMetronome from '../react-pro-metronome/src';
-import PatternMaker, { BeatPosition, PlayNotes } from '../utils/classes/patternMaker';
+import PatternMaker, { BeatPosition } from '../utils/classes/patternMaker';
 import MeasureBottomSelector from './elements/MeasureBottomSelector';
 import MeasureTopSelector from './elements/MeasureTopSelector';
 import NoteDivisionSelector from './elements/NoteDivisionSelector';
@@ -120,7 +121,7 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
           {
             name: 'Whole Notes',
             default: false,
-            previewName: '𝅝',
+            previewName: '\u{1D15D}',
             stateName: 'firstNoteOnly',
             selected: false,
           },
@@ -233,6 +234,22 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
 };
 
 export default Metronome;
+
+function getMeasurePlayNoteValues(
+  playNotesArray: Array<PlayNotes>,
+  default_: PlayNotes,
+  selected_: PlayNotes
+) {
+  const array = [];
+  for (let i = 0; i < playNotesArray.length; i++) {
+    const name = playNotesArray[i];
+    const defaultVar = playNotesArray[i] === default_;
+    const selected = playNotesArray[i] === selected_;
+    const stateName = playNotesArray[i];
+    array.push({ name, default: defaultVar, selected, stateName });
+  }
+  return array;
+}
 
 function getMeasureTopSelectorValues(
   beatArray: Array<BeatsPerBar>,
