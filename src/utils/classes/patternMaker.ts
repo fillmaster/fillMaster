@@ -1,12 +1,6 @@
 import { BeatsPerBar } from '../../consts/beatsPerBar';
 import { MeasureDivision } from '../../consts/measureDivisions';
-
-export type PlayNotes =
-  | 'firstNoteOnly'
-  | 'halfNotes'
-  | 'quarterNotes'
-  | 'eighthNotes'
-  | 'sixteenthNotes';
+import { PlayNotes } from '../../consts/playNotes';
 
 export type PlayFillOn = { beat: BeatPosition; subBeat: SubBeatPosition };
 
