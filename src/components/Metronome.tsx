@@ -47,7 +47,7 @@ const Metronome = ({ play, tempo, fillStart, patternMaker }: MetronomeProps) => 
   );
   const [quarterNote, setQuarterNote] = useState(null);
   const [barCount, setBarCount] = useState(-1);
-  const isCountIn = barCount === 0;
+  const isCountIn = () => barCount === 0 && play;
   const [metronomeString, setMetronomeString] = useState(patternMaker.getMetronomeString());
   const [key, setKey] = useState(0);
 
@@ -102,6 +102,7 @@ const Metronome = ({ play, tempo, fillStart, patternMaker }: MetronomeProps) => 
             patternMaker.getCustomSettingsForPattern().timeSignature.beats
           )}
           handleSetItem={handleSetTimeSignatureTop}
+          disabled={isCountIn()}
         />
         <MeasureBottomSelector
           selectorItems={getMeasureBottomSelectorValues(
@@ -110,6 +111,7 @@ const Metronome = ({ play, tempo, fillStart, patternMaker }: MetronomeProps) => 
             patternMaker.getCustomSettingsForPattern().timeSignature.division
           )}
           handleSetItem={handleSetTimeSignatureBottom}
+          disabled={isCountIn()}
         />
       </div>
       <br />
@@ -152,10 +154,11 @@ const Metronome = ({ play, tempo, fillStart, patternMaker }: MetronomeProps) => 
           },
         ]}
         handleSetItem={handleSetNoteDivision}
+        disabled={isCountIn()}
       />
       <br />
 
-      {isCountIn ? (
+      {barCount === 0 ? (
         // COUNT-IN
         <ProMetronome
           bpm={Number(tempo)}

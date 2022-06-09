@@ -28,9 +28,10 @@ export type SelectorItems = SelectorItem[];
 interface SelectorProps {
   selectorItems: SelectorItems;
   handleSetItem: (param: string) => void;
+  disabled: boolean;
 }
 
-const Selector = ({ selectorItems, handleSetItem }: SelectorProps) => {
+const Selector = ({ selectorItems, handleSetItem, disabled }: SelectorProps) => {
   const getDefault = () => getDefaultAndSelectedIndexes(selectorItems).default;
   const getSelected = () => getDefaultAndSelectedIndexes(selectorItems).selected;
 
@@ -72,6 +73,7 @@ const Selector = ({ selectorItems, handleSetItem }: SelectorProps) => {
           minWidth: WIDTH,
           fontFamily: selectedOption.previewName ? 'Noto Music' : 'inherit',
         }}
+        disabled={disabled}
       >
         {selectedOption.previewName ? selectedOption.previewName : selectedOption.name}
       </Button>

@@ -12,10 +12,17 @@ type MeasureBottomSelectorItems = MeasureBottomSelectorItem[];
 interface MeasureBottomSelectorProps {
   selectorItems: MeasureBottomSelectorItems;
   handleSetItem: (param: string) => void;
+  disabled: boolean;
 }
 
-const MeasureBottomSelector = ({ selectorItems, handleSetItem }: MeasureBottomSelectorProps) => {
-  return <Selector selectorItems={selectorItems} handleSetItem={handleSetItem} />;
+const MeasureBottomSelector = ({
+  selectorItems,
+  handleSetItem,
+  disabled,
+}: MeasureBottomSelectorProps) => {
+  return (
+    <Selector selectorItems={selectorItems} handleSetItem={handleSetItem} disabled={disabled} />
+  );
 };
 
 export default MeasureBottomSelector;

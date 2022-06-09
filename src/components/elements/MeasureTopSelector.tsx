@@ -12,10 +12,17 @@ type MeasureTopSelectorItems = MeasureTopSelectorItem[];
 interface MeasureTopSelectorProps {
   selectorItems: MeasureTopSelectorItems;
   handleSetItem: (param: string) => void;
+  disabled: boolean;
 }
 
-const MeasureTopSelector = ({ selectorItems, handleSetItem }: MeasureTopSelectorProps) => {
-  return <Selector selectorItems={selectorItems} handleSetItem={handleSetItem} />;
+const MeasureTopSelector = ({
+  selectorItems,
+  handleSetItem,
+  disabled,
+}: MeasureTopSelectorProps) => {
+  return (
+    <Selector selectorItems={selectorItems} handleSetItem={handleSetItem} disabled={disabled} />
+  );
 };
 
 export default MeasureTopSelector;

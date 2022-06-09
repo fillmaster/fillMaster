@@ -13,10 +13,17 @@ type NoteDivisionSelectorItems = NoteDivisionSelectorItem[];
 interface NoteDivisionSelectorProps {
   selectorItems: NoteDivisionSelectorItems;
   handleSetItem: (param: string) => void;
+  disabled: boolean;
 }
 
-const NoteDivisionSelector = ({ selectorItems, handleSetItem }: NoteDivisionSelectorProps) => {
-  return <Selector selectorItems={selectorItems} handleSetItem={handleSetItem} />;
+const NoteDivisionSelector = ({
+  selectorItems,
+  handleSetItem,
+  disabled,
+}: NoteDivisionSelectorProps) => {
+  return (
+    <Selector selectorItems={selectorItems} handleSetItem={handleSetItem} disabled={disabled} />
+  );
 };
 
 export default NoteDivisionSelector;
