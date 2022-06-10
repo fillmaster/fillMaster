@@ -15,7 +15,7 @@ import ProMetronome from '../react-pro-metronome/src';
 import PatternMaker, { BeatPosition } from '../utils/classes/patternMaker';
 import MeasureBottomSelector from './elements/MeasureBottomSelector';
 import MeasureTopSelector from './elements/MeasureTopSelector';
-import NoteDivisionSelector from './elements/NoteDivisionSelector';
+import Selectors from './Selectors';
 
 interface MetronomeProps {
   play: boolean;
@@ -122,14 +122,11 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
         />
       </div>
       <br />
-      <NoteDivisionSelector
-        selectorItems={getPlayNoteValues(
-          [...PLAY_NOTES],
-          patternMaker.getCustomSettingsForPattern().timeSignature.division,
-          patternMaker.getCustomSettingsForPattern().playNotes
-        )}
-        handleSetItem={handleSetNoteDivision}
-        disabled={isCountIn()}
+      <Selectors
+        timeSignatureBottom={timeSignatureBottom as MeasureDivision}
+        patternMaker={patternMaker}
+        isCountIn={isCountIn}
+        handleSetNoteDivision={handleSetNoteDivision}
       />
       <br />
 
@@ -208,23 +205,6 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
 };
 
 export default Metronome;
-
-function getPlayNoteValues(
-  playNotesArray: Array<PlayNotes>,
-  default_: MeasureDivision,
-  selected_: PlayNotes
-) {
-  const array = [];
-  for (let i = 0; i < playNotesArray.length; i++) {
-    const name = getNamesForPlayNotes(playNotesArray[i]);
-    const defaultVar = playNotesArray[i] === getPlayNotesByMeasureDivision(default_);
-    const selected = playNotesArray[i] === selected_;
-    const stateName = playNotesArray[i];
-    const previewName = getUnicodeForPlayNotes(playNotesArray[i]);
-    array.push({ name, default: defaultVar, selected, previewName, stateName });
-  }
-  return array;
-}
 
 function getMeasureTopSelectorValues(
   beatArray: Array<BeatsPerBar>,
