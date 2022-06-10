@@ -2,13 +2,7 @@ import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { BeatsPerBar, BEATS_PER_BAR } from '../consts/beatsPerBar';
 import { MeasureDivision, MEASURE_DIVISIONS } from '../consts/measureDivisions';
-import {
-  getNamesForPlayNotes,
-  getPlayNotesByMeasureDivision,
-  getUnicodeForPlayNotes,
-  PlayNotes,
-  PLAY_NOTES,
-} from '../consts/playNotes';
+import { PlayNotes } from '../consts/playNotes';
 // permanent fix needed
 // eslint-disable-next-line import/no-relative-packages
 import ProMetronome from '../react-pro-metronome/src';
