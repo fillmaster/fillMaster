@@ -1,14 +1,12 @@
 import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { BeatsPerBar, BEATS_PER_BAR } from '../consts/beatsPerBar';
-import { MeasureDivision, MEASURE_DIVISIONS } from '../consts/measureDivisions';
+import { BeatsPerBar } from '../consts/beatsPerBar';
+import { MeasureDivision } from '../consts/measureDivisions';
 import { PlayNotes } from '../consts/playNotes';
 // permanent fix needed
 // eslint-disable-next-line import/no-relative-packages
 import ProMetronome from '../react-pro-metronome/src';
 import PatternMaker, { BeatPosition } from '../utils/classes/patternMaker';
-import MeasureBottomSelector from './elements/MeasureBottomSelector';
-import MeasureTopSelector from './elements/MeasureTopSelector';
 import Selectors from './Selectors';
 
 interface MetronomeProps {
@@ -95,32 +93,13 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
 
   return (
     <div className="App">
-      <div>
-        <MeasureTopSelector
-          selectorItems={getMeasureTopSelectorValues(
-            [...BEATS_PER_BAR],
-            '4',
-            patternMaker.getCustomSettingsForPattern().timeSignature.beats
-          )}
-          handleSetItem={handleSetTimeSignatureTop}
-          disabled={isCountIn()}
-        />
-        <MeasureBottomSelector
-          selectorItems={getMeasureBottomSelectorValues(
-            [...MEASURE_DIVISIONS],
-            '4',
-            patternMaker.getCustomSettingsForPattern().timeSignature.division
-          )}
-          handleSetItem={handleSetTimeSignatureBottom}
-          disabled={isCountIn()}
-        />
-      </div>
-      <br />
       <Selectors
         timeSignatureBottom={timeSignatureBottom as MeasureDivision}
         patternMaker={patternMaker}
         isCountIn={isCountIn}
         handleSetNoteDivision={handleSetNoteDivision}
+        handleSetTimeSignatureTop={handleSetTimeSignatureTop}
+        handleSetTimeSignatureBottom={handleSetTimeSignatureBottom}
       />
       <br />
 
@@ -199,35 +178,3 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
 };
 
 export default Metronome;
-
-function getMeasureTopSelectorValues(
-  beatArray: Array<BeatsPerBar>,
-  default_: BeatsPerBar,
-  selected_: BeatsPerBar
-) {
-  const array = [];
-  for (let i = 0; i < beatArray.length; i++) {
-    const name = beatArray[i];
-    const defaultVar = beatArray[i] === default_;
-    const selected = beatArray[i] === selected_;
-    const stateName = beatArray[i];
-    array.push({ name, default: defaultVar, selected, stateName });
-  }
-  return array;
-}
-
-function getMeasureBottomSelectorValues(
-  divisionArray: Array<MeasureDivision>,
-  default_: MeasureDivision,
-  selected_: MeasureDivision
-) {
-  const array = [];
-  for (let i = 0; i < divisionArray.length; i++) {
-    const name = divisionArray[i];
-    const defaultVar = divisionArray[i] === default_;
-    const selected = divisionArray[i] === selected_;
-    const stateName = divisionArray[i];
-    array.push({ name, default: defaultVar, selected, stateName });
-  }
-  return array;
-}
