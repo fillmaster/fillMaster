@@ -1,4 +1,7 @@
 // PLAY_NOTES array is converted to a Type. Array is needed to iterate over which
+
+import assertUnreachable from '../utils/assertUnreachable';
+
 // is why a union type is not made directly.
 export const PLAY_NOTES = [
   'firstNoteOnly',
@@ -14,14 +17,16 @@ export type PlayNotes = PlayNotesType[number];
 export function getUnicodeForPlayNote(playNotes: PlayNotes) {
   switch (playNotes) {
     case 'firstNoteOnly':
-      return 'x';
+      return '\u{1D15D}';
     case 'halfNotes':
-      return 'y';
+      return '\u{1D15E}';
     case 'quarterNotes':
-      return 'q';
+      return '\u{1D15F}';
+    case 'eighthNotes':
+      return '\u{1D160}';
     case 'sixteenthNotes':
-      return 'w';
+      return '\u{1D161}';
     default:
-      return 'quarterNotes';
+      return assertUnreachable(playNotes);
   }
 }
