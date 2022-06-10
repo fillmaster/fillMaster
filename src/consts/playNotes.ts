@@ -14,7 +14,7 @@ export const PLAY_NOTES = [
 type PlayNotesType = typeof PLAY_NOTES;
 export type PlayNotes = PlayNotesType[number];
 
-export function getUnicodeForPlayNote(playNotes: PlayNotes) {
+export function getUnicodeForPlayNotes(playNotes: PlayNotes) {
   switch (playNotes) {
     case 'firstNoteOnly':
       return '\u{1D15D}';
@@ -26,6 +26,23 @@ export function getUnicodeForPlayNote(playNotes: PlayNotes) {
       return '\u{1D160}';
     case 'sixteenthNotes':
       return '\u{1D161}';
+    default:
+      return assertUnreachable(playNotes);
+  }
+}
+
+export function getNamesForPlayNotes(playNotes: PlayNotes) {
+  switch (playNotes) {
+    case 'firstNoteOnly':
+      return 'Whole Notes';
+    case 'halfNotes':
+      return 'Half Notes';
+    case 'quarterNotes':
+      return 'Quarter Notes';
+    case 'eighthNotes':
+      return 'Eighth Notes';
+    case 'sixteenthNotes':
+      return 'Sixteenth Notes';
     default:
       return assertUnreachable(playNotes);
   }
