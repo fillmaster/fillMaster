@@ -2,7 +2,13 @@ import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { BeatsPerBar, BEATS_PER_BAR } from '../consts/beatsPerBar';
 import { MeasureDivision, MEASURE_DIVISIONS } from '../consts/measureDivisions';
-import { PlayNotes } from '../consts/playNotes';
+import {
+  getNamesForPlayNotes,
+  getPlayNotesByMeasureDivision,
+  getUnicodeForPlayNotes,
+  PlayNotes,
+  PLAY_NOTES,
+} from '../consts/playNotes';
 // permanent fix needed
 // eslint-disable-next-line import/no-relative-packages
 import ProMetronome from '../react-pro-metronome/src';
@@ -117,43 +123,11 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
       </div>
       <br />
       <NoteDivisionSelector
-        selectorItems={[
-          {
-            name: 'Whole Notes',
-            default: false,
-            previewName: '\u{1D15D}',
-            stateName: 'firstNoteOnly',
-            selected: false,
-          },
-          {
-            name: 'Half Notes',
-            default: false,
-            previewName: '\u{1D15E}',
-            stateName: 'halfNotes',
-            selected: false,
-          },
-          {
-            name: 'Quarter Notes',
-            default: true,
-            previewName: '\u{1D15F}',
-            stateName: 'quarterNotes',
-            selected: true,
-          },
-          {
-            name: 'Eighth Notes',
-            default: false,
-            previewName: '\u{1D160}',
-            stateName: 'eighthNotes',
-            selected: false,
-          },
-          {
-            name: 'Sixteenth Notes',
-            default: false,
-            previewName: '\u{1D161}',
-            stateName: 'sixteenthNotes',
-            selected: false,
-          },
-        ]}
+        selectorItems={getPlayNoteValues(
+          [...PLAY_NOTES],
+          patternMaker.getCustomSettingsForPattern().timeSignature.division,
+          patternMaker.getCustomSettingsForPattern().playNotes
+        )}
         handleSetItem={handleSetNoteDivision}
         disabled={isCountIn()}
       />
@@ -235,18 +209,19 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
 
 export default Metronome;
 
-function getMeasurePlayNoteValues(
+function getPlayNoteValues(
   playNotesArray: Array<PlayNotes>,
-  default_: PlayNotes,
+  default_: MeasureDivision,
   selected_: PlayNotes
 ) {
   const array = [];
   for (let i = 0; i < playNotesArray.length; i++) {
-    const name = playNotesArray[i];
-    const defaultVar = playNotesArray[i] === default_;
+    const name = getNamesForPlayNotes(playNotesArray[i]);
+    const defaultVar = playNotesArray[i] === getPlayNotesByMeasureDivision(default_);
     const selected = playNotesArray[i] === selected_;
     const stateName = playNotesArray[i];
-    array.push({ name, default: defaultVar, selected, stateName });
+    const previewName = getUnicodeForPlayNotes(playNotesArray[i]);
+    array.push({ name, default: defaultVar, selected, previewName, stateName });
   }
   return array;
 }

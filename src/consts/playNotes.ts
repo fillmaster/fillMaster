@@ -1,6 +1,7 @@
 // PLAY_NOTES array is converted to a Type. Array is needed to iterate over which
 
 import assertUnreachable from '../utils/assertUnreachable';
+import { MeasureDivision } from './measureDivisions';
 
 // is why a union type is not made directly.
 export const PLAY_NOTES = [
@@ -45,5 +46,20 @@ export function getNamesForPlayNotes(playNotes: PlayNotes) {
       return 'Sixteenth Notes';
     default:
       return assertUnreachable(playNotes);
+  }
+}
+
+export function getPlayNotesByMeasureDivision(measureDivision: MeasureDivision): PlayNotes {
+  switch (measureDivision) {
+    case '2':
+      return 'halfNotes';
+    case '4':
+      return 'quarterNotes';
+    case '8':
+      return 'eighthNotes';
+    case '16':
+      return 'sixteenthNotes';
+    default:
+      return assertUnreachable(measureDivision);
   }
 }
