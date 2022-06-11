@@ -1,14 +1,14 @@
 import Box from '@mui/material/Box';
-import Stepper from '@mui/material/Stepper';
-import Step from '@mui/material/Step';
-import StepLabel from '@mui/material/StepLabel';
-import StepContent from '@mui/material/StepContent';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
+import Step from '@mui/material/Step';
+import StepContent from '@mui/material/StepContent';
+import StepLabel from '@mui/material/StepLabel';
+import Stepper from '@mui/material/Stepper';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
-import SetupStep from './StepSetup';
 import MetronomeContainer from './MetronomeContainer';
+import SetupStep from './StepSetup';
 
 const steps = [
   {
@@ -39,7 +39,7 @@ const VerticalLinearStepper = () => {
   const [fillStart, setFillStart] = useState('');
   const [fill, setFill] = useState('');
   const [tempo, setTempo] = useState('');
-  const [render, setRender] = useState(true);
+  const [key, setKey] = useState(0);
   const [sliderValues, setSliderValues] = useState<number[]>([60, 120]);
 
   const handleSetSliderValues = (values: Array<number>) => {
@@ -47,7 +47,7 @@ const VerticalLinearStepper = () => {
   };
 
   const restartMetronome = () => {
-    setRender(true);
+    setKey(key + 1);
   };
 
   const handleSetBeatIdea = (beat: string) => {
@@ -118,13 +118,8 @@ const VerticalLinearStepper = () => {
             <div>Fill style: {fill}</div>
           </b>
           <div>@ {tempo} bpm</div>
-          <MetronomeContainer
-            render={render}
-            restartMetronome={restartMetronome}
-            tempo={tempo}
-            fillStart={fillStart}
-          />
-          <button type="button" onClick={() => setRender(false)}>
+          <MetronomeContainer tempo={tempo} fillStart={fillStart} key={key} />
+          <button type="button" onClick={() => restartMetronome()}>
             restart
           </button>
           <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
