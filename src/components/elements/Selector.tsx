@@ -1,9 +1,9 @@
-import { useState, MouseEvent, useEffect } from 'react';
+import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { Box } from '@mui/material';
 import Zoom from '@mui/material/Zoom';
+import { MouseEvent, useEffect, useState } from 'react';
 
 /**
  * This component is a wrapper for MuiMenu to make it have the default
@@ -29,9 +29,10 @@ interface SelectorProps {
   selectorItems: SelectorItems;
   handleSetItem: (param: string) => void;
   disabled: boolean;
+  centered?: boolean;
 }
 
-const Selector = ({ selectorItems, handleSetItem, disabled }: SelectorProps) => {
+const Selector = ({ selectorItems, handleSetItem, disabled, centered = true }: SelectorProps) => {
   const getDefault = () => getDefaultAndSelectedIndexes(selectorItems).default;
   const getSelected = () => getDefaultAndSelectedIndexes(selectorItems).selected;
 
@@ -112,7 +113,7 @@ const Selector = ({ selectorItems, handleSetItem, disabled }: SelectorProps) => 
                 data-my-value={item.name}
                 onClick={handleClickMenuItem}
                 sx={{
-                  justifyContent: 'center',
+                  justifyContent: centered ? 'center' : 'flex-start',
                   outline: item.default ? '1px solid hsl(200, 30%, 60%)' : 'none',
                   backgroundColor:
                     item.name === selectedOptionName ? 'hsla(230, 30%, 40%, 0.23)' : 'transparent',

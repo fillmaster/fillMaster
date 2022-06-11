@@ -22,7 +22,12 @@ const NoteDivisionSelector = ({
   disabled,
 }: NoteDivisionSelectorProps) => {
   return (
-    <Selector selectorItems={selectorItems} handleSetItem={handleSetItem} disabled={disabled} />
+    <Selector
+      selectorItems={selectorItems}
+      handleSetItem={handleSetItem}
+      disabled={disabled}
+      centered={false}
+    />
   );
 };
 
