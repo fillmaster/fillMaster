@@ -28,6 +28,14 @@ module.exports = {
     'no-unused-vars': 'off', // covered by TypeScript
     'arrow-body-style': ['off'],
     'react/require-render-return': ['warn'],
+    'react/require-default-props': [
+      1,
+      {
+        forbidDefaultForRequired: true,
+        classes: 'defaultProps',
+        functions: 'ignore', // ignoring for now as buggy
+      },
+    ],
     'prettier/prettier': ['warn'],
     'import/extensions': [
       'warn',
