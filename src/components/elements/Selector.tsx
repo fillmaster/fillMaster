@@ -30,9 +30,16 @@ interface SelectorProps {
   handleSetItem: (param: string) => void;
   disabled: boolean;
   centered?: boolean;
+  highlightDefault?: boolean;
 }
 
-const Selector = ({ selectorItems, handleSetItem, disabled, centered = true }: SelectorProps) => {
+const Selector = ({
+  selectorItems,
+  handleSetItem,
+  disabled,
+  centered = true,
+  highlightDefault = false,
+}: SelectorProps) => {
   const getDefault = () => getDefaultAndSelectedIndexes(selectorItems).default;
   const getSelected = () => getDefaultAndSelectedIndexes(selectorItems).selected;
 
@@ -114,7 +121,10 @@ const Selector = ({ selectorItems, handleSetItem, disabled, centered = true }: S
                 onClick={handleClickMenuItem}
                 sx={{
                   justifyContent: centered ? 'center' : 'flex-start',
-                  outline: item.default ? '1px solid hsl(200, 30%, 60%)' : 'none',
+                  outline:
+                    item.default && highlightDefault
+                      ? '1px solid hsla(200, 30%, 60%, 0.6)'
+                      : 'none',
                   backgroundColor:
                     item.name === selectedOptionName ? 'hsla(230, 30%, 40%, 0.23)' : 'transparent',
                   '&:hover': {

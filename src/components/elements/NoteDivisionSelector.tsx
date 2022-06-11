@@ -27,6 +27,7 @@ const NoteDivisionSelector = ({
       handleSetItem={handleSetItem}
       disabled={disabled}
       centered={false}
+      highlightDefault
     />
   );
 };
