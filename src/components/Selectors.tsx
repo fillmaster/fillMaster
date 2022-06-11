@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { BeatsPerBar, BEATS_PER_BAR } from '../consts/beatsPerBar';
 import { MeasureDivision, MEASURE_DIVISIONS } from '../consts/measureDivisions';
 import {
@@ -26,8 +27,13 @@ const Selectors = ({
   isCountIn,
   handleSetNoteDivision,
   handleSetTimeSignatureTop,
-  handleSetTimeSignatureBottom
+  handleSetTimeSignatureBottom,
 }: SelectorsProps) => {
+  const [key, setKey] = useState(0);
+  useEffect(() => {
+    setKey(key + 1);
+  }, [timeSignatureBottom]);
+
   return (
     <>
       <div>
@@ -55,10 +61,11 @@ const Selectors = ({
         selectorItems={getPlayNoteValues(
           [...PLAY_NOTES],
           timeSignatureBottom as MeasureDivision,
-          patternMaker.getCustomSettingsForPattern().playNotes
+          getPlayNotesByMeasureDivision(timeSignatureBottom)
         )}
         handleSetItem={handleSetNoteDivision}
         disabled={isCountIn()}
+        key={key}
       />
     </>
   );

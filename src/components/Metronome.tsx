@@ -58,11 +58,14 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
 
   const handleSetTimeSignatureTop = (beats: string) => {
     setTimeSignatureTop(beats);
+    // refresh needed to restart metronome when beats per bar changes. Otherwise you may change time signature to e.g. 3/4 whilst
+    // in 5/4 mode and you're on a note value higher than 3 which causes a 'no sound' error.
     setKey(key + 1);
   };
 
   const handleSetTimeSignatureBottom = (division: string) => {
     setTimeSignatureBottom(division);
+    setKey(key + 1);
   };
 
   useEffect(() => {
