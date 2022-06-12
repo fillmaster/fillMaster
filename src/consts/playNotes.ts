@@ -5,7 +5,7 @@ import { MeasureDivision } from './measureDivisions';
 
 // is why a union type is not made directly.
 export const PLAY_NOTES = [
-  'firstNoteOnly',
+  'wholeNotes',
   'halfNotes',
   'quarterNotes',
   'eighthNotes',
@@ -17,7 +17,7 @@ export type PlayNotes = PlayNotesType[number];
 
 export function getUnicodeForPlayNotes(playNotes: PlayNotes) {
   switch (playNotes) {
-    case 'firstNoteOnly':
+    case 'wholeNotes':
       return '\u{1D15D}';
     case 'halfNotes':
       return '\u{1D15E}';
@@ -34,7 +34,7 @@ export function getUnicodeForPlayNotes(playNotes: PlayNotes) {
 
 export function getNamesForPlayNotes(playNotes: PlayNotes) {
   switch (playNotes) {
-    case 'firstNoteOnly':
+    case 'wholeNotes':
       return 'Whole Notes';
     case 'halfNotes':
       return 'Half Notes';

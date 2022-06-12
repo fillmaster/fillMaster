@@ -156,7 +156,7 @@ function replaceEachNthChar(str: string, nth: number, replaceWith: MetronomeSoun
 function getNth(playNotes: PlayNotes, subDivision: number) {
   let nth: number | null;
   switch (playNotes) {
-    case 'firstNoteOnly':
+    case 'wholeNotes':
       nth = null;
       break;
     case 'halfNotes':

@@ -17,7 +17,7 @@ describe('PatternMaker', () => {
 describe('Test custom pattern with no first-note-only', () => {
   it('should return 100000000000000', () => {
     patternMaker.setCustomSettingsForPattern({
-      playNotes: 'firstNoteOnly',
+      playNotes: 'wholeNotes',
       playFillOn: { beat: '4', subBeat: '0' },
       timeSignature: { beats: '4', division: '4' },
     });
@@ -96,7 +96,7 @@ describe('Test custom pattern set to default and back', () => {
     });
     patternMaker.setCustomSettingsForPatternToDefault();
     patternMaker.setCustomSettingsForPattern({
-      playNotes: 'firstNoteOnly',
+      playNotes: 'wholeNotes',
       playFillOn: { beat: '4', subBeat: '0' },
       timeSignature: { beats: '4', division: '4' },
     });
@@ -146,7 +146,7 @@ describe('Test fill when start set to 3', () => {
 describe('Test fill when start set to 4', () => {
   it('should return 1000000000003000', () => {
     patternMaker.setCustomSettingsForPattern({
-      playNotes: 'firstNoteOnly',
+      playNotes: 'wholeNotes',
       playFillOn: { beat: '4', subBeat: '0' },
       timeSignature: { beats: '4', division: '4' },
     });
