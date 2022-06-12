@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import { BeatsPerBar, BEATS_PER_BAR } from '../consts/beatsPerBar';
 import { MeasureDivision, MEASURE_DIVISIONS } from '../consts/measureDivisions';
+import { PlayNotes, PLAY_NOTES } from '../consts/playNotes';
+import PatternMaker from '../utils/classes/patternMaker';
 import {
   getNamesForPlayNotes,
   getPlayNotesByMeasureDivision,
   getUnicodeForPlayNotes,
-  PlayNotes,
-  PLAY_NOTES,
-} from '../consts/playNotes';
-import PatternMaker from '../utils/classes/patternMaker';
+} from '../utils/playNotesFunctions';
 import MeasureBottomSelector from './elements/MeasureBottomSelector';
 import MeasureTopSelector from './elements/MeasureTopSelector';
 import NoteDivisionSelector from './elements/NoteDivisionSelector';
