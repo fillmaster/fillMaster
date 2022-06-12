@@ -1,6 +1,7 @@
 import { BeatsPerBar } from '../../consts/beatsPerBar';
 import { MeasureDivision } from '../../consts/measureDivisions';
 import { PlayNotes } from '../../consts/playNotes';
+import assertUnreachable from '../assertUnreachable';
 
 export type PlayFillOn = { beat: BeatPosition; subBeat: SubBeatPosition };
 
@@ -172,7 +173,7 @@ function getNth(playNotes: PlayNotes, subDivision: number) {
       nth = subDivision / 4;
       break;
     default:
-      nth = null;
+      nth = assertUnreachable(playNotes);
   }
   return nth;
 }
