@@ -173,7 +173,7 @@ function getNth(playNotes: PlayNotes, subDivision: number) {
       nth = subDivision / 4;
       break;
     default:
-      nth = assertUnreachable(playNotes);
+      assertUnreachable(playNotes);
   }
   return nth;
 }
