@@ -20,7 +20,7 @@ const getPlayNotesNumbers = (beatsPerBar_: BeatsPerBar, division_: MeasureDivisi
 };
 
 const getLowerNotes = (beatsPerBar_: BeatsPerBar, division_: MeasureDivision) => {
-  const divisions = stringToNumArray([...MEASURE_DIVISIONS, '1']);
+  const divisions = stringToNumArray(['1', ...MEASURE_DIVISIONS]);
   const division = Number(division_);
   const beatsPerBar = Number(beatsPerBar_);
   const divisionIndex = divisions.findIndex((div) => div === division);
