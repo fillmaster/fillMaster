@@ -31,7 +31,7 @@ const getLowerNotes = (beatsPerBar_: BeatsPerBar, division_: MeasureDivision) =>
     const remainder = beatsPerBar % rule;
     if (remainder === 0 && quotient >= 1) newArray.push(divisions[i].toString());
   }
-  return newArray.sort();
+  return newArray;
 };
 
 const getHigherNotes = (division: MeasureDivision) => {
