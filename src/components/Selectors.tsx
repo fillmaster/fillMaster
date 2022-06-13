@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { BeatsPerBar, BEATS_PER_BAR } from '../consts/beatsPerBar';
 import { MeasureDivision, MEASURE_DIVISIONS } from '../consts/measureDivisions';
-import { PlayNotes, PLAY_NOTES } from '../consts/playNotes';
+import { PlayNotes } from '../consts/playNotes';
 import PatternMaker from '../utils/classes/patternMaker';
+import getAvailablePlayNotes from '../utils/getAvailablePlayNotes';
 import {
   getNamesForPlayNotes,
   getPlayNotesByMeasureDivision,
@@ -58,7 +59,10 @@ const Selectors = ({
       <br />
       <NoteDivisionSelector
         selectorItems={getPlayNotesOptions(
-          [...PLAY_NOTES],
+          getAvailablePlayNotes(
+            patternMaker.getCustomSettingsForPattern().timeSignature.beats,
+            timeSignatureBottom
+          ),
           timeSignatureBottom as MeasureDivision,
           getPlayNotesByMeasureDivision(timeSignatureBottom)
         )}

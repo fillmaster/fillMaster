@@ -36,8 +36,10 @@ export function getNamesForPlayNotes(playNotes: PlayNotes) {
   }
 }
 
-export function getPlayNotesByMeasureDivision(measureDivision: MeasureDivision): PlayNotes {
+export function getPlayNotesByMeasureDivision(measureDivision: MeasureDivision | '1'): PlayNotes {
   switch (measureDivision) {
+    case '1':
+      return 'wholeNotes';
     case '2':
       return 'halfNotes';
     case '4':
