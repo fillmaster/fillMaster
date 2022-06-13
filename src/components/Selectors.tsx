@@ -37,7 +37,7 @@ const Selectors = ({
     <>
       <div>
         <MeasureTopSelector
-          selectorItems={getMeasureTopSelectorValues(
+          selectorItems={getMeasureTopSelectorOptions(
             [...BEATS_PER_BAR],
             '4',
             patternMaker.getCustomSettingsForPattern().timeSignature.beats
@@ -46,7 +46,7 @@ const Selectors = ({
           disabled={isCountIn()}
         />
         <MeasureBottomSelector
-          selectorItems={getMeasureBottomSelectorValues(
+          selectorItems={getMeasureBottomSelectorOptions(
             [...MEASURE_DIVISIONS],
             '4',
             patternMaker.getCustomSettingsForPattern().timeSignature.division
@@ -57,7 +57,7 @@ const Selectors = ({
       </div>
       <br />
       <NoteDivisionSelector
-        selectorItems={getPlayNoteValues(
+        selectorItems={getPlayNotesOptions(
           [...PLAY_NOTES],
           timeSignatureBottom as MeasureDivision,
           getPlayNotesByMeasureDivision(timeSignatureBottom)
@@ -72,7 +72,7 @@ const Selectors = ({
 
 export default Selectors;
 
-function getPlayNoteValues(
+function getPlayNotesOptions(
   playNotesArray: Array<PlayNotes>,
   default_: MeasureDivision,
   selected_: PlayNotes
@@ -89,23 +89,23 @@ function getPlayNoteValues(
   return array;
 }
 
-function getMeasureTopSelectorValues(
-  beatArray: Array<BeatsPerBar>,
+function getMeasureTopSelectorOptions(
+  beatsPerBars: Array<BeatsPerBar>,
   default_: BeatsPerBar,
   selected_: BeatsPerBar
 ) {
-  const array = [];
-  for (let i = 0; i < beatArray.length; i++) {
-    const name = beatArray[i];
-    const defaultVar = beatArray[i] === default_;
-    const selected = beatArray[i] === selected_;
-    const stateName = beatArray[i];
-    array.push({ name, default: defaultVar, selected, stateName });
+  const beatsPerBarSelectorOptions = [];
+  for (let i = 0; i < beatsPerBars.length; i++) {
+    const name = beatsPerBars[i];
+    const defaultVar = beatsPerBars[i] === default_;
+    const selected = beatsPerBars[i] === selected_;
+    const stateName = beatsPerBars[i];
+    beatsPerBarSelectorOptions.push({ name, default: defaultVar, selected, stateName });
   }
-  return array;
+  return beatsPerBarSelectorOptions;
 }
 
-function getMeasureBottomSelectorValues(
+function getMeasureBottomSelectorOptions(
   divisionArray: Array<MeasureDivision>,
   default_: MeasureDivision,
   selected_: MeasureDivision
