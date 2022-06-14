@@ -84,14 +84,20 @@ function getPlayNotesOptions(
   selected_: PlayNotes
 ) {
   const playNoteOptions: NoteDivisionSelectorItems = [];
+  let selectedFound = false;
   for (let i = 0; i < playNotesArray.length; i++) {
     const name = getNamesForPlayNotes(playNotesArray[i]);
     const defaultVar = playNotesArray[i] === getPlayNotesByMeasureDivision(default_);
     const selected = playNotesArray[i] === selected_;
+    if (selected) selectedFound = true;
     const stateName = playNotesArray[i];
     const previewName = getUnicodeForPlayNotes(playNotesArray[i]);
     playNoteOptions.push({ name, default: defaultVar, selected, previewName, stateName });
   }
+  // TODO: Fix this HACK. It's to stop crashes when changing between different
+  // note divisions on the time signature. It crashes because a 'No items selected' error
+  // is thrown due to the change in size of selectorItems array.
+  if (!selectedFound) playNoteOptions[playNoteOptions.length - 1].selected = true;
   return playNoteOptions;
 }
 
