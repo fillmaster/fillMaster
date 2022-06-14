@@ -7,7 +7,7 @@ type MeasureBottomSelectorItem = {
   stateName: MeasureDivision; // name of state, handled where function was called from. Defaults to name.
   selected: boolean;
 };
-type MeasureBottomSelectorItems = MeasureBottomSelectorItem[];
+export type MeasureBottomSelectorItems = MeasureBottomSelectorItem[];
 
 interface MeasureBottomSelectorProps {
   selectorItems: MeasureBottomSelectorItems;

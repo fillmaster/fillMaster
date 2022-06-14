@@ -9,9 +9,11 @@ import {
   getPlayNotesByMeasureDivision,
   getUnicodeForPlayNotes,
 } from '../utils/playNotesFunctions';
-import MeasureBottomSelector from './elements/MeasureBottomSelector';
-import MeasureTopSelector from './elements/MeasureTopSelector';
-import NoteDivisionSelector from './elements/NoteDivisionSelector';
+import MeasureBottomSelector, {
+  MeasureBottomSelectorItems,
+} from './elements/MeasureBottomSelector';
+import MeasureTopSelector, { MeasureTopSelectorItems } from './elements/MeasureTopSelector';
+import NoteDivisionSelector, { NoteDivisionSelectorItems } from './elements/NoteDivisionSelector';
 
 interface SelectorsProps {
   timeSignatureBottom: MeasureDivision;
@@ -61,9 +63,9 @@ const Selectors = ({
         selectorItems={getPlayNotesOptions(
           getAvailablePlayNotes(
             patternMaker.getCustomSettingsForPattern().timeSignature.beats,
-            timeSignatureBottom
+            patternMaker.getCustomSettingsForPattern().timeSignature.division
           ),
-          timeSignatureBottom as MeasureDivision,
+          patternMaker.getCustomSettingsForPattern().timeSignature.division,
           getPlayNotesByMeasureDivision(timeSignatureBottom)
         )}
         handleSetItem={handleSetNoteDivision}
@@ -81,16 +83,16 @@ function getPlayNotesOptions(
   default_: MeasureDivision,
   selected_: PlayNotes
 ) {
-  const array = [];
+  const playNoteOptions: NoteDivisionSelectorItems = [];
   for (let i = 0; i < playNotesArray.length; i++) {
     const name = getNamesForPlayNotes(playNotesArray[i]);
     const defaultVar = playNotesArray[i] === getPlayNotesByMeasureDivision(default_);
     const selected = playNotesArray[i] === selected_;
     const stateName = playNotesArray[i];
     const previewName = getUnicodeForPlayNotes(playNotesArray[i]);
-    array.push({ name, default: defaultVar, selected, previewName, stateName });
+    playNoteOptions.push({ name, default: defaultVar, selected, previewName, stateName });
   }
-  return array;
+  return playNoteOptions;
 }
 
 function getMeasureTopSelectorOptions(
@@ -98,7 +100,7 @@ function getMeasureTopSelectorOptions(
   default_: BeatsPerBar,
   selected_: BeatsPerBar
 ) {
-  const beatsPerBarSelectorOptions = [];
+  const beatsPerBarSelectorOptions: MeasureTopSelectorItems = [];
   for (let i = 0; i < beatsPerBars.length; i++) {
     const name = beatsPerBars[i];
     const defaultVar = beatsPerBars[i] === default_;
@@ -114,13 +116,13 @@ function getMeasureBottomSelectorOptions(
   default_: MeasureDivision,
   selected_: MeasureDivision
 ) {
-  const array = [];
+  const measureBottomSelectorItems: MeasureBottomSelectorItems = [];
   for (let i = 0; i < divisionArray.length; i++) {
     const name = divisionArray[i];
     const defaultVar = divisionArray[i] === default_;
     const selected = divisionArray[i] === selected_;
     const stateName = divisionArray[i];
-    array.push({ name, default: defaultVar, selected, stateName });
+    measureBottomSelectorItems.push({ name, default: defaultVar, selected, stateName });
   }
-  return array;
+  return measureBottomSelectorItems;
 }

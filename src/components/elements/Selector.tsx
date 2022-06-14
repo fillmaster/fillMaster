@@ -136,7 +136,7 @@ const Selector = ({
                 }}
               >
                 {item.previewName && (
-                  <text style={{ fontFamily: 'Noto Music' }}>{item.previewName}&nbsp;&nbsp;</text>
+                  <span style={{ fontFamily: 'Noto Music' }}>{item.previewName}&nbsp;&nbsp;</span>
                 )}
                 {item.name}
               </MenuItem>
@@ -156,7 +156,7 @@ function getSelectorObjectByName(selectorItems: SelectorItems, name: string) {
       return selectorItems[i];
     }
   }
-  throw new Error('No matching name found in SelectorItems');
+  throw new Error(`No matching name (${name}) found in SelectorItems names:`);
 }
 
 function getTransformVerticalOffset(defaultIndex: number, height: number) {

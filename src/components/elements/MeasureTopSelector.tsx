@@ -7,7 +7,7 @@ type MeasureTopSelectorItem = {
   stateName: BeatsPerBar; // name of state, handled where function was called from. Defaults to name.
   selected: boolean;
 };
-type MeasureTopSelectorItems = MeasureTopSelectorItem[];
+export type MeasureTopSelectorItems = MeasureTopSelectorItem[];
 
 interface MeasureTopSelectorProps {
   selectorItems: MeasureTopSelectorItems;

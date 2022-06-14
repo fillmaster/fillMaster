@@ -8,7 +8,7 @@ type NoteDivisionSelectorItem = {
   stateName: PlayNotes; // name of state, handled where function was called from. Defaults to name.
   selected: boolean;
 };
-type NoteDivisionSelectorItems = NoteDivisionSelectorItem[];
+export type NoteDivisionSelectorItems = NoteDivisionSelectorItem[];
 
 interface NoteDivisionSelectorProps {
   selectorItems: NoteDivisionSelectorItems;

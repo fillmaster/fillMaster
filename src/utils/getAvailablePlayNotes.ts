@@ -1,7 +1,6 @@
 import { BeatsPerBar } from '../consts/beatsPerBar';
 import { MeasureDivision, MEASURE_DIVISIONS } from '../consts/measureDivisions';
 import { getPlayNotesByMeasureDivision } from './playNotesFunctions';
-import { stringToNumArray } from './stringNumConvert';
 
 // Not a great name, but this is needed for calculations. 1 is needed to include whole notes
 // and it must go up to the maximum number of the note division type (e.g. 16)
@@ -19,17 +18,15 @@ const getPlayNotesNumbers = (beatsPerBar_: BeatsPerBar, division_: MeasureDivisi
   return [...lower, ...higher];
 };
 
-const getLowerNotes = (beatsPerBar_: BeatsPerBar, division_: MeasureDivision) => {
-  const divisions = stringToNumArray(['1', ...MEASURE_DIVISIONS]);
-  const division = Number(division_);
-  const beatsPerBar = Number(beatsPerBar_);
+const getLowerNotes = (beatsPerBar: BeatsPerBar, division: MeasureDivision) => {
+  const divisions = ['1', ...MEASURE_DIVISIONS];
   const divisionIndex = divisions.findIndex((div) => div === division);
   const newArray = [];
   for (let i = 0; i <= divisionIndex; i++) {
-    const rule = division / divisions[i];
-    const quotient = Math.floor(beatsPerBar / rule);
-    const remainder = beatsPerBar % rule;
-    if (remainder === 0 && quotient >= 1) newArray.push(divisions[i].toString());
+    const rule = Number(division) / Number(divisions[i]);
+    const quotient = Math.floor(Number(beatsPerBar) / rule);
+    const remainder = Number(beatsPerBar) % rule;
+    if (remainder === 0 && quotient >= 1) newArray.push(divisions[i]);
   }
   return newArray;
 };
