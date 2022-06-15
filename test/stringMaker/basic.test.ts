@@ -1,7 +1,7 @@
 import assert from 'assert';
-import PatternMaker from '../src/utils/classes/patternMaker';
+import PatternMaker from '../../src/utils/classes/patternMaker';
 
-const patternMaker = PatternMaker.getInstance();
+const patternMaker = PatternMaker.getInstance(4);
 
 // Original Tests
 

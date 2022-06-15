@@ -35,7 +35,7 @@ export default class PatternMaker {
 
   private metronomeSoundCountIn: MetronomeSound = '1';
 
-  private subDivision: Subdivision = 4;
+  private subDivision: Subdivision;
 
   private defaultSettingsForPattern: PatternSettings;
 
@@ -45,18 +45,19 @@ export default class PatternMaker {
   // by using 'PatternMaker.getInstance();'.
   private static instance: PatternMaker;
 
-  private constructor() {
+  private constructor(subdivision: Subdivision = 8) {
     this.defaultSettingsForPattern = {
       playNotes: 'quarterNotes',
       playFillOn: { beat: '3', subBeat: '0' },
       timeSignature: { beats: '4', division: '4' },
     };
     this.customSettingsForPattern = this.defaultSettingsForPattern;
+    this.subDivision = subdivision;
   }
 
-  public static getInstance(): PatternMaker {
+  public static getInstance(subdivision?: Subdivision): PatternMaker {
     if (!PatternMaker.instance) {
-      PatternMaker.instance = new PatternMaker();
+      PatternMaker.instance = new PatternMaker(subdivision);
     }
 
     return PatternMaker.instance;
