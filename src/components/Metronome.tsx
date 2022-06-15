@@ -100,6 +100,7 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
   return (
     <div className="App">
       <Selectors
+        timeSignatureTop={timeSignatureTop as BeatsPerBar}
         timeSignatureBottom={timeSignatureBottom as MeasureDivision}
         patternMaker={patternMaker}
         isCountIn={isCountIn}

@@ -16,6 +16,7 @@ import MeasureTopSelector, { MeasureTopSelectorItems } from './elements/MeasureT
 import NoteDivisionSelector, { NoteDivisionSelectorItems } from './elements/NoteDivisionSelector';
 
 interface SelectorsProps {
+  timeSignatureTop: BeatsPerBar;
   timeSignatureBottom: MeasureDivision;
   patternMaker: PatternMaker;
   isCountIn: () => boolean;
@@ -24,6 +25,7 @@ interface SelectorsProps {
   handleSetTimeSignatureBottom: (division: string) => void;
 }
 const Selectors = ({
+  timeSignatureTop,
   timeSignatureBottom,
   patternMaker,
   isCountIn,
@@ -32,9 +34,11 @@ const Selectors = ({
   handleSetTimeSignatureBottom,
 }: SelectorsProps) => {
   const [key, setKey] = useState(0);
+
+  // reset note division to default when time signature changes
   useEffect(() => {
     setKey(key + 1);
-  }, [timeSignatureBottom]);
+  }, [timeSignatureBottom, timeSignatureTop]);
 
   return (
     <>
