@@ -7,6 +7,7 @@ import { PlayNotes } from '../consts/playNotes';
 // eslint-disable-next-line import/no-relative-packages
 import ProMetronome from '../react-pro-metronome/src';
 import PatternMaker, { BeatPosition } from '../utils/classes/patternMaker';
+import getStringArrayBetweenTwoValues from '../utils/getArrayBetweenValues';
 import Selectors from './Selectors';
 
 interface MetronomeProps {
@@ -44,7 +45,9 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
   const [timeSignatureBottom, setTimeSignatureBottom] = useState(
     patternMaker.getCustomSettingsForPattern().timeSignature.division as string
   );
-  const [quarterNote, setQuarterNote] = useState(null);
+  const [quarterNote, setQuarterNote] = useState(1);
+  const oneToBeatsPerBar = getStringArrayBetweenTwoValues(1, quarterNote);
+
   const [barCount, setBarCount] = useState(-1);
   const isCountIn = () => barCount === 0 && play;
   const [metronomeString, setMetronomeString] = useState(patternMaker.getMetronomeString());
@@ -143,35 +146,15 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
           key={key}
           // temporary any for props and state
           render={(props: any, state: any) => (
-            <Box>
-              <div>
-                {setQuarterNote(state.qNote)}
-                {state.qNote === 1 && (
-                  <div>
-                    <time style={counterOn}> </time> <time style={counterOff}> </time>{' '}
-                    <time style={counterOff}> </time> <time style={counterOff}> </time>
-                  </div>
-                )}
-                {state.qNote === 2 && (
-                  <div>
-                    <time style={counterOff}> </time> <time style={counterOn}> </time>{' '}
-                    <time style={counterOff}> </time> <time style={counterOff}> </time>
-                  </div>
-                )}
-                {state.qNote === 3 && (
-                  <div>
-                    <time style={counterOff}> </time> <time style={counterOff}> </time>{' '}
-                    <time style={counterOn}> </time> <time style={counterOff}> </time>
-                  </div>
-                )}
-                {state.qNote === 4 && (
-                  <div>
-                    <time style={counterOff}> </time> <time style={counterOff}> </time>{' '}
-                    <time style={counterOff}> </time> <time style={counterOn}> </time>
-                  </div>
-                )}
-                <div style={{ height: '1em' }} />
-              </div>
+            <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
+              {setQuarterNote(state.qNote)}
+              {oneToBeatsPerBar.map((beat) => {
+                return (
+                  <span key="asdfg">
+                    <time style={beat === state.qNote ? counterOn : counterOff}> </time>
+                  </span>
+                );
+              })}
             </Box>
           )}
         />
