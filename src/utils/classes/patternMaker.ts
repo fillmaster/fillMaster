@@ -96,6 +96,10 @@ export default class PatternMaker {
     return this.createMetronomeString({ isCountIn: true });
   };
 
+  public getSubDivision = () => {
+    return this.subDivision;
+  };
+
   private createMetronomeString({ isCountIn } = { isCountIn: false }) {
     let metronomeSubDivisionSound = this.metronomeSoundLo;
     let metronomeFirstNoteSound = this.metronomeSoundHi;

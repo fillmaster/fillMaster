@@ -115,7 +115,7 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
         <>
           <ProMetronome
             bpm={Number(tempo)}
-            subdivision={8}
+            subdivision={patternMaker.getSubDivision()}
             isPlaying={play}
             soundEnabled
             soundPattern={patternMaker.getMetronomeCountInString()}
@@ -139,7 +139,7 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
         // METRONOME START
         <ProMetronome
           bpm={Number(tempo)}
-          subdivision={8}
+          subdivision={patternMaker.getSubDivision()}
           soundEnabled
           isPlaying={play}
           soundPattern={metronomeString}
