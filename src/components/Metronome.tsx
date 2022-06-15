@@ -150,7 +150,7 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
               {setQuarterNote(state.qNote)}
               {oneToBeatsPerBar.map((beat) => {
                 return (
-                  <span key="asdfg">
+                  <span key={`beat${beat}`}>
                     <time style={beat === state.qNote ? counterOn : counterOff}> </time>
                   </span>
                 );
