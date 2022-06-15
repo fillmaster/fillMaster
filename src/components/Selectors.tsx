@@ -40,6 +40,8 @@ const Selectors = ({
     setKey(key + 1);
   }, [timeSignatureBottom, timeSignatureTop]);
 
+  // PatternMaker getters must be used for beats/divisions in return() - don't use timeSig top/bottom
+  // states here as it becomes a source of crashing.
   const currentBeatsPerBar = () => patternMaker.getCustomSettingsForPattern().timeSignature.beats;
   const currentMeasureDivision = () =>
     patternMaker.getCustomSettingsForPattern().timeSignature.division;
@@ -47,9 +49,6 @@ const Selectors = ({
   return (
     <>
       <div>
-        {/* Be sure to keep patternMaker getters for beats/divisions,
-        using the relative states (timeSigTop/timeSigBottom) can 
-        crash app */}
         <MeasureTopSelector
           selectorItems={getMeasureTopSelectorOptions(
             [...BEATS_PER_BAR],
