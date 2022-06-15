@@ -152,7 +152,7 @@ const Metronome = ({ play, tempo, fillStart }: MetronomeProps) => {
               {oneToBeatsPerBar.map((beat) => {
                 return (
                   <span key={`beat${beat}`}>
-                    <time style={beat === state.qNote ? counterOn : counterOff}> </time>
+                    <time style={beat === state.qNote ? counterOn : counterOff} />
                   </span>
                 );
               })}
