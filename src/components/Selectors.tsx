@@ -40,14 +40,21 @@ const Selectors = ({
     setKey(key + 1);
   }, [timeSignatureBottom, timeSignatureTop]);
 
+  const currentBeatsPerBar = () => patternMaker.getCustomSettingsForPattern().timeSignature.beats;
+  const currentMeasureDivision = () =>
+    patternMaker.getCustomSettingsForPattern().timeSignature.division;
+
   return (
     <>
       <div>
+        {/* Be sure to keep patternMaker getters for beats/divisions,
+        using the relative states (timeSigTop/timeSigBottom) can 
+        crash app */}
         <MeasureTopSelector
           selectorItems={getMeasureTopSelectorOptions(
             [...BEATS_PER_BAR],
             '4',
-            patternMaker.getCustomSettingsForPattern().timeSignature.beats
+            currentBeatsPerBar()
           )}
           handleSetItem={handleSetTimeSignatureTop}
           disabled={isCountIn()}
@@ -56,7 +63,7 @@ const Selectors = ({
           selectorItems={getMeasureBottomSelectorOptions(
             [...MEASURE_DIVISIONS],
             '4',
-            patternMaker.getCustomSettingsForPattern().timeSignature.division
+            currentMeasureDivision()
           )}
           handleSetItem={handleSetTimeSignatureBottom}
           disabled={isCountIn()}
@@ -65,14 +72,9 @@ const Selectors = ({
       <br />
       <NoteDivisionSelector
         selectorItems={getPlayNotesOptions(
-          getAvailablePlayNotes(
-            patternMaker.getCustomSettingsForPattern().timeSignature.beats,
-            patternMaker.getCustomSettingsForPattern().timeSignature.division
-          ),
-          patternMaker.getCustomSettingsForPattern().timeSignature.division,
-          getPlayNotesByMeasureDivision(
-            patternMaker.getCustomSettingsForPattern().timeSignature.division
-          )
+          getAvailablePlayNotes(currentBeatsPerBar(), currentMeasureDivision()),
+          currentMeasureDivision(),
+          getPlayNotesByMeasureDivision(currentMeasureDivision())
         )}
         handleSetItem={handleSetNoteDivision}
         disabled={isCountIn()}
