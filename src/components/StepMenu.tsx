@@ -76,6 +76,7 @@ const VerticalLinearStepper = () => {
 
   const handleReset = () => {
     setActiveStep(0);
+    restartMetronome();
     togglePanel();
   };
   const [activeDiv, setActiveDiv] = useState('panel1');
