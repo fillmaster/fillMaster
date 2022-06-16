@@ -18,24 +18,24 @@
   color: white;
 }
 
-.div1,
-.div2 {
+.panel1,
+.panel2 {
   overflow: hidden;
 }
-.div1 {
+.panel1 {
   padding-left: 3%;
 }
-.div2 {
+.panel2 {
   padding-top: 5%;
 }
-.div1.show,
-.div2.show {
+.panel1.show,
+.panel2.show {
   height: 100vh;
   transition: all 0.3s ease-in-out;
   padding-top: 4%;
 }
-.div1.hide,
-.div2.hide {
+.panel1.hide,
+.panel2.hide {
   height: 0;
   transition: all 0.3s ease-in-out;
 }
