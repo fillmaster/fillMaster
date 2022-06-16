@@ -116,7 +116,11 @@ export default class PatternMaker {
     );
 
     let stringWithDivisions = blankString;
-    const nth = getNth(this.customSettingsForPattern.playNotes, this.subDivision);
+    const nth = getNth(
+      this.customSettingsForPattern.playNotes,
+      this.subDivision,
+      this.customSettingsForPattern.timeSignature.division
+    );
     if (nth !== null) {
       stringWithDivisions = replaceEachNthChar(blankString, nth, metronomeSubDivisionSound);
     }
@@ -159,23 +163,24 @@ function replaceEachNthChar(str: string, nth: number, replaceWith: MetronomeSoun
   return stringAsArray.join('');
 }
 
-function getNth(playNotes: PlayNotes, subDivision: number) {
+function getNth(playNotes: PlayNotes, subDivision: Subdivision, division_: MeasureDivision) {
   let nth: number | null;
+  const division = Number(division_);
   switch (playNotes) {
     case 'wholeNotes':
       nth = null;
       break;
     case 'halfNotes':
-      nth = subDivision * 2;
+      nth = subDivision * (division / 2);
       break;
     case 'quarterNotes':
-      nth = subDivision * 1;
+      nth = subDivision * (division / 4);
       break;
     case 'eighthNotes':
-      nth = subDivision / 2;
+      nth = subDivision * (division / 8);
       break;
     case 'sixteenthNotes':
-      nth = subDivision / 4;
+      nth = subDivision * (division / 16);
       break;
     default:
       assertUnreachable(playNotes);
