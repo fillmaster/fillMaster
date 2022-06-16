@@ -14,7 +14,6 @@ export default useFirstRender;
 
 // const firstRender = useFirstRender();
 
-
 // // for other parts of app:
 // useEffect(() => {
 //   if (!firstRender) {
