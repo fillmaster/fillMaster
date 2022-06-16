@@ -79,11 +79,14 @@ const VerticalLinearStepper = () => {
     restartMetronome();
     togglePanel();
   };
-  const [activeDiv, setActiveDiv] = useState('panel1');
+  const [activePanel, setActivePanel] = useState('panel1');
 
   const togglePanel = () => {
-    // eslint-disable-next-line no-unused-expressions
-    activeDiv === 'panel1' ? setActiveDiv('panel2') : setActiveDiv('panel1');
+    if (activePanel === 'panel1') {
+      setActivePanel('panel2');
+    } else {
+      setActivePanel('panel1');
+    }
   };
 
   useEffect(() => {
@@ -93,7 +96,7 @@ const VerticalLinearStepper = () => {
   return (
     <>
       {/* PANEL 1: STEP MENU */}
-      <div className={activeDiv === 'panel1' ? 'panel1 show' : 'panel1 hide'} id="panel1">
+      <div className={activePanel === 'panel1' ? 'panel1 show' : 'panel1 hide'} id="panel1">
         <Stepper activeStep={activeStep} orientation="vertical">
           {steps.map((step, index) => (
             <Step key={step.label}>
@@ -125,7 +128,7 @@ const VerticalLinearStepper = () => {
         </Stepper>
       </div>
       {/* PANEL 2: METRONOME */}
-      <div className={activeDiv === 'panel2' ? 'panel2 show' : 'panel2 hide'} id="panel2">
+      <div className={activePanel === 'panel2' ? 'panel2 show' : 'panel2 hide'} id="panel2">
         <Paper square elevation={0} sx={{ p: 3 }}>
           <div>Drum Beat: {beatIdea}</div>
           <b>
