@@ -2,6 +2,7 @@ import { BeatsPerBar } from '../../consts/beatsPerBar';
 import { MeasureDivision } from '../../consts/measureDivisions';
 import { PlayNotes } from '../../consts/playNotes';
 import assertUnreachable from '../assertUnreachable';
+import { getPlayNotesByMeasureDivision } from '../playNotesFunctions';
 
 export type PlayFillOn = { beat: BeatPosition; subBeat: SubBeatPosition };
 
@@ -119,7 +120,8 @@ export default class PatternMaker {
     const nth = getNth(
       this.customSettingsForPattern.playNotes,
       this.subDivision,
-      this.customSettingsForPattern.timeSignature.division
+      this.customSettingsForPattern.timeSignature.division,
+      isCountIn
     );
     if (nth !== null) {
       stringWithDivisions = replaceEachNthChar(blankString, nth, metronomeSubDivisionSound);
@@ -163,9 +165,16 @@ function replaceEachNthChar(str: string, nth: number, replaceWith: MetronomeSoun
   return stringAsArray.join('');
 }
 
-function getNth(playNotes: PlayNotes, subDivision: Subdivision, division_: MeasureDivision) {
+function getNth(
+  playNotes_: PlayNotes,
+  subDivision: Subdivision,
+  division_: MeasureDivision,
+  isCountIn: boolean = false
+) {
   let nth: number;
   const division = Number(division_);
+  let playNotes = playNotes_;
+  if (isCountIn) playNotes = getPlayNotesByMeasureDivision(division_);
   switch (playNotes) {
     case 'wholeNotes':
       nth = subDivision * division;
