@@ -14,18 +14,21 @@ interface NoteDivisionSelectorProps {
   selectorItems: NoteDivisionSelectorItems;
   handleSetItem: (param: string) => void;
   disabled: boolean;
+  disabledPreview?: string;
 }
 
 const NoteDivisionSelector = ({
   selectorItems,
   handleSetItem,
   disabled,
+  disabledPreview,
 }: NoteDivisionSelectorProps) => {
   return (
     <Selector
       selectorItems={selectorItems}
       handleSetItem={handleSetItem}
       disabled={disabled}
+      disabledPreview={disabledPreview}
       centered={false}
       highlightDefault
     />

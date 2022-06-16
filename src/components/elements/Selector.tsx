@@ -29,6 +29,7 @@ interface SelectorProps {
   selectorItems: SelectorItems;
   handleSetItem: (param: string) => void;
   disabled: boolean;
+  disabledPreview?: string;
   centered?: boolean;
   highlightDefault?: boolean;
 }
@@ -37,6 +38,7 @@ const Selector = ({
   selectorItems,
   handleSetItem,
   disabled,
+  disabledPreview,
   centered = true,
   highlightDefault = false,
 }: SelectorProps) => {
@@ -67,6 +69,8 @@ const Selector = ({
 
   const offset = getTransformVerticalOffset(getDefault(), HEIGHT);
 
+  const preview = disabled && disabledPreview ? disabledPreview : selectedOption.previewName;
+
   return (
     <div>
       <Button
@@ -83,7 +87,10 @@ const Selector = ({
         }}
         disabled={disabled}
       >
-        {selectedOption.previewName ? selectedOption.previewName : selectedOption.name}
+        {
+          // add optional disabled preview param
+        }
+        {selectedOption.previewName ? preview : selectedOption.name}
       </Button>
 
       <Menu

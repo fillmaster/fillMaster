@@ -77,6 +77,9 @@ const Selectors = ({
         )}
         handleSetItem={handleSetNoteDivision}
         disabled={isCountIn()}
+        disabledPreview={getUnicodeForPlayNotes(
+          getPlayNotesByMeasureDivision(currentMeasureDivision())
+        )}
         key={key}
       />
     </>
