@@ -1,3 +1,4 @@
+import { Grid } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { BeatsPerBar, BEATS_PER_BAR } from '../consts/beatsPerBar';
 import { MeasureDivision, MEASURE_DIVISIONS } from '../consts/measureDivisions';
@@ -47,8 +48,9 @@ const Selectors = ({
     patternMaker.getCustomSettingsForPattern().timeSignature.division;
 
   return (
-    <>
-      <div>
+    <Grid container spacing={2}>
+      <Grid item xs={3} />
+      <Grid item xs={2}>
         <MeasureTopSelector
           selectorItems={getMeasureTopSelectorOptions(
             [...BEATS_PER_BAR],
@@ -67,22 +69,24 @@ const Selectors = ({
           handleSetItem={handleSetTimeSignatureBottom}
           disabled={isCountIn()}
         />
-      </div>
-      <br />
-      <NoteDivisionSelector
-        selectorItems={getPlayNotesOptions(
-          getAvailablePlayNotes(currentBeatsPerBar(), currentMeasureDivision()),
-          currentMeasureDivision(),
-          getPlayNotesByMeasureDivision(currentMeasureDivision())
-        )}
-        handleSetItem={handleSetNoteDivision}
-        disabled={isCountIn()}
-        disabledPreview={getUnicodeForPlayNotes(
-          getPlayNotesByMeasureDivision(currentMeasureDivision())
-        )}
-        key={key}
-      />
-    </>
+      </Grid>
+      <Grid item xs={2} sx={{ alignSelf: 'center' }}>
+        <NoteDivisionSelector
+          selectorItems={getPlayNotesOptions(
+            getAvailablePlayNotes(currentBeatsPerBar(), currentMeasureDivision()),
+            currentMeasureDivision(),
+            getPlayNotesByMeasureDivision(currentMeasureDivision())
+          )}
+          handleSetItem={handleSetNoteDivision}
+          disabled={isCountIn()}
+          disabledPreview={getUnicodeForPlayNotes(
+            getPlayNotesByMeasureDivision(currentMeasureDivision())
+          )}
+          key={key}
+        />
+      </Grid>
+      <Grid item xs={5} />
+    </Grid>
   );
 };
 
