@@ -168,7 +168,7 @@ function getNth(playNotes: PlayNotes, subDivision: Subdivision, division_: Measu
   const division = Number(division_);
   switch (playNotes) {
     case 'wholeNotes':
-      nth = null;
+      nth = subDivision * division;
       break;
     case 'halfNotes':
       nth = subDivision * (division / 2);
