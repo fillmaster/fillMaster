@@ -1,7 +1,7 @@
 import PauseIcon from '@mui/icons-material/PauseCircleFilled';
 import PlayIcon from '@mui/icons-material/PlayCircleFilled';
 import StopIcon from '@mui/icons-material/StopCircle';
-import { Button } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import { useState } from 'react';
 import Metronome from './Metronome';
 
@@ -15,19 +15,24 @@ const MetronomeContainer = ({ tempo, fillStart, restartMetronome }: MetronomeCon
   const [isPlaying, setIsPlaying] = useState(false);
 
   return (
-    <div style={{ height: '50px', padding: '50px' }}>
-      <Metronome play={isPlaying} tempo={tempo} fillStart={fillStart} />
-      <Button onClick={() => restartMetronome()}>
-        <StopIcon />
-      </Button>
-      <Button onClick={() => setIsPlaying(!isPlaying)}>
-        {isPlaying ? (
-          <PauseIcon onClick={() => setIsPlaying(!isPlaying)} />
-        ) : (
-          <PlayIcon onClick={() => setIsPlaying(!isPlaying)} />
-        )}
-      </Button>
-    </div>
+    <Grid container spacing={2}>
+      <Grid item xs={3} />
+      <Grid item xs={9}>
+        <div style={{ height: '50px', padding: '50px' }}>
+          <Metronome play={isPlaying} tempo={tempo} fillStart={fillStart} />
+          <Button onClick={() => restartMetronome()}>
+            <StopIcon />
+          </Button>
+          <Button onClick={() => setIsPlaying(!isPlaying)}>
+            {isPlaying ? (
+              <PauseIcon onClick={() => setIsPlaying(!isPlaying)} />
+            ) : (
+              <PlayIcon onClick={() => setIsPlaying(!isPlaying)} />
+            )}
+          </Button>
+        </div>
+      </Grid>
+    </Grid>
   );
 };
 

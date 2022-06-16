@@ -1,3 +1,4 @@
+import { Grid } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
@@ -130,23 +131,29 @@ const VerticalLinearStepper = () => {
       {/* PANEL 2: METRONOME */}
       <div className={activePanel === 'panel2' ? 'panel2 show' : 'panel2 hide'} id="panel2">
         <Paper square elevation={0} sx={{ p: 3 }}>
-          <div>Drum Beat: {beatIdea}</div>
-          <b>
-            <div>Fill on Beat {fillStart} of bar 4</div>
-          </b>
-          <b>
-            <div>Fill style: {fill}</div>
-          </b>
-          <div>@ {tempo} bpm</div>
+          <Grid container spacing={2}>
+            <Grid item xs={8}>
+              <div>Drum Beat: {beatIdea}</div>
+              <b>
+                <div>Fill on Beat {fillStart} of bar 4</div>
+              </b>
+              <b>
+                <div>Fill style: {fill}</div>
+              </b>
+              <div>@ {tempo} bpm</div>
+            </Grid>
+            <Grid item xs={4}>
+              <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
+                START OVER
+              </Button>
+            </Grid>
+          </Grid>
           <MetronomeContainer
             tempo={tempo}
             fillStart={fillStart}
             key={key}
             restartMetronome={restartMetronome}
           />
-          <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
-            START OVER
-          </Button>
         </Paper>
       </div>
     </>

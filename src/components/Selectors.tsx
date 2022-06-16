@@ -49,7 +49,7 @@ const Selectors = ({
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={3} />
+      <Grid item xs={1} />
       <Grid item xs={2}>
         <MeasureTopSelector
           selectorItems={getMeasureTopSelectorOptions(
