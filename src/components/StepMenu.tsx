@@ -138,10 +138,12 @@ const VerticalLinearStepper = () => {
             <div>Fill style: {fill}</div>
           </b>
           <div>@ {tempo} bpm</div>
-          <MetronomeContainer tempo={tempo} fillStart={fillStart} key={key} />
-          <button type="button" onClick={() => restartMetronome()}>
-            restart
-          </button>
+          <MetronomeContainer
+            tempo={tempo}
+            fillStart={fillStart}
+            key={key}
+            restartMetronome={restartMetronome}
+          />
           <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
             START OVER
           </Button>
