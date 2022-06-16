@@ -18,25 +18,24 @@
   color: white;
 }
 
+.div1,
+.div2 {
+  overflow: hidden;
+}
 .div1 {
-  background-color: #000000;
-  color: white;
+  padding-left: 3%;
 }
 .div2 {
-  background-color: green;
-  color: white;
+  padding-top: 5%;
 }
 .div1.show,
 .div2.show {
-  height: 500px;
-  transition: all 0.2s ease-in-out;
-  padding-top: 50px;
-  text-align: center;
+  height: 100vh;
+  transition: all 0.3s ease-in-out;
+  padding-top: 4%;
 }
 .div1.hide,
 .div2.hide {
-  text-align: center;
   height: 0;
-  overflow: hidden;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
