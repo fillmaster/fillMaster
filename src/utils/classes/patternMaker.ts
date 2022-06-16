@@ -164,7 +164,7 @@ function replaceEachNthChar(str: string, nth: number, replaceWith: MetronomeSoun
 }
 
 function getNth(playNotes: PlayNotes, subDivision: Subdivision, division_: MeasureDivision) {
-  let nth: number | null;
+  let nth: number;
   const division = Number(division_);
   switch (playNotes) {
     case 'wholeNotes':
