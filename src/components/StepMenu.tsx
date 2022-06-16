@@ -6,7 +6,8 @@ import StepContent from '@mui/material/StepContent';
 import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
 import Typography from '@mui/material/Typography';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import '../App.css';
 import MetronomeContainer from './MetronomeContainer';
 import SetupStep from './StepSetup';
 
@@ -75,59 +76,76 @@ const VerticalLinearStepper = () => {
 
   const handleReset = () => {
     setActiveStep(0);
+    togglePanel();
+  };
+  const [activeDiv, setActiveDiv] = useState('div1');
+
+  const togglePanel = () => {
+    // eslint-disable-next-line no-unused-expressions
+    activeDiv === 'div1' ? setActiveDiv('div2') : setActiveDiv('div1');
   };
 
+  useEffect(() => {
+    if (activeStep === steps.length) togglePanel();
+  }, [activeStep]);
+
   return (
-    <Box sx={{ maxWidth: 400 }}>
-      <Stepper activeStep={activeStep} orientation="vertical">
-        {steps.map((step, index) => (
-          <Step key={step.label}>
-            <StepLabel>{step.label}</StepLabel>
-            <StepContent>
-              <Typography>{step.description}</Typography>
-              <SetupStep
-                index={index}
-                handleSetBeatIdea={handleSetBeatIdea}
-                handleSetFillStart={handleSetFillStart}
-                handleSetFill={handleSetFill}
-                handleSetTempo={handleSetTempo}
-                handleSetSliderValues={handleSetSliderValues}
-                sliderValues={sliderValues}
-              />
-              <Box sx={{ mb: 2 }}>
-                <div>
-                  <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }}>
-                    {index === steps.length - 1 ? 'Start' : 'Next'}
-                  </Button>
-                  <Button disabled={index === 0} onClick={handleBack} sx={{ mt: 1, mr: 1 }}>
-                    Back
-                  </Button>
-                </div>
-              </Box>
-            </StepContent>
-          </Step>
-        ))}
-      </Stepper>
-      {activeStep === steps.length && (
-        <Paper square elevation={0} sx={{ p: 3 }}>
-          <div>Drum Beat: {beatIdea}</div>
-          <b>
-            <div>Fill on Beat {fillStart} of bar 4</div>
-          </b>
-          <b>
-            <div>Fill style: {fill}</div>
-          </b>
-          <div>@ {tempo} bpm</div>
-          <MetronomeContainer tempo={tempo} fillStart={fillStart} key={key} />
-          <button type="button" onClick={() => restartMetronome()}>
-            restart
-          </button>
-          <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
-            START OVER
-          </Button>
-        </Paper>
-      )}
-    </Box>
+    <>
+      {/* PANEL 1: STEP MENU */}
+      <Box sx={{ maxWidth: 400 }}>
+        <div className={activeDiv === 'div1' ? 'div1 show' : 'div1 hide'} id="div1">
+          <Stepper activeStep={activeStep} orientation="vertical">
+            {steps.map((step, index) => (
+              <Step key={step.label}>
+                <StepLabel>{step.label}</StepLabel>
+                <StepContent>
+                  <Typography>{step.description}</Typography>
+                  <SetupStep
+                    index={index}
+                    handleSetBeatIdea={handleSetBeatIdea}
+                    handleSetFillStart={handleSetFillStart}
+                    handleSetFill={handleSetFill}
+                    handleSetTempo={handleSetTempo}
+                    handleSetSliderValues={handleSetSliderValues}
+                    sliderValues={sliderValues}
+                  />
+                  <Box sx={{ mb: 2 }}>
+                    <div>
+                      <Button variant="contained" onClick={handleNext} sx={{ mt: 1, mr: 1 }}>
+                        {index === steps.length - 1 ? 'Start' : 'Next'}
+                      </Button>
+                      <Button disabled={index === 0} onClick={handleBack} sx={{ mt: 1, mr: 1 }}>
+                        Back
+                      </Button>
+                    </div>
+                  </Box>
+                </StepContent>
+              </Step>
+            ))}
+          </Stepper>
+        </div>
+        {/* PANEL 2: METRONOME */}
+        <div className={activeDiv === 'div2' ? 'div2 show' : 'div2 hide'} id="div2">
+          <Paper square elevation={0} sx={{ p: 3 }}>
+            <div>Drum Beat: {beatIdea}</div>
+            <b>
+              <div>Fill on Beat {fillStart} of bar 4</div>
+            </b>
+            <b>
+              <div>Fill style: {fill}</div>
+            </b>
+            <div>@ {tempo} bpm</div>
+            <MetronomeContainer tempo={tempo} fillStart={fillStart} key={key} />
+            <button type="button" onClick={() => restartMetronome()}>
+              restart
+            </button>
+            <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
+              START OVER
+            </Button>
+          </Paper>
+        </div>
+      </Box>
+    </>
   );
 };
 

@@ -1,6 +1,7 @@
 import '../App.css';
 
 import { useState } from 'react';
+import StepMenu from './StepMenu';
 
 const ToggleScreens = () => {
   const [activeDiv, setActiveDiv] = useState('div1');
@@ -13,7 +14,7 @@ const ToggleScreens = () => {
   return (
     <>
       <div className={activeDiv === 'div1' ? 'div1 show' : 'div1 hide'} id="div1">
-        Div 1
+        <StepMenu />
         <button type="button" onClick={toggleDiv}>
           {' '}
           Hide div1
