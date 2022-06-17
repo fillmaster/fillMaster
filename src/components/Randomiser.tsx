@@ -6,6 +6,11 @@ interface RandomAnimatorProps {
   handleSetItem: (param: string) => void;
 }
 
+function sleep(ms: number) {
+  // eslint-disable-next-line no-promise-executor-return
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 const makeRepeated = (arr: Array<string>) => {
   // increase number before / arr.length to increase random-spin time
   const divider = 50;
@@ -24,9 +29,9 @@ const Randomiser = ({ arrayToRandomise, handleSetItem }: RandomAnimatorProps) =>
 
   const flickThroughArray = async () => {
     for (let i = 0; i < randomArray.length; i++) {
-      const milliseconds = 30;
       setRandomItem(randomArray[i]);
-      setTimeout(() => setRandomItem(randomArray[i]), milliseconds);
+      // eslint-disable-next-line no-await-in-loop
+      await sleep(30);
     }
   };
   useEffect(() => {
