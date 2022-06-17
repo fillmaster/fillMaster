@@ -2,7 +2,7 @@
 
 import RestartAllIcon from '@mui/icons-material/RestartAltRounded';
 import { Button, Fade, Typography } from '@mui/material';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import BEAT_IDEAS from '../consts/forRandomiser/beatIdeas';
 import FILL_STARTS from '../consts/forRandomiser/fillStarts';
 import FILLS from '../consts/forRandomiser/fillTypes';
@@ -34,10 +34,10 @@ const QuickRandomiser = ({
   setTempo,
   tempoOptions,
 }: QuickRandomiserProps) => {
-  const [beatIdeaVisible, setBeatIdeaVisible] = useState(false);
-  const [fillStartVisible, setFillStartVisible] = useState(false);
-  const [fillVisible, setFillVisible] = useState(false);
-  const [tempoVisible, setTempoVisible] = useState(false);
+  const [beatIdeaVisible, setBeatIdeaVisible] = useState(true);
+  const [fillStartVisible, setFillStartVisible] = useState(true);
+  const [fillVisible, setFillVisible] = useState(true);
+  const [tempoVisible, setTempoVisible] = useState(true);
 
   const handleChange = (setItem: Dispatch<SetStateAction<boolean>>) => {
     setItem(false);
@@ -61,26 +61,6 @@ const QuickRandomiser = ({
       setTempo(shuffleArray([...tempoOptions()])[0]);
     }
   };
-
-  useEffect(() => {
-    setBeatIdeaVisible(false);
-    setTimeout(() => setBeatIdeaVisible(true), 600);
-  }, [beatIdea]);
-
-  useEffect(() => {
-    setFillStartVisible(false);
-    setTimeout(() => setFillStartVisible(true), 600);
-  }, [fillStart]);
-
-  useEffect(() => {
-    setFillVisible(false);
-    setTimeout(() => setFillVisible(true), 600);
-  }, [fill]);
-
-  useEffect(() => {
-    setTempoVisible(false);
-    setTimeout(() => setTempoVisible(true), 600);
-  }, [tempo]);
 
   return (
     <>
