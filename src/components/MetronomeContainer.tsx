@@ -9,9 +9,15 @@ interface MetronomeContainerProps {
   tempo: string;
   fillStart: string;
   restartMetronome: () => void;
+  triggerResetFillStart: () => void;
 }
 
-const MetronomeContainer = ({ tempo, fillStart, restartMetronome }: MetronomeContainerProps) => {
+const MetronomeContainer = ({
+  tempo,
+  fillStart,
+  restartMetronome,
+  triggerResetFillStart,
+}: MetronomeContainerProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   return (
@@ -19,7 +25,12 @@ const MetronomeContainer = ({ tempo, fillStart, restartMetronome }: MetronomeCon
       <Grid item xs={3} />
       <Grid item xs={9}>
         <div style={{ height: '50px', padding: '50px' }}>
-          <Metronome play={isPlaying} tempo={tempo} fillStart={fillStart} />
+          <Metronome
+            play={isPlaying}
+            tempo={tempo}
+            fillStart={fillStart}
+            triggerResetFillStart={triggerResetFillStart}
+          />
           <Button onClick={() => restartMetronome()}>
             <StopIcon />
           </Button>

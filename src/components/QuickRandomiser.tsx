@@ -2,7 +2,7 @@
 
 import RestartAllIcon from '@mui/icons-material/RestartAltRounded';
 import { Button, Fade, Typography } from '@mui/material';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, forwardRef, SetStateAction, useState } from 'react';
 import BEAT_IDEAS from '../consts/forRandomiser/beatIdeas';
 import FILL_STARTS from '../consts/forRandomiser/fillStarts';
 import FILLS from '../consts/forRandomiser/fillTypes';
@@ -23,17 +23,20 @@ interface QuickRandomiserProps {
   tempoOptions: () => Array<string>;
 }
 
-const QuickRandomiser = ({
-  beatIdea,
-  fillStart,
-  fill,
-  tempo,
-  setBeatIdea,
-  setFillStart,
-  setFill,
-  setTempo,
-  tempoOptions,
-}: QuickRandomiserProps) => {
+const QuickRandomiser = (
+  {
+    beatIdea,
+    fillStart,
+    fill,
+    tempo,
+    setBeatIdea,
+    setFillStart,
+    setFill,
+    setTempo,
+    tempoOptions,
+  }: QuickRandomiserProps,
+  ref: any
+) => {
   const [beatIdeaVisible, setBeatIdeaVisible] = useState(true);
   const [fillStartVisible, setFillStartVisible] = useState(true);
   const [fillVisible, setFillVisible] = useState(true);
@@ -43,6 +46,7 @@ const QuickRandomiser = ({
     setItem(false);
     setTimeout(() => setItem(true), 600);
   };
+
   const quickResetRandomiser = (randomsToReset: Array<RandomiseMe>) => {
     if (randomsToReset.includes('beatIdea')) {
       handleChange(setBeatIdeaVisible);
@@ -91,8 +95,15 @@ const QuickRandomiser = ({
       <Button onClick={() => quickResetRandomiser([...RANDOMISE_ME])}>
         <RestartAllIcon />
       </Button>
+
+      {/* trigger */}
+      <Button
+        ref={ref}
+        onClick={() => quickResetRandomiser(['startFill'])}
+        sx={{ display: 'none' }}
+      />
     </>
   );
 };
 
-export default QuickRandomiser;
+export default forwardRef(QuickRandomiser);

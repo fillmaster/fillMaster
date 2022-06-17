@@ -12,7 +12,8 @@ function sleep(ms: number) {
 }
 
 const makeRepeated = (arr: Array<string>) => {
-  // increase number before / arr.length to increase random-spin time
+  // takes a shuffled array and extends/crops it to a given length
+  // so it can be cycled through;
   const divider = 50;
   if (arr.length > divider) return arr.slice(0, divider);
   return Array.from({ length: divider / arr.length }, () => arr).flat();

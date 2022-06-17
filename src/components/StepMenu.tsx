@@ -7,7 +7,7 @@ import StepContent from '@mui/material/StepContent';
 import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
 import Typography from '@mui/material/Typography';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import '../App.css';
 import getStringArrayBetweenTwoValues from '../utils/getArrayBetweenValues';
 import MetronomeContainer from './MetronomeContainer';
@@ -45,6 +45,11 @@ const VerticalLinearStepper = () => {
   const [tempo, setTempo] = useState('');
   const [key, setKey] = useState(0);
   const [sliderValues, setSliderValues] = useState<number[]>([60, 120]);
+  const resetFillStart = useRef<HTMLDivElement>(null);
+
+  const triggerResetFillStart = () => {
+    if (resetFillStart.current) resetFillStart.current.click();
+  };
 
   const tempoOptions = () => getStringArrayBetweenTwoValues(sliderValues[0], sliderValues[1]);
 
@@ -84,6 +89,7 @@ const VerticalLinearStepper = () => {
     restartMetronome();
     togglePanel();
   };
+
   // in development: change default to 'panel2' when testing
   // changes to 'panel2' to avoid having to step through.
   const [activePanel, setActivePanel] = useState('panel1');
@@ -140,6 +146,7 @@ const VerticalLinearStepper = () => {
           <Grid container spacing={2}>
             <Grid item xs={8}>
               <QuickRandomiser
+                ref={resetFillStart}
                 beatIdea={beatIdea}
                 fillStart={fillStart}
                 fill={fill}
@@ -162,6 +169,7 @@ const VerticalLinearStepper = () => {
             fillStart={fillStart}
             key={key}
             restartMetronome={restartMetronome}
+            triggerResetFillStart={triggerResetFillStart}
           />
         </Paper>
       </div>
