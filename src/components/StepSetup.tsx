@@ -1,5 +1,6 @@
 import RefreshIcon from '@mui/icons-material/RefreshRounded';
 import { Button, Typography } from '@mui/material';
+import { useState } from 'react';
 import beatIdeas from '../consts/forRandomiser/beatIdeas';
 import fillStarts from '../consts/forRandomiser/fillStarts';
 import fills from '../consts/forRandomiser/fillTypes';
@@ -15,12 +16,7 @@ interface SetupStepProps {
   handleSetFill: (fill: string) => void;
   handleSetTempo: (tempo: string) => void;
   handleSetSliderValues: (sliderValues: Array<number>) => void;
-  resetRandomiser: (randomsToReset: Array<RandomiseMe>) => void;
   sliderValues: Array<number>;
-  beatIdeaKey: number;
-  startFillKey: number;
-  fillKey: number;
-  tempoKey: number;
 }
 
 const SetupStep = ({
@@ -31,12 +27,19 @@ const SetupStep = ({
   handleSetTempo,
   handleSetSliderValues,
   sliderValues,
-  resetRandomiser,
-  beatIdeaKey,
-  startFillKey,
-  fillKey,
-  tempoKey,
 }: SetupStepProps) => {
+  const [beatIdeaKey, setBeatIdeaKey] = useState(0);
+  const [startFillKey, setStartFillKey] = useState(0);
+  const [fillKey, setFillKey] = useState(0);
+  const [tempoKey, setTempoKey] = useState(0);
+
+  const resetRandomiser = (randomToReset: RandomiseMe) => {
+    if (randomToReset === 'beatIdea') setBeatIdeaKey(beatIdeaKey + 1);
+    if (randomToReset === 'startFill') setStartFillKey(startFillKey + 1);
+    if (randomToReset === 'fill') setFillKey(fillKey + 1);
+    if (randomToReset === 'tempo') setTempoKey(tempoKey + 1);
+  };
+
   if (index === 0)
     return (
       <TempoChooser handleSetSliderValues={handleSetSliderValues} sliderValues={sliderValues} />
@@ -52,7 +55,7 @@ const SetupStep = ({
           />
         </b>
         <div>When you&apos;ve thought of something, continue...</div>
-        <Button onClick={() => resetRandomiser(['beatIdea'])}>
+        <Button onClick={() => resetRandomiser('beatIdea')}>
           <RefreshIcon />
         </Button>
       </>
@@ -67,11 +70,11 @@ const SetupStep = ({
           handleSetItem={handleSetFillStart}
         />
         <span> of bar 4.</span>{' '}
-        <span>
-          <Button onClick={() => resetRandomiser(['startFill'])}>
+        <div>
+          <Button onClick={() => resetRandomiser('startFill')}>
             <RefreshIcon />
           </Button>
-        </span>
+        </div>
       </>
     );
   if (index === 3)
@@ -80,9 +83,11 @@ const SetupStep = ({
         <b>
           <Randomiser key={fillKey} arrayToRandomise={fills} handleSetItem={handleSetFill} />
         </b>
-        <Button onClick={() => resetRandomiser(['fill'])}>
-          <RefreshIcon />
-        </Button>
+        <div>
+          <Button onClick={() => resetRandomiser('fill')}>
+            <RefreshIcon />
+          </Button>
+        </div>
       </>
     );
   if (index === 4)
@@ -99,7 +104,7 @@ const SetupStep = ({
             bpm
           </Typography>
         </b>
-        <Button onClick={() => resetRandomiser(['tempo'])}>
+        <Button onClick={() => resetRandomiser('tempo')}>
           <RefreshIcon />
         </Button>
       </>
