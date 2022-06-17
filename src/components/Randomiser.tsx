@@ -7,8 +7,6 @@ interface RandomAnimatorProps {
 }
 
 function sleep(ms: number) {
-  // ignore this eslint error for now as it relates to an imported node module
-  // decide whether to ignore rule as a whole or just here or other solution.
   // eslint-disable-next-line no-promise-executor-return
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
