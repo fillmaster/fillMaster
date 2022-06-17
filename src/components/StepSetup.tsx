@@ -1,9 +1,9 @@
 import RefreshIcon from '@mui/icons-material/RefreshRounded';
 import { Button, Typography } from '@mui/material';
-import { useState } from 'react';
 import beatIdeas from '../consts/forRandomiser/beatIdeas';
 import fillStarts from '../consts/forRandomiser/fillStarts';
 import fills from '../consts/forRandomiser/fillTypes';
+import { RandomiseMe } from '../consts/forRandomiser/randomiseMe';
 import getStringArrayBetweenTwoValues from '../utils/getArrayBetweenValues';
 import Randomiser from './Randomiser';
 import TempoChooser from './TempoChooser';
@@ -15,7 +15,12 @@ interface SetupStepProps {
   handleSetFill: (fill: string) => void;
   handleSetTempo: (tempo: string) => void;
   handleSetSliderValues: (sliderValues: Array<number>) => void;
+  resetRandomiser: (randomsToReset: Array<RandomiseMe>) => void;
   sliderValues: Array<number>;
+  beatIdeaKey: number;
+  startFillKey: number;
+  fillKey: number;
+  tempoKey: number;
 }
 
 const SetupStep = ({
@@ -26,22 +31,12 @@ const SetupStep = ({
   handleSetTempo,
   handleSetSliderValues,
   sliderValues,
+  resetRandomiser,
+  beatIdeaKey,
+  startFillKey,
+  fillKey,
+  tempoKey,
 }: SetupStepProps) => {
-  const [beatIdeaKey, setBeatIdeaKey] = useState(0);
-  const [startFillKey, setStartFillKey] = useState(0);
-  const [fillKey, setFillKey] = useState(0);
-  const [tempoKey, setTempoKey] = useState(0);
-
-  type RandomiseMe = 'beatIdea' | 'startFill' | 'fill' | 'tempo';
-  const resetRandomiser = (randomsToReset: Array<RandomiseMe>) => {
-    if (randomsToReset.includes('beatIdea')) setBeatIdeaKey(beatIdeaKey + 1);
-    if (randomsToReset.includes('startFill')) setStartFillKey(startFillKey + 1);
-    if (randomsToReset.includes('fill')) setFillKey(fillKey + 1);
-    if (randomsToReset.includes('tempo')) setTempoKey(tempoKey + 1);
-  };
-
-  // const handleResetAllRandoms
-
   if (index === 0)
     return (
       <TempoChooser handleSetSliderValues={handleSetSliderValues} sliderValues={sliderValues} />
