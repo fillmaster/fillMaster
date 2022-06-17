@@ -1,3 +1,4 @@
+import RestartAllIcon from '@mui/icons-material/RestartAltRounded';
 import { Grid } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -7,11 +8,10 @@ import StepContent from '@mui/material/StepContent';
 import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
 import Typography from '@mui/material/Typography';
-import RestartAllIcon from '@mui/icons-material/RestartAltRounded';
 import { useEffect, useState } from 'react';
 import '../App.css';
-import { RandomiseMe, RANDOMISE_ME } from '../consts/forRandomiser/randomiseMe';
 import MetronomeContainer from './MetronomeContainer';
+import QuickRandomiser from './QuickRandomiser';
 import SetupStep from './StepSetup';
 
 const steps = [
@@ -45,17 +45,6 @@ const VerticalLinearStepper = () => {
   const [tempo, setTempo] = useState('');
   const [key, setKey] = useState(0);
   const [sliderValues, setSliderValues] = useState<number[]>([60, 120]);
-  const [beatIdeaKey, setBeatIdeaKey] = useState(0);
-  const [startFillKey, setStartFillKey] = useState(0);
-  const [fillKey, setFillKey] = useState(0);
-  const [tempoKey, setTempoKey] = useState(0);
-
-  const resetRandomiser = (randomsToReset: Array<RandomiseMe>) => {
-    if (randomsToReset.includes('beatIdea')) setBeatIdeaKey(beatIdeaKey + 1);
-    if (randomsToReset.includes('startFill')) setStartFillKey(startFillKey + 1);
-    if (randomsToReset.includes('fill')) setFillKey(fillKey + 1);
-    if (randomsToReset.includes('tempo')) setTempoKey(tempoKey + 1);
-  };
 
   const handleSetSliderValues = (values: Array<number>) => {
     setSliderValues(values);
@@ -127,11 +116,6 @@ const VerticalLinearStepper = () => {
                   handleSetTempo={handleSetTempo}
                   handleSetSliderValues={handleSetSliderValues}
                   sliderValues={sliderValues}
-                  resetRandomiser={resetRandomiser}
-                  beatIdeaKey={beatIdeaKey}
-                  startFillKey={startFillKey}
-                  fillKey={fillKey}
-                  tempoKey={tempoKey}
                 />
                 <Box sx={{ mb: 2 }}>
                   <div>
@@ -153,7 +137,9 @@ const VerticalLinearStepper = () => {
         <Paper square elevation={0} sx={{ p: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={8}>
-              <div>Drum Beat: {beatIdea}</div>
+              <div>
+                Drum Beat: <QuickRandomiser />
+              </div>
               <b>
                 <div>Fill on Beat {fillStart} of bar 4</div>
               </b>
@@ -161,7 +147,7 @@ const VerticalLinearStepper = () => {
                 <div>Fill style: {fill}</div>
               </b>
               <div>@ {tempo} bpm</div>
-              <Button onClick={() => resetRandomiser([...RANDOMISE_ME])}>
+              <Button onClick={() => console.log('test')}>
                 <RestartAllIcon />
               </Button>
             </Grid>
