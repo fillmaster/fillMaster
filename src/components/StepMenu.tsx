@@ -1,4 +1,3 @@
-import RestartAllIcon from '@mui/icons-material/RestartAltRounded';
 import { Grid } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -10,6 +9,7 @@ import Stepper from '@mui/material/Stepper';
 import Typography from '@mui/material/Typography';
 import { useEffect, useState } from 'react';
 import '../App.css';
+import getStringArrayBetweenTwoValues from '../utils/getArrayBetweenValues';
 import MetronomeContainer from './MetronomeContainer';
 import QuickRandomiser from './QuickRandomiser';
 import SetupStep from './StepSetup';
@@ -46,12 +46,22 @@ const VerticalLinearStepper = () => {
   const [key, setKey] = useState(0);
   const [sliderValues, setSliderValues] = useState<number[]>([60, 120]);
 
+  const tempoOptions = () => getStringArrayBetweenTwoValues(sliderValues[0], sliderValues[1]);
+
   const handleSetSliderValues = (values: Array<number>) => {
     setSliderValues(values);
   };
 
   const restartMetronome = () => {
     setKey(key + 1);
+  };
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
   const handleSetBeatIdea = (beat: string) => {
@@ -67,14 +77,6 @@ const VerticalLinearStepper = () => {
 
   const handleSetTempo = (_tempo: string) => {
     setTempo(_tempo);
-  };
-
-  const handleNext = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
   const handleReset = () => {
@@ -137,19 +139,17 @@ const VerticalLinearStepper = () => {
         <Paper square elevation={0} sx={{ p: 3 }}>
           <Grid container spacing={2}>
             <Grid item xs={8}>
-              <div>
-                Drum Beat: <QuickRandomiser />
-              </div>
-              <b>
-                <div>Fill on Beat {fillStart} of bar 4</div>
-              </b>
-              <b>
-                <div>Fill style: {fill}</div>
-              </b>
-              <div>@ {tempo} bpm</div>
-              <Button onClick={() => console.log('test')}>
-                <RestartAllIcon />
-              </Button>
+              <QuickRandomiser
+                beatIdea={beatIdea}
+                fillStart={fillStart}
+                fill={fill}
+                tempo={tempo}
+                setBeatIdea={handleSetBeatIdea}
+                setFillStart={handleSetFillStart}
+                setFill={handleSetFill}
+                setTempo={handleSetTempo}
+                tempoOptions={tempoOptions}
+              />
             </Grid>
             <Grid item xs={4}>
               <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
