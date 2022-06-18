@@ -102,7 +102,7 @@ const QuickRandomiser = (
       {/* trigger */}
       <Button
         ref={ref}
-        onClick={() => quickResetRandomiser(['startFill'])}
+        onClick={() => quickResetRandomiser(['startFill', 'beatIdea'])}
         sx={{ display: 'none' }}
       />
     </>
