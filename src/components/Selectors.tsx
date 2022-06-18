@@ -68,7 +68,7 @@ const Selectors = ({
           disabled={isCountIn()}
         />
       </Grid>
-      <Grid item xs={6} sx={{ alignSelf: 'center', marginLeft: '1.5rem' }}>
+      <Grid item xs={8} sx={{ alignSelf: 'center', marginLeft: '1.5rem' }}>
         <NoteDivisionSelector
           selectorItems={getPlayNotesOptions(
             getAvailablePlayNotes(currentBeatsPerBar(), currentMeasureDivision()),
