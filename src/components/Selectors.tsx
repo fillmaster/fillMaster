@@ -94,15 +94,16 @@ function getPlayNotesOptions(
   default_: MeasureDivision,
   selected_: PlayNotes
 ) {
-  const playNoteOptions: NoteDivisionSelectorItems = [];
+  const options: NoteDivisionSelectorItems = [];
   for (let i = 0; i < playNotesArray.length; i++) {
     const name = getNamesForPlayNotes(playNotesArray[i]);
     const defaultVar = playNotesArray[i] === getPlayNotesByNumber(default_);
     const selected = playNotesArray[i] === selected_;
     const stateName = playNotesArray[i];
     const previewName = getUnicodeForPlayNotes(playNotesArray[i]);
-    playNoteOptions.push({ name, default: defaultVar, selected, previewName, stateName });
+    options.push({ name, default: defaultVar, selected, previewName, stateName });
   }
+  const playNoteOptions = getLabels(options);
   return playNoteOptions;
 }
 
@@ -136,4 +137,14 @@ function getMeasureBottomSelectorOptions(
     measureBottomSelectorItems.push({ name, default: defaultVar, selected, stateName });
   }
   return measureBottomSelectorItems;
+}
+
+function getLabels(playNoteOptions_: NoteDivisionSelectorItems) {
+  const playNoteOptions = [...playNoteOptions_];
+  const defaultIndex = playNoteOptions.findIndex((playNote) => playNote.default === true);
+  if (defaultIndex > 0) playNoteOptions[defaultIndex - 1].label = 'half time';
+  playNoteOptions[defaultIndex].label = 'regular time';
+  if (defaultIndex < playNoteOptions.length - 1)
+    playNoteOptions[defaultIndex + 1].label = 'double time';
+  return playNoteOptions;
 }

@@ -19,6 +19,7 @@ export type SelectorItem = {
   previewName?: string; // Name to display on button. Defaults to name.
   stateName: string; // name of state, handled where function was called from. Defaults to name.
   selected: boolean;
+  label?: string;
 };
 
 // must combine SelectorItemBasic and SelectorItemWithPreview and not use an array
@@ -153,7 +154,11 @@ const Selector = ({
           })}
         </Box>
       </Menu>
-      {label && <Typography sx={{ paddingLeft: '1rem' }}>Hello</Typography>}
+      {label && (
+        <Typography sx={{ paddingLeft: '1rem' }}>
+          {selectedOption.label !== undefined && selectedOption.label}
+        </Typography>
+      )}
     </Box>
   );
 };
