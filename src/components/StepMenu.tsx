@@ -9,6 +9,7 @@ import Stepper from '@mui/material/Stepper';
 import Typography from '@mui/material/Typography';
 import { useEffect, useRef, useState } from 'react';
 import '../App.css';
+import PatternMaker from '../utils/classes/patternMaker';
 import getStringArrayBetweenTwoValues from '../utils/getArrayBetweenValues';
 import MetronomeContainer from './MetronomeContainer';
 import QuickRandomiser from './QuickRandomiser';
@@ -38,6 +39,7 @@ const steps = [
 ];
 
 const VerticalLinearStepper = () => {
+  const patternMaker = PatternMaker.getInstance();
   const [activeStep, setActiveStep] = useState(0);
   const [beatIdea, setBeatIdea] = useState('');
   const [fillStart, setFillStart] = useState('');
@@ -124,6 +126,7 @@ const VerticalLinearStepper = () => {
                   handleSetTempo={handleSetTempo}
                   handleSetSliderValues={handleSetSliderValues}
                   sliderValues={sliderValues}
+                  patternMaker={patternMaker}
                 />
                 <Box sx={{ mb: 2 }}>
                   <div>
@@ -156,6 +159,7 @@ const VerticalLinearStepper = () => {
                 setFill={handleSetFill}
                 setTempo={handleSetTempo}
                 tempoOptions={tempoOptions}
+                patternMaker={patternMaker}
               />
             </Grid>
             <Grid item xs={4}>
@@ -170,6 +174,7 @@ const VerticalLinearStepper = () => {
             key={key}
             restartMetronome={restartMetronome}
             triggerResetFillStart={triggerResetFillStart}
+            patternMaker={patternMaker}
           />
         </Paper>
       </div>

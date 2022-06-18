@@ -43,9 +43,8 @@ const Selectors = ({
 
   // PatternMaker getters must be used for beats/divisions in return() - don't use timeSig top/bottom
   // states here as it becomes a source of crashing.
-  const currentBeatsPerBar = () => patternMaker.getCustomSettingsForPattern().timeSignature.beats;
-  const currentMeasureDivision = () =>
-    patternMaker.getCustomSettingsForPattern().timeSignature.division;
+  const currentBeatsPerBar = () => patternMaker.getSettings().timeSignature.beats;
+  const currentMeasureDivision = () => patternMaker.getSettings().timeSignature.division;
 
   return (
     <Grid container spacing={2}>

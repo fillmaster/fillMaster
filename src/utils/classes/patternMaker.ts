@@ -65,15 +65,15 @@ export default class PatternMaker {
   }
   // END OF SINGLETON.
 
-  public setCustomSettingsForPattern = (patternSettings: PatternSettings) => {
+  public setSettings = (patternSettings: PatternSettings) => {
     this.customSettingsForPattern = patternSettings;
   };
 
-  public setCustomSettingsForPatternToDefault = () => {
+  public setSettingsToDefault = () => {
     this.customSettingsForPattern = this.defaultSettingsForPattern;
   };
 
-  public getCustomSettingsForPattern = () => {
+  public getSettings = () => {
     return this.customSettingsForPattern;
   };
 

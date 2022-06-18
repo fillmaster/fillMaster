@@ -3,10 +3,11 @@
 import RestartAllIcon from '@mui/icons-material/RestartAltRounded';
 import { Button, Fade, Typography } from '@mui/material';
 import { Dispatch, forwardRef, SetStateAction, useState } from 'react';
-import BEAT_IDEAS from '../consts/forRandomiser/beatIdeas';
-import FILL_STARTS from '../consts/forRandomiser/fillStarts';
+import beatIdeas from '../consts/forRandomiser/beatIdeas';
+import fillStarts from '../consts/forRandomiser/fillStarts';
 import FILLS from '../consts/forRandomiser/fillTypes';
 import { RandomiseMe, RANDOMISE_ME } from '../consts/forRandomiser/randomiseMe';
+import PatternMaker from '../utils/classes/patternMaker';
 import shuffleArray from '../utils/randomFunctions';
 
 // <Fade in={checked}>{beatIdeaAsText}</Fade>
@@ -21,6 +22,7 @@ interface QuickRandomiserProps {
   setFill: (_fill: string) => void;
   setTempo: (_tempo: string) => void;
   tempoOptions: () => Array<string>;
+  patternMaker: PatternMaker;
 }
 
 const QuickRandomiser = (
@@ -34,6 +36,7 @@ const QuickRandomiser = (
     setFill,
     setTempo,
     tempoOptions,
+    patternMaker,
   }: QuickRandomiserProps,
   ref: any
 ) => {
@@ -50,11 +53,11 @@ const QuickRandomiser = (
   const quickResetRandomiser = (randomsToReset: Array<RandomiseMe>) => {
     if (randomsToReset.includes('beatIdea')) {
       handleChange(setBeatIdeaVisible);
-      setBeatIdea(shuffleArray([...BEAT_IDEAS])[0]);
+      setBeatIdea(shuffleArray(beatIdeas(patternMaker.getSettings().timeSignature.beats))[0]);
     }
     if (randomsToReset.includes('startFill')) {
       handleChange(setFillStartVisible);
-      setFillStart(shuffleArray([...FILL_STARTS])[0]);
+      setFillStart(shuffleArray(fillStarts(patternMaker.getSettings().timeSignature.beats))[0]);
     }
     if (randomsToReset.includes('fill')) {
       handleChange(setFillVisible);

@@ -15,6 +15,7 @@ interface MetronomeProps {
   tempo: string;
   fillStart: string;
   triggerResetFillStart: () => void;
+  patternMaker: PatternMaker;
 }
 
 const counterOff = {
@@ -35,16 +36,19 @@ const counterOn = {
   margin: '10px',
 };
 
-const Metronome = ({ play, tempo, fillStart, triggerResetFillStart }: MetronomeProps) => {
-  const patternMaker = PatternMaker.getInstance();
-  const [noteDivision, setNoteDivision] = useState(
-    patternMaker.getCustomSettingsForPattern().playNotes as string
-  );
+const Metronome = ({
+  play,
+  tempo,
+  fillStart,
+  triggerResetFillStart,
+  patternMaker,
+}: MetronomeProps) => {
+  const [noteDivision, setNoteDivision] = useState(patternMaker.getSettings().playNotes as string);
   const [timeSignatureTop, setTimeSignatureTop] = useState(
-    patternMaker.getCustomSettingsForPattern().timeSignature.beats as string
+    patternMaker.getSettings().timeSignature.beats as string
   );
   const [timeSignatureBottom, setTimeSignatureBottom] = useState(
-    patternMaker.getCustomSettingsForPattern().timeSignature.division as string
+    patternMaker.getSettings().timeSignature.division as string
   );
   const [quarterNote, setQuarterNote] = useState(1);
   const oneToBeatsPerBar = getStringArrayBetweenTwoValues(1, quarterNote);
@@ -54,7 +58,7 @@ const Metronome = ({ play, tempo, fillStart, triggerResetFillStart }: MetronomeP
   const [metronomeString, setMetronomeString] = useState(patternMaker.getMetronomeString());
   const [key, setKey] = useState(0);
 
-  const beatsPerBar = Number(patternMaker.getCustomSettingsForPattern().timeSignature.beats);
+  const beatsPerBar = Number(patternMaker.getSettings().timeSignature.beats);
 
   const handleSetNoteDivision = (division: string) => {
     setNoteDivision(division);
@@ -75,7 +79,7 @@ const Metronome = ({ play, tempo, fillStart, triggerResetFillStart }: MetronomeP
   };
 
   useEffect(() => {
-    patternMaker.setCustomSettingsForPattern({
+    patternMaker.setSettings({
       playNotes: noteDivision as PlayNotes,
       playFillOn: { beat: fillStart as BeatPosition, subBeat: '0' },
       timeSignature: {
@@ -129,9 +133,7 @@ const Metronome = ({ play, tempo, fillStart, triggerResetFillStart }: MetronomeP
                 {setQuarterNote(state.qNote)}
                 <div style={{ height: '1em' }}>
                   {isCountIn() &&
-                    Number(patternMaker.getCustomSettingsForPattern().timeSignature.beats) -
-                      state.qNote +
-                      1}
+                    Number(patternMaker.getSettings().timeSignature.beats) - state.qNote + 1}
                 </div>
               </div>
             )}

@@ -5,6 +5,7 @@ import beatIdeas from '../consts/forRandomiser/beatIdeas';
 import fillStarts from '../consts/forRandomiser/fillStarts';
 import fills from '../consts/forRandomiser/fillTypes';
 import { RandomiseMe } from '../consts/forRandomiser/randomiseMe';
+import PatternMaker from '../utils/classes/patternMaker';
 import getStringArrayBetweenTwoValues from '../utils/getArrayBetweenValues';
 import Randomiser from './Randomiser';
 import TempoChooser from './TempoChooser';
@@ -17,6 +18,7 @@ interface SetupStepProps {
   handleSetTempo: (tempo: string) => void;
   handleSetSliderValues: (sliderValues: Array<number>) => void;
   sliderValues: Array<number>;
+  patternMaker: PatternMaker;
 }
 
 const SetupStep = ({
@@ -27,6 +29,7 @@ const SetupStep = ({
   handleSetTempo,
   handleSetSliderValues,
   sliderValues,
+  patternMaker,
 }: SetupStepProps) => {
   const [beatIdeaKey, setBeatIdeaKey] = useState(0);
   const [startFillKey, setStartFillKey] = useState(0);
@@ -50,7 +53,7 @@ const SetupStep = ({
         <b>
           <Randomiser
             key={beatIdeaKey}
-            arrayToRandomise={beatIdeas}
+            arrayToRandomise={beatIdeas(patternMaker.getSettings().timeSignature.beats)}
             handleSetItem={handleSetBeatIdea}
           />
         </b>
@@ -66,7 +69,7 @@ const SetupStep = ({
         <span>Start your drum fill on beat </span>
         <Randomiser
           key={startFillKey}
-          arrayToRandomise={fillStarts}
+          arrayToRandomise={fillStarts(patternMaker.getSettings().timeSignature.beats)}
           handleSetItem={handleSetFillStart}
         />
         <span> of bar 4.</span>{' '}

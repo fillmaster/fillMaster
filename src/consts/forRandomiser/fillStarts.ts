@@ -1,3 +1,8 @@
-const FILL_STARTS = ['1', '2', '3', '4'];
+import getStringArrayBetweenTwoValues from '../../utils/getArrayBetweenValues';
+import { BeatsPerBar } from '../beatsPerBar';
 
-export default FILL_STARTS;
+const fillStarts = (beatsPerBar: BeatsPerBar) => {
+  return getStringArrayBetweenTwoValues(1, Number(beatsPerBar));
+};
+
+export default fillStarts;

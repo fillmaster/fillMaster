@@ -1,16 +1,19 @@
-const BEAT_IDEAS = [
-  "Add a kick on the 'e' of 1",
-  "Add a kick on the '&' of 1",
-  "Add a kick on the 'a' of 1",
-  "Add a kick on the 'e' of 2",
-  "Add a kick on the '&' of 2",
-  "Add a kick on the 'a' of 2",
-  "Add a kick on the 'e' of 3",
-  "Add a kick on the '&' of 3",
-  "Add a kick on the 'a' of 3",
-  "Add a kick on the 'e' of 4",
-  "Add a kick on the '&' of 4",
-  "Add a kick on the 'a' of 4",
-];
+import getStringArrayBetweenTwoValues from '../../utils/getArrayBetweenValues';
+import { BeatsPerBar } from '../beatsPerBar';
 
-export default BEAT_IDEAS;
+const eAndA = ['e', '&', 'a'];
+
+const getKickIdeas = (beatsPerBar: BeatsPerBar) => {
+  const beatsArray = getStringArrayBetweenTwoValues(1, Number(beatsPerBar));
+  const kickIdeas: string[] = [];
+  for (let i = 0; i < beatsArray.length; i++) {
+    eAndA.forEach((c) => kickIdeas.push(`Add a kick on the '${c}' of i`));
+  }
+  return kickIdeas;
+};
+
+const beatIdeas = (beatsPerBar: BeatsPerBar) => {
+  return getKickIdeas(beatsPerBar);
+};
+
+export default beatIdeas;

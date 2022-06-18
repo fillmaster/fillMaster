@@ -3,6 +3,7 @@ import PlayIcon from '@mui/icons-material/PlayCircleFilled';
 import StopIcon from '@mui/icons-material/StopCircle';
 import { Button, Grid } from '@mui/material';
 import { useState } from 'react';
+import PatternMaker from '../utils/classes/patternMaker';
 import Metronome from './Metronome';
 
 interface MetronomeContainerProps {
@@ -10,6 +11,7 @@ interface MetronomeContainerProps {
   fillStart: string;
   restartMetronome: () => void;
   triggerResetFillStart: () => void;
+  patternMaker: PatternMaker;
 }
 
 const MetronomeContainer = ({
@@ -17,6 +19,7 @@ const MetronomeContainer = ({
   fillStart,
   restartMetronome,
   triggerResetFillStart,
+  patternMaker,
 }: MetronomeContainerProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -30,6 +33,7 @@ const MetronomeContainer = ({
             tempo={tempo}
             fillStart={fillStart}
             triggerResetFillStart={triggerResetFillStart}
+            patternMaker={patternMaker}
           />
           <Button onClick={() => restartMetronome()}>
             <StopIcon />
