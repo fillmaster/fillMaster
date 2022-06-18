@@ -3,6 +3,7 @@
 import RestartAllIcon from '@mui/icons-material/RestartAltRounded';
 import { Button, Fade, Typography } from '@mui/material';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { BeatsPerBar } from '../consts/beatsPerBar';
 import beatIdeas from '../consts/forRandomiser/beatIdeas';
 import fillStarts from '../consts/forRandomiser/fillStarts';
 import FILLS from '../consts/forRandomiser/fillTypes';
@@ -52,11 +53,11 @@ const QuickRandomiser = ({
   const quickResetRandomiser = (randomsToReset: Array<RandomiseMe>) => {
     if (randomsToReset.includes('beatIdea')) {
       handleChange(setBeatIdeaVisible);
-      setBeatIdea(shuffleArray(beatIdeas(patternMaker.getSettings().timeSignature.beats))[0]);
+      setBeatIdea(shuffleArray(beatIdeas(timeSignatureTop as BeatsPerBar))[0]);
     }
     if (randomsToReset.includes('startFill')) {
       handleChange(setFillStartVisible);
-      setFillStart(shuffleArray(fillStarts(patternMaker.getSettings().timeSignature.beats))[0]);
+      setFillStart(shuffleArray(fillStarts(timeSignatureTop as BeatsPerBar))[0]);
     }
     if (randomsToReset.includes('fill')) {
       handleChange(setFillVisible);
