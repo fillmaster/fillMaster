@@ -7,6 +7,7 @@ type NoteDivisionSelectorItem = {
   previewName: string; // Name to display on button. Defaults to name.
   stateName: PlayNotes; // name of state, handled where function was called from. Defaults to name.
   selected: boolean;
+  label?: string;
 };
 export type NoteDivisionSelectorItems = NoteDivisionSelectorItem[];
 
@@ -31,6 +32,7 @@ const NoteDivisionSelector = ({
       disabledPreview={disabledPreview}
       centered={false}
       highlightDefault
+      label
     />
   );
 };

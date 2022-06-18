@@ -8,7 +8,6 @@ import beatIdeas from '../consts/forRandomiser/beatIdeas';
 import fillStarts from '../consts/forRandomiser/fillStarts';
 import FILLS from '../consts/forRandomiser/fillTypes';
 import { RandomiseMe, RANDOMISE_ME } from '../consts/forRandomiser/randomiseMe';
-import PatternMaker from '../utils/classes/patternMaker';
 import shuffleArray from '../utils/randomFunctions';
 
 // <Fade in={checked}>{beatIdeaAsText}</Fade>
@@ -78,20 +77,16 @@ const QuickRandomiser = ({
           <Typography>Drum Beat: {beatIdea}</Typography>
         </Fade>
       </div>
-      <b>
-        <div>
-          <Fade in={fillStartVisible}>
-            <Typography>Fill on Beat {fillStart} of bar 4</Typography>
-          </Fade>
-        </div>
-      </b>
-      <b>
-        <div>
-          <Fade in={fillVisible}>
-            <Typography>Fill style: {fill}</Typography>
-          </Fade>
-        </div>
-      </b>
+      <div>
+        <Fade in={fillStartVisible}>
+          <Typography>Fill on Beat {fillStart} of bar 4</Typography>
+        </Fade>
+      </div>
+      <div>
+        <Fade in={fillVisible}>
+          <Typography>Fill style: {fill}</Typography>
+        </Fade>
+      </div>
       <div>
         <Fade in={tempoVisible}>
           <Typography>@ {tempo} bpm</Typography>

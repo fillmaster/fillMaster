@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -32,6 +32,7 @@ interface SelectorProps {
   disabledPreview?: string;
   centered?: boolean;
   highlightDefault?: boolean;
+  label?: boolean;
 }
 
 const Selector = ({
@@ -41,6 +42,7 @@ const Selector = ({
   disabledPreview,
   centered = true,
   highlightDefault = false,
+  label = false,
 }: SelectorProps) => {
   const getDefault = () => getDefaultAndSelectedIndexes(selectorItems).default;
   const getSelected = () => getDefaultAndSelectedIndexes(selectorItems).selected;
@@ -72,7 +74,7 @@ const Selector = ({
   const preview = disabled && disabledPreview ? disabledPreview : selectedOption.previewName;
 
   return (
-    <div>
+    <Box sx={{ display: 'flex' }}>
       <Button
         aria-controls={open ? 'demo-positioned-menu' : undefined}
         aria-haspopup="true"
@@ -151,7 +153,8 @@ const Selector = ({
           })}
         </Box>
       </Menu>
-    </div>
+      {label && <Typography sx={{ paddingLeft: '1rem' }}>Hello</Typography>}
+    </Box>
   );
 };
 
