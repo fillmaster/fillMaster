@@ -48,7 +48,6 @@ const Selectors = ({
 
   return (
     <Grid container spacing={2}>
-      <Grid item xs={1} />
       <Grid item xs={2}>
         <MeasureTopSelector
           selectorItems={getMeasureTopSelectorOptions(
@@ -69,7 +68,7 @@ const Selectors = ({
           disabled={isCountIn()}
         />
       </Grid>
-      <Grid item xs={2} sx={{ alignSelf: 'center', marginLeft: '1.5rem' }}>
+      <Grid item xs={6} sx={{ alignSelf: 'center', marginLeft: '1.5rem' }}>
         <NoteDivisionSelector
           selectorItems={getPlayNotesOptions(
             getAvailablePlayNotes(currentBeatsPerBar(), currentMeasureDivision()),
@@ -82,7 +81,6 @@ const Selectors = ({
           key={key}
         />
       </Grid>
-      <Grid item xs={5} />
     </Grid>
   );
 };
