@@ -22,8 +22,8 @@ interface SelectorsProps {
   patternMaker: PatternMaker;
   isCountIn: () => boolean;
   handleSetNoteDivision: (division: string) => void;
-  handleSetTimeSignatureTop: (beats: string) => void;
-  handleSetTimeSignatureBottom: (division: string) => void;
+  setTimeSignatureTop: (beats: string) => void;
+  setTimeSignatureBottom: (division: string) => void;
 }
 const Selectors = ({
   timeSignatureTop,
@@ -31,8 +31,8 @@ const Selectors = ({
   patternMaker,
   isCountIn,
   handleSetNoteDivision,
-  handleSetTimeSignatureTop,
-  handleSetTimeSignatureBottom,
+  setTimeSignatureTop,
+  setTimeSignatureBottom,
 }: SelectorsProps) => {
   const [key, setKey] = useState(0);
 
@@ -56,7 +56,7 @@ const Selectors = ({
             '4',
             currentBeatsPerBar()
           )}
-          handleSetItem={handleSetTimeSignatureTop}
+          handleSetItem={setTimeSignatureTop}
           disabled={isCountIn()}
         />
         <MeasureBottomSelector
@@ -65,7 +65,7 @@ const Selectors = ({
             '4',
             currentMeasureDivision()
           )}
-          handleSetItem={handleSetTimeSignatureBottom}
+          handleSetItem={setTimeSignatureBottom}
           disabled={isCountIn()}
         />
       </Grid>

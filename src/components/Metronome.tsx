@@ -14,8 +14,11 @@ interface MetronomeProps {
   play: boolean;
   tempo: string;
   fillStart: string;
-  triggerResetFillStart: () => void;
   patternMaker: PatternMaker;
+  timeSignatureBottom: string;
+  timeSignatureTop: string;
+  setTimeSignatureBottom: (beats: string) => void;
+  setTimeSignatureTop: (division: string) => void;
 }
 
 const counterOff = {
@@ -40,42 +43,23 @@ const Metronome = ({
   play,
   tempo,
   fillStart,
-  triggerResetFillStart,
   patternMaker,
+  timeSignatureBottom,
+  timeSignatureTop,
+  setTimeSignatureBottom,
+  setTimeSignatureTop,
 }: MetronomeProps) => {
   const [noteDivision, setNoteDivision] = useState(patternMaker.getSettings().playNotes as string);
-  const [timeSignatureTop, setTimeSignatureTop] = useState(
-    patternMaker.getSettings().timeSignature.beats as string
-  );
-  const [timeSignatureBottom, setTimeSignatureBottom] = useState(
-    patternMaker.getSettings().timeSignature.division as string
-  );
   const [quarterNote, setQuarterNote] = useState(1);
   const oneToBeatsPerBar = getStringArrayBetweenTwoValues(1, quarterNote);
 
   const [barCount, setBarCount] = useState(-1);
   const isCountIn = () => barCount === 0 && play;
   const [metronomeString, setMetronomeString] = useState(patternMaker.getMetronomeString());
-  const [key, setKey] = useState(0);
-
   const beatsPerBar = Number(patternMaker.getSettings().timeSignature.beats);
 
   const handleSetNoteDivision = (division: string) => {
     setNoteDivision(division);
-  };
-
-  const handleSetTimeSignatureTop = (beats: string) => {
-    setTimeSignatureTop(beats);
-    // refresh needed to restart metronome when beats per bar changes. Otherwise you may change
-    // time signature to e.g. 3/4 whilst in 5/4 mode and you're on a note value higher than 3
-    // which causes a 'no sound' error.
-    setKey(key + 1);
-    triggerResetFillStart();
-  };
-
-  const handleSetTimeSignatureBottom = (division: string) => {
-    setTimeSignatureBottom(division);
-    setKey(key + 1);
   };
 
   useEffect(() => {
@@ -112,8 +96,8 @@ const Metronome = ({
         patternMaker={patternMaker}
         isCountIn={isCountIn}
         handleSetNoteDivision={handleSetNoteDivision}
-        handleSetTimeSignatureTop={handleSetTimeSignatureTop}
-        handleSetTimeSignatureBottom={handleSetTimeSignatureBottom}
+        setTimeSignatureTop={setTimeSignatureTop}
+        setTimeSignatureBottom={setTimeSignatureBottom}
       />
       <br />
 
@@ -149,7 +133,6 @@ const Metronome = ({
           isPlaying={play}
           soundPattern={metronomeString}
           beatsPerBar={beatsPerBar}
-          key={key}
           // temporary any for props and state
           render={(props: any, state: any) => (
             <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>

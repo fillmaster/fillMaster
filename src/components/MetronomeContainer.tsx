@@ -10,16 +10,22 @@ interface MetronomeContainerProps {
   tempo: string;
   fillStart: string;
   restartMetronome: () => void;
-  triggerResetFillStart: () => void;
   patternMaker: PatternMaker;
+  timeSignatureBottom: string;
+  timeSignatureTop: string;
+  setTimeSignatureBottom: (beats: string) => void;
+  setTimeSignatureTop: (division: string) => void;
 }
 
 const MetronomeContainer = ({
   tempo,
   fillStart,
   restartMetronome,
-  triggerResetFillStart,
   patternMaker,
+  timeSignatureBottom,
+  timeSignatureTop,
+  setTimeSignatureBottom,
+  setTimeSignatureTop,
 }: MetronomeContainerProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -32,8 +38,11 @@ const MetronomeContainer = ({
             play={isPlaying}
             tempo={tempo}
             fillStart={fillStart}
-            triggerResetFillStart={triggerResetFillStart}
             patternMaker={patternMaker}
+            timeSignatureBottom={timeSignatureBottom}
+            timeSignatureTop={timeSignatureTop}
+            setTimeSignatureBottom={setTimeSignatureBottom}
+            setTimeSignatureTop={setTimeSignatureTop}
           />
           <Button onClick={() => restartMetronome()}>
             <StopIcon />

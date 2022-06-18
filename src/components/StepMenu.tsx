@@ -7,7 +7,7 @@ import StepContent from '@mui/material/StepContent';
 import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
 import Typography from '@mui/material/Typography';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../App.css';
 import PatternMaker from '../utils/classes/patternMaker';
 import getStringArrayBetweenTwoValues from '../utils/getArrayBetweenValues';
@@ -47,10 +47,19 @@ const VerticalLinearStepper = () => {
   const [tempo, setTempo] = useState('');
   const [key, setKey] = useState(0);
   const [sliderValues, setSliderValues] = useState<number[]>([60, 120]);
-  const resetFillStart = useRef<HTMLDivElement>(null);
+  const [timeSignatureTop, setTimeSignatureTop] = useState(
+    patternMaker.getSettings().timeSignature.beats as string
+  );
+  const [timeSignatureBottom, setTimeSignatureBottom] = useState(
+    patternMaker.getSettings().timeSignature.division as string
+  );
 
-  const triggerResetFillStart = () => {
-    if (resetFillStart.current) resetFillStart.current.click();
+  const handleSetTimeSignatureTop = (beats: string) => {
+    setTimeSignatureTop(beats);
+  };
+
+  const handleSetTimeSignatureBottom = (division: string) => {
+    setTimeSignatureBottom(division);
   };
 
   const tempoOptions = () => getStringArrayBetweenTwoValues(sliderValues[0], sliderValues[1]);
@@ -149,7 +158,6 @@ const VerticalLinearStepper = () => {
           <Grid container spacing={2}>
             <Grid item xs={8}>
               <QuickRandomiser
-                ref={resetFillStart}
                 beatIdea={beatIdea}
                 fillStart={fillStart}
                 fill={fill}
@@ -160,6 +168,7 @@ const VerticalLinearStepper = () => {
                 setTempo={handleSetTempo}
                 tempoOptions={tempoOptions}
                 patternMaker={patternMaker}
+                timeSignatureTop={timeSignatureTop}
               />
             </Grid>
             <Grid item xs={4}>
@@ -173,8 +182,11 @@ const VerticalLinearStepper = () => {
             fillStart={fillStart}
             key={key}
             restartMetronome={restartMetronome}
-            triggerResetFillStart={triggerResetFillStart}
             patternMaker={patternMaker}
+            timeSignatureBottom={timeSignatureBottom}
+            timeSignatureTop={timeSignatureTop}
+            setTimeSignatureTop={handleSetTimeSignatureTop}
+            setTimeSignatureBottom={handleSetTimeSignatureBottom}
           />
         </Paper>
       </div>
