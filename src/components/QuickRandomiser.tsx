@@ -23,7 +23,6 @@ interface QuickRandomiserProps {
   setFill: (_fill: string) => void;
   setTempo: (_tempo: string) => void;
   tempoOptions: () => Array<string>;
-  patternMaker: PatternMaker;
   timeSignatureTop: string;
 }
 
@@ -37,7 +36,6 @@ const QuickRandomiser = ({
   setFill,
   setTempo,
   tempoOptions,
-  patternMaker,
   timeSignatureTop,
 }: QuickRandomiserProps) => {
   const [beatIdeaVisible, setBeatIdeaVisible] = useState(true);

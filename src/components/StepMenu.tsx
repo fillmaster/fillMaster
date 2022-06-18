@@ -167,7 +167,6 @@ const VerticalLinearStepper = () => {
                 setFill={handleSetFill}
                 setTempo={handleSetTempo}
                 tempoOptions={tempoOptions}
-                patternMaker={patternMaker}
                 timeSignatureTop={timeSignatureTop}
               />
             </Grid>
