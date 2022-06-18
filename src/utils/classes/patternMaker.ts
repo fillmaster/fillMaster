@@ -2,7 +2,7 @@ import { BeatsPerBar } from '../../consts/beatsPerBar';
 import { MeasureDivision } from '../../consts/measureDivisions';
 import { PlayNotes } from '../../consts/playNotes';
 import assertUnreachable from '../assertUnreachable';
-import { getPlayNotesByMeasureDivision } from '../playNotesFunctions';
+import { getPlayNotesByNumber } from '../playNotesFunctions';
 
 export type PlayFillOn = { beat: BeatPosition; subBeat: SubBeatPosition };
 
@@ -174,7 +174,7 @@ function getNth(
   let nth: number;
   const division = Number(division_);
   let playNotes = playNotes_;
-  if (isCountIn) playNotes = getPlayNotesByMeasureDivision(division_);
+  if (isCountIn) playNotes = getPlayNotesByNumber(division_);
   switch (playNotes) {
     case 'wholeNotes':
       nth = subDivision * division;

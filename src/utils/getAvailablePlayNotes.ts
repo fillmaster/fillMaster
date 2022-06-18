@@ -1,6 +1,6 @@
 import { BeatsPerBar } from '../consts/beatsPerBar';
 import { MeasureDivision, MEASURE_DIVISIONS } from '../consts/measureDivisions';
-import { getPlayNotesByMeasureDivision } from './playNotesFunctions';
+import { getPlayNotesByNumber } from './playNotesFunctions';
 
 // Not a great name, but this is needed for calculations. 1 is needed to include whole notes
 // and it must go up to the maximum number of the note division type (e.g. 16)
@@ -8,7 +8,7 @@ type OneToMaxDivision = MeasureDivision | '1';
 
 const getAvailablePlayNotes = (beatsPerBar_: BeatsPerBar, division_: MeasureDivision) => {
   const array = getPlayNotesNumbers(beatsPerBar_, division_);
-  const newArray = array.map((x) => getPlayNotesByMeasureDivision(x as OneToMaxDivision));
+  const newArray = array.map((x) => getPlayNotesByNumber(x as OneToMaxDivision));
   return newArray;
 };
 

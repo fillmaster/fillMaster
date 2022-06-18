@@ -7,7 +7,7 @@ import PatternMaker from '../utils/classes/patternMaker';
 import getAvailablePlayNotes from '../utils/getAvailablePlayNotes';
 import {
   getNamesForPlayNotes,
-  getPlayNotesByMeasureDivision,
+  getPlayNotesByNumber,
   getUnicodeForPlayNotes,
 } from '../utils/playNotesFunctions';
 import MeasureBottomSelector, {
@@ -74,13 +74,11 @@ const Selectors = ({
           selectorItems={getPlayNotesOptions(
             getAvailablePlayNotes(currentBeatsPerBar(), currentMeasureDivision()),
             currentMeasureDivision(),
-            getPlayNotesByMeasureDivision(currentMeasureDivision())
+            getPlayNotesByNumber(currentMeasureDivision())
           )}
           handleSetItem={handleSetNoteDivision}
           disabled={isCountIn()}
-          disabledPreview={getUnicodeForPlayNotes(
-            getPlayNotesByMeasureDivision(currentMeasureDivision())
-          )}
+          disabledPreview={getUnicodeForPlayNotes(getPlayNotesByNumber(currentMeasureDivision()))}
           key={key}
         />
       </Grid>
@@ -99,7 +97,7 @@ function getPlayNotesOptions(
   const playNoteOptions: NoteDivisionSelectorItems = [];
   for (let i = 0; i < playNotesArray.length; i++) {
     const name = getNamesForPlayNotes(playNotesArray[i]);
-    const defaultVar = playNotesArray[i] === getPlayNotesByMeasureDivision(default_);
+    const defaultVar = playNotesArray[i] === getPlayNotesByNumber(default_);
     const selected = playNotesArray[i] === selected_;
     const stateName = playNotesArray[i];
     const previewName = getUnicodeForPlayNotes(playNotesArray[i]);

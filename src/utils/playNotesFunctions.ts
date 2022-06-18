@@ -2,6 +2,7 @@ import { MeasureDivision } from '../consts/measureDivisions';
 import { PlayNotes } from '../consts/playNotes';
 import assertUnreachable from './assertUnreachable';
 
+type PlayNotesNumber = MeasureDivision | '1';
 export function getUnicodeForPlayNotes(playNotes: PlayNotes) {
   switch (playNotes) {
     case 'wholeNotes':
@@ -36,8 +37,8 @@ export function getNamesForPlayNotes(playNotes: PlayNotes) {
   }
 }
 
-export function getPlayNotesByMeasureDivision(measureDivision: MeasureDivision | '1'): PlayNotes {
-  switch (measureDivision) {
+export function getPlayNotesByNumber(playNotesNumber: PlayNotesNumber): PlayNotes {
+  switch (playNotesNumber) {
     case '1':
       return 'wholeNotes';
     case '2':
@@ -49,6 +50,6 @@ export function getPlayNotesByMeasureDivision(measureDivision: MeasureDivision |
     case '16':
       return 'sixteenthNotes';
     default:
-      return assertUnreachable(measureDivision);
+      return assertUnreachable(playNotesNumber);
   }
 }
