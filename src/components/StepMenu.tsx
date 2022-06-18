@@ -95,7 +95,7 @@ const VerticalLinearStepper = () => {
     setTempo(_tempo);
   };
 
-  const handleReset = () => {
+  const handleResetApp = () => {
     setActiveStep(0);
     restartMetronome();
     togglePanel();
@@ -172,7 +172,7 @@ const VerticalLinearStepper = () => {
               />
             </Grid>
             <Grid item xs={4}>
-              <Button onClick={handleReset} sx={{ mt: 1, mr: 1 }}>
+              <Button onClick={handleResetApp} sx={{ mt: 1, mr: 1 }}>
                 START OVER
               </Button>
             </Grid>
