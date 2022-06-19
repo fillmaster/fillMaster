@@ -100,54 +100,37 @@ const Metronome = ({
         setTimeSignatureBottom={setTimeSignatureBottom}
       />
       <br />
-
-      {barCount === 0 ? (
-        // SETUP & COUNT-IN
-        <>
-          <ProMetronome
-            bpm={Number(tempo)}
-            subdivision={patternMaker.getSubDivision()}
-            isPlaying={play}
-            soundEnabled
-            soundPattern={patternMaker.getMetronomeCountInString()}
-            beatsPerBar={beatsPerBar}
-            // temporary any for props and state
-            render={(props: any, state: any) => (
-              <div>
-                {setQuarterNote(state.qNote)}
-                <div style={{ height: '1em' }}>
-                  {isCountIn() &&
-                    Number(patternMaker.getSettings().timeSignature.beats) - state.qNote + 1}
-                </div>
-              </div>
-            )}
-          />
-          <br />
-        </>
-      ) : (
-        // METRONOME START
-        <ProMetronome
-          bpm={Number(tempo)}
-          subdivision={patternMaker.getSubDivision()}
-          soundEnabled
-          isPlaying={play}
-          soundPattern={metronomeString}
-          beatsPerBar={beatsPerBar}
-          // temporary any for props and state
-          render={(props: any, state: any) => (
-            <Box sx={{ display: 'flex', justifyContent: 'flex-start' }}>
-              {setQuarterNote(state.qNote)}
-              {oneToBeatsPerBar.map((beat) => {
-                return (
-                  <span key={`beat${beat}`}>
-                    <time style={beat === state.qNote ? counterOn : counterOff} />
-                  </span>
-                );
-              })}
-            </Box>
-          )}
-        />
-      )}
+      <ProMetronome
+        bpm={Number(tempo)}
+        subdivision={patternMaker.getSubDivision()}
+        isPlaying={play}
+        soundEnabled
+        soundPattern={barCount === 0 ? patternMaker.getMetronomeCountInString() : metronomeString}
+        beatsPerBar={beatsPerBar}
+        // temporary any for props and state
+        render={(props: any, state: any) => (
+          <div>
+            {setQuarterNote(state.qNote)}
+            <div style={{ height: '1em' }}>
+              {isCountIn()
+                ? Number(patternMaker.getSettings().timeSignature.beats) - state.qNote + 1
+                : oneToBeatsPerBar.map((beat) => {
+                    return (
+                      <Box
+                        sx={{ display: 'flex', justifyContent: 'flex-start' }}
+                        key={`beat${beat}`}
+                      >
+                        <span>
+                          <time style={beat === state.qNote ? counterOn : counterOff} />
+                        </span>
+                      </Box>
+                    );
+                  })}
+            </div>
+          </div>
+        )}
+      />
+      <br />
     </div>
   );
 };
