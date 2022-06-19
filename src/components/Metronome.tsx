@@ -110,10 +110,11 @@ const Metronome = ({
         render={(props: any, state: any) => (
           <>
             {setCurrentBeat(state.qNote)}
-            <div style={{ height: '1em' }}>
+            <div style={{ height: '1em', display: 'flex', justifyContent: 'left' }}>
               {isCountIn()
                 ? Number(patternMaker.getSettings().timeSignature.beats) - state.qNote + 1
-                : oneToBeatsPerBar.map((beat) => {
+                : barCount > 0 &&
+                  oneToBeatsPerBar.map((beat) => {
                     return (
                       <span key={`beat${beat}`}>
                         <time style={beat === state.qNote ? counterOn : counterOff} />
