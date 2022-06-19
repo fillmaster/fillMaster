@@ -1,4 +1,3 @@
-import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { BeatsPerBar } from '../consts/beatsPerBar';
 import { MeasureDivision } from '../consts/measureDivisions';
@@ -116,14 +115,9 @@ const Metronome = ({
                 ? Number(patternMaker.getSettings().timeSignature.beats) - state.qNote + 1
                 : oneToBeatsPerBar.map((beat) => {
                     return (
-                      <Box
-                        sx={{ display: 'flex', justifyContent: 'flex-start' }}
-                        key={`beat${beat}`}
-                      >
-                        <span>
-                          <time style={beat === state.qNote ? counterOn : counterOff} />
-                        </span>
-                      </Box>
+                      <span key={`beat${beat}`}>
+                        <time style={beat === state.qNote ? counterOn : counterOff} />
+                      </span>
                     );
                   })}
             </div>
