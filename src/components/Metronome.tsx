@@ -50,8 +50,8 @@ const Metronome = ({
   setTimeSignatureTop,
 }: MetronomeProps) => {
   const [noteDivision, setNoteDivision] = useState(patternMaker.getSettings().playNotes as string);
-  const [quarterNote, setQuarterNote] = useState(1);
-  const oneToBeatsPerBar = getStringArrayBetweenTwoValues(1, quarterNote);
+  const [currentBeat, setCurrentBeat] = useState(1);
+  const oneToBeatsPerBar = getStringArrayBetweenTwoValues(1, currentBeat);
 
   const [barCount, setBarCount] = useState(-1);
   const isCountIn = () => barCount === 0 && play;
@@ -83,10 +83,10 @@ const Metronome = ({
   }, [barCount]);
 
   useEffect(() => {
-    if (quarterNote === 1) {
+    if (currentBeat === 1) {
       setBarCount(barCount + 1);
     }
-  }, [quarterNote]);
+  }, [currentBeat]);
 
   return (
     <div className="App">
@@ -109,8 +109,8 @@ const Metronome = ({
         beatsPerBar={beatsPerBar}
         // temporary any for props and state
         render={(props: any, state: any) => (
-          <div>
-            {setQuarterNote(state.qNote)}
+          <>
+            {setCurrentBeat(state.qNote)}
             <div style={{ height: '1em' }}>
               {isCountIn()
                 ? Number(patternMaker.getSettings().timeSignature.beats) - state.qNote + 1
@@ -127,7 +127,7 @@ const Metronome = ({
                     );
                   })}
             </div>
-          </div>
+          </>
         )}
       />
       <br />
