@@ -7,8 +7,6 @@ The project is Open Source under GNU GENERAL PUBLIC LICENSE Version 3.
 
 Clone the repo and run `npm i`
 
-The code is best edited in VS Code with the `Prettier - Code Formatter` extension installed to ensure linting/code styling is displayed correctly. Prettier has been set to fix any of the formatting errors on save.
-
 ## Available Scripts
 
 
