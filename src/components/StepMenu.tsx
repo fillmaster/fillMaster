@@ -9,6 +9,7 @@ import Stepper from '@mui/material/Stepper';
 import Typography from '@mui/material/Typography';
 import { useEffect, useState } from 'react';
 import '../App.css';
+import assertUnreachable from '../utils/assertUnreachable';
 import PatternMaker from '../utils/classes/patternMaker';
 import getStringArrayBetweenTwoValues from '../utils/getArrayBetweenValues';
 import MetronomeContainer from './MetronomeContainer';
@@ -105,7 +106,7 @@ const VerticalLinearStepper = () => {
   const handleResetApp = () => {
     setActiveStep(0);
     restartMetronome();
-    togglePanel();
+    togglePanel('panel1');
   };
 
   useEffect(() => {
@@ -116,16 +117,20 @@ const VerticalLinearStepper = () => {
   // changes to 'panel2' to avoid having to step through.
   const [activePanel, setActivePanel] = useState('panel1');
 
-  const togglePanel = () => {
-    if (activePanel === 'panel1') {
-      setActivePanel('panel2');
-    } else {
-      setActivePanel('panel1');
+  type Panel = 'panel1' | 'panel2';
+  const togglePanel = (panel: Panel) => {
+    switch (panel) {
+      case 'panel1':
+        return setActivePanel('panel1');
+      case 'panel2':
+        return setActivePanel('panel2');
+      default:
+        return assertUnreachable(panel);
     }
   };
 
   useEffect(() => {
-    if (activeStep === steps.length) togglePanel();
+    if (activeStep === steps.length) togglePanel('panel2');
   }, [activeStep]);
 
   return (
