@@ -18,6 +18,7 @@ interface MetronomeProps {
   timeSignatureTop: string;
   setTimeSignatureBottom: (beats: string) => void;
   setTimeSignatureTop: (division: string) => void;
+  handleSetCurrentBar: (bar: number) => void;
 }
 
 const counterOff = {
@@ -47,6 +48,7 @@ const Metronome = ({
   timeSignatureTop,
   setTimeSignatureBottom,
   setTimeSignatureTop,
+  handleSetCurrentBar,
 }: MetronomeProps) => {
   const [noteDivision, setNoteDivision] = useState(patternMaker.getSettings().playNotes as string);
   const [currentBeat, setCurrentBeat] = useState(1);
@@ -56,6 +58,8 @@ const Metronome = ({
   const isCountIn = () => barCount === 0 && play;
   const [metronomeString, setMetronomeString] = useState(patternMaker.getMetronomeString());
   const beatsPerBar = Number(patternMaker.getSettings().timeSignature.beats);
+
+  handleSetCurrentBar(barCount);
 
   const handleSetNoteDivision = (division: string) => {
     setNoteDivision(division);
