@@ -47,6 +47,8 @@ const VerticalLinearStepper = () => {
   const [tempo, setTempo] = useState('');
   const [key, setKey] = useState(0);
   const [currentBar, setCurrentBar] = useState(0);
+  const currentBarOfFour = () => (currentBar % 4 === 0 ? 4 : currentBar % 4);
+
   const [sliderValues, setSliderValues] = useState<number[]>([60, 120]);
   const [timeSignatureTop, setTimeSignatureTop] = useState(
     patternMaker.getSettings().timeSignature.beats as string
@@ -179,7 +181,7 @@ const VerticalLinearStepper = () => {
               <Button onClick={handleResetApp} sx={{ mt: 1, mr: 1 }}>
                 START OVER
               </Button>
-              <div>{currentBar > 0 && `Bar: ${currentBar}`}</div>
+              <div>{currentBar > 0 && `Bar: ${currentBarOfFour()} (${currentBar})`}</div>
             </Grid>
           </Grid>
           <MetronomeContainer
