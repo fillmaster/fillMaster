@@ -7,7 +7,7 @@ import StepContent from '@mui/material/StepContent';
 import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
 import Typography from '@mui/material/Typography';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import '../App.css';
 import PatternMaker from '../utils/classes/patternMaker';
 import getStringArrayBetweenTwoValues from '../utils/getArrayBetweenValues';
@@ -46,6 +46,7 @@ const VerticalLinearStepper = () => {
   const [fill, setFill] = useState('');
   const [tempo, setTempo] = useState('');
   const [key, setKey] = useState(0);
+  const [currentBar, setCurrentBar] = useState(0);
   const [sliderValues, setSliderValues] = useState<number[]>([60, 120]);
   const [timeSignatureTop, setTimeSignatureTop] = useState(
     patternMaker.getSettings().timeSignature.beats as string
@@ -53,10 +54,9 @@ const VerticalLinearStepper = () => {
   const [timeSignatureBottom, setTimeSignatureBottom] = useState(
     patternMaker.getSettings().timeSignature.division as string
   );
-  const barRef = useRef(0);
 
-  const updateBarRef = (barState: number) => {
-    barRef.current = barState;
+  const handleSetCurrentBar = (bar: number) => {
+    setCurrentBar(bar);
   };
 
   const handleSetTimeSignatureTop = (beats: string) => {
@@ -179,7 +179,7 @@ const VerticalLinearStepper = () => {
               <Button onClick={handleResetApp} sx={{ mt: 1, mr: 1 }}>
                 START OVER
               </Button>
-              <div>{barRef.current}</div>
+              <div>{currentBar > 0 && `Bar: ${currentBar}`}</div>
             </Grid>
           </Grid>
           <MetronomeContainer
@@ -192,7 +192,7 @@ const VerticalLinearStepper = () => {
             timeSignatureTop={timeSignatureTop}
             setTimeSignatureTop={handleSetTimeSignatureTop}
             setTimeSignatureBottom={handleSetTimeSignatureBottom}
-            updateBarRef={updateBarRef}
+            handleSetCurrentBar={handleSetCurrentBar}
           />
         </Paper>
       </div>

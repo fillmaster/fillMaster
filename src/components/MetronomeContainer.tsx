@@ -15,7 +15,7 @@ interface MetronomeContainerProps {
   timeSignatureTop: string;
   setTimeSignatureBottom: (beats: string) => void;
   setTimeSignatureTop: (division: string) => void;
-  updateBarRef: (barState: number) => void;
+  handleSetCurrentBar: (bar: number) => void;
 }
 
 const MetronomeContainer = ({
@@ -27,7 +27,7 @@ const MetronomeContainer = ({
   timeSignatureTop,
   setTimeSignatureBottom,
   setTimeSignatureTop,
-  updateBarRef,
+  handleSetCurrentBar,
 }: MetronomeContainerProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -45,7 +45,7 @@ const MetronomeContainer = ({
             timeSignatureTop={timeSignatureTop}
             setTimeSignatureBottom={setTimeSignatureBottom}
             setTimeSignatureTop={setTimeSignatureTop}
-            updateBarRef={updateBarRef}
+            handleSetCurrentBar={handleSetCurrentBar}
           />
           <Button onClick={() => restartMetronome()}>
             <StopIcon />
