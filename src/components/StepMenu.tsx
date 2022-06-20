@@ -108,6 +108,10 @@ const VerticalLinearStepper = () => {
     togglePanel();
   };
 
+  useEffect(() => {
+    restartMetronome();
+  }, [timeSignatureTop]);
+
   // in development: change default to 'panel2' when testing
   // changes to 'panel2' to avoid having to step through.
   const [activePanel, setActivePanel] = useState('panel1');
