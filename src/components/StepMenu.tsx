@@ -7,7 +7,7 @@ import StepContent from '@mui/material/StepContent';
 import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
 import Typography from '@mui/material/Typography';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import '../App.css';
 import PatternMaker from '../utils/classes/patternMaker';
 import getStringArrayBetweenTwoValues from '../utils/getArrayBetweenValues';
@@ -53,6 +53,11 @@ const VerticalLinearStepper = () => {
   const [timeSignatureBottom, setTimeSignatureBottom] = useState(
     patternMaker.getSettings().timeSignature.division as string
   );
+  const barRef = useRef(0);
+
+  const updateBarRef = (barState: number) => {
+    barRef.current = barState;
+  };
 
   const handleSetTimeSignatureTop = (beats: string) => {
     setTimeSignatureTop(beats);
@@ -174,6 +179,7 @@ const VerticalLinearStepper = () => {
               <Button onClick={handleResetApp} sx={{ mt: 1, mr: 1 }}>
                 START OVER
               </Button>
+              <div>{barRef.current}</div>
             </Grid>
           </Grid>
           <MetronomeContainer
@@ -186,6 +192,7 @@ const VerticalLinearStepper = () => {
             timeSignatureTop={timeSignatureTop}
             setTimeSignatureTop={handleSetTimeSignatureTop}
             setTimeSignatureBottom={handleSetTimeSignatureBottom}
+            updateBarRef={updateBarRef}
           />
         </Paper>
       </div>
