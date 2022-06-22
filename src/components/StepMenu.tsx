@@ -7,7 +7,8 @@ import StepContent from '@mui/material/StepContent';
 import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
 import Typography from '@mui/material/Typography';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { FillOnBar } from '../App';
 import '../App.css';
 import assertUnreachable from '../utils/assertUnreachable';
 import PatternMaker from '../utils/classes/patternMaker';
@@ -48,7 +49,10 @@ const VerticalLinearStepper = () => {
   const [tempo, setTempo] = useState('');
   const [key, setKey] = useState(0);
   const [currentBar, setCurrentBar] = useState(0);
-  const currentBarOfFour = () => (currentBar % 4 === 0 ? 4 : currentBar % 4);
+  const fillOnBar = useContext(FillOnBar);
+  const currentBarOfLoop = () =>
+    // loops from 1 to fillOnBar (e.g. 1, 2, 3, 4, 1, 2, 3, 4)
+    currentBar % fillOnBar === 0 ? fillOnBar : currentBar % fillOnBar;
 
   const [sliderValues, setSliderValues] = useState<number[]>([60, 120]);
   const [timeSignatureTop, setTimeSignatureTop] = useState(
@@ -190,7 +194,7 @@ const VerticalLinearStepper = () => {
               <Button onClick={handleResetApp} sx={{ mt: 1, mr: 1 }}>
                 START OVER
               </Button>
-              <div>{currentBar > 0 && `Bar: ${currentBarOfFour()} (${currentBar})`}</div>
+              <div>{currentBar > 0 && `Bar: ${currentBarOfLoop()} (${currentBar})`}</div>
             </Grid>
           </Grid>
           <MetronomeContainer
