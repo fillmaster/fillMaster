@@ -9,9 +9,14 @@ import MenuOptions from './Menu';
 interface ResponsiveAppBarProps {
   setDrawerOpen: (open: boolean) => void;
   setFillOnBar: (fillBar: number) => void;
+  setHelperSound: (helperSound: boolean) => void;
 }
 
-const ResponsiveAppBar = ({ setDrawerOpen, setFillOnBar }: ResponsiveAppBarProps) => {
+const ResponsiveAppBar = ({
+  setDrawerOpen,
+  setFillOnBar,
+  setHelperSound,
+}: ResponsiveAppBarProps) => {
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -42,7 +47,11 @@ const ResponsiveAppBar = ({ setDrawerOpen, setFillOnBar }: ResponsiveAppBarProps
               aria-haspopup="true"
               color="inherit"
             >
-              <MenuOptions setDrawerOpen={setDrawerOpen} setFillOnBar={setFillOnBar} />
+              <MenuOptions
+                setDrawerOpen={setDrawerOpen}
+                setFillOnBar={setFillOnBar}
+                setHelperSound={setHelperSound}
+              />
             </IconButton>
           </Box>
         </Toolbar>

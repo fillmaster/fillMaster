@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { FillOnBar } from '../App';
+import { FillOnBar, HelperSound } from '../App';
 import { BeatsPerBar } from '../consts/beatsPerBar';
 import { MeasureDivision } from '../consts/measureDivisions';
 import { PlayNotes } from '../consts/playNotes';
@@ -55,6 +55,7 @@ const Metronome = ({
   const [currentBeat, setCurrentBeat] = useState(1);
   const [currentSubBeat, setCurrentSubBeat] = useState(0);
   const oneToBeatsPerBar = getStringArrayBetweenTwoValues(1, currentBeat);
+  const helperSoundEnabled = useContext(HelperSound);
 
   const [barCount, setBarCount] = useState(-1);
   const isCountIn = () => barCount === 0 && play;
@@ -81,7 +82,7 @@ const Metronome = ({
   }, [noteDivision, fillStart, timeSignatureTop, timeSignatureBottom]);
 
   useEffect(() => {
-    if (barCount % fillOnBar === 0) {
+    if (barCount % fillOnBar === 0 && helperSoundEnabled) {
       setMetronomeString(patternMaker.getMetronomeStringWithFill());
     } else {
       setMetronomeString(patternMaker.getMetronomeString());

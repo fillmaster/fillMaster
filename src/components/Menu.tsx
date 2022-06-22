@@ -18,9 +18,10 @@ export interface BasicTabsProps {
 interface TemporaryDrawerProps {
   setDrawerOpen: (open: boolean) => void;
   setFillOnBar: (fillOnBar: number) => void;
+  setHelperSound: (helperSound: boolean) => void;
 }
 
-const TemporaryDrawer = ({ setDrawerOpen, setFillOnBar }: TemporaryDrawerProps) => {
+const TemporaryDrawer = ({ setDrawerOpen, setFillOnBar, setHelperSound }: TemporaryDrawerProps) => {
   const [state, setState] = useState({
     right: false,
   });
@@ -32,7 +33,7 @@ const TemporaryDrawer = ({ setDrawerOpen, setFillOnBar }: TemporaryDrawerProps) 
   const renderTab = () => {
     switch (tab) {
       case 'Settings':
-        return <MenuSettings setFillOnBar={setFillOnBar} />;
+        return <MenuSettings setFillOnBar={setFillOnBar} setHelperSound={setHelperSound} />;
       case 'Help':
         return <MenuHelp />;
       case 'About':
