@@ -3,14 +3,16 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useContext, useEffect, useState } from 'react';
+import { FillOnBar } from '../../App';
 
 interface MenuSettingsProps {
-  setFillOnBar: (fillBar: number) => void;
+  setFillOnBar: (fillOnBar: number) => void;
 }
 
 const MenuSettings = ({ setFillOnBar }: MenuSettingsProps) => {
-  const [value, setValue] = useState('4');
+  const fillOnBar = useContext(FillOnBar);
+  const [value, setValue] = useState(fillOnBar.toString());
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setValue((event.target as HTMLInputElement).value);

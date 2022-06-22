@@ -17,7 +17,7 @@ export interface BasicTabsProps {
 
 interface TemporaryDrawerProps {
   setDrawerOpen: (open: boolean) => void;
-  setFillOnBar: (fillBar: number) => void;
+  setFillOnBar: (fillOnBar: number) => void;
 }
 
 const TemporaryDrawer = ({ setDrawerOpen, setFillOnBar }: TemporaryDrawerProps) => {

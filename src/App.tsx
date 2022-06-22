@@ -14,18 +14,16 @@ const App = () => {
     setDrawerOpen(open);
   };
 
-  const handleSetFillOnBar = (fillBar: number) => {
-    setFillOnBar(fillBar);
+  const handleSetFillOnBar = (fillOnBar_: number) => {
+    setFillOnBar(fillOnBar_);
   };
   return (
-    <>
-      <Header setDrawerOpen={handleSetDrawerOpen} setFillOnBar={handleSetFillOnBar} />
-      <FillOnBar.Provider value={fillOnBar}>
-        <Drawer.Provider value={drawerOpen}>
-          <StepMenu />
-        </Drawer.Provider>
-      </FillOnBar.Provider>
-    </>
+    <FillOnBar.Provider value={fillOnBar}>
+      <Drawer.Provider value={drawerOpen}>
+        <Header setDrawerOpen={handleSetDrawerOpen} setFillOnBar={handleSetFillOnBar} />
+        <StepMenu />
+      </Drawer.Provider>
+    </FillOnBar.Provider>
   );
 };
 
