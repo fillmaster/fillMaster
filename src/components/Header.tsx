@@ -7,10 +7,11 @@ import Typography from '@mui/material/Typography';
 import MenuOptions from './Menu';
 
 interface ResponsiveAppBarProps {
-  handleSetDrawerOpen: (open: boolean) => void;
+  setDrawerOpen: (open: boolean) => void;
+  setFillOnBar: (fillBar: number) => void;
 }
 
-const ResponsiveAppBar = ({ handleSetDrawerOpen }: ResponsiveAppBarProps) => {
+const ResponsiveAppBar = ({ setDrawerOpen, setFillOnBar }: ResponsiveAppBarProps) => {
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -41,7 +42,7 @@ const ResponsiveAppBar = ({ handleSetDrawerOpen }: ResponsiveAppBarProps) => {
               aria-haspopup="true"
               color="inherit"
             >
-              <MenuOptions handleSetDrawerOpen={handleSetDrawerOpen} />
+              <MenuOptions setDrawerOpen={setDrawerOpen} setFillOnBar={setFillOnBar} />
             </IconButton>
           </Box>
         </Toolbar>

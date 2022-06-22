@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { FillOnBar } from '../App';
 import { BeatsPerBar } from '../consts/beatsPerBar';
 import { MeasureDivision } from '../consts/measureDivisions';
 import { PlayNotes } from '../consts/playNotes';
@@ -59,6 +60,7 @@ const Metronome = ({
   const isCountIn = () => barCount === 0 && play;
   const [metronomeString, setMetronomeString] = useState(patternMaker.getMetronomeString());
   const beatsPerBar = Number(patternMaker.getSettings().timeSignature.beats);
+  const fillOnBar = useContext(FillOnBar);
 
   handleSetCurrentBar(barCount);
 
@@ -79,7 +81,7 @@ const Metronome = ({
   }, [noteDivision, fillStart, timeSignatureTop, timeSignatureBottom]);
 
   useEffect(() => {
-    if (barCount % 4 === 0) {
+    if (barCount % fillOnBar === 0) {
       setMetronomeString(patternMaker.getMetronomeStringWithFill());
     } else {
       setMetronomeString(patternMaker.getMetronomeString());

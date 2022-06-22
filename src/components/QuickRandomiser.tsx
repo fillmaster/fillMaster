@@ -2,7 +2,8 @@
 
 import RestartAllIcon from '@mui/icons-material/RestartAltRounded';
 import { Button, Fade, Typography } from '@mui/material';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useContext, useEffect, useState } from 'react';
+import { FillOnBar } from '../App';
 import { BeatsPerBar } from '../consts/beatsPerBar';
 import beatIdeas from '../consts/forRandomiser/beatIdeas';
 import fillStarts from '../consts/forRandomiser/fillStarts';
@@ -41,6 +42,7 @@ const QuickRandomiser = ({
   const [fillStartVisible, setFillStartVisible] = useState(true);
   const [fillVisible, setFillVisible] = useState(true);
   const [tempoVisible, setTempoVisible] = useState(true);
+  const fillOnBar = useContext(FillOnBar);
 
   const handleChange = (setItem: Dispatch<SetStateAction<boolean>>) => {
     setItem(false);
@@ -79,7 +81,9 @@ const QuickRandomiser = ({
       </div>
       <div>
         <Fade in={fillStartVisible}>
-          <Typography>Fill on Beat {fillStart} of bar 4</Typography>
+          <Typography>
+            Fill on Beat {fillStart} of bar {fillOnBar}
+          </Typography>
         </Fade>
       </div>
       <div>

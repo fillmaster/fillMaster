@@ -1,6 +1,7 @@
 import RefreshIcon from '@mui/icons-material/RefreshRounded';
 import { Button, Typography } from '@mui/material';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { FillOnBar } from '../App';
 import beatIdeas from '../consts/forRandomiser/beatIdeas';
 import fillStarts from '../consts/forRandomiser/fillStarts';
 import fills from '../consts/forRandomiser/fillTypes';
@@ -35,6 +36,7 @@ const SetupStep = ({
   const [startFillKey, setStartFillKey] = useState(0);
   const [fillKey, setFillKey] = useState(0);
   const [tempoKey, setTempoKey] = useState(0);
+  const fillOnBar = useContext(FillOnBar);
 
   const resetRandomiser = (randomToReset: RandomiseMe) => {
     if (randomToReset === 'beatIdea') setBeatIdeaKey(beatIdeaKey + 1);
@@ -72,7 +74,7 @@ const SetupStep = ({
           arrayToRandomise={fillStarts(patternMaker.getSettings().timeSignature.beats)}
           handleSetItem={handleSetFillStart}
         />
-        <span> of bar 4.</span>{' '}
+        <span> of bar {fillOnBar}.</span>{' '}
         <div>
           <Button onClick={() => resetRandomiser('startFill')}>
             <RefreshIcon />

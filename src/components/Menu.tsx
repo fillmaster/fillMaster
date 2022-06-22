@@ -16,10 +16,11 @@ export interface BasicTabsProps {
 }
 
 interface TemporaryDrawerProps {
-  handleSetDrawerOpen: (open: boolean) => void;
+  setDrawerOpen: (open: boolean) => void;
+  setFillOnBar: (fillBar: number) => void;
 }
 
-const TemporaryDrawer = ({ handleSetDrawerOpen }: TemporaryDrawerProps) => {
+const TemporaryDrawer = ({ setDrawerOpen, setFillOnBar }: TemporaryDrawerProps) => {
   const [state, setState] = useState({
     right: false,
   });
@@ -31,13 +32,13 @@ const TemporaryDrawer = ({ handleSetDrawerOpen }: TemporaryDrawerProps) => {
   const renderTab = () => {
     switch (tab) {
       case 'Settings':
-        return <MenuSettings />;
+        return <MenuSettings setFillOnBar={setFillOnBar} />;
       case 'Help':
         return <MenuHelp />;
       case 'About':
         return <MenuAbout />;
       default:
-        return <MenuSettings />;
+        return null;
     }
   };
 
@@ -49,7 +50,7 @@ const TemporaryDrawer = ({ handleSetDrawerOpen }: TemporaryDrawerProps) => {
     ) {
       return;
     }
-    handleSetDrawerOpen(open);
+    setDrawerOpen(open);
     setState({ ...state, [anchor]: open });
   };
   const iOS = typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent);
