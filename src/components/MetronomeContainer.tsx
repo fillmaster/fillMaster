@@ -2,7 +2,8 @@ import PauseIcon from '@mui/icons-material/PauseCircleFilled';
 import PlayIcon from '@mui/icons-material/PlayCircleFilled';
 import StopIcon from '@mui/icons-material/StopCircle';
 import { Button, Grid } from '@mui/material';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { Drawer } from '../App';
 import PatternMaker from '../utils/classes/patternMaker';
 import Metronome from './Metronome';
 
@@ -30,6 +31,20 @@ const MetronomeContainer = ({
   handleSetCurrentBar,
 }: MetronomeContainerProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const settingsOpen = useContext(Drawer);
+  const [wasPlayingOnSettingsOpen, setWasPlayingOnSettingsOpen] = useState(false);
+
+  // pause metronome when opening settings menu
+  useEffect(() => {
+    if (settingsOpen && isPlaying) {
+      setWasPlayingOnSettingsOpen(true);
+      setIsPlaying(false);
+    }
+    if (!settingsOpen && wasPlayingOnSettingsOpen) {
+      setIsPlaying(true);
+      setWasPlayingOnSettingsOpen(false);
+    }
+  }, [settingsOpen]);
 
   return (
     <Grid container spacing={2}>

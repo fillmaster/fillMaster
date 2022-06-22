@@ -1,12 +1,16 @@
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import IconButton from '@mui/material/IconButton';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
 import MenuOptions from './Menu';
 
-const ResponsiveAppBar = () => {
+interface ResponsiveAppBarProps {
+  handleSetDrawerOpen: (open: boolean) => void;
+}
+
+const ResponsiveAppBar = ({ handleSetDrawerOpen }: ResponsiveAppBarProps) => {
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -37,7 +41,7 @@ const ResponsiveAppBar = () => {
               aria-haspopup="true"
               color="inherit"
             >
-              <MenuOptions />
+              <MenuOptions handleSetDrawerOpen={handleSetDrawerOpen} />
             </IconButton>
           </Box>
         </Toolbar>

@@ -1,12 +1,12 @@
-import { useState, KeyboardEvent, MouseEvent, SyntheticEvent } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
-import Box from '@mui/material/Box';
 import { SwipeableDrawer } from '@mui/material';
+import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
-import MenuTabs from './MenuTabs';
-import MenuSettings from './MenuPages/MenuSettings';
-import MenuHelp from './MenuPages/MenuHelp';
+import { KeyboardEvent, MouseEvent, SyntheticEvent, useState } from 'react';
 import MenuAbout from './MenuPages/MenuAbout';
+import MenuHelp from './MenuPages/MenuHelp';
+import MenuSettings from './MenuPages/MenuSettings';
+import MenuTabs from './MenuTabs';
 
 export type TabName = 'Settings' | 'Help' | 'About';
 type Anchor = 'right';
@@ -15,7 +15,11 @@ export interface BasicTabsProps {
   handleSetTab: (event: SyntheticEvent, newValue: TabName) => void;
 }
 
-const TemporaryDrawer = () => {
+interface TemporaryDrawerProps {
+  handleSetDrawerOpen: (open: boolean) => void;
+}
+
+const TemporaryDrawer = ({ handleSetDrawerOpen }: TemporaryDrawerProps) => {
   const [state, setState] = useState({
     right: false,
   });
@@ -45,7 +49,7 @@ const TemporaryDrawer = () => {
     ) {
       return;
     }
-
+    handleSetDrawerOpen(open);
     setState({ ...state, [anchor]: open });
   };
   const iOS = typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent);
