@@ -10,12 +10,14 @@ interface ResponsiveAppBarProps {
   setDrawerOpen: (open: boolean) => void;
   setFillOnBar: (fillBar: number) => void;
   setHelperSound: (helperSound: boolean) => void;
+  resetAllSettings: () => void;
 }
 
 const ResponsiveAppBar = ({
   setDrawerOpen,
   setFillOnBar,
   setHelperSound,
+  resetAllSettings,
 }: ResponsiveAppBarProps) => {
   return (
     <AppBar position="static">
@@ -51,6 +53,7 @@ const ResponsiveAppBar = ({
                 setDrawerOpen={setDrawerOpen}
                 setFillOnBar={setFillOnBar}
                 setHelperSound={setHelperSound}
+                resetAllSettings={resetAllSettings}
               />
             </IconButton>
           </Box>

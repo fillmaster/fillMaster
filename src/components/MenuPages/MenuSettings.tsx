@@ -1,4 +1,4 @@
-import { Switch } from '@mui/material';
+import { Button, Switch } from '@mui/material';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormLabel from '@mui/material/FormLabel';
@@ -10,9 +10,10 @@ import { FillOnBar, HelperSound } from '../../App';
 interface MenuSettingsProps {
   setFillOnBar: (fillOnBar: number) => void;
   setHelperSound: (helperSound: boolean) => void;
+  resetAllSettings: () => void;
 }
 
-const MenuSettings = ({ setFillOnBar, setHelperSound }: MenuSettingsProps) => {
+const MenuSettings = ({ setFillOnBar, setHelperSound, resetAllSettings }: MenuSettingsProps) => {
   const fillOnBar = useContext(FillOnBar);
   const helperSound = useContext(HelperSound);
 
@@ -26,6 +27,9 @@ const MenuSettings = ({ setFillOnBar, setHelperSound }: MenuSettingsProps) => {
 
   return (
     <FormControl>
+      <Button onClick={resetAllSettings} sx={{ mt: 1 }}>
+        RESET TO DEFAULTS
+      </Button>
       <FormLabel id="demo-row-radio-buttons-group-label">Play fills every</FormLabel>
       <RadioGroup
         row
@@ -40,7 +44,7 @@ const MenuSettings = ({ setFillOnBar, setHelperSound }: MenuSettingsProps) => {
       <FormLabel id="demo-row-radio-buttons-group-label">
         Enable helper sound at start of fill.
       </FormLabel>
-      <Switch onChange={handleHelperSoundChange} defaultChecked={helperSound} />
+      <Switch onChange={handleHelperSoundChange} checked={helperSound} />
     </FormControl>
   );
 };

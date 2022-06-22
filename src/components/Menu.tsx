@@ -19,9 +19,15 @@ interface TemporaryDrawerProps {
   setDrawerOpen: (open: boolean) => void;
   setFillOnBar: (fillOnBar: number) => void;
   setHelperSound: (helperSound: boolean) => void;
+  resetAllSettings: () => void;
 }
 
-const TemporaryDrawer = ({ setDrawerOpen, setFillOnBar, setHelperSound }: TemporaryDrawerProps) => {
+const TemporaryDrawer = ({
+  setDrawerOpen,
+  setFillOnBar,
+  setHelperSound,
+  resetAllSettings,
+}: TemporaryDrawerProps) => {
   const [state, setState] = useState({
     right: false,
   });
@@ -33,7 +39,13 @@ const TemporaryDrawer = ({ setDrawerOpen, setFillOnBar, setHelperSound }: Tempor
   const renderTab = () => {
     switch (tab) {
       case 'Settings':
-        return <MenuSettings setFillOnBar={setFillOnBar} setHelperSound={setHelperSound} />;
+        return (
+          <MenuSettings
+            setFillOnBar={setFillOnBar}
+            setHelperSound={setHelperSound}
+            resetAllSettings={resetAllSettings}
+          />
+        );
       case 'Help':
         return <MenuHelp />;
       case 'About':

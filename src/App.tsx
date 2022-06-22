@@ -7,10 +7,22 @@ export const Drawer = createContext(false);
 export const FillOnBar = createContext(4);
 export const HelperSound = createContext(true);
 
+const DEFAULTS = {
+  drawerOpen: false,
+  fillOnBar: 4,
+  helperSound: true,
+};
+
 const App = () => {
-  const [drawerOpen, setDrawerOpen] = useState(false);
-  const [fillOnBar, setFillOnBar] = useState(4);
-  const [helperSound, setHelperSound] = useState(true);
+  const [drawerOpen, setDrawerOpen] = useState(DEFAULTS.drawerOpen);
+  const [fillOnBar, setFillOnBar] = useState(DEFAULTS.fillOnBar);
+  const [helperSound, setHelperSound] = useState(DEFAULTS.helperSound);
+
+  const resetAllSettings = () => {
+    setDrawerOpen(DEFAULTS.drawerOpen);
+    setFillOnBar(DEFAULTS.fillOnBar);
+    setHelperSound(DEFAULTS.helperSound);
+  };
 
   const handleSetDrawerOpen = (open: boolean) => {
     setDrawerOpen(open);
@@ -32,6 +44,7 @@ const App = () => {
             setDrawerOpen={handleSetDrawerOpen}
             setFillOnBar={handleSetFillOnBar}
             setHelperSound={handleSetHelperSound}
+            resetAllSettings={resetAllSettings}
           />
           <StepMenu />
         </Drawer.Provider>
