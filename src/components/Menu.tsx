@@ -81,11 +81,9 @@ const TemporaryDrawer = ({
           sx: { width: '80%' },
         }}
       >
-        <Box>
-          <MenuTabs tab={tab} handleSetTab={handleSetTab} />
-          <Divider />
-          {renderTab()}
-        </Box>
+        <MenuTabs tab={tab} handleSetTab={handleSetTab} />
+        <Divider />
+        <Box sx={{ padding: '4%' }}>{renderTab()}</Box>
       </SwipeableDrawer>
     </>
   );
