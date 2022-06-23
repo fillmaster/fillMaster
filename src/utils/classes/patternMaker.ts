@@ -171,11 +171,14 @@ function getNth(
   division_: MeasureDivision,
   isCountIn: boolean = false
 ) {
-  let nth: number;
+  let nth: number | null;
   const division = Number(division_);
   let playNotes = playNotes_;
   if (isCountIn) playNotes = getPlayNotesByNumber(division_);
   switch (playNotes) {
+    case 'firstNoteOnly':
+      nth = null;
+      break;
     case 'wholeNotes':
       nth = subDivision * division;
       break;

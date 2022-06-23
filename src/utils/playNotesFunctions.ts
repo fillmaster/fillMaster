@@ -2,9 +2,11 @@ import { MeasureDivision } from '../consts/measureDivisions';
 import { PlayNotes } from '../consts/playNotes';
 import assertUnreachable from './assertUnreachable';
 
-type PlayNotesNumber = MeasureDivision | '1';
+export type PlayNotesNumber = MeasureDivision | '1';
 export function getUnicodeForPlayNotes(playNotes: PlayNotes) {
   switch (playNotes) {
+    case 'firstNoteOnly':
+      return '\u{2460}';
     case 'wholeNotes':
       return '\u{1D15D}';
     case 'halfNotes':
@@ -22,6 +24,8 @@ export function getUnicodeForPlayNotes(playNotes: PlayNotes) {
 
 export function getNamesForPlayNotes(playNotes: PlayNotes) {
   switch (playNotes) {
+    case 'firstNoteOnly':
+      return 'First Note Only';
     case 'wholeNotes':
       return 'Whole Notes';
     case 'halfNotes':
@@ -51,5 +55,24 @@ export function getPlayNotesByNumber(playNotesNumber: PlayNotesNumber): PlayNote
       return 'sixteenthNotes';
     default:
       return assertUnreachable(playNotesNumber);
+  }
+}
+
+export function getPlayNotesAsNumber(playNotes: PlayNotes): PlayNotesNumber {
+  switch (playNotes) {
+    case 'firstNoteOnly':
+      throw new Error("firstNoteOnly is not a standard division and doesn't have a number");
+    case 'wholeNotes':
+      return '1';
+    case 'halfNotes':
+      return '2';
+    case 'quarterNotes':
+      return '4';
+    case 'eighthNotes':
+      return '8';
+    case 'sixteenthNotes':
+      return '16';
+    default:
+      return assertUnreachable(playNotes);
   }
 }
