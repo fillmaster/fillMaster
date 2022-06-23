@@ -66,6 +66,10 @@ export default class PatternMaker {
   // END OF SINGLETON.
 
   public setSettings = (patternSettings: PatternSettings) => {
+    if (Number(patternSettings.playFillOn.beat) > Number(patternSettings.timeSignature.beats))
+      throw new Error('Cannot set fill beat higher than the number of beats per bar.');
+    if (Number(patternSettings.playFillOn.subBeat) > this.subDivision - 1)
+      throw new Error('Cannot set a sub-beat higher than the number of subdivisions.');
     this.customSettingsForPattern = patternSettings;
   };
 
