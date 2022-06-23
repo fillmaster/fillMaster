@@ -22,15 +22,14 @@ const MenuAbout = () => {
           <h4>Real world learning.</h4>
           You could call Fill Master a &apos;Magic Free&apos; education app. It doesn&apos;t promise
           to make you a better musician on it&apos;s own. In fact the app would be pretty useless in
-          isolation. This is intended, the whole purpose of the app is to be used as a tool whilst
-          you&apos;re at your kit. It&apos;s designed to encourage you to play the thing you are
-          trying to learn.
+          isolation. The intended purpose of the app is to be used as a tool whilst you&apos;re at
+          your kit. It&apos;s designed to encourage you to play and learn by doing.
         </li>
       </ol>
       This software is open source and growing. We plan to eventually have different levels of
-      difficulty and professional advice from actual drum teachers. So all levels of drummer will
-      want this tool in their arsenal. We want the metronome alone to be the best on the web, so it
-      can be a one-stop shop for your drumming practice!
+      difficulty from beginner to professional, so all levels of drummer will want this tool in
+      their arsenal. We want the metronome alone to be the best on the web, so it can be a one-stop
+      shop for your drumming practice!
       <br />
       <br />
       version 0.3
