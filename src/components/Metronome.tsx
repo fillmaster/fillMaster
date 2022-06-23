@@ -24,20 +24,20 @@ interface MetronomeProps {
 
 const counterOff = {
   backgroundColor: 'lightgrey',
-  width: '10px',
+  maxWidth: '5px',
   height: '10px',
   border: '1px solid red',
-  padding: '10px',
-  margin: '10px',
+  padding: '5px',
+  margin: '5px',
 };
 
 const counterOn = {
   backgroundColor: 'red',
-  width: '10px',
+  maxWidth: '5px',
   height: '10px',
   border: '1px solid red',
-  padding: '10px',
-  margin: '10px',
+  padding: '5px',
+  margin: '5px',
 };
 
 const Metronome = ({
@@ -125,7 +125,13 @@ const Metronome = ({
           <>
             {setCurrentBeat(state.qNote)}
             {setCurrentSubBeat(state.subNote)}
-            <div style={{ height: '1em', display: 'flex', justifyContent: 'left' }}>
+            <div
+              style={{
+                height: '1em',
+                display: 'flex',
+                justifyContent: isCountIn() ? 'center' : 'left',
+              }}
+            >
               {isCountIn()
                 ? Number(patternMaker.getSettings().timeSignature.beats) - state.qNote + 1
                 : barCount > 0 &&

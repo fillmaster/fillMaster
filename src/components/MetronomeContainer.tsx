@@ -1,7 +1,7 @@
 import PauseIcon from '@mui/icons-material/PauseCircleFilled';
 import PlayIcon from '@mui/icons-material/PlayCircleFilled';
 import StopIcon from '@mui/icons-material/StopCircle';
-import { Button, Grid } from '@mui/material';
+import { Button } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { Drawer } from '../App';
 import PatternMaker from '../utils/classes/patternMaker';
@@ -47,34 +47,29 @@ const MetronomeContainer = ({
   }, [settingsOpen]);
 
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={3} />
-      <Grid item xs={9}>
-        <div style={{ height: '50px', padding: '50px' }}>
-          <Metronome
-            play={isPlaying}
-            tempo={tempo}
-            fillStart={fillStart}
-            patternMaker={patternMaker}
-            timeSignatureBottom={timeSignatureBottom}
-            timeSignatureTop={timeSignatureTop}
-            setTimeSignatureBottom={setTimeSignatureBottom}
-            setTimeSignatureTop={setTimeSignatureTop}
-            handleSetCurrentBar={handleSetCurrentBar}
-          />
-          <Button onClick={() => restartMetronome()}>
-            <StopIcon />
-          </Button>
-          <Button onClick={() => setIsPlaying(!isPlaying)}>
-            {isPlaying ? (
-              <PauseIcon onClick={() => setIsPlaying(!isPlaying)} />
-            ) : (
-              <PlayIcon onClick={() => setIsPlaying(!isPlaying)} />
-            )}
-          </Button>
-        </div>
-      </Grid>
-    </Grid>
+    <div style={{ height: '50px', padding: '50px' }}>
+      <Metronome
+        play={isPlaying}
+        tempo={tempo}
+        fillStart={fillStart}
+        patternMaker={patternMaker}
+        timeSignatureBottom={timeSignatureBottom}
+        timeSignatureTop={timeSignatureTop}
+        setTimeSignatureBottom={setTimeSignatureBottom}
+        setTimeSignatureTop={setTimeSignatureTop}
+        handleSetCurrentBar={handleSetCurrentBar}
+      />
+      <Button onClick={() => restartMetronome()}>
+        <StopIcon />
+      </Button>
+      <Button onClick={() => setIsPlaying(!isPlaying)}>
+        {isPlaying ? (
+          <PauseIcon onClick={() => setIsPlaying(!isPlaying)} />
+        ) : (
+          <PlayIcon onClick={() => setIsPlaying(!isPlaying)} />
+        )}
+      </Button>
+    </div>
   );
 };
 
