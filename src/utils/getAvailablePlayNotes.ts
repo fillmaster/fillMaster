@@ -5,6 +5,8 @@ import { getPlayNotesByNumber, PlayNotesNumber } from './playNotesFunctions';
 const getAvailablePlayNotes = (beatsPerBar_: BeatsPerBar, division_: MeasureDivision) => {
   const array = getPlayNotesNumbers(beatsPerBar_, division_);
   const newArray = array.map((x) => getPlayNotesByNumber(x as PlayNotesNumber));
+  if ((Number(beatsPerBar_) / Number(division_)) * Number(array[0]) !== 1)
+    newArray.unshift('firstNoteOnly');
   return newArray;
 };
 

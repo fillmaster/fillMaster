@@ -6,7 +6,7 @@ export type PlayNotesNumber = MeasureDivision | '1';
 export function getUnicodeForPlayNotes(playNotes: PlayNotes) {
   switch (playNotes) {
     case 'firstNoteOnly':
-      return '\u{2460}';
+      return '1\u{02E2}\u{1D57}';
     case 'wholeNotes':
       return '\u{1D15D}';
     case 'halfNotes':
