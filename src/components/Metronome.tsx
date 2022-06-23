@@ -1,3 +1,4 @@
+import { Box, lighten, useTheme } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { FillOnBar, HelperSound } from '../App';
 import { BeatsPerBar } from '../consts/beatsPerBar';
@@ -21,24 +22,6 @@ interface MetronomeProps {
   setTimeSignatureTop: (division: string) => void;
   handleSetCurrentBar: (bar: number) => void;
 }
-
-const counterOff = {
-  backgroundColor: 'lightgrey',
-  maxWidth: '5px',
-  height: '10px',
-  border: '1px solid red',
-  padding: '5px',
-  margin: '5px',
-};
-
-const counterOn = {
-  backgroundColor: 'red',
-  maxWidth: '5px',
-  height: '10px',
-  border: '1px solid red',
-  padding: '5px',
-  margin: '5px',
-};
 
 const Metronome = ({
   play,
@@ -101,6 +84,17 @@ const Metronome = ({
     }
   }, [currentBeat, currentSubBeat]);
 
+  const theme = useTheme();
+
+  const counter = {
+    backgroundColor: lighten(theme.palette.primary.main, 0.8),
+    maxWidth: '5px',
+    height: '10px',
+    border: `1px solid ${theme.palette.primary.main}`,
+    padding: '5px',
+    margin: '5px',
+  };
+
   return (
     <div className="App">
       <Selectors
@@ -136,11 +130,7 @@ const Metronome = ({
                 ? Number(patternMaker.getSettings().timeSignature.beats) - state.qNote + 1
                 : barCount > 0 &&
                   oneToBeatsPerBar.map((beat) => {
-                    return (
-                      <span key={`beat${beat}`}>
-                        <time style={beat === state.qNote ? counterOn : counterOff} />
-                      </span>
-                    );
+                    return <Box sx={{ ...counter }} key={`beat${beat}`} />;
                   })}
             </div>
           </>

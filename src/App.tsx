@@ -1,3 +1,5 @@
+import { ThemeProvider } from '@emotion/react';
+import { createTheme } from '@mui/material';
 import { createContext, useState } from 'react';
 import './App.css';
 import Header from './components/Header';
@@ -12,6 +14,17 @@ const DEFAULTS = {
   fillOnBar: 4,
   helperSound: true,
 };
+
+export const defaultTheme = createTheme({
+  palette: {
+    primary: {
+      main: 'hsl(212, 93%, 45%)',
+    },
+    secondary: {
+      main: 'hsl(212, 83%, 47%)',
+    },
+  },
+});
 
 const App = () => {
   const [drawerOpen, setDrawerOpen] = useState(DEFAULTS.drawerOpen);
@@ -37,19 +50,21 @@ const App = () => {
   };
 
   return (
-    <HelperSound.Provider value={helperSound}>
-      <FillOnBar.Provider value={fillOnBar}>
-        <Drawer.Provider value={drawerOpen}>
-          <Header
-            setDrawerOpen={handleSetDrawerOpen}
-            setFillOnBar={handleSetFillOnBar}
-            setHelperSound={handleSetHelperSound}
-            resetAllSettings={resetAllSettings}
-          />
-          <StepMenu />
-        </Drawer.Provider>
-      </FillOnBar.Provider>
-    </HelperSound.Provider>
+    <ThemeProvider theme={defaultTheme}>
+      <HelperSound.Provider value={helperSound}>
+        <FillOnBar.Provider value={fillOnBar}>
+          <Drawer.Provider value={drawerOpen}>
+            <Header
+              setDrawerOpen={handleSetDrawerOpen}
+              setFillOnBar={handleSetFillOnBar}
+              setHelperSound={handleSetHelperSound}
+              resetAllSettings={resetAllSettings}
+            />
+            <StepMenu />
+          </Drawer.Provider>
+        </FillOnBar.Provider>
+      </HelperSound.Provider>
+    </ThemeProvider>
   );
 };
 
