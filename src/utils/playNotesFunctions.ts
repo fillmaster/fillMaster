@@ -57,22 +57,3 @@ export function getPlayNotesByNumber(playNotesNumber: PlayNotesNumber): PlayNote
       return assertUnreachable(playNotesNumber);
   }
 }
-
-export function getPlayNotesAsNumber(playNotes: PlayNotes): PlayNotesNumber {
-  switch (playNotes) {
-    case 'firstNoteOnly':
-      throw new Error("firstNoteOnly is not a standard division and doesn't have a number");
-    case 'wholeNotes':
-      return '1';
-    case 'halfNotes':
-      return '2';
-    case 'quarterNotes':
-      return '4';
-    case 'eighthNotes':
-      return '8';
-    case 'sixteenthNotes':
-      return '16';
-    default:
-      return assertUnreachable(playNotes);
-  }
-}
