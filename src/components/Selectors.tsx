@@ -140,7 +140,8 @@ function getMeasureBottomSelectorOptions(
 function getLabels(playNoteOptions_: NoteDivisionSelectorItems) {
   const playNoteOptions = [...playNoteOptions_];
   const defaultIndex = playNoteOptions.findIndex((playNote) => playNote.default === true);
-  if (defaultIndex > 0) playNoteOptions[defaultIndex - 1].label = 'half time';
+  if (defaultIndex > 0 && playNoteOptions[defaultIndex - 1].stateName !== 'firstNoteOnly')
+    playNoteOptions[defaultIndex - 1].label = 'half time';
   playNoteOptions[defaultIndex].label = 'regular time';
   if (defaultIndex < playNoteOptions.length - 1)
     playNoteOptions[defaultIndex + 1].label = 'double time';

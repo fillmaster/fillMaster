@@ -2,9 +2,11 @@ import { MeasureDivision } from '../consts/measureDivisions';
 import { PlayNotes } from '../consts/playNotes';
 import assertUnreachable from './assertUnreachable';
 
-type PlayNotesNumber = MeasureDivision | '1';
+export type PlayNotesNumber = MeasureDivision | '1';
 export function getUnicodeForPlayNotes(playNotes: PlayNotes) {
   switch (playNotes) {
+    case 'firstNoteOnly':
+      return '1\u{02E2}\u{1D57}';
     case 'wholeNotes':
       return '\u{1D15D}';
     case 'halfNotes':
@@ -22,6 +24,8 @@ export function getUnicodeForPlayNotes(playNotes: PlayNotes) {
 
 export function getNamesForPlayNotes(playNotes: PlayNotes) {
   switch (playNotes) {
+    case 'firstNoteOnly':
+      return 'First Note Only';
     case 'wholeNotes':
       return 'Whole Notes';
     case 'halfNotes':
