@@ -31,7 +31,7 @@ const TempoChooser = ({ handleSetSliderValues, sliderValues }: TempoChooserProps
   };
 
   return (
-    <Box sx={{ width: 300, mt: '50px' }}>
+    <Box sx={{ width: 300, mt: '50px', display: 'flex' }}>
       <Slider
         getAriaLabel={() => 'Minimum distance shift'}
         value={sliderValues}
@@ -42,6 +42,7 @@ const TempoChooser = ({ handleSetSliderValues, sliderValues }: TempoChooserProps
         min={20}
         max={240}
       />
+      &nbsp;&nbsp;bpm
     </Box>
   );
 };

@@ -1,7 +1,24 @@
 const MenuHelp = () => {
   return (
     <>
-      <h4>The basics if you can&apos;t count music</h4>
+      <h4>How to use the app.</h4>
+      <ol>
+        <li> Choose a tempo range you&apos;d like to work in.</li>
+        <li>
+          Come up with a drum groove based on the advice given, or come up with your own. If you
+          don&apos;t know how to count music, check the quick guide below. Once you&apos;ve got
+          something. Move to step 3.
+        </li>
+        <li>
+          In steps 3 to 4 we&apos;ll choose when to start your fill and what type of fill to play.
+        </li>
+        <li>
+          We&apos;ll choose a random tempo for you. If it ends up being too fast, don&apos;t worry.
+          You can change the note division on the metronome or refresh the randomiser.
+        </li>
+        <li> Press Play! - You&apos;ll hear a ping sound when it&apos;s time to play your fill.</li>
+      </ol>
+      <h4>The basics of counting music</h4>
       <h5> Example:</h5>
       Stick to 4/4 timing. Count 1, 2, 3, 4. Kicks generally go on beats 1 and 3. Snare on 2 and 4.
       <br />
