@@ -23,7 +23,7 @@ export const defaultTheme = createTheme({
     secondary: {
       main: 'hsl(212, 83%, 47%)',
     },
-  },
+  }
 });
 
 const App = () => {

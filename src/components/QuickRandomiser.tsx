@@ -11,8 +11,8 @@ import FILLS from '../consts/forRandomiser/fillTypes';
 import { RandomiseMe, RANDOMISE_ME } from '../consts/forRandomiser/randomiseMe';
 import shuffleArray from '../utils/randomFunctions';
 
-// <Fade in={checked}>{beatIdeaAsText}</Fade>
-
+const EXIT = 0;
+const ENTER = 500;
 interface QuickRandomiserProps {
   beatIdea: string;
   fillStart: string;
@@ -75,24 +75,48 @@ const QuickRandomiser = ({
   return (
     <>
       <div>
-        <Fade in={beatIdeaVisible}>
+        <Fade
+          in={beatIdeaVisible}
+          timeout={{
+            exit: EXIT,
+            enter: ENTER,
+          }}
+        >
           <Typography>Drum Beat: {beatIdea}</Typography>
         </Fade>
       </div>
       <div>
-        <Fade in={fillStartVisible}>
+        <Fade
+          in={fillStartVisible}
+          timeout={{
+            exit: EXIT,
+            enter: ENTER,
+          }}
+        >
           <Typography>
             Fill on Beat {fillStart} of bar {fillOnBar}
           </Typography>
         </Fade>
       </div>
       <div>
-        <Fade in={fillVisible}>
+        <Fade
+          in={fillVisible}
+          timeout={{
+            exit: EXIT,
+            enter: ENTER,
+          }}
+        >
           <Typography>Fill style: {fill}</Typography>
         </Fade>
       </div>
       <div>
-        <Fade in={tempoVisible}>
+        <Fade
+          in={tempoVisible}
+          timeout={{
+            exit: EXIT,
+            enter: ENTER,
+          }}
+        >
           <Typography>@ {tempo} bpm</Typography>
         </Fade>
       </div>
