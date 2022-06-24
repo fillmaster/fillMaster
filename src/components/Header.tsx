@@ -30,7 +30,7 @@ const ResponsiveAppBar = ({
               noWrap
               sx={{
                 mr: 2,
-                fontFamily: 'monospace',
+                fontFamily: 'Bebas Neue',
                 fontWeight: 700,
                 letterSpacing: '.3rem',
                 color: 'inherit',
