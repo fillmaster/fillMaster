@@ -121,7 +121,7 @@ const Metronome = ({
             {setCurrentSubBeat(state.subNote)}
             <div
               style={{
-                height: '1em',
+                height: '3em',
                 display: 'flex',
                 justifyContent: isCountIn() ? 'center' : 'left',
               }}
