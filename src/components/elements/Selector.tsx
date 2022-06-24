@@ -10,7 +10,7 @@ import { MouseEvent, useEffect, useState } from 'react';
  * item centered (vertically on top of the button). It also adds some styling based and includes fonts to read
  * the musical unicode values.
  */
-const HEIGHT = 20;
+const HEIGHT = 25;
 const WIDTH = '2rem';
 
 export type SelectorItem = {

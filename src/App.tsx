@@ -1,9 +1,9 @@
 import { ThemeProvider } from '@emotion/react';
-import { createTheme } from '@mui/material';
 import { createContext, useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import StepMenu from './components/StepMenu';
+import defaultTheme from './Theme';
 
 export const Drawer = createContext(false);
 export const FillOnBar = createContext(4);
@@ -14,17 +14,6 @@ const DEFAULTS = {
   fillOnBar: 4,
   helperSound: true,
 };
-
-export const defaultTheme = createTheme({
-  palette: {
-    primary: {
-      main: 'hsl(212, 93%, 45%)',
-    },
-    secondary: {
-      main: 'hsl(212, 83%, 47%)',
-    },
-  }
-});
 
 const App = () => {
   const [drawerOpen, setDrawerOpen] = useState(DEFAULTS.drawerOpen);
