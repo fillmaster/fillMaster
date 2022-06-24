@@ -47,7 +47,7 @@ const MetronomeContainer = ({
   }, [settingsOpen]);
 
   return (
-    <div style={{ height: '50px', padding: '50px', marginTop: '100px' }}>
+    <div style={{ height: '50px', padding: '50px', marginTop: '20px' }}>
       <Metronome
         play={isPlaying}
         tempo={tempo}

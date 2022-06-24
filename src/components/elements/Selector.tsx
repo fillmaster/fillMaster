@@ -1,4 +1,4 @@
-import { Box, Typography } from '@mui/material';
+import { Box, lighten, Typography, useTheme } from '@mui/material';
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -73,6 +73,9 @@ const Selector = ({
   const offset = getTransformVerticalOffset(getDefault(), HEIGHT);
 
   const preview = disabled && disabledPreview ? disabledPreview : selectedOption.previewName;
+
+  const theme = useTheme();
+  const labelColor = lighten(theme.palette.primary.main, 0.6);
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -155,7 +158,7 @@ const Selector = ({
         </Box>
       </Menu>
       {label && (
-        <Typography sx={{ paddingLeft: '1rem' }}>
+        <Typography sx={{ paddingLeft: '1rem', color: labelColor }}>
           {selectedOption.label !== undefined && selectedOption.label}
         </Typography>
       )}
