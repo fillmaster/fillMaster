@@ -124,6 +124,7 @@ const Metronome = ({
                 height: '3em',
                 display: 'flex',
                 justifyContent: isCountIn() ? 'center' : 'left',
+                marginLeft: '-35px', // sorry temporary horrible fix to stop 16 beats going off screen
               }}
             >
               {isCountIn()
