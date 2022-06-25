@@ -176,7 +176,7 @@ const VerticalLinearStepper = () => {
       <div className={activePanel === 'panel2' ? 'panel2 show' : 'panel2 hide'} id="panel2">
         <Paper square elevation={0} sx={{ p: 3 }}>
           <Grid container spacing={2}>
-            <Grid item xs={10}>
+            <Grid item xs={12}>
               <QuickRandomiser
                 beatIdea={beatIdea}
                 fillStart={fillStart}
@@ -190,14 +190,16 @@ const VerticalLinearStepper = () => {
                 timeSignatureTop={timeSignatureTop}
               />
             </Grid>
-            <Grid
-              item
-              xs={2}
-              sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}
+            <Box
+              sx={{
+                display: 'flex',
+                width: '100%',
+                paddingLeft: '70vw',
+              }}
             >
-              <div>Bar: </div>
-              <div>{currentBar > 0 ? `${currentBarOfLoop()} (${currentBar})` : ' '}</div>
-            </Grid>
+              <span>Bar:&nbsp;</span>
+              <span>{currentBar > 0 ? `${currentBarOfLoop()} (${currentBar})` : ' '}</span>
+            </Box>
           </Grid>
           <MetronomeContainer
             tempo={tempo}
