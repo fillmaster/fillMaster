@@ -4,6 +4,7 @@ import Container from '@mui/material/Container';
 import IconButton from '@mui/material/IconButton';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
+import Logo from '../assets/logo.png';
 import MenuOptions from './Menu';
 
 interface ResponsiveAppBarProps {
@@ -23,13 +24,14 @@ const ResponsiveAppBar = ({
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex' } }} />
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex' } }}>
+          <Box sx={{ flexGrow: 1, display: 'flex' }} />
+          <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
+            <img src={Logo} alt="logo" height="40px" width="40px" />
             <Typography
               variant="h5"
               noWrap
               sx={{
-                mr: 2,
+                ml: 1,
                 fontFamily: 'Bebas Neue',
                 fontWeight: 700,
                 letterSpacing: '.3rem',

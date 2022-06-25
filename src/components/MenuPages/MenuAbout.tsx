@@ -10,12 +10,12 @@ const MenuAbout = () => {
         </li>
         The random idea generators are designed to help you think outside the box and get out of
         your comfort zone. It&apos;s a technique used by many musicians. A guitarist lacking
-        inspiration may say: &ldquo;Today I&apos;m going to play in the key of F minor&rdquo; and
-        only use three chords. This is the same concept but with drums and rhythm in mind.
+        inspiration may say: &ldquo;Today I&apos;m going to play in the key of F minor, and only use
+        three chords&rdquo;. This is the same concept but with drums and rhythm in mind.
         <li>
           <h4>To guide you in your improvisations</h4>
-          There are helper sounds for when to play your fill and there are plans to add similar
-          guides in the future. These give you the confidence that you&apos;re doing it right
+          There are helper sounds for when to play your fill and there are plans to add more helpers
+          like these in the future. These give you the confidence that you&apos;re doing it right
           without needing to think about it, until it becomes second nature.
         </li>
         <li>
@@ -29,7 +29,7 @@ const MenuAbout = () => {
       This software is open source and growing. We plan to eventually have different levels of
       difficulty from beginner to professional, so all levels of drummer will want this tool in
       their arsenal. We want the metronome alone to be the best on the web, so it can be a one-stop
-      shop for your drumming practice!
+      shop for your time keeping and improvisation needs.
       <br />
       <br />
       version 0.3

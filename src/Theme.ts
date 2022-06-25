@@ -9,7 +9,7 @@ declare module '@mui/material/Button' {
 const defaultTheme = createTheme({
   palette: {
     primary: {
-      main: 'hsl(213, 94%, 45%)',
+      main: 'hsl(213, 78%, 50%)', // #1c76e3
     },
   },
 });
