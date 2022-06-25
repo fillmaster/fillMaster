@@ -68,7 +68,7 @@ export default class PatternMaker {
   public setSettings = (patternSettings: PatternSettings) => {
     // temporarily commenting out error checking at the object level as it is causing
     // the errors to be thrown. Perhaps some sort of race condition.
-    
+
     // if (Number(patternSettings.playFillOn.beat) > Number(patternSettings.timeSignature.beats))
     //   throw new Error('Cannot set fill beat higher than the number of beats per bar.');
     // if (Number(patternSettings.playFillOn.subBeat) > this.subDivision - 1)
