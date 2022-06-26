@@ -10,11 +10,13 @@ const MenuHelp = () => {
           something. Move to step 3.
         </li>
         <li>
-          In steps 3 to 4 we&apos;ll choose when to start your fill and what type of fill to play.
+          In steps 3 and 4 of the app we&apos;ll choose when to start your fill and what type of
+          fill to play.
         </li>
         <li>
-          We&apos;ll choose a random tempo for you. If it ends up being too fast, don&apos;t worry.
-          You can change the note division on the metronome or refresh the randomiser.
+          In step 5 we&apos;ll choose a random tempo for you. If it ends up being too fast,
+          don&apos;t worry. You can change the note division on the metronome or refresh the
+          randomiser.
         </li>
         <li> Press Play! - You&apos;ll hear a ping sound when it&apos;s time to play your fill.</li>
       </ol>
