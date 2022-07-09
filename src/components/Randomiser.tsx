@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import shuffleArray from '../utils/randomFunctions';
 
-const DEFUALT_PAUSE_DURATION = 30;
+const DEFAULT_PAUSE_DURATION = 30;
 const DEFAULT_DURATION = 1000;
 
 interface RandomAnimatorProps {
@@ -52,7 +52,7 @@ async function flickThroughArray<T>(
 const Randomiser = ({
   arrayToRandomise,
   duration = DEFAULT_DURATION,
-  pauseDuration = DEFUALT_PAUSE_DURATION,
+  pauseDuration = DEFAULT_PAUSE_DURATION,
   handleSetItem,
 }: RandomAnimatorProps) => {
   const randomArray = shuffleArray(arrayToRandomise);
