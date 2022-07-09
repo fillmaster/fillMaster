@@ -22,8 +22,20 @@ async function flickThroughArray<T>(
   pauseDuration: number,
   callback: (value: T) => void
 ): Promise<void> {
+  if (pauseDuration <= 0) {
+    throw new Error('pauseDuration must be greater than 0');
+  }
+
   let timeSpend = 0;
+
   for (let i = 0; i < array.length; i++) {
+    if (timeSpend >= duration) {
+      return Promise.resolve();
+    }
+    // We don't want to overshoot
+    const actualPauseDuration =
+      duration - timeSpend > pauseDuration ? pauseDuration : duration - timeSpend;
+
     // Maybe the callback becomes undefined
     // if the component unmounts before the loop is finished
     // In that case we just cancel the flicking
@@ -31,11 +43,8 @@ async function flickThroughArray<T>(
 
     callback(array[i]);
     // eslint-disable-next-line no-await-in-loop
-    await sleep(pauseDuration);
-    timeSpend += pauseDuration;
-    if (timeSpend >= duration) {
-      return Promise.resolve();
-    }
+    await sleep(actualPauseDuration);
+    timeSpend += actualPauseDuration;
   }
   return flickThroughArray(array, duration - timeSpend, pauseDuration, callback);
 }
