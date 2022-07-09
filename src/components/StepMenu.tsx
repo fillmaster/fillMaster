@@ -57,12 +57,6 @@ const VerticalLinearStepper = () => {
     // loops from 1 to fillOnBar (e.g. 1, 2, 3, 4, 1, 2, 3, 4)
     currentBar % fillOnBar === 0 ? fillOnBar : currentBar % fillOnBar;
 
-  const getSliderValues = () => {
-    const sliderData = localStorage.getItem('sliderValues');
-    return sliderData !== null ? JSON.parse(sliderData) : [60, 120];
-  };
-
-  const [sliderValues, setSliderValues] = useState<number[]>(getSliderValues());
   const [sliderValues, setSliderValues] = useLocalStorage('sliderValues', DEAFAULT_SLIDER_VALUES);
   const [timeSignatureTop, setTimeSignatureTop] = useState(
     patternMaker.getSettings().timeSignature.beats as string
@@ -70,11 +64,6 @@ const VerticalLinearStepper = () => {
   const [timeSignatureBottom, setTimeSignatureBottom] = useState(
     patternMaker.getSettings().timeSignature.division as string
   );
-
-  // update localstorage slider values data everytime the values change
-  useEffect(() => {
-    localStorage.setItem('sliderValues', JSON.stringify(sliderValues));
-  }, [sliderValues]);
 
   const handleSetCurrentBar = (bar: number) => {
     setCurrentBar(bar);
@@ -126,6 +115,16 @@ const VerticalLinearStepper = () => {
     restartMetronome();
     togglePanel('panel1');
   };
+
+  useEffect(() => {
+    const handleResetSettings = () => {
+      patternMaker.resetTimeSignature();
+      setSliderValues(DEAFAULT_SLIDER_VALUES);
+    };
+    window.addEventListener('resetSettings', handleResetSettings);
+
+    return () => window.removeEventListener('rsetSettings', handleResetSettings);
+  }, [patternMaker]);
 
   useEffect(() => {
     restartMetronome();

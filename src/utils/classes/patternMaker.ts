@@ -25,6 +25,10 @@ interface PatternSettings {
   timeSignature: TimeSignature;
 }
 
+const DEFAULT_TIME_SIGNATURE: { timeSignature: TimeSignature } = {
+  timeSignature: { beats: '4', division: '4' },
+};
+
 export default class PatternMaker {
   private metronomeSoundOff: MetronomeSound = '0';
 
@@ -78,6 +82,13 @@ export default class PatternMaker {
 
   public setSettingsToDefault = () => {
     this.customSettingsForPattern = this.defaultSettingsForPattern;
+  };
+
+  public resetTimeSignature = () => {
+    this.customSettingsForPattern = {
+      ...this.customSettingsForPattern,
+      ...DEFAULT_TIME_SIGNATURE,
+    };
   };
 
   public getSettings = () => {
