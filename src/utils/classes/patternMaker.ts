@@ -25,8 +25,9 @@ interface PatternSettings {
   timeSignature: TimeSignature;
 }
 
-const DEFAULT_TIME_SIGNATURE: { timeSignature: TimeSignature } = {
-  timeSignature: { beats: '4', division: '4' },
+export const DEFAULT_TIME_SIGNATURE: TimeSignature = {
+  beats: '4',
+  division: '4',
 };
 
 export default class PatternMaker {
@@ -87,7 +88,7 @@ export default class PatternMaker {
   public resetTimeSignature = () => {
     this.customSettingsForPattern = {
       ...this.customSettingsForPattern,
-      ...DEFAULT_TIME_SIGNATURE,
+      timeSignature: DEFAULT_TIME_SIGNATURE,
     };
   };
 

@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction, useCallback, useState } from 'react';
+import updateLocalStorage, { parseJSON } from '../utils/localStorage';
 
 type SetLocalStorage<T> = Dispatch<SetStateAction<T>>;
 
@@ -21,17 +22,11 @@ export default function useLocalStorage<T>(key: string, initialValue: T): [T, Se
 
   const setStoreValue: SetLocalStorage<T> = useCallback(
     (value) => {
-      if (typeof window === 'undefined') {
-        return;
-      }
+      const newValue = value instanceof Function ? value(store) : value;
+      const hasStoreUpdated = updateLocalStorage(key, newValue);
 
-      try {
-        const newValue = value instanceof Function ? value(store) : value;
-
-        window.localStorage.setItem(key, JSON.stringify(newValue));
+      if (hasStoreUpdated) {
         setStore(newValue);
-      } catch (error) {
-        console.error(`Error setting store with key ${key}`, error);
       }
     },
     [store]
@@ -39,11 +34,3 @@ export default function useLocalStorage<T>(key: string, initialValue: T): [T, Se
 
   return [store, setStoreValue];
 }
-
-const parseJSON = <T>(json: string | null): T | undefined => {
-  try {
-    return json === 'undefined' ? undefined : JSON.parse(json ?? '');
-  } catch {
-    return undefined;
-  }
-};

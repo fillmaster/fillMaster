@@ -13,22 +13,22 @@ import { MouseEvent, useEffect, useState } from 'react';
 const HEIGHT = 25;
 const WIDTH = '2rem';
 
-export type SelectorItem = {
-  name: string; // Name to display on menu drop down.
+export type SelectorItem<T> = {
+  name: T; // Name to display on menu drop down.
   default: boolean;
   previewName?: string; // Name to display on button. Defaults to name.
-  stateName: string; // name of state, handled where function was called from. Defaults to name.
+  stateName: T; // name of state, handled where function was called from. Defaults to name.
   selected: boolean;
   label?: string;
 };
 
 // must combine SelectorItemBasic and SelectorItemWithPreview and not use an array
 // of SelectorItem to assure only one or other is used.
-export type SelectorItems = SelectorItem[];
+export type SelectorItems<T> = SelectorItem<T>[];
 
-interface SelectorProps {
-  selectorItems: SelectorItems;
-  handleSetItem: (param: string) => void;
+interface SelectorProps<T> {
+  selectorItems: SelectorItems<T>;
+  handleSetItem: (param: T) => void;
   disabled: boolean;
   disabledPreview?: string;
   centered?: boolean;
@@ -36,7 +36,7 @@ interface SelectorProps {
   label?: boolean;
 }
 
-const Selector = ({
+const Selector = <T,>({
   selectorItems,
   handleSetItem,
   disabled,
@@ -44,7 +44,7 @@ const Selector = ({
   centered = true,
   highlightDefault = false,
   label = false,
-}: SelectorProps) => {
+}: SelectorProps<T>) => {
   const getDefault = () => getDefaultAndSelectedIndexes(selectorItems).default;
   const getSelected = () => getDefaultAndSelectedIndexes(selectorItems).selected;
 
@@ -66,7 +66,7 @@ const Selector = ({
 
   const handleClickMenuItem = (event: MouseEvent<HTMLElement>) => {
     const { myValue } = event.currentTarget.dataset;
-    if (myValue !== undefined) setSelectedOptionName(myValue);
+    if (myValue !== undefined) setSelectedOptionName(myValue as unknown as T);
     handleClose();
   };
 
@@ -129,7 +129,7 @@ const Selector = ({
           {selectorItems.map((item) => {
             return (
               <MenuItem
-                key={item.name}
+                key={item.name as any}
                 data-my-value={item.name}
                 onClick={handleClickMenuItem}
                 sx={{
@@ -168,7 +168,7 @@ const Selector = ({
 
 export default Selector;
 
-function getSelectorObjectByName(selectorItems: SelectorItems, name: string) {
+function getSelectorObjectByName<T>(selectorItems: SelectorItems<T>, name: T): SelectorItem<T> {
   for (let i = 0; i < selectorItems.length; i++) {
     if (selectorItems[i].name === name) {
       return selectorItems[i];
@@ -184,7 +184,7 @@ function getTransformVerticalOffset(defaultIndex: number, height: number) {
   return offset;
 }
 
-function getDefaultAndSelectedIndexes(array: SelectorItems) {
+function getDefaultAndSelectedIndexes<T>(array: SelectorItems<T>) {
   const indexes = { default: -1, selected: -1 };
   for (let i = 0; i < array.length; i++) {
     if (array[i].default) {
