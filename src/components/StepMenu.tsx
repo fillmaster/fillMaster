@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import { useContext, useEffect, useState } from 'react';
 import { FillOnBar } from '../App';
 import '../App.css';
+import useLocalStorage from '../hooks/useLocalStorage';
 import assertUnreachable from '../utils/assertUnreachable';
 import PatternMaker from '../utils/classes/patternMaker';
 import getStringArrayBetweenTwoValues from '../utils/getArrayBetweenValues';
@@ -40,6 +41,8 @@ const steps = [
   },
 ];
 
+const DEAFAULT_SLIDER_VALUES = [60, 120];
+
 const VerticalLinearStepper = () => {
   const patternMaker = PatternMaker.getInstance();
   const [activeStep, setActiveStep] = useState(0);
@@ -60,6 +63,7 @@ const VerticalLinearStepper = () => {
   };
 
   const [sliderValues, setSliderValues] = useState<number[]>(getSliderValues());
+  const [sliderValues, setSliderValues] = useLocalStorage('sliderValues', DEAFAULT_SLIDER_VALUES);
   const [timeSignatureTop, setTimeSignatureTop] = useState(
     patternMaker.getSettings().timeSignature.beats as string
   );
