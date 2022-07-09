@@ -1,80 +1,92 @@
-import React, { PureComponent } from 'react'
-import PropTypes, { number } from 'prop-types'
-import { Howl } from 'howler'
+import { Howl } from 'howler';
+import PropTypes from 'prop-types';
+import { PureComponent } from 'react';
 
-import { numberInRange, stringWithLength } from '../utils/advanced-prop-types'
+import { numberInRange, stringWithLength } from '../utils/advanced-prop-types';
 
-import click3SoundFileMP3 from './sounds/click3.mp3'
-import click3SoundFileOGG from './sounds/click3.ogg'
-import click3SoundFileAAC from './sounds/click3.aac'
+import click3SoundFileAAC from './sounds/click3.aac';
+import click3SoundFileMP3 from './sounds/click3.mp3';
+import click3SoundFileOGG from './sounds/click3.ogg';
 
-import click2SoundFileMP3 from './sounds/click2.mp3'
-import click2SoundFileOGG from './sounds/click2.ogg'
-import click2SoundFileAAC from './sounds/click2.aac'
+import click2SoundFileAAC from './sounds/click2.aac';
+import click2SoundFileMP3 from './sounds/click2.mp3';
+import click2SoundFileOGG from './sounds/click2.ogg';
 
-import click1SoundFileMP3 from './sounds/click1.mp3'
-import click1SoundFileOGG from './sounds/click1.ogg'
-import click1SoundFileAAC from './sounds/click1.aac'
+import click1SoundFileAAC from './sounds/click1.aac';
+import click1SoundFileMP3 from './sounds/click1.mp3';
+import click1SoundFileOGG from './sounds/click1.ogg';
 
-const MAXBPM = 300
-const MAXSUBDIVISION = 8
+const MAXBPM = 300;
+const MAXSUBDIVISION = 8;
 
-class ProMetronome extends PureComponent {
+type ProMetronomeState = {
+  qNote: number,
+  subNote: number,
+};
+
+type ProMetronomeProps = {
+  bpm: number,
+  subdivision: number,
+  isPlaying: boolean,
+  soundEnabled: boolean,
+  beatsPerBar: number,
+  soundPattern: string,
+  render: (props: ProMetronomeProps, state: ProMetronomeState) => JSX.Element,
+};
+
+class ProMetronome extends PureComponent<ProMetronomeProps, ProMetronomeState> {
   state = {
     qNote: 1,
-    subNote: 1
-  }
+    subNote: 1,
+  };
 
   clickSounds = [
     new Howl({
       src: [click1SoundFileMP3, click1SoundFileOGG, click1SoundFileAAC],
-      preload: true
+      preload: true,
     }),
     new Howl({
       src: [click2SoundFileMP3, click2SoundFileOGG, click2SoundFileAAC],
-      preload: true
+      preload: true,
     }),
     new Howl({
       src: [click3SoundFileMP3, click3SoundFileOGG, click3SoundFileAAC],
-      preload: true
-    })
-  ]
+      preload: true,
+    }),
+  ];
 
   update = () => {
-    const { soundEnabled, soundPattern, subdivision } = this.props
-    const { qNote, subNote } = this.state
+    const { soundEnabled, soundPattern, subdivision } = this.props;
+    const { qNote, subNote } = this.state;
 
     if (soundEnabled && soundPattern.length === this.props.beatsPerBar * subdivision) {
-      const soundLevel = soundPattern.charAt(
-        (qNote - 1) * subdivision + subNote - 1
-      )
-      if (soundLevel > 0 && soundLevel <= 3)
-        this.clickSounds[soundLevel - 1].play()
+      const soundLevel = soundPattern.charAt((qNote - 1) * subdivision + subNote - 1);
+      if (soundLevel > 0 && soundLevel <= 3) this.clickSounds[soundLevel - 1].play();
     }
 
     if (subNote < subdivision) {
-      this.setState(prevState => ({
-        subNote: prevState.subNote + 1
-      }))
+      this.setState((prevState) => ({
+        subNote: prevState.subNote + 1,
+      }));
     } else {
-      this.setState(prevState => ({
+      this.setState((prevState) => ({
         // modification: prevState.qNote === X (Beats per Bar)
         qNote: prevState.qNote === this.props.beatsPerBar ? 1 : prevState.qNote + 1,
-        subNote: 1
-      }))
+        subNote: 1,
+      }));
     }
-  }
+  };
 
   calculateInterval = (bpm, subdivision) => {
-    return Math.floor(60000 / (bpm * subdivision))
-  }
+    return Math.floor(60000 / (bpm * subdivision));
+  };
 
   componentDidMount() {
     if (this.props.isPlaying) {
       this.timerID = setInterval(
         this.update,
         this.calculateInterval(this.props.bpm, this.props.subdivision)
-      )
+      );
     }
   }
 
@@ -84,29 +96,28 @@ class ProMetronome extends PureComponent {
         this.timerID = setInterval(
           this.update,
           this.calculateInterval(nextProps.bpm, nextProps.subdivision)
-        )
+        );
       } else {
-        clearInterval(this.timerID)
+        clearInterval(this.timerID);
       }
     } else if (
       nextProps.isPlaying &&
-      (nextProps.bpm !== this.props.bpm ||
-        nextProps.subdivision !== this.props.subdivision)
+      (nextProps.bpm !== this.props.bpm || nextProps.subdivision !== this.props.subdivision)
     ) {
-      clearInterval(this.timerID)
+      clearInterval(this.timerID);
       this.timerID = setInterval(
         this.update,
         this.calculateInterval(nextProps.bpm, nextProps.subdivision)
-      )
+      );
     }
   }
 
   componentWillUnmount() {
-    clearInterval(this.timerID)
+    clearInterval(this.timerID);
   }
 
   render() {
-    return this.props.render(this.props, this.state)
+    return this.props.render(this.props, this.state);
   }
 }
 
@@ -117,13 +128,13 @@ ProMetronome.propTypes = {
   soundEnabled: PropTypes.bool,
   beatsPerBar: PropTypes.number,
   soundPattern: (props, propName, componentName) =>
-  // pretty sure props['beatsPerBar'] is correct for prop access within propTypes
-  // it follows the props['subdivision'] pattern, look more into propTypes checks as I believe
-  // these are for error checking (console, or test). Probably redundant after upgrade to typescript, 
-  // but maybe useful for logging as cannot be checked at compile time.
+    // pretty sure props['beatsPerBar'] is correct for prop access within propTypes
+    // it follows the props['subdivision'] pattern, look more into propTypes checks as I believe
+    // these are for error checking (console, or test). Probably redundant after upgrade to typescript,
+    // but maybe useful for logging as cannot be checked at compile time.
     stringWithLength(props['beatsPerBar'] * props['subdivision'])(props, propName, componentName),
   render: PropTypes.func.isRequired,
-}
+};
 
 ProMetronome.defaultProps = {
   bpm: 80,
@@ -132,6 +143,6 @@ ProMetronome.defaultProps = {
   soundEnabled: false,
   beatsPerBar: 4,
   soundPattern: '',
-}
+};
 
-export default ProMetronome
+export default ProMetronome;
