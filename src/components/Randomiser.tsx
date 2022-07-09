@@ -5,7 +5,7 @@ const DEFAULT_PAUSE_DURATION = 30;
 const DEFAULT_DURATION = 1300;
 const SLOW_DOWN_THRESHOLD_FRACTION = 0.5;
 const ITERATION_SLOW_DOWN_MULTIPLIER = 70;
-// Smoothes out the animation and makes the animation less step
+// Smooths out the animation and makes the animation less step
 const SLOW_DOWN_OVER_MULTIPLIER = 1.5;
 
 interface RandomAnimatorProps {
