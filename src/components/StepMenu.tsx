@@ -68,17 +68,17 @@ const VerticalLinearStepper = () => {
   };
 
   const handleSetTimeSignatureTop = (beats: BeatsPerBar) => {
-    setTimeSignature({
+    setTimeSignature(({ division }) => ({
       beats,
-      division: timeSignatureBottom,
-    });
+      division,
+    }));
   };
 
   const handleSetTimeSignatureBottom = (division: MeasureDivision) => {
-    setTimeSignature({
-      beats: timeSignatureTop,
+    setTimeSignature(({ beats }) => ({
+      beats,
       division,
-    });
+    }));
   };
 
   const tempoOptions = () => getStringArrayBetweenTwoValues(sliderValues[0], sliderValues[1]);
