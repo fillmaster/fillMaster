@@ -19,22 +19,35 @@ import click1SoundFileOGG from './sounds/click1.ogg';
 const MAXBPM = 300;
 const MAXSUBDIVISION = 8;
 
-type ProMetronomeState = {
-  qNote: number,
-  subNote: number,
-};
+/**
+ * @callback renderItem
+ * @param {ProMetronomeProps} props
+ * @param {ProMetronomeState} state
+ * @returns {JSX.Element}
+ */
+/**
+ * @typedef ProMetronomeProps
+ * @type {object}
+ * @property {number} bpm
+ * @property {number} subdivision
+ * @property {boolean} isPlaying
+ * @property {boolean} soundEnabled
+ * @property {number} beatsPerBar
+ * @property {string} soundPattern
+ * @property {renderItem} render
+ *
+ */
 
-type ProMetronomeProps = {
-  bpm: number,
-  subdivision: number,
-  isPlaying: boolean,
-  soundEnabled: boolean,
-  beatsPerBar: number,
-  soundPattern: string,
-  render: (props: ProMetronomeProps, state: ProMetronomeState) => JSX.Element,
-};
-
-class ProMetronome extends PureComponent<ProMetronomeProps, ProMetronomeState> {
+/**
+ * @typedef ProMetronomeState
+ * @type {object}
+ * @property {number} qNote
+ * @property {number} subNote
+ */
+/**
+ * @augments {PureComponent<ProMetronomeProps, ProMetronomeState>}
+ */
+class ProMetronome extends PureComponent {
   state = {
     qNote: 1,
     subNote: 1,
