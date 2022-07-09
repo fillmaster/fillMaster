@@ -14,7 +14,7 @@ const HEIGHT = 25;
 const WIDTH = '2rem';
 
 export type SelectorItem<T> = {
-  name: T; // Name to display on menu drop down.
+  name: string; // Name to display on menu drop down.
   default: boolean;
   previewName?: string; // Name to display on button. Defaults to name.
   stateName: T; // name of state, handled where function was called from. Defaults to name.
@@ -36,7 +36,7 @@ interface SelectorProps<T> {
   label?: boolean;
 }
 
-const Selector = <T,>({
+const Selector = <T extends {}>({
   selectorItems,
   handleSetItem,
   disabled,
@@ -66,7 +66,7 @@ const Selector = <T,>({
 
   const handleClickMenuItem = (event: MouseEvent<HTMLElement>) => {
     const { myValue } = event.currentTarget.dataset;
-    if (myValue !== undefined) setSelectedOptionName(myValue as unknown as T);
+    if (myValue !== undefined) setSelectedOptionName(myValue);
     handleClose();
   };
 
@@ -129,7 +129,7 @@ const Selector = <T,>({
           {selectorItems.map((item) => {
             return (
               <MenuItem
-                key={item.name as any}
+                key={item.name}
                 data-my-value={item.name}
                 onClick={handleClickMenuItem}
                 sx={{
@@ -168,7 +168,10 @@ const Selector = <T,>({
 
 export default Selector;
 
-function getSelectorObjectByName<T>(selectorItems: SelectorItems<T>, name: T): SelectorItem<T> {
+function getSelectorObjectByName<T>(
+  selectorItems: SelectorItems<T>,
+  name: string
+): SelectorItem<T> {
   for (let i = 0; i < selectorItems.length; i++) {
     if (selectorItems[i].name === name) {
       return selectorItems[i];
