@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import shuffleArray from '../utils/randomFunctions';
 
-const DEFAULT_PAUSE_DURATION = 30;
-const DEFAULT_DURATION = 1300;
-const SLOW_DOWN_THRESHOLD_FRACTION = 0.5;
-const ITERATION_SLOW_DOWN_MULTIPLIER = 70;
+const DEFAULT_PAUSE_DURATION = 18;
+const DEFAULT_DURATION = 1000;
+const SLOW_DOWN_THRESHOLD_FRACTION = 0.4;
+const ITERATION_SLOW_DOWN_MULTIPLIER = 60;
 // Smooths out the animation and makes the animation less step
-const SLOW_DOWN_OVER_MULTIPLIER = 1.5;
+const SLOW_DOWN_OVER_MULTIPLIER = 1.4;
 
 interface RandomAnimatorProps {
   arrayToRandomise: Array<string>;
