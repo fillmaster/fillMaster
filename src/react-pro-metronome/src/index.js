@@ -44,6 +44,7 @@ const MAXSUBDIVISION = 8;
  * @property {number} qNote
  * @property {number} subNote
  */
+
 /**
  * @augments {PureComponent<ProMetronomeProps, ProMetronomeState>}
  */
