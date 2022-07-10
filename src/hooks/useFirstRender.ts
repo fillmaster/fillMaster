@@ -12,9 +12,10 @@ function useFirstRender() {
 
 export default useFirstRender;
 
+// // for other parts of app:
+
 // const firstRender = useFirstRender();
 
-// // for other parts of app:
 // useEffect(() => {
 //   if (!firstRender) {
 //     console.log('not firstRender');
