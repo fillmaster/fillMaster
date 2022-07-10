@@ -11,7 +11,7 @@ export type MeasureTopSelectorItems = MeasureTopSelectorItem[];
 
 interface MeasureTopSelectorProps {
   selectorItems: MeasureTopSelectorItems;
-  handleSetItem: (param: string) => void;
+  handleSetItem: (param: BeatsPerBar) => void;
   disabled: boolean;
 }
 

@@ -2,7 +2,7 @@ import { MeasureDivision } from '../../consts/measureDivisions';
 import Selector from './Selector';
 
 type MeasureBottomSelectorItem = {
-  name: string; // Name to display on menu drop down.
+  name: MeasureDivision; // Name to display on menu drop down.
   default: boolean;
   stateName: MeasureDivision; // name of state, handled where function was called from. Defaults to name.
   selected: boolean;
@@ -11,7 +11,7 @@ export type MeasureBottomSelectorItems = MeasureBottomSelectorItem[];
 
 interface MeasureBottomSelectorProps {
   selectorItems: MeasureBottomSelectorItems;
-  handleSetItem: (param: string) => void;
+  handleSetItem: (param: MeasureDivision) => void;
   disabled: boolean;
 }
 

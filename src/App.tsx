@@ -3,6 +3,7 @@ import { createContext, useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import StepMenu from './components/StepMenu';
+import useLocalStorage from './hooks/useLocalStorage';
 import defaultTheme from './Theme';
 
 export const Drawer = createContext(false);
@@ -17,13 +18,15 @@ const DEFAULTS = {
 
 const App = () => {
   const [drawerOpen, setDrawerOpen] = useState(DEFAULTS.drawerOpen);
-  const [fillOnBar, setFillOnBar] = useState(DEFAULTS.fillOnBar);
-  const [helperSound, setHelperSound] = useState(DEFAULTS.helperSound);
+  const [fillOnBar, setFillOnBar] = useLocalStorage('fillOnBar', DEFAULTS.fillOnBar);
+  const [helperSound, setHelperSound] = useLocalStorage('helperSoundEnabled', DEFAULTS.helperSound);
 
   const resetAllSettings = () => {
     setDrawerOpen(DEFAULTS.drawerOpen);
     setFillOnBar(DEFAULTS.fillOnBar);
     setHelperSound(DEFAULTS.helperSound);
+
+    window.dispatchEvent(new CustomEvent('resetSettings'));
   };
 
   const handleSetDrawerOpen = (open: boolean) => {

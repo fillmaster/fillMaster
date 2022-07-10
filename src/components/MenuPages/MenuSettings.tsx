@@ -27,7 +27,7 @@ const MenuSettings = ({ setFillOnBar, setHelperSound, resetAllSettings }: MenuSe
 
   return (
     <FormControl>
-      <Button onClick={resetAllSettings}>RESET TO DEFAULTS</Button>
+      <Button onClick={resetAllSettings}>Reset all settings</Button>
       <FormLabel id="demo-row-radio-buttons-group-label">Play fills every</FormLabel>
       <RadioGroup
         row

@@ -2,34 +2,35 @@
 <html lang="en">
 
 <head>
-
   <!-- Analytics -->
   <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-QCQKTDFT3G"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-QCQKTDFT3G"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
 
-  gtag('config', 'G-QCQKTDFT3G');
-</script>
+    gtag('config', 'G-QCQKTDFT3G');
+  </script>
 
   <!-- favicon and manifest -->
   <meta charset="utf-8" />
   <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png" />
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
   <!-- font for music notation unicode -->
 
-<link rel="preload" href="https://fonts.googleapis.com">
-<link rel="preload" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Music&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com" />
+  <link rel="preload" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Music&display=swap" rel="stylesheet" />
 
   <!-- splash for apple -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
   <link href="%PUBLIC_URL%/splashscreens/iphone5_splash.png"
     media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)"
     rel="apple-touch-startup-image" />
@@ -67,11 +68,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
   <meta name="description" content="Fill Master: A drum idea generator / improvisation trainer!" />
+  <meta http-equiv="ScreenOrientation" content="autoRotate:disabled" />
+
+  <!-- Prevent landscape orientation on phones. Needs to live here rather
+    than app.css. External css loads too early and text is briefly present on load.
+    -->
+  <style>
+    .landscape {
+      display: none;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background-color: #fff;
+      z-index: 999;
+      place-content: center;
+    }
+
+    @media (pointer: coarse) {
+      @media (orientation: landscape) {
+        .landscape {
+          display: grid;
+        }
+      }
+    }
+  </style>
+
   <title>Fill Master</title>
 </head>
 
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
+  <div class="landscape">landscape mode not supported</div>
   <div id="root"></div>
   <!--
       This HTML file is a template.

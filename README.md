@@ -1,4 +1,5 @@
 # Introduction
+
 This project has been created to inspire ideas for drummers by enforcing rules to use whilst practicing the improvisation of drum beats, particularly fills. It can help beginner improvisers practice playing fills on time and can help any level of player get out of their comfort zone by playing things outside their usual style.
 
 The project is Open Source under GNU GENERAL PUBLIC LICENSE Version 3.
@@ -6,9 +7,6 @@ The project is Open Source under GNU GENERAL PUBLIC LICENSE Version 3.
 ## Getting started
 
 Clone the repo and run `npm i`
-
-## Available Scripts
-
 
 ## Available Scripts
 
@@ -23,9 +21,11 @@ Open http://yourip:3000 on your mobile to view on mobile.
 The page will reload if you make edits.
 
 ### `npm test`
+
 Runs the tests. Code must be compiled first using `npm run compile`.
 
 ### `npm run compile`
+
 If you need to compile the code to JavaScript. The files will be in the `dist` folder.
 
 ### `npm run build`
@@ -37,6 +37,7 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 ### `npm run serve`
+
 Builds the app and runs the server so that you can then go to: http://yourip:3000 on your mobile to view the built app (i.e. not the slower, dev environment app).
 
 ## About the project:
