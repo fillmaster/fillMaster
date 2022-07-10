@@ -128,7 +128,7 @@ const VerticalLinearStepper = () => {
     };
     window.addEventListener('resetSettings', handleResetSettings);
 
-    return () => window.removeEventListener('rsetSettings', handleResetSettings);
+    return () => window.removeEventListener('resetSettings', handleResetSettings);
   }, [patternMaker]);
 
   useEffect(() => {
