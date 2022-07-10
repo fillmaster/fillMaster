@@ -1,5 +1,5 @@
-import { BeatsPerBar } from '../consts/beatsPerBar';
-import { MeasureDivision, MEASURE_DIVISIONS } from '../consts/measureDivisions';
+import { BeatsPerBar } from '../constsants/beatsPerBar';
+import { MeasureDivision, MEASURE_DIVISIONS } from '../constsants/measureDivisions';
 import { getPlayNotesByNumber, PlayNotesNumber } from './playNotesFunctions';
 
 const getAvailablePlayNotes = (beatsPerBar_: BeatsPerBar, division_: MeasureDivision) => {
