@@ -114,11 +114,10 @@ const Metronome = ({
         soundEnabled
         soundPattern={barCount === 0 ? patternMaker.getMetronomeCountInString() : metronomeString}
         beatsPerBar={beatsPerBar}
-        // temporary any for props and state
-        render={(props: any, state: any) => (
+        render={(_, { qNote, subNote }) => (
           <>
-            {setCurrentBeat(state.qNote)}
-            {setCurrentSubBeat(state.subNote)}
+            {setCurrentBeat(qNote)}
+            {setCurrentSubBeat(subNote)}
             <div
               style={{
                 height: '3em',
@@ -128,7 +127,7 @@ const Metronome = ({
               }}
             >
               {isCountIn()
-                ? Number(patternMaker.getSettings().timeSignature.beats) - state.qNote + 1
+                ? Number(patternMaker.getSettings().timeSignature.beats) - qNote + 1
                 : barCount > 0 &&
                   oneToBeatsPerBar.map((beat) => {
                     return <Box sx={{ ...counter }} key={`beat${beat}`} />;
