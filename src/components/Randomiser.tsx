@@ -111,7 +111,6 @@ const Randomiser = ({
 
   useEffect(() => {
     let callback: ((value: string) => void) | undefined = (value: string) => {
-      console.log(value);
       setRandomItem(value);
     };
 
