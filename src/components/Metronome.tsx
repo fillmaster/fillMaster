@@ -1,12 +1,12 @@
 import { Box, lighten, useTheme } from '@mui/material';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { FillOnBar, HelperSound } from '../App';
 import { BeatsPerBar } from '../constsants/beatsPerBar';
 import { MeasureDivision } from '../constsants/measureDivisions';
 import { PlayNotes } from '../constsants/playNotes';
 // permanent fix needed
 // eslint-disable-next-line import/no-relative-packages
-import ProMetronome from '../react-pro-metronome/src';
+import useProMetronome, { ProMetronome } from '../react-pro-metronome/src/hooks/useProMetronome';
 import PatternMaker, { BeatPosition } from '../utils/classes/patternMaker';
 import getStringArrayBetweenTwoValues from '../utils/getArrayBetweenValues';
 import Selectors from './Selectors';
@@ -35,15 +35,32 @@ const Metronome = ({
   handleSetCurrentBar,
 }: MetronomeProps) => {
   const [noteDivision, setNoteDivision] = useState(patternMaker.getSettings().playNotes as string);
-  const [currentBeat, setCurrentBeat] = useState(1);
-  const [currentSubBeat, setCurrentSubBeat] = useState(0);
+  const [barCount, setBarCount] = useState(-1);
+  const [metronomeString, setMetronomeString] = useState(patternMaker.getMetronomeString());
+  const options: ProMetronome = useMemo(
+    () => ({
+      bpm: Number(tempo),
+      subdivision: patternMaker.getSubDivision(),
+      isPlaying: play,
+      soundEnabled: true,
+      soundPattern: !barCount ? patternMaker.getMetronomeCountInString() : metronomeString,
+      beatsPerBar: Number(patternMaker.getSettings().timeSignature.beats),
+    }),
+    [
+      tempo,
+      patternMaker,
+      play,
+      barCount,
+      metronomeString,
+      patternMaker.getMetronomeCountInString(),
+      patternMaker.getSettings().timeSignature.beats,
+    ]
+  );
+  const { currentBeat, currentSubBeat } = useProMetronome(options);
   const oneToBeatsPerBar = getStringArrayBetweenTwoValues(1, currentBeat);
   const helperSoundEnabled = useContext(HelperSound);
 
-  const [barCount, setBarCount] = useState(-1);
   const isCountIn = () => barCount === 0 && play;
-  const [metronomeString, setMetronomeString] = useState(patternMaker.getMetronomeString());
-  const beatsPerBar = Number(patternMaker.getSettings().timeSignature.beats);
   const fillOnBar = useContext(FillOnBar);
 
   handleSetCurrentBar(barCount);
@@ -74,15 +91,15 @@ const Metronome = ({
 
   useEffect(() => {
     if (timeSignatureTop !== '1' && currentBeat === 1) {
-      setBarCount(barCount + 1);
+      setBarCount((prevState) => prevState + 1);
     }
   }, [currentBeat]);
 
   useEffect(() => {
     if (timeSignatureTop === '1' && currentSubBeat === 1) {
-      setBarCount(barCount + 1);
+      setBarCount((prevState) => prevState + 1);
     }
-  }, [currentBeat, currentSubBeat]);
+  }, [currentSubBeat]);
 
   const theme = useTheme();
 
@@ -107,35 +124,21 @@ const Metronome = ({
         setTimeSignatureBottom={setTimeSignatureBottom}
       />
       <br />
-      <ProMetronome
-        bpm={Number(tempo)}
-        subdivision={patternMaker.getSubDivision()}
-        isPlaying={play}
-        soundEnabled
-        soundPattern={barCount === 0 ? patternMaker.getMetronomeCountInString() : metronomeString}
-        beatsPerBar={beatsPerBar}
-        render={(_, { qNote, subNote }) => (
-          <>
-            {setCurrentBeat(qNote)}
-            {setCurrentSubBeat(subNote)}
-            <div
-              style={{
-                height: '3em',
-                display: 'flex',
-                justifyContent: isCountIn() ? 'center' : 'left',
-                marginLeft: '-35px', // sorry temporary horrible fix to stop 16 beats going off screen
-              }}
-            >
-              {isCountIn()
-                ? Number(patternMaker.getSettings().timeSignature.beats) - qNote + 1
-                : barCount > 0 &&
-                  oneToBeatsPerBar.map((beat) => {
-                    return <Box sx={{ ...counter }} key={`beat${beat}`} />;
-                  })}
-            </div>
-          </>
-        )}
-      />
+      <div
+        style={{
+          height: '3em',
+          display: 'flex',
+          justifyContent: isCountIn() ? 'center' : 'left',
+          marginLeft: '-35px', // sorry temporary horrible fix to stop 16 beats going off screen
+        }}
+      >
+        {isCountIn()
+          ? Number(patternMaker.getSettings().timeSignature.beats) - currentBeat + 1
+          : barCount &&
+            oneToBeatsPerBar.map((beat) => {
+              return <Box sx={{ ...counter }} key={`beat${beat}`} />;
+            })}
+      </div>
       <br />
     </div>
   );
