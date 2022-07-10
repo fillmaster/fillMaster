@@ -16,10 +16,10 @@ interface MetronomeProps {
   tempo: string;
   fillStart: string;
   patternMaker: PatternMaker;
-  timeSignatureBottom: string;
-  timeSignatureTop: string;
-  setTimeSignatureBottom: (beats: string) => void;
-  setTimeSignatureTop: (division: string) => void;
+  timeSignatureBottom: MeasureDivision;
+  timeSignatureTop: BeatsPerBar;
+  setTimeSignatureTop: (beats: BeatsPerBar) => void;
+  setTimeSignatureBottom: (division: MeasureDivision) => void;
   handleSetCurrentBar: (bar: number) => void;
 }
 

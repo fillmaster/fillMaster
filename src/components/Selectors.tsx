@@ -22,8 +22,8 @@ interface SelectorsProps {
   patternMaker: PatternMaker;
   isCountIn: () => boolean;
   handleSetNoteDivision: (division: string) => void;
-  setTimeSignatureTop: (beats: string) => void;
-  setTimeSignatureBottom: (division: string) => void;
+  setTimeSignatureTop: (beats: BeatsPerBar) => void;
+  setTimeSignatureBottom: (division: MeasureDivision) => void;
 }
 const Selectors = ({
   timeSignatureTop,

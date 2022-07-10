@@ -24,6 +24,8 @@ const App = () => {
     setDrawerOpen(DEFAULTS.drawerOpen);
     setFillOnBar(DEFAULTS.fillOnBar);
     setHelperSound(DEFAULTS.helperSound);
+
+    window.dispatchEvent(new CustomEvent('resetSettings'));
   };
 
   const handleSetDrawerOpen = (open: boolean) => {

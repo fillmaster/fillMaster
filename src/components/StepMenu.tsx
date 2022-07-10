@@ -10,8 +10,11 @@ import Typography from '@mui/material/Typography';
 import { useContext, useEffect, useState } from 'react';
 import { FillOnBar } from '../App';
 import '../App.css';
+import { BeatsPerBar } from '../consts/beatsPerBar';
+import { MeasureDivision } from '../consts/measureDivisions';
+import useLocalStorage from '../hooks/useLocalStorage';
 import assertUnreachable from '../utils/assertUnreachable';
-import PatternMaker from '../utils/classes/patternMaker';
+import PatternMaker, { DEFAULT_TIME_SIGNATURE } from '../utils/classes/patternMaker';
 import getStringArrayBetweenTwoValues from '../utils/getArrayBetweenValues';
 import MetronomeContainer from './MetronomeContainer';
 import QuickRandomiser from './QuickRandomiser';
@@ -40,6 +43,8 @@ const steps = [
   },
 ];
 
+const DEAFAULT_SLIDER_VALUES = [60, 120];
+
 const VerticalLinearStepper = () => {
   const patternMaker = PatternMaker.getInstance();
   const [activeStep, setActiveStep] = useState(0);
@@ -54,34 +59,26 @@ const VerticalLinearStepper = () => {
     // loops from 1 to fillOnBar (e.g. 1, 2, 3, 4, 1, 2, 3, 4)
     currentBar % fillOnBar === 0 ? fillOnBar : currentBar % fillOnBar;
 
-  const getSliderValues = () => {
-    const sliderData = localStorage.getItem('sliderValues');
-    return sliderData !== null ? JSON.parse(sliderData) : [60, 120];
-  };
-
-  const [sliderValues, setSliderValues] = useState<number[]>(getSliderValues());
-  const [timeSignatureTop, setTimeSignatureTop] = useState(
-    patternMaker.getSettings().timeSignature.beats as string
-  );
-  const [timeSignatureBottom, setTimeSignatureBottom] = useState(
-    patternMaker.getSettings().timeSignature.division as string
-  );
-
-  // update localstorage slider values data everytime the values change
-  useEffect(() => {
-    localStorage.setItem('sliderValues', JSON.stringify(sliderValues));
-  }, [sliderValues]);
+  const [sliderValues, setSliderValues] = useLocalStorage('sliderValues', DEAFAULT_SLIDER_VALUES);
+  const [{ beats: timeSignatureTop, division: timeSignatureBottom }, setTimeSignature] =
+    useLocalStorage('timeSignature', patternMaker.getSettings().timeSignature);
 
   const handleSetCurrentBar = (bar: number) => {
     setCurrentBar(bar);
   };
 
-  const handleSetTimeSignatureTop = (beats: string) => {
-    setTimeSignatureTop(beats);
+  const handleSetTimeSignatureTop = (beats: BeatsPerBar) => {
+    setTimeSignature(({ division }) => ({
+      beats,
+      division,
+    }));
   };
 
-  const handleSetTimeSignatureBottom = (division: string) => {
-    setTimeSignatureBottom(division);
+  const handleSetTimeSignatureBottom = (division: MeasureDivision) => {
+    setTimeSignature(({ beats }) => ({
+      beats,
+      division,
+    }));
   };
 
   const tempoOptions = () => getStringArrayBetweenTwoValues(sliderValues[0], sliderValues[1]);
@@ -122,6 +119,17 @@ const VerticalLinearStepper = () => {
     restartMetronome();
     togglePanel('panel1');
   };
+
+  useEffect(() => {
+    const handleResetSettings = () => {
+      patternMaker.resetTimeSignature();
+      setSliderValues(DEAFAULT_SLIDER_VALUES);
+      setTimeSignature(DEFAULT_TIME_SIGNATURE);
+    };
+    window.addEventListener('resetSettings', handleResetSettings);
+
+    return () => window.removeEventListener('rsetSettings', handleResetSettings);
+  }, [patternMaker]);
 
   useEffect(() => {
     restartMetronome();
