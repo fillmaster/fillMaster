@@ -4,6 +4,8 @@ import {
   predictLastFlick,
 } from '../../src/components/Randomiser';
 
+const sleepFunc = jest.fn(() => Promise.resolve());
+
 describe('flickSlowDown', () => {
   it('should return values that get exponitally bigger', () => {
     const duration = 900;
@@ -38,18 +40,30 @@ describe('flickThroughArray', () => {
     const pauseDuration = 10;
     const callback = jest.fn();
 
-    const result = await flickThroughArray(array, { duration, pauseDuration, callback });
+    const result = await flickThroughArray(array, { duration, pauseDuration, callback, sleepFunc });
     expect(array).toContain(result);
     expect(callback).toBeCalled();
   });
+  it('should only call the callback with values from the array', async () => {
+    const array = [1, 2, 3, 4, 5];
+    const duration = 2000;
+    const pauseDuration = 10;
+    const callback = jest.fn<void, [number]>();
 
+    await flickThroughArray(array, { duration, pauseDuration, callback, sleepFunc });
+
+    expect(callback.mock.calls.reduce((acc, args) => array.includes(args[0]) && acc, true)).toBe(
+      true
+    );
+    expect(callback).toBeCalled();
+  });
   it('should throw an error if pauseDuration is 0', async () => {
     const array = [1, 2, 3, 4, 5];
     const duration = 200;
     const pauseDuration = 0;
     const callback = jest.fn();
 
-    const promise = flickThroughArray(array, { duration, pauseDuration, callback });
+    const promise = flickThroughArray(array, { duration, pauseDuration, callback, sleepFunc });
     expect(promise).rejects.toThrow();
     expect(callback).toBeCalledTimes(0);
   });
@@ -63,7 +77,12 @@ describe('predictLastFlick', () => {
     const callback = jest.fn();
 
     const result = await predictLastFlick(array, { duration, pauseDuration });
-    const flickResult = await flickThroughArray(array, { duration, pauseDuration, callback });
+    const flickResult = await flickThroughArray(array, {
+      duration,
+      pauseDuration,
+      callback,
+      sleepFunc,
+    });
 
     expect(result).toEqual(flickResult);
   });

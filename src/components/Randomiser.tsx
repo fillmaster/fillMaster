@@ -76,6 +76,9 @@ export async function flickThroughArray<T>(
   let timeSpend = 0;
   let i = 0;
   for (; timeSpend < duration; i++) {
+    if (i >= array.length) {
+      i = 0;
+    }
     const timeLeft = duration - timeSpend;
     // We don't want to overshoot
     const actualPauseDuration = Math.min(timeLeft, slowedPauseDuration);
@@ -89,13 +92,10 @@ export async function flickThroughArray<T>(
     // Maybe the callback becomes undefined
     // if the component unmounts before the loop is finished
     // In that case we just cancel the flicking
-    if (typeof callback === 'undefined') return array[i > 0 ? i - 1 : 0];
+    if (typeof callback === 'undefined') return array[i > 0 ? i - 1 : array.length - 1];
     callback(array[i]);
 
     timeSpend += actualPauseDuration;
-    if (i >= array.length) {
-      i = 0;
-    }
   }
   return array[i];
 }
@@ -111,6 +111,7 @@ const Randomiser = ({
 
   useEffect(() => {
     let callback: ((value: string) => void) | undefined = (value: string) => {
+      console.log(value);
       setRandomItem(value);
     };
 
