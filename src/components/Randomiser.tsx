@@ -40,10 +40,7 @@ export function flickSlowDown(
   return curPauseDuration;
 }
 
-export type PredictLastFlickOptions<T> = Omit<
-  FlickThroughOptions<T>,
-  'callback' | 'sleepFunc' | 'startDuration'
->;
+export type PredictLastFlickOptions<T> = Omit<FlickThroughOptions<T>, 'callback' | 'sleepFunc'>;
 
 export async function predictLastFlick<T>(
   array: Array<T>,
@@ -75,7 +72,8 @@ export async function flickThroughArray<T>(
   let slowedPauseDuration = pauseDuration;
   let timeSpend = 0;
   let i = 0;
-  for (; timeSpend < duration; i++) {
+
+  while (timeSpend < duration) {
     if (i >= array.length) {
       i = 0;
     }
@@ -96,8 +94,9 @@ export async function flickThroughArray<T>(
     callback(array[i]);
 
     timeSpend += actualPauseDuration;
+    i += 1;
   }
-  return array[i];
+  return array[i - 1];
 }
 
 const Randomiser = ({

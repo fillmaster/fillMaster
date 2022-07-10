@@ -57,6 +57,18 @@ describe('flickThroughArray', () => {
     );
     expect(callback).toBeCalled();
   });
+
+  it('should return the value the last callback recieved', async () => {
+    const array = [1, 2, 3, 4, 5];
+    const duration = 2000;
+    const pauseDuration = 10;
+    const callback = jest.fn<void, [number]>();
+
+    const result = await flickThroughArray(array, { duration, pauseDuration, callback, sleepFunc });
+    expect(callback).toBeCalled();
+    expect(result).toBe(callback.mock.lastCall[0]);
+  });
+
   it('should throw an error if pauseDuration is 0', async () => {
     const array = [1, 2, 3, 4, 5];
     const duration = 200;
@@ -85,5 +97,7 @@ describe('predictLastFlick', () => {
     });
 
     expect(result).toEqual(flickResult);
+    expect(callback).toBeCalled();
+    expect(callback.mock.lastCall[0]).toEqual(flickResult);
   });
 });
