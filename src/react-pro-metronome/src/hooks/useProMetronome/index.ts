@@ -72,8 +72,6 @@ export default function useProMetronome({
   );
 
   useEffect(() => {
-    console.log('tesst');
-
     if (isPlaying) {
       intervalId.current = setInterval(update, intervalDuration);
     }

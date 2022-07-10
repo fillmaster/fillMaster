@@ -1,12 +1,12 @@
 import { Box, lighten, useTheme } from '@mui/material';
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { FillOnBar, HelperSound } from '../App';
 import { BeatsPerBar } from '../constsants/beatsPerBar';
 import { MeasureDivision } from '../constsants/measureDivisions';
 import { PlayNotes } from '../constsants/playNotes';
 // permanent fix needed
 // eslint-disable-next-line import/no-relative-packages
-import useProMetronome, { ProMetronome } from '../react-pro-metronome/src/hooks/useProMetronome';
+import useProMetronome from '../react-pro-metronome/src/hooks/useProMetronome';
 import PatternMaker, { BeatPosition } from '../utils/classes/patternMaker';
 import getStringArrayBetweenTwoValues from '../utils/getArrayBetweenValues';
 import Selectors from './Selectors';
@@ -37,26 +37,14 @@ const Metronome = ({
   const [noteDivision, setNoteDivision] = useState(patternMaker.getSettings().playNotes as string);
   const [barCount, setBarCount] = useState(-1);
   const [metronomeString, setMetronomeString] = useState(patternMaker.getMetronomeString());
-  const options: ProMetronome = useMemo(
-    () => ({
-      bpm: Number(tempo),
-      subdivision: patternMaker.getSubDivision(),
-      isPlaying: play,
-      soundEnabled: true,
-      soundPattern: !barCount ? patternMaker.getMetronomeCountInString() : metronomeString,
-      beatsPerBar: Number(patternMaker.getSettings().timeSignature.beats),
-    }),
-    [
-      tempo,
-      patternMaker,
-      play,
-      barCount,
-      metronomeString,
-      patternMaker.getMetronomeCountInString(),
-      patternMaker.getSettings().timeSignature.beats,
-    ]
-  );
-  const { currentBeat, currentSubBeat } = useProMetronome(options);
+  const { currentBeat, currentSubBeat } = useProMetronome({
+    bpm: +tempo,
+    subdivision: patternMaker.getSubDivision(),
+    isPlaying: play,
+    soundEnabled: true,
+    soundPattern: !barCount ? patternMaker.getMetronomeCountInString() : metronomeString,
+    beatsPerBar: +patternMaker.getSettings().timeSignature.beats,
+  });
   const oneToBeatsPerBar = getStringArrayBetweenTwoValues(1, currentBeat);
   const helperSoundEnabled = useContext(HelperSound);
 
