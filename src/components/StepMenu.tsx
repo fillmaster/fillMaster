@@ -43,7 +43,7 @@ const steps = [
   },
 ];
 
-const DEAFAULT_SLIDER_VALUES = [60, 120];
+const DEFAULT_SLIDER_VALUES = [60, 120];
 
 const VerticalLinearStepper = () => {
   const patternMaker = PatternMaker.getInstance();
@@ -59,7 +59,7 @@ const VerticalLinearStepper = () => {
     // loops from 1 to fillOnBar (e.g. 1, 2, 3, 4, 1, 2, 3, 4)
     currentBar % fillOnBar === 0 ? fillOnBar : currentBar % fillOnBar;
 
-  const [sliderValues, setSliderValues] = useLocalStorage('sliderValues', DEAFAULT_SLIDER_VALUES);
+  const [sliderValues, setSliderValues] = useLocalStorage('sliderValues', DEFAULT_SLIDER_VALUES);
   const [{ beats: timeSignatureTop, division: timeSignatureBottom }, setTimeSignature] =
     useLocalStorage('timeSignature', patternMaker.getSettings().timeSignature);
 
@@ -123,7 +123,7 @@ const VerticalLinearStepper = () => {
   useEffect(() => {
     const handleResetSettings = () => {
       patternMaker.resetTimeSignature();
-      setSliderValues(DEAFAULT_SLIDER_VALUES);
+      setSliderValues(DEFAULT_SLIDER_VALUES);
       setTimeSignature(DEFAULT_TIME_SIGNATURE);
     };
     window.addEventListener('resetSettings', handleResetSettings);
