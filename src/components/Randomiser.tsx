@@ -20,11 +20,7 @@ async function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export function flickSlowDown(
-  curPauseDuration: number,
-  timeSpentTotal: number,
-  startDuration: number
-) {
+function flickSlowDown(curPauseDuration: number, timeSpentTotal: number, startDuration: number) {
   if (curPauseDuration < 0) {
     throw new Error('curPauseDuration should be positive');
   }
@@ -40,9 +36,9 @@ export function flickSlowDown(
   return curPauseDuration;
 }
 
-export type PredictLastFlickOptions<T> = Omit<FlickThroughOptions<T>, 'callback' | 'sleepFunc'>;
+type PredictLastFlickOptions<T> = Omit<FlickThroughOptions<T>, 'callback' | 'sleepFunc'>;
 
-export async function predictLastFlick<T>(
+async function predictLastFlick<T>(
   array: Array<T>,
   { duration, pauseDuration }: PredictLastFlickOptions<T>
 ) {
@@ -54,14 +50,14 @@ export async function predictLastFlick<T>(
   });
 }
 
-export interface FlickThroughOptions<T> {
+interface FlickThroughOptions<T> {
   duration: number;
   pauseDuration: number;
   callback: (value: T) => void;
   sleepFunc?: (ms: number) => Promise<unknown>;
 }
 
-export async function flickThroughArray<T>(
+async function flickThroughArray<T>(
   array: Array<T>,
   { duration, pauseDuration, callback, sleepFunc = sleep }: FlickThroughOptions<T>
 ): Promise<T> {
@@ -129,3 +125,8 @@ const Randomiser = ({
 };
 
 export default Randomiser;
+export const forTestingPurposesOnly = {
+  flickSlowDown,
+  flickThroughArray,
+  predictLastFlick,
+};

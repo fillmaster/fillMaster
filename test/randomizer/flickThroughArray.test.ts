@@ -1,8 +1,6 @@
-import {
-  flickSlowDown,
-  flickThroughArray,
-  predictLastFlick,
-} from '../../src/components/Randomiser';
+import { forTestingPurposesOnly } from '../../src/components/Randomiser';
+
+const { flickThroughArray, flickSlowDown, predictLastFlick } = forTestingPurposesOnly;
 
 const sleepFunc = jest.fn(() => Promise.resolve());
 
