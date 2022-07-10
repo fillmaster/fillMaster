@@ -20,59 +20,84 @@ async function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-async function flickThroughArray<T>(
+export function flickSlowDown(
+  curPauseDuration: number,
+  timeSpentTotal: number,
+  startDuration: number
+) {
+  if (curPauseDuration < 0) {
+    throw new Error('curPauseDuration should be positive');
+  }
+  // Slowdown
+  if (timeSpentTotal >= SLOW_DOWN_THRESHOLD_FRACTION * startDuration) {
+    // this is basically 1/totalTimeLeft so we get an exponential slow down
+    const exponential = SLOW_DOWN_OVER_MULTIPLIER / (startDuration - timeSpentTotal);
+    // We use a multiplier to make these values bigger
+    const addAmount = curPauseDuration * exponential * ITERATION_SLOW_DOWN_MULTIPLIER;
+
+    return curPauseDuration + addAmount;
+  }
+  return curPauseDuration;
+}
+
+export type PredictLastFlickOptions<T> = Omit<
+  FlickThroughOptions<T>,
+  'callback' | 'sleepFunc' | 'startDuration'
+>;
+
+export async function predictLastFlick<T>(
   array: Array<T>,
-  duration: number,
-  pauseDuration: number,
-  callback: (value: T) => void,
-  startDuration?: number
-): Promise<void> {
+  { duration, pauseDuration }: PredictLastFlickOptions<T>
+) {
+  return flickThroughArray(array, {
+    duration,
+    pauseDuration,
+    sleepFunc: () => Promise.resolve(),
+    callback: () => {},
+  });
+}
+
+export interface FlickThroughOptions<T> {
+  duration: number;
+  pauseDuration: number;
+  callback: (value: T) => void;
+  sleepFunc?: (ms: number) => Promise<unknown>;
+}
+
+export async function flickThroughArray<T>(
+  array: Array<T>,
+  { duration, pauseDuration, callback, sleepFunc = sleep }: FlickThroughOptions<T>
+): Promise<T> {
   if (pauseDuration <= 0) {
     throw new Error('pauseDuration must be greater than 0');
   }
 
   let slowedPauseDuration = pauseDuration;
   let timeSpend = 0;
-
-  const actualStartDuration = startDuration ?? duration;
-
-  for (let i = 0; i < array.length; i++) {
+  let i = 0;
+  for (; timeSpend < duration; i++) {
     const timeLeft = duration - timeSpend;
     // We don't want to overshoot
     const actualPauseDuration = Math.min(timeLeft, slowedPauseDuration);
     // the true time we already spent in the loop with recursion
-    const timeSpentTotal = actualStartDuration - duration + timeSpend;
+    const timeSpentTotal = duration - duration + timeSpend;
 
-    if (timeSpend >= duration) {
-      return Promise.resolve();
-    }
+    slowedPauseDuration = flickSlowDown(slowedPauseDuration, timeSpentTotal, duration);
+
     // eslint-disable-next-line no-await-in-loop
-    await sleep(actualPauseDuration);
+    await sleepFunc(actualPauseDuration);
     // Maybe the callback becomes undefined
     // if the component unmounts before the loop is finished
     // In that case we just cancel the flicking
-    if (typeof callback === 'undefined') return Promise.resolve();
+    if (typeof callback === 'undefined') return array[i > 0 ? i - 1 : 0];
     callback(array[i]);
 
-    // Slowdown
-    if (timeSpentTotal >= SLOW_DOWN_THRESHOLD_FRACTION * actualStartDuration) {
-      // this is basically 1/totalTimeLeft so we get an exponential slow down
-      const exponential = SLOW_DOWN_OVER_MULTIPLIER / (actualStartDuration - timeSpentTotal);
-      // We use a multiplier to make these values bigger
-      const addAmount = slowedPauseDuration * exponential * ITERATION_SLOW_DOWN_MULTIPLIER;
-
-      slowedPauseDuration += addAmount;
-    }
-
     timeSpend += actualPauseDuration;
+    if (i >= array.length) {
+      i = 0;
+    }
   }
-  return flickThroughArray(
-    array,
-    duration - timeSpend,
-    slowedPauseDuration,
-    callback,
-    startDuration ?? duration
-  );
+  return array[i];
 }
 
 const Randomiser = ({
@@ -85,15 +110,23 @@ const Randomiser = ({
   const [randomItem, setRandomItem] = useState(randomArray[0]);
 
   useEffect(() => {
-    flickThroughArray(randomArray, duration, pauseDuration, setRandomItem);
+    let callback: ((value: string) => void) | undefined = (value: string) => {
+      setRandomItem(value);
+    };
+
+    flickThroughArray(randomArray, { duration, pauseDuration, callback });
+    // Should return instantly
+    predictLastFlick(randomArray, { duration, pauseDuration }).then((value) => {
+      handleSetItem(value);
+    });
+
+    return () => {
+      callback = undefined;
+    };
   }, []);
 
-  return (
-    <>
-      {handleSetItem(randomItem)}
-      {randomItem}
-    </>
-  );
+  // eslint-disable-next-line react/jsx-no-useless-fragment
+  return <>{randomItem}</>;
 };
 
 export default Randomiser;
