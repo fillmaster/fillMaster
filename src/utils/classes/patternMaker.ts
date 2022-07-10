@@ -1,6 +1,6 @@
-import { BeatsPerBar } from '../../consts/beatsPerBar';
-import { MeasureDivision } from '../../consts/measureDivisions';
-import { PlayNotes } from '../../consts/playNotes';
+import { BeatsPerBar } from '../../constsants/beatsPerBar';
+import { MeasureDivision } from '../../constsants/measureDivisions';
+import { PlayNotes } from '../../constsants/playNotes';
 import assertUnreachable from '../assertUnreachable';
 import { getPlayNotesByNumber } from '../playNotesFunctions';
 

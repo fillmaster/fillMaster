@@ -1,4 +1,4 @@
-import { MeasureDivision } from '../../consts/measureDivisions';
+import { MeasureDivision } from '../../constsants/measureDivisions';
 import Selector from './Selector';
 
 type MeasureBottomSelectorItem = {
