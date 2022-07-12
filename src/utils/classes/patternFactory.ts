@@ -4,8 +4,6 @@ import { getBlankString, getIndexForFillCharacter, getNth, replaceCharacter, rep
 
 export class PatternFactory extends Pattern {
 
-	private metronomeSound: MetronomeSounds = MetronomeSounds.MetronomeSoundOff;
-
 	private subDivision: SubDivision;
 
 	constructor(patternSettings?: IPatternSettings, subDivision: SubDivision = 8) {
@@ -56,6 +54,3 @@ export class PatternFactory extends Pattern {
     return metronomeString;
   }
 }
-
-const patternFactory = new PatternFactory();
-
