@@ -167,25 +167,3 @@ describe('Test halfNotes on and fill on beat 4', () => {
     assert.equal(patternMaker.getMetronomeStringWithFill().length, 16);
   });
 });
-describe('Test quarterNotes on and fill on beat 3', () => {
-  it('should return 100020003000', () => {
-    patternMaker.setSettings({
-      playNotes: 'quarterNotes',
-      playFillOn: { beat: '3', subBeat: '0' },
-      timeSignature: { beats: '3', division: '4' },
-    });
-    assert.equal(patternMaker.getMetronomeStringWithFill(), '100020003000');
-    assert.equal(patternMaker.getMetronomeStringWithFill().length, 12);
-  });
-});
-describe('Test fill start on the e of 2', () => {
-  it('should return 1000230020002000', () => {
-    patternMaker.setSettings({
-      playNotes: 'quarterNotes',
-      playFillOn: { beat: '2', subBeat: '1' },
-      timeSignature: { beats: '4', division: '4' },
-    });
-    assert.equal(patternMaker.getMetronomeStringWithFill(), '1000230020002000');
-    assert.equal(patternMaker.getMetronomeStringWithFill().length, 16);
-  });
-});
