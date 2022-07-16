@@ -14,7 +14,7 @@ import { BeatsPerBar } from '../consts/beatsPerBar';
 import { MeasureDivision } from '../consts/measureDivisions';
 import useLocalStorage from '../hooks/useLocalStorage';
 import assertUnreachable from '../utils/assertUnreachable';
-import PatternMaker, { DEFAULT_TIME_SIGNATURE } from '../utils/classes/patternMaker';
+import MetronomePattern, { DEFAULT_TIME_SIGNATURE } from '../utils/classes/patternMaker';
 import getStringArrayBetweenTwoValues from '../utils/getArrayBetweenValues';
 import MetronomeContainer from './MetronomeContainer';
 import QuickRandomiser from './QuickRandomiser';
@@ -46,7 +46,7 @@ const steps = [
 const DEFAULT_SLIDER_VALUES = [60, 120];
 
 const VerticalLinearStepper = () => {
-  const patternMaker = PatternMaker.getInstance();
+  const patternMaker = MetronomePattern.getInstance();
   const [activeStep, setActiveStep] = useState(0);
   const [beatIdea, setBeatIdea] = useState('');
   const [fillStart, setFillStart] = useState('');
@@ -61,7 +61,7 @@ const VerticalLinearStepper = () => {
 
   const [sliderValues, setSliderValues] = useLocalStorage('sliderValues', DEFAULT_SLIDER_VALUES);
   const [{ beats: timeSignatureTop, division: timeSignatureBottom }, setTimeSignature] =
-    useLocalStorage('timeSignature', patternMaker.getSettings().timeSignature);
+    useLocalStorage('timeSignature', patternMaker.getPatternSettings().timeSignature);
 
   const handleSetCurrentBar = (bar: number) => {
     setCurrentBar(bar);
@@ -121,14 +121,14 @@ const VerticalLinearStepper = () => {
   };
 
   useEffect(() => {
-    const handleResetSettings = () => {
+    const handleResetPatternSettings = () => {
       patternMaker.resetTimeSignature();
       setSliderValues(DEFAULT_SLIDER_VALUES);
       setTimeSignature(DEFAULT_TIME_SIGNATURE);
     };
-    window.addEventListener('resetSettings', handleResetSettings);
+    window.addEventListener('resetPatternSettings', handleResetPatternSettings);
 
-    return () => window.removeEventListener('rsetSettings', handleResetSettings);
+    return () => window.removeEventListener('rsetPatternSettings', handleResetPatternSettings);
   }, [patternMaker]);
 
   useEffect(() => {

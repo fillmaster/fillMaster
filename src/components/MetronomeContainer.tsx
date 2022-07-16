@@ -4,16 +4,16 @@ import StopIcon from '@mui/icons-material/StopCircle';
 import { Button } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { Drawer } from '../App';
+import MetronomePattern from '../classes/pattern/metronomePattern';
 import { BeatsPerBar } from '../consts/beatsPerBar';
 import { MeasureDivision } from '../consts/measureDivisions';
-import PatternMaker from '../utils/classes/patternMaker';
 import Metronome from './Metronome';
 
 interface MetronomeContainerProps {
   tempo: string;
   fillStart: string;
   restartMetronome: () => void;
-  patternMaker: PatternMaker;
+  patternMaker: MetronomePattern;
   timeSignatureBottom: MeasureDivision;
   timeSignatureTop: BeatsPerBar;
   setTimeSignatureTop: (beats: BeatsPerBar) => void;

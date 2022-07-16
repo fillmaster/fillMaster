@@ -1,6 +1,5 @@
-import { IPatternSettings, MetronomeSounds, SubDivision } from './models-interfaces';
+import { IPatternSettings, MetronomeSounds, PlayHelperOn, SubDivision } from './models-interfaces';
 import Pattern from './pattern';
-import { PlayFillOn } from './patternMaker';
 import {
   getBlankString,
   getIndexForFillCharacter,
@@ -10,36 +9,33 @@ import {
 } from './patternUtils';
 
 class MetronomePattern extends Pattern {
-  private playFillOn: PlayFillOn;
-
-  private subDivision: SubDivision;
+  private playHelperOn: PlayHelperOn;
 
   private static instance: MetronomePattern;
 
-  constructor(
-    playFillOn: PlayFillOn,
+  private constructor(
+    playHelperOn: PlayHelperOn,
     subDivision: SubDivision,
     patternSettings?: IPatternSettings
   ) {
     super(patternSettings);
-    this.playFillOn = playFillOn;
-    this.subDivision = subDivision;
+    this.playHelperOn = playHelperOn;
   }
 
   public static getInstance(
     patternSettings?: IPatternSettings,
-    playFillOn: PlayFillOn = { beat: '3', subBeat: '0' },
-    subDivision: SubDivision = 8
+    subDivision: SubDivision = 8,
+    playHelperOn: PlayHelperOn = { beat: '3', subBeat: '0' }
   ): MetronomePattern {
     if (!MetronomePattern.instance) {
-      MetronomePattern.instance = new MetronomePattern(playFillOn, subDivision, patternSettings);
+      MetronomePattern.instance = new MetronomePattern(playHelperOn, subDivision, patternSettings);
     }
 
     return MetronomePattern.instance;
   }
 
   getMetronomeStringWithFill(): string {
-    const { beat, subBeat } = this.playFillOn;
+    const { beat, subBeat } = this.playHelperOn;
 
     const metronomeString = this.createMetronomeString();
     const fillIndex = getIndexForFillCharacter(beat, this.subDivision, subBeat);
@@ -50,6 +46,14 @@ class MetronomePattern extends Pattern {
     );
     return metronomeFillString;
   }
+
+  public getMetronomeString = () => {
+    return this.createMetronomeString();
+  };
+
+  public getMetronomeCountInString = () => {
+    return this.createMetronomeString({ isCountIn: true });
+  };
 
   private createMetronomeString({ isCountIn } = { isCountIn: false }) {
     let metronomeSubDivisionSound = MetronomeSounds.MetronomeSoundLo;

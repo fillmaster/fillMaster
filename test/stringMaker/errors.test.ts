@@ -1,12 +1,12 @@
-import PatternMaker from '../../src/utils/classes/patternMaker';
+import MetronomePattern from '../../src/utils/classes/patternMaker';
 
-const patternMaker = PatternMaker.getInstance(4);
+const patternMaker = MetronomePattern.getInstance(4);
 
 // TEMPORARILY SKIPPING
-describe.skip('PatternMaker Errors', () => {
+describe.skip('MetronomePattern Errors', () => {
   describe('Test should fail when settings fill beat higher than beats per bar', () => {
     const setWrongSettings = () =>
-      patternMaker.setSettings({
+      patternMaker.setPatternSettings({
         playNotes: 'quarterNotes',
         playFillOn: { beat: '4', subBeat: '0' },
         timeSignature: { beats: '3', division: '4' },
@@ -19,7 +19,7 @@ describe.skip('PatternMaker Errors', () => {
   });
   describe('Test should fail when settings fill sub-beat higher than subdivision', () => {
     const setWrongSettings = () =>
-      patternMaker.setSettings({
+      patternMaker.setPatternSettings({
         playNotes: 'quarterNotes',
         playFillOn: { beat: '4', subBeat: '5' },
         timeSignature: { beats: '4', division: '4' },

@@ -26,7 +26,7 @@ const App = () => {
     setFillOnBar(DEFAULTS.fillOnBar);
     setHelperSound(DEFAULTS.helperSound);
 
-    window.dispatchEvent(new CustomEvent('resetSettings'));
+    window.dispatchEvent(new CustomEvent('resetPatternSettings'));
   };
 
   const handleSetDrawerOpen = (open: boolean) => {
