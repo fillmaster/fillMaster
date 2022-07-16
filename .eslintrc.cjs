@@ -22,6 +22,8 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
+    'no-shadow': 'off', // contains incorrect error messages
+    '@typescript-eslint/no-shadow': ['error'],
     'react-hooks/exhaustive-deps': 'off',
     'no-underscore-dangle': 'off',
     'no-use-before-define': 'off',

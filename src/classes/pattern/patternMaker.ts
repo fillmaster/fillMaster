@@ -1,8 +1,8 @@
 import { BeatsPerBar } from '../../consts/beatsPerBar';
 import { MeasureDivision } from '../../consts/measureDivisions';
 import { PlayNotes } from '../../consts/playNotes';
-import assertUnreachable from '../assertUnreachable';
-import { getPlayNotesByNumber } from '../playNotesFunctions';
+import assertUnreachable from '../../utils/assertUnreachable';
+import { getPlayNotesByNumber } from '../../utils/playNotesFunctions';
 
 export type PlayFillOn = { beat: BeatPosition; subBeat: SubBeatPosition };
 

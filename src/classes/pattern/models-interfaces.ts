@@ -1,19 +1,19 @@
-import { BeatsPerBar } from "../../consts/beatsPerBar";
-import { PlayNotes } from "../../consts/playNotes";
-import { TimeSignature } from "./patternMaker";
+import { BeatsPerBar } from '../../consts/beatsPerBar';
+import { PlayNotes } from '../../consts/playNotes';
+import { TimeSignature } from './patternMaker';
 
 export type SubBeatPosition = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7';
 
 export enum MetronomeSounds {
-	MetronomeSoundOff = '0',
-	MetronomeSoundHi = '1',
-	MetronomeSoundLo = '2',
-	MetronomeSoundFill = '3'
+  MetronomeSoundOff = '0',
+  MetronomeSoundHi = '1',
+  MetronomeSoundLo = '2',
+  MetronomeSoundFill = '3',
 }
 
 export interface IPatternSettings {
-	playNotes: PlayNotes;
-	timeSignature: TimeSignature;
+  playNotes: PlayNotes;
+  timeSignature: TimeSignature;
 }
 
 export type BeatPosition = BeatsPerBar;
