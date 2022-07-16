@@ -12,8 +12,8 @@ import { FillOnBar } from '../App';
 import '../App.css';
 import MetronomePattern from '../classes/pattern/metronomePattern';
 import { DEFAULT_TIME_SIGNATURE } from '../classes/pattern/models-interfaces';
-import { BeatsPerBar } from '../consts/beatsPerBar';
-import { MeasureDivision } from '../consts/measureDivisions';
+import { BeatsPerBar } from '../constants/beatsPerBar';
+import { MeasureDivision } from '../constants/measureDivisions';
 import useLocalStorage from '../hooks/useLocalStorage';
 import assertUnreachable from '../utils/assertUnreachable';
 import getStringArrayBetweenTwoValues from '../utils/getArrayBetweenValues';
@@ -129,7 +129,7 @@ const VerticalLinearStepper = () => {
     };
     window.addEventListener('resetPatternSettings', handleResetPatternSettings);
 
-    return () => window.removeEventListener('resetPatternSettings', handleResetPatternSettings);
+    return () => window.removeEventListener('resetSettings', handleResetSettings);
   }, [patternMaker]);
 
   useEffect(() => {
@@ -213,7 +213,7 @@ const VerticalLinearStepper = () => {
               sx={{
                 display: 'flex',
                 width: '100%',
-                paddingLeft: '70vw',
+                marginLeft: '75%',
               }}
             >
               <span>Bar:&nbsp;</span>

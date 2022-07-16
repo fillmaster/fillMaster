@@ -5,8 +5,8 @@ import { Button } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { Drawer } from '../App';
 import MetronomePattern from '../classes/pattern/metronomePattern';
-import { BeatsPerBar } from '../consts/beatsPerBar';
-import { MeasureDivision } from '../consts/measureDivisions';
+import { BeatsPerBar } from '../constants/beatsPerBar';
+import { MeasureDivision } from '../constants/measureDivisions';
 import Metronome from './Metronome';
 
 interface MetronomeContainerProps {

@@ -3,9 +3,9 @@ import { useContext, useEffect, useState } from 'react';
 import { FillOnBar, HelperSound } from '../App';
 import MetronomePattern from '../classes/pattern/metronomePattern';
 import { BeatPosition } from '../classes/pattern/models-interfaces';
-import { BeatsPerBar } from '../consts/beatsPerBar';
-import { MeasureDivision } from '../consts/measureDivisions';
-import { PlayNotes } from '../consts/playNotes';
+import { BeatsPerBar } from '../constants/beatsPerBar';
+import { MeasureDivision } from '../constants/measureDivisions';
+import { PlayNotes } from '../constants/playNotes';
 // permanent fix needed
 // eslint-disable-next-line import/no-relative-packages
 import ProMetronome from '../react-pro-metronome/src';

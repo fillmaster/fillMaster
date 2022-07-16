@@ -1,9 +1,9 @@
 import { Grid } from '@mui/material';
 import { useEffect, useState } from 'react';
 import MetronomePattern from '../classes/pattern/metronomePattern';
-import { BeatsPerBar, BEATS_PER_BAR } from '../consts/beatsPerBar';
-import { MeasureDivision, MEASURE_DIVISIONS } from '../consts/measureDivisions';
-import { PlayNotes } from '../consts/playNotes';
+import { BeatsPerBar, BEATS_PER_BAR } from '../constants/beatsPerBar';
+import { MeasureDivision, MEASURE_DIVISIONS } from '../constants/measureDivisions';
+import { PlayNotes } from '../constants/playNotes';
 import getAvailablePlayNotes from '../utils/getAvailablePlayNotes';
 import {
   getNamesForPlayNotes,
