@@ -28,3 +28,8 @@ export type PlayHelperOn = { beat: BeatPosition; subBeat: SubBeatPosition };
 // Kept as union of numbers instead of strings as this will never be set by the UI directly.
 // This is only used for calculations and will not be directly part of a metronomeString.
 export type SubDivision = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+
+export const DEFAULT_TIME_SIGNATURE: TimeSignature = {
+  beats: '4',
+  division: '4',
+};

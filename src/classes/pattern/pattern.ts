@@ -1,4 +1,9 @@
-import { IPatternHelperSettings, IPatternSettings, SubDivision } from './models-interfaces';
+import {
+  DEFAULT_TIME_SIGNATURE,
+  IPatternHelperSettings,
+  IPatternSettings,
+  SubDivision,
+} from './models-interfaces';
 
 class Pattern {
   protected subDivision: SubDivision;
@@ -19,6 +24,13 @@ class Pattern {
 
   public getSubDivision = () => {
     return this.subDivision;
+  };
+
+  public resetTimeSignature = () => {
+    this.patternSettings = {
+      ...this.patternSettings,
+      timeSignature: DEFAULT_TIME_SIGNATURE,
+    };
   };
 
   getDefaultPatternSettings(): IPatternSettings | IPatternHelperSettings {

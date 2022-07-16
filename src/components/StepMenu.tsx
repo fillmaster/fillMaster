@@ -10,11 +10,12 @@ import Typography from '@mui/material/Typography';
 import { useContext, useEffect, useState } from 'react';
 import { FillOnBar } from '../App';
 import '../App.css';
+import MetronomePattern from '../classes/pattern/metronomePattern';
+import { DEFAULT_TIME_SIGNATURE } from '../classes/pattern/models-interfaces';
 import { BeatsPerBar } from '../consts/beatsPerBar';
 import { MeasureDivision } from '../consts/measureDivisions';
 import useLocalStorage from '../hooks/useLocalStorage';
 import assertUnreachable from '../utils/assertUnreachable';
-import MetronomePattern, { DEFAULT_TIME_SIGNATURE } from '../utils/classes/patternMaker';
 import getStringArrayBetweenTwoValues from '../utils/getArrayBetweenValues';
 import MetronomeContainer from './MetronomeContainer';
 import QuickRandomiser from './QuickRandomiser';
@@ -68,14 +69,14 @@ const VerticalLinearStepper = () => {
   };
 
   const handleSetTimeSignatureTop = (beats: BeatsPerBar) => {
-    setTimeSignature(({ division }) => ({
+    setTimeSignature(({ division }: any) => ({
       beats,
       division,
     }));
   };
 
   const handleSetTimeSignatureBottom = (division: MeasureDivision) => {
-    setTimeSignature(({ beats }) => ({
+    setTimeSignature(({ beats }: any) => ({
       beats,
       division,
     }));
@@ -128,7 +129,7 @@ const VerticalLinearStepper = () => {
     };
     window.addEventListener('resetPatternSettings', handleResetPatternSettings);
 
-    return () => window.removeEventListener('rsetPatternSettings', handleResetPatternSettings);
+    return () => window.removeEventListener('resetPatternSettings', handleResetPatternSettings);
   }, [patternMaker]);
 
   useEffect(() => {
