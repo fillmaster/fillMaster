@@ -4,8 +4,8 @@ import StopIcon from '@mui/icons-material/StopCircle';
 import { Button } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { Drawer } from '../App';
-import { BeatsPerBar } from '../constsants/beatsPerBar';
-import { MeasureDivision } from '../constsants/measureDivisions';
+import { BeatsPerBar } from '../constants/beatsPerBar';
+import { MeasureDivision } from '../constants/measureDivisions';
 import PatternMaker from '../utils/classes/patternMaker';
 import Metronome from './Metronome';
 

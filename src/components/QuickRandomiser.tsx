@@ -4,11 +4,11 @@ import RestartAllIcon from '@mui/icons-material/RestartAltRounded';
 import { Button, Fade, Typography } from '@mui/material';
 import { Dispatch, SetStateAction, useContext, useEffect, useState } from 'react';
 import { FillOnBar } from '../App';
-import { BeatsPerBar } from '../constsants/beatsPerBar';
-import beatIdeas from '../constsants/forRandomiser/beatIdeas';
-import fillStarts from '../constsants/forRandomiser/fillStarts';
-import FILLS from '../constsants/forRandomiser/fillTypes';
-import { RandomiseMe, RANDOMISE_ME } from '../constsants/forRandomiser/randomiseMe';
+import { BeatsPerBar } from '../constants/beatsPerBar';
+import beatIdeas from '../constants/forRandomiser/beatIdeas';
+import fillStarts from '../constants/forRandomiser/fillStarts';
+import FILLS from '../constants/forRandomiser/fillTypes';
+import { RandomiseMe, RANDOMISE_ME } from '../constants/forRandomiser/randomiseMe';
 import shuffleArray from '../utils/randomFunctions';
 
 const EXIT = 0;

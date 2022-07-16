@@ -1,9 +1,9 @@
 import { Box, lighten, useTheme } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { FillOnBar, HelperSound } from '../App';
-import { BeatsPerBar } from '../constsants/beatsPerBar';
-import { MeasureDivision } from '../constsants/measureDivisions';
-import { PlayNotes } from '../constsants/playNotes';
+import { BeatsPerBar } from '../constants/beatsPerBar';
+import { MeasureDivision } from '../constants/measureDivisions';
+import { PlayNotes } from '../constants/playNotes';
 // permanent fix needed
 // eslint-disable-next-line import/no-relative-packages
 import ProMetronome from '../react-pro-metronome/src';
