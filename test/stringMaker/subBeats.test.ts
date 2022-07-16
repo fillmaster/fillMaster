@@ -1,7 +1,7 @@
 import assert from 'assert';
-import PatternMaker from '../../src/utils/classes/patternMaker';
+import MetronomePattern from '../../src/classes/pattern/metronomePattern';
 
-let patternMaker = PatternMaker.getInstance(4);
+let patternMaker = MetronomePattern.getInstance();
 
 // music speak (with 4 subdivisions):
 // fill on the e of 1 = 1300
@@ -10,9 +10,9 @@ let patternMaker = PatternMaker.getInstance(4);
 
 describe('Test fill start on the e of 2', () => {
   it('should return 1000230020002000', () => {
-    patternMaker.setSettings({
+    patternMaker.setPatternSettings({
       playNotes: 'quarterNotes',
-      playFillOn: { beat: '2', subBeat: '1' },
+      playHelperOn: { beat: '2', subBeat: '1' },
       timeSignature: { beats: '4', division: '4' },
     });
     const pattern = patternMaker.getMetronomeStringWithFill();
@@ -27,13 +27,13 @@ describe('Test fill start on the e of 2', () => {
 // fill on the e of 1 = 10300000
 // fill on the & of 1 = 10003000
 // fill on the a of 1 = 10000030
-patternMaker = PatternMaker.getInstance(8);
+patternMaker = MetronomePattern.getInstance();
 
 describe('Test fill start on the e of 2', () => {
   it('should return 1000230020002000', () => {
-    patternMaker.setSettings({
+    patternMaker.setPatternSettings({
       playNotes: 'quarterNotes',
-      playFillOn: { beat: '2', subBeat: '1' },
+      playHelperOn: { beat: '2', subBeat: '1' },
       timeSignature: { beats: '4', division: '4' },
     });
     const pattern = patternMaker.getMetronomeStringWithFill();

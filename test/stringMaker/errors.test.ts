@@ -1,6 +1,6 @@
-import MetronomePattern from '../../src/utils/classes/patternMaker';
+import MetronomePattern from '../../src/classes/pattern/metronomePattern';
 
-const patternMaker = MetronomePattern.getInstance(4);
+const patternMaker = MetronomePattern.getInstance();
 
 // TEMPORARILY SKIPPING
 describe.skip('MetronomePattern Errors', () => {
@@ -8,7 +8,7 @@ describe.skip('MetronomePattern Errors', () => {
     const setWrongSettings = () =>
       patternMaker.setPatternSettings({
         playNotes: 'quarterNotes',
-        playFillOn: { beat: '4', subBeat: '0' },
+        playHelperOn: { beat: '4', subBeat: '0' },
         timeSignature: { beats: '3', division: '4' },
       });
     it('should throw and error', () => {
@@ -21,7 +21,7 @@ describe.skip('MetronomePattern Errors', () => {
     const setWrongSettings = () =>
       patternMaker.setPatternSettings({
         playNotes: 'quarterNotes',
-        playFillOn: { beat: '4', subBeat: '5' },
+        playHelperOn: { beat: '4', subBeat: '5' },
         timeSignature: { beats: '4', division: '4' },
       });
     it('should throw and error', () => {

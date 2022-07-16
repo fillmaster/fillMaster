@@ -1,7 +1,7 @@
 import assert from 'assert';
 import MetronomePattern from '../../src/classes/pattern/metronomePattern';
 
-const patternMaker = MetronomePattern.getInstance(4);
+const patternMaker = MetronomePattern.getInstance();
 
 // Original Tests
 
@@ -81,7 +81,7 @@ describe('Test custom pattern set to default', () => {
       playHelperOn: { beat: '4', subBeat: '0' },
       timeSignature: { beats: '4', division: '4' },
     });
-    patternMaker.setPatternSettingsToDefault();
+    patternMaker.resetPatternSettingsToDefault();
     assert.equal(patternMaker.getMetronomeString(), '1000200020002000');
     assert.equal(patternMaker.getMetronomeString().length, 16);
   });
@@ -94,7 +94,7 @@ describe('Test custom pattern set to default and back', () => {
       playHelperOn: { beat: '4', subBeat: '0' },
       timeSignature: { beats: '4', division: '4' },
     });
-    patternMaker.setPatternSettingsToDefault();
+    patternMaker.resetPatternSettingsToDefault();
     patternMaker.setPatternSettings({
       playNotes: 'wholeNotes',
       playHelperOn: { beat: '4', subBeat: '0' },

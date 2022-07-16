@@ -1,7 +1,7 @@
 import assert from 'assert';
-import MetronomePattern from '../../src/utils/classes/patternMaker';
+import MetronomePattern from '../../src/classes/pattern/metronomePattern';
 
-const patternMaker = MetronomePattern.getInstance(8);
+const patternMaker = MetronomePattern.getInstance();
 
 describe('MetronomePattern', () => {
   describe('Test default string on creation with SubDivision 8', () => {
