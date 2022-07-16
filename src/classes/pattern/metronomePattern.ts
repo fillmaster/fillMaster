@@ -1,4 +1,9 @@
-import { IPatternSettings, MetronomeSounds, PlayHelperOn, SubDivision } from './models-interfaces';
+import {
+  IPatternHelperSettings,
+  MetronomeSounds,
+  PlayHelperOn,
+  SubDivision,
+} from './models-interfaces';
 import Pattern from './pattern';
 import {
   getBlankString,
@@ -13,17 +18,23 @@ class MetronomePattern extends Pattern {
 
   private static instance: MetronomePattern;
 
+  protected override defaultPatternSettings: IPatternHelperSettings = {
+    playNotes: 'quarterNotes',
+    timeSignature: { beats: '4', division: '4' },
+    playHelperOn: { beat: '3', subBeat: '0' },
+  };
+
   private constructor(
     playHelperOn: PlayHelperOn,
     subDivision: SubDivision,
-    patternSettings?: IPatternSettings
+    patternSettings?: IPatternHelperSettings
   ) {
     super(patternSettings);
     this.playHelperOn = playHelperOn;
   }
 
   public static getInstance(
-    patternSettings?: IPatternSettings,
+    patternSettings?: IPatternHelperSettings,
     subDivision: SubDivision = 8,
     playHelperOn: PlayHelperOn = { beat: '3', subBeat: '0' }
   ): MetronomePattern {

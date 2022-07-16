@@ -1,9 +1,9 @@
-import { IPatternSettings, SubDivision } from './models-interfaces';
+import { IPatternHelperSettings, IPatternSettings, SubDivision } from './models-interfaces';
 
 class Pattern {
   protected subDivision: SubDivision;
 
-  private defaultPatternSettings: IPatternSettings = {
+  protected defaultPatternSettings: IPatternSettings = {
     playNotes: 'quarterNotes',
     timeSignature: { beats: '4', division: '4' },
   };
@@ -21,15 +21,15 @@ class Pattern {
     return this.subDivision;
   };
 
-  getDefaultPatternSettings(): IPatternSettings {
+  getDefaultPatternSettings(): IPatternSettings | IPatternHelperSettings {
     return { ...this.defaultPatternSettings };
   }
 
-  getPatternSettings(): IPatternSettings {
+  getPatternSettings(): IPatternSettings | IPatternHelperSettings {
     return this.patternSettings;
   }
 
-  setPatternSettings(patternSettings: IPatternSettings): void {
+  setPatternSettings(patternSettings: IPatternSettings | IPatternHelperSettings): void {
     this.patternSettings = patternSettings;
   }
 
