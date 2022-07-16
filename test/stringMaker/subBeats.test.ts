@@ -15,8 +15,9 @@ describe('Test fill start on the e of 2', () => {
       playFillOn: { beat: '2', subBeat: '1' },
       timeSignature: { beats: '4', division: '4' },
     });
-    assert.equal(patternMaker.getMetronomeStringWithFill(), '1000230020002000');
-    assert.equal(patternMaker.getMetronomeStringWithFill().length, 16);
+    const pattern = patternMaker.getMetronomeStringWithFill();
+    assert.equal(pattern, '1000230020002000');
+    assert.equal(pattern.length, 16);
   });
 });
 

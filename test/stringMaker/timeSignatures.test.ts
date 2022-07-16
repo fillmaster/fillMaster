@@ -10,7 +10,8 @@ describe('Test quarterNotes on and fill on beat 3', () => {
       playFillOn: { beat: '3', subBeat: '0' },
       timeSignature: { beats: '3', division: '4' },
     });
-    assert.equal(patternMaker.getMetronomeStringWithFill(), '100000002000000030000000');
-    assert.equal(patternMaker.getMetronomeStringWithFill().length, 24);
+    const pattern = patternMaker.getMetronomeStringWithFill();
+    assert.equal(pattern, '100000002000000030000000');
+    assert.equal(pattern.length, 24);
   });
 });
