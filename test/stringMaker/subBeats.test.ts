@@ -2,7 +2,8 @@ import assert from 'assert';
 import MetronomePattern from '../../src/classes/pattern/metronomePattern';
 
 const patternMaker = MetronomePattern.getInstance();
-patternMaker.setSubDivision(4);
+//todo: how to set 2nd PARAM in instantiate?
+//todo: if it fixes issue. remove setter!
 
 // music speak (with 4 subdivisions):
 // fill on the e of 1 = 1300

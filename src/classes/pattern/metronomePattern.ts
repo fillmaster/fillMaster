@@ -1,4 +1,9 @@
-import { IPatternHelperSettings, MetronomeSounds, PlayHelperOn } from './models-interfaces';
+import {
+  IPatternHelperSettings,
+  MetronomeSounds,
+  PlayHelperOn,
+  SubDivision,
+} from './models-interfaces';
 import Pattern from './pattern';
 import {
   getBlankString,
@@ -9,9 +14,9 @@ import {
 } from './patternUtils';
 
 class MetronomePattern extends Pattern {
-  private playHelperOn: PlayHelperOn;
-
   private static instance: MetronomePattern;
+
+  protected override patternSettings: IPatternHelperSettings;
 
   protected override defaultPatternSettings: IPatternHelperSettings = {
     playNotes: 'quarterNotes',
@@ -19,24 +24,28 @@ class MetronomePattern extends Pattern {
     playHelperOn: { beat: '3', subBeat: '0' },
   };
 
-  private constructor(playHelperOn: PlayHelperOn, patternSettings?: IPatternHelperSettings) {
-    super(patternSettings);
-    this.playHelperOn = playHelperOn;
+  private constructor(
+    patternSettings?: IPatternHelperSettings,
+    subDivision?: SubDivision,
+    playHelperOn?: PlayHelperOn
+  ) {
+    super(subDivision, patternSettings);
+    this.patternSettings = this.defaultPatternSettings;
   }
 
   public static getInstance(
     patternSettings?: IPatternHelperSettings,
+    subDivision?: SubDivision,
     playHelperOn: PlayHelperOn = { beat: '3', subBeat: '0' }
   ): MetronomePattern {
     if (!MetronomePattern.instance) {
-      MetronomePattern.instance = new MetronomePattern(playHelperOn, patternSettings);
+      MetronomePattern.instance = new MetronomePattern(patternSettings, subDivision, playHelperOn);
     }
-
     return MetronomePattern.instance;
   }
 
   getMetronomeStringWithFill(): string {
-    const { beat, subBeat } = this.playHelperOn;
+    const { beat, subBeat } = this.patternSettings.playHelperOn;
 
     const metronomeString = this.createMetronomeString();
     const fillIndex = getIndexForFillCharacter(beat, this.subDivision, subBeat);

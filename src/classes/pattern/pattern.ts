@@ -13,16 +13,16 @@ class Pattern {
     timeSignature: { beats: '4', division: '4' },
   };
 
-  private patternSettings: IPatternSettings; // user provided settings
+  protected patternSettings: IPatternSettings; // user provided settings
 
-  constructor(patternSettings?: IPatternSettings) {
+  constructor(subDivision?: SubDivision, patternSettings?: IPatternSettings) {
     this.patternSettings = patternSettings
       ? { ...this.getDefaultPatternSettings(), ...patternSettings }
       : this.getDefaultPatternSettings();
-    this.subDivision = 8;
+    this.subDivision = subDivision || 8;
   }
 
-  public getSubDivision = () => {
+  protected getSubDivision = () => {
     return this.subDivision;
   };
 
