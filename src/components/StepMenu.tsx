@@ -212,7 +212,7 @@ const VerticalLinearStepper = () => {
               sx={{
                 display: 'flex',
                 width: '100%',
-                paddingLeft: '70vw',
+                marginLeft: '75%',
               }}
             >
               <span>Bar:&nbsp;</span>
