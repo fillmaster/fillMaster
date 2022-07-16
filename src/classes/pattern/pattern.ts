@@ -15,15 +15,19 @@ class Pattern {
 
   private patternSettings: IPatternSettings; // user provided settings
 
-  constructor(patternSettings?: IPatternSettings, subDivision: SubDivision = 8) {
+  constructor(patternSettings?: IPatternSettings) {
     this.patternSettings = patternSettings
       ? { ...this.getDefaultPatternSettings(), ...patternSettings }
       : this.getDefaultPatternSettings();
-    this.subDivision = subDivision;
+    this.subDivision = 8;
   }
 
   public getSubDivision = () => {
     return this.subDivision;
+  };
+
+  public setSubDivision = (subDivision: SubDivision) => {
+    this.subDivision = subDivision;
   };
 
   public resetTimeSignature = () => {

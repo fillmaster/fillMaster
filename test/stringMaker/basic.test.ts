@@ -2,6 +2,7 @@ import assert from 'assert';
 import MetronomePattern from '../../src/classes/pattern/metronomePattern';
 
 const patternMaker = MetronomePattern.getInstance();
+patternMaker.setSubDivision(4);
 
 // Original Tests
 
@@ -123,7 +124,7 @@ describe('Test fill when start set to 2', () => {
   it('should return 1000300020002000', () => {
     patternMaker.setPatternSettings({
       playNotes: 'quarterNotes',
-      playHelperOn: { beat: '2', subBeat: '0' },
+      playHelperOn: { beat: '4', subBeat: '0' },
       timeSignature: { beats: '4', division: '4' },
     });
     assert.equal(patternMaker.getMetronomeStringWithFill(), '1000300020002000');
