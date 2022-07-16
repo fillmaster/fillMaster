@@ -1,9 +1,4 @@
-import {
-  IPatternHelperSettings,
-  MetronomeSounds,
-  PlayHelperOn,
-  SubDivision,
-} from './models-interfaces';
+import { IPatternHelperSettings, MetronomeSounds } from './models-interfaces';
 import Pattern from './pattern';
 import {
   getBlankString,
@@ -16,7 +11,8 @@ import {
 class MetronomePattern extends Pattern {
   private static instance: MetronomePattern;
 
-  protected override patternSettings: IPatternHelperSettings;
+  // https://stackoverflow.com/questions/49699067/property-has-no-initializer-and-is-not-definitely-assigned-in-the-construc
+  public override patternSettings!: IPatternHelperSettings;
 
   protected override defaultPatternSettings: IPatternHelperSettings = {
     playNotes: 'quarterNotes',
@@ -24,22 +20,14 @@ class MetronomePattern extends Pattern {
     playHelperOn: { beat: '3', subBeat: '0' },
   };
 
-  private constructor(
-    patternSettings?: IPatternHelperSettings,
-    subDivision?: SubDivision,
-    playHelperOn?: PlayHelperOn
-  ) {
-    super(subDivision, patternSettings);
-    this.patternSettings = this.defaultPatternSettings;
+  // constructor is necessary to keep it private
+  private constructor(patternSettings?: IPatternHelperSettings) {
+    super(patternSettings);
   }
 
-  public static getInstance(
-    patternSettings?: IPatternHelperSettings,
-    subDivision?: SubDivision,
-    playHelperOn: PlayHelperOn = { beat: '3', subBeat: '0' }
-  ): MetronomePattern {
+  public static getInstance(patternSettings?: IPatternHelperSettings): MetronomePattern {
     if (!MetronomePattern.instance) {
-      MetronomePattern.instance = new MetronomePattern(patternSettings, subDivision, playHelperOn);
+      MetronomePattern.instance = new MetronomePattern(patternSettings);
     }
     return MetronomePattern.instance;
   }
@@ -55,6 +43,10 @@ class MetronomePattern extends Pattern {
       MetronomeSounds.MetronomeSoundFill
     );
     return metronomeFillString;
+  }
+
+  setPatternSettings(patternSettings: IPatternHelperSettings): void {
+    this.patternSettings = patternSettings;
   }
 
   public getMetronomeString = () => {

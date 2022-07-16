@@ -15,14 +15,14 @@ class Pattern {
 
   protected patternSettings: IPatternSettings; // user provided settings
 
-  constructor(subDivision?: SubDivision, patternSettings?: IPatternSettings) {
+  constructor(patternSettings?: IPatternSettings) {
     this.patternSettings = patternSettings
       ? { ...this.getDefaultPatternSettings(), ...patternSettings }
       : this.getDefaultPatternSettings();
-    this.subDivision = subDivision || 8;
+    this.subDivision = 8;
   }
 
-  protected getSubDivision = () => {
+  public getSubDivision = () => {
     return this.subDivision;
   };
 
@@ -45,7 +45,7 @@ class Pattern {
     return this.patternSettings;
   }
 
-  setPatternSettings(patternSettings: IPatternSettings | IPatternHelperSettings): void {
+  setPatternSettings(patternSettings: IPatternSettings): void {
     this.patternSettings = patternSettings;
   }
 
