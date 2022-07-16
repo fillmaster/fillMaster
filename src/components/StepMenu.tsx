@@ -122,12 +122,12 @@ const VerticalLinearStepper = () => {
   };
 
   useEffect(() => {
-    const handleResetPatternSettings = () => {
+    const handleResetSettings = () => {
       patternMaker.resetTimeSignature();
       setSliderValues(DEFAULT_SLIDER_VALUES);
       setTimeSignature(DEFAULT_TIME_SIGNATURE);
     };
-    window.addEventListener('resetPatternSettings', handleResetPatternSettings);
+    window.addEventListener('resetPatternSettings', handleResetSettings);
 
     return () => window.removeEventListener('resetSettings', handleResetSettings);
   }, [patternMaker]);

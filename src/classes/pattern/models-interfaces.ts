@@ -1,6 +1,6 @@
-import { BeatsPerBar } from '../../consts/beatsPerBar';
-import { MeasureDivision } from '../../consts/measureDivisions';
-import { PlayNotes } from '../../consts/playNotes';
+import { BeatsPerBar } from '../../constants/beatsPerBar';
+import { MeasureDivision } from '../../constants/measureDivisions';
+import { PlayNotes } from '../../constants/playNotes';
 
 export type SubBeatPosition = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7';
 

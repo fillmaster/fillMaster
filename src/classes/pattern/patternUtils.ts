@@ -1,6 +1,6 @@
-import { BeatsPerBar } from '../../consts/beatsPerBar';
-import { MeasureDivision } from '../../consts/measureDivisions';
-import { PlayNotes } from '../../consts/playNotes';
+import { BeatsPerBar } from '../../constants/beatsPerBar';
+import { MeasureDivision } from '../../constants/measureDivisions';
+import { PlayNotes } from '../../constants/playNotes';
 import assertUnreachable from '../../utils/assertUnreachable';
 import { getPlayNotesByNumber } from '../../utils/playNotesFunctions';
 import { MetronomeSounds, SubBeatPosition, SubDivision } from './models-interfaces';
