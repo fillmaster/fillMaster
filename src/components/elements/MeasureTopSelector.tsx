@@ -1,4 +1,4 @@
-import { BeatsPerBar } from '../../constsants/beatsPerBar';
+import { BeatsPerBar } from '../../constants/beatsPerBar';
 import Selector from './Selector';
 
 type MeasureTopSelectorItem = {

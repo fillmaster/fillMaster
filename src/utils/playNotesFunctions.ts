@@ -1,5 +1,5 @@
-import { MeasureDivision } from '../constsants/measureDivisions';
-import { PlayNotes } from '../constsants/playNotes';
+import { MeasureDivision } from '../constants/measureDivisions';
+import { PlayNotes } from '../constants/playNotes';
 import assertUnreachable from './assertUnreachable';
 
 export type PlayNotesNumber = MeasureDivision | '1';

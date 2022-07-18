@@ -1,4 +1,4 @@
-import { PlayNotes } from '../../constsants/playNotes';
+import { PlayNotes } from '../../constants/playNotes';
 import Selector from './Selector';
 
 type NoteDivisionSelectorItem = {
