@@ -7,8 +7,8 @@ const patternMaker = PatternMaker.getInstance(4);
 
 describe('PatternMaker', () => {
   describe('Test default string on creation', () => {
-    it('should return 1000200020002000x', () => {
-      assert.equal(patternMaker.getMetronomeString(), '1000200020002000');
+    it('should return 1000200020002000', () => {
+      assert.equal(patternMaker.getMetronomeString(), '1000200020002000x');
       assert.equal(patternMaker.getMetronomeString().length, 16);
     });
   });
