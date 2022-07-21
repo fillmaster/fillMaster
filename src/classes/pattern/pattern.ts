@@ -15,7 +15,7 @@ abstract class Pattern {
 
   protected patternSettings: IPatternSettings; // user provided settings
 
-  constructor(patternSettings?: IPatternSettings) {
+  public constructor(patternSettings?: IPatternSettings) {
     this.patternSettings = patternSettings
       ? { ...this.getDefaultPatternSettings(), ...patternSettings }
       : this.getDefaultPatternSettings();
@@ -37,21 +37,21 @@ abstract class Pattern {
     };
   };
 
-  abstract getMetronomeString(): string;
+  public abstract getMetronomeString(): string;
 
-  getDefaultPatternSettings(): IPatternSettings | IPatternHelperSettings {
+  public getDefaultPatternSettings(): IPatternSettings | IPatternHelperSettings {
     return { ...this.defaultPatternSettings };
   }
 
-  getPatternSettings(): IPatternSettings | IPatternHelperSettings {
+  public getPatternSettings(): IPatternSettings | IPatternHelperSettings {
     return this.patternSettings;
   }
 
-  setPatternSettings(patternSettings: IPatternSettings): void {
+  public setPatternSettings(patternSettings: IPatternSettings): void {
     this.patternSettings = patternSettings;
   }
 
-  resetPatternSettingsToDefault(): void {
+  public resetPatternSettingsToDefault(): void {
     this.patternSettings = { ...this.getDefaultPatternSettings() };
   }
 }

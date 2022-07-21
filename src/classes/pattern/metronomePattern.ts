@@ -31,11 +31,11 @@ class MetronomePattern extends Pattern {
     return MetronomePattern.instance;
   }
 
-  getDefaultPlayHelperOn(): PlayHelperOn {
+  public getDefaultPlayHelperOn(): PlayHelperOn {
     return { ...this.playHelperOn };
   }
 
-  getMetronomeStringWithFill(): string {
+  public getMetronomeStringWithFill(): string {
     const { beat, subBeat } = this.playHelperOn;
 
     const metronomeString = this.createMetronomeString();
@@ -48,7 +48,7 @@ class MetronomePattern extends Pattern {
     return metronomeFillString;
   }
 
-  setPlayHelperOn(playHelperOn: PlayHelperOn): void {
+  public setPlayHelperOn(playHelperOn: PlayHelperOn): void {
     this.playHelperOn = playHelperOn;
   }
 

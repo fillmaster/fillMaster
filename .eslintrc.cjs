@@ -26,6 +26,7 @@ module.exports = {
     '@typescript-eslint/no-useless-constructor': ['error'],
     'no-shadow': 'off', // contains incorrect error messages
     '@typescript-eslint/no-shadow': ['error'],
+    '@typescript-eslint/explicit-member-accessibility': ['error'],
     'react-hooks/exhaustive-deps': 'off',
     'no-underscore-dangle': 'off',
     'no-use-before-define': 'off',
