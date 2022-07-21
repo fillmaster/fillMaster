@@ -1,9 +1,9 @@
 import { Grid } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { BeatsPerBar, BEATS_PER_BAR } from '../consts/beatsPerBar';
-import { MeasureDivision, MEASURE_DIVISIONS } from '../consts/measureDivisions';
-import { PlayNotes } from '../consts/playNotes';
-import PatternMaker from '../utils/classes/patternMaker';
+import MetronomePattern from '../classes/pattern/metronomePattern';
+import { BeatsPerBar, BEATS_PER_BAR } from '../constants/beatsPerBar';
+import { MeasureDivision, MEASURE_DIVISIONS } from '../constants/measureDivisions';
+import { PlayNotes } from '../constants/playNotes';
 import getAvailablePlayNotes from '../utils/getAvailablePlayNotes';
 import {
   getNamesForPlayNotes,
@@ -19,7 +19,7 @@ import NoteDivisionSelector, { NoteDivisionSelectorItems } from './elements/Note
 interface SelectorsProps {
   timeSignatureTop: BeatsPerBar;
   timeSignatureBottom: MeasureDivision;
-  patternMaker: PatternMaker;
+  patternMaker: MetronomePattern;
   isCountIn: () => boolean;
   handleSetNoteDivision: (division: string) => void;
   setTimeSignatureTop: (beats: BeatsPerBar) => void;
@@ -41,10 +41,10 @@ const Selectors = ({
     setKey(key + 1);
   }, [timeSignatureBottom, timeSignatureTop]);
 
-  // PatternMaker getters must be used for beats/divisions in return() - don't use timeSig top/bottom
+  // MetronomePattern getters must be used for beats/divisions in return() - don't use timeSig top/bottom
   // states here as it becomes a source of crashing.
-  const currentBeatsPerBar = () => patternMaker.getSettings().timeSignature.beats;
-  const currentMeasureDivision = () => patternMaker.getSettings().timeSignature.division;
+  const currentBeatsPerBar = () => patternMaker.getPatternSettings().timeSignature.beats;
+  const currentMeasureDivision = () => patternMaker.getPatternSettings().timeSignature.division;
 
   return (
     <Grid container spacing={2}>

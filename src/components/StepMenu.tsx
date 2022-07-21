@@ -10,11 +10,12 @@ import Typography from '@mui/material/Typography';
 import { useContext, useEffect, useState } from 'react';
 import { FillOnBar } from '../App';
 import '../App.css';
-import { BeatsPerBar } from '../consts/beatsPerBar';
-import { MeasureDivision } from '../consts/measureDivisions';
+import MetronomePattern from '../classes/pattern/metronomePattern';
+import { DEFAULT_TIME_SIGNATURE } from '../classes/pattern/models-interfaces';
+import { BeatsPerBar } from '../constants/beatsPerBar';
+import { MeasureDivision } from '../constants/measureDivisions';
 import useLocalStorage from '../hooks/useLocalStorage';
 import assertUnreachable from '../utils/assertUnreachable';
-import PatternMaker, { DEFAULT_TIME_SIGNATURE } from '../utils/classes/patternMaker';
 import getStringArrayBetweenTwoValues from '../utils/getArrayBetweenValues';
 import MetronomeContainer from './MetronomeContainer';
 import QuickRandomiser from './QuickRandomiser';
@@ -46,7 +47,7 @@ const steps = [
 const DEFAULT_SLIDER_VALUES = [60, 120];
 
 const VerticalLinearStepper = () => {
-  const patternMaker = PatternMaker.getInstance();
+  const patternMaker = MetronomePattern.getInstance();
   const [activeStep, setActiveStep] = useState(0);
   const [beatIdea, setBeatIdea] = useState('');
   const [fillStart, setFillStart] = useState('');
@@ -61,21 +62,21 @@ const VerticalLinearStepper = () => {
 
   const [sliderValues, setSliderValues] = useLocalStorage('sliderValues', DEFAULT_SLIDER_VALUES);
   const [{ beats: timeSignatureTop, division: timeSignatureBottom }, setTimeSignature] =
-    useLocalStorage('timeSignature', patternMaker.getSettings().timeSignature);
+    useLocalStorage('timeSignature', patternMaker.getPatternSettings().timeSignature);
 
   const handleSetCurrentBar = (bar: number) => {
     setCurrentBar(bar);
   };
 
   const handleSetTimeSignatureTop = (beats: BeatsPerBar) => {
-    setTimeSignature(({ division }) => ({
+    setTimeSignature(({ division }: any) => ({
       beats,
       division,
     }));
   };
 
   const handleSetTimeSignatureBottom = (division: MeasureDivision) => {
-    setTimeSignature(({ beats }) => ({
+    setTimeSignature(({ beats }: any) => ({
       beats,
       division,
     }));
@@ -126,9 +127,9 @@ const VerticalLinearStepper = () => {
       setSliderValues(DEFAULT_SLIDER_VALUES);
       setTimeSignature(DEFAULT_TIME_SIGNATURE);
     };
-    window.addEventListener('resetSettings', handleResetSettings);
+    window.addEventListener('resetPatternSettings', handleResetSettings);
 
-    return () => window.removeEventListener('rsetSettings', handleResetSettings);
+    return () => window.removeEventListener('resetSettings', handleResetSettings);
   }, [patternMaker]);
 
   useEffect(() => {
@@ -212,7 +213,7 @@ const VerticalLinearStepper = () => {
               sx={{
                 display: 'flex',
                 width: '100%',
-                paddingLeft: '70vw',
+                marginLeft: '75%',
               }}
             >
               <span>Bar:&nbsp;</span>

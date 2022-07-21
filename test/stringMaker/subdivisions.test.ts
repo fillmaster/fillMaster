@@ -1,9 +1,10 @@
 import assert from 'assert';
-import PatternMaker from '../../src/utils/classes/patternMaker';
+import MetronomePattern from '../../src/classes/pattern/metronomePattern';
 
-const patternMaker = PatternMaker.getInstance(8);
+const patternMaker = MetronomePattern.getInstance();
+patternMaker.setSubDivision(8);
 
-describe('PatternMaker', () => {
+describe('MetronomePattern', () => {
   describe('Test default string on creation with SubDivision 8', () => {
     it('should return 10000000200000002000000020000000', () => {
       assert.equal(patternMaker.getMetronomeString(), '10000000200000002000000020000000');

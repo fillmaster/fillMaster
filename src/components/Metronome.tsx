@@ -1,13 +1,14 @@
 import { Box, lighten, useTheme } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { FillOnBar, HelperSound } from '../App';
-import { BeatsPerBar } from '../consts/beatsPerBar';
-import { MeasureDivision } from '../consts/measureDivisions';
-import { PlayNotes } from '../consts/playNotes';
+import MetronomePattern from '../classes/pattern/metronomePattern';
+import { BeatPosition } from '../classes/pattern/models-interfaces';
+import { BeatsPerBar } from '../constants/beatsPerBar';
+import { MeasureDivision } from '../constants/measureDivisions';
+import { PlayNotes } from '../constants/playNotes';
 // permanent fix needed
 // eslint-disable-next-line import/no-relative-packages
 import ProMetronome from '../react-pro-metronome/src';
-import PatternMaker, { BeatPosition } from '../utils/classes/patternMaker';
 import getStringArrayBetweenTwoValues from '../utils/getArrayBetweenValues';
 import Selectors from './Selectors';
 
@@ -15,7 +16,7 @@ interface MetronomeProps {
   play: boolean;
   tempo: string;
   fillStart: string;
-  patternMaker: PatternMaker;
+  patternMaker: MetronomePattern;
   timeSignatureBottom: MeasureDivision;
   timeSignatureTop: BeatsPerBar;
   setTimeSignatureTop: (beats: BeatsPerBar) => void;
@@ -34,7 +35,9 @@ const Metronome = ({
   setTimeSignatureTop,
   handleSetCurrentBar,
 }: MetronomeProps) => {
-  const [noteDivision, setNoteDivision] = useState(patternMaker.getSettings().playNotes as string);
+  const [noteDivision, setNoteDivision] = useState(
+    patternMaker.getPatternSettings().playNotes as string
+  );
   const [currentBeat, setCurrentBeat] = useState(1);
   const [currentSubBeat, setCurrentSubBeat] = useState(0);
   const oneToBeatsPerBar = getStringArrayBetweenTwoValues(1, currentBeat);
@@ -43,7 +46,7 @@ const Metronome = ({
   const [barCount, setBarCount] = useState(-1);
   const isCountIn = () => barCount === 0 && play;
   const [metronomeString, setMetronomeString] = useState(patternMaker.getMetronomeString());
-  const beatsPerBar = Number(patternMaker.getSettings().timeSignature.beats);
+  const beatsPerBar = Number(patternMaker.getPatternSettings().timeSignature.beats);
   const fillOnBar = useContext(FillOnBar);
 
   handleSetCurrentBar(barCount);
@@ -53,14 +56,14 @@ const Metronome = ({
   };
 
   useEffect(() => {
-    patternMaker.setSettings({
+    patternMaker.setPatternSettings({
       playNotes: noteDivision as PlayNotes,
-      playFillOn: { beat: fillStart as BeatPosition, subBeat: '0' },
       timeSignature: {
         beats: timeSignatureTop as BeatsPerBar,
         division: timeSignatureBottom as MeasureDivision,
       },
     });
+    patternMaker.setPlayHelperOn({ beat: fillStart as BeatPosition, subBeat: '0' });
     setMetronomeString(patternMaker.getMetronomeString());
   }, [noteDivision, fillStart, timeSignatureTop, timeSignatureBottom]);
 
@@ -127,7 +130,7 @@ const Metronome = ({
               }}
             >
               {isCountIn()
-                ? Number(patternMaker.getSettings().timeSignature.beats) - qNote + 1
+                ? Number(patternMaker.getPatternSettings().timeSignature.beats) - qNote + 1
                 : barCount > 0 &&
                   oneToBeatsPerBar.map((beat) => {
                     return <Box sx={{ ...counter }} key={`beat${beat}`} />;
