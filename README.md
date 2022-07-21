@@ -105,7 +105,7 @@ _Note: The above diagram is based on the metronome subdivision setting of 4. i.e
 
 In 5/4 timing. The above diagram would look the same but the count would go up to 5.
 
-In 4/8 timing. The above diagram would look the same but `the beat` would be called Eight Notes, the first subdivision 16ths and the second subdivision would be 32nd notes.
+In 4/8 timing. The above diagram would look the same but `the beat` would be called Eighth Notes, the first subdivision 16ths and the second subdivision would be 32nd notes.
 
 # GLOSSARY
 
