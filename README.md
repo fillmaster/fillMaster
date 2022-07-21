@@ -51,10 +51,77 @@ RPM is written in javascript and at some point in the future we may update this 
 
 ## Music Counting Basics
 
-In standard 4/4 timing:
+_This will hopefully help non-musicians working on the project or musicians who don't know much theory. It's also a guide for how we communicate with the metronome part of the app._
+
+Musicians often count music to help them keep in time. 4/4 is the most common time signature used in music. See glossary (below) for an explanation of time signatures.
+
+* If you decide to play quarter notes (beats) in 4/4. You may count 1, 2, 3, 4, 1, 2, 3, 4.
+
+* If you decide to play eighth notes (two notes per beat) in 4/4. You may count 1 and 2 and 3 and 4 and. This can be called the first subdivision.
+
+* If you decide to play sixteenth notes (four notes per beat) in 4/4. You may count 1 e & a 2 e & a 3 e & a 4 e & a. This can be called the second subdivision.
+
+If all of these are played at 100 bpm (beats per minute). The numbers would fall in the same place and the subdivisions would fall in between. 
+
+If we were to play in 4/8. It would sound identical to 4/4 (its just a naming convention). The first subdivision will now be called 16th notes (as you now are using 8ths as your beat) and the second subdivision will be called 32nd notes.
+
+When making music you can go between beats and subdivisions as much as you want, otherwise the song would be pretty boring. But for the purpose of a metronome we tend to stick to one division at a time.
+
+### Exercise:
+This is of course completely optional, but if you really want to understand why we count in music. Do the following.
+* Count out loud 1, 2, 3, 4 (and repeat)
+* Maintain the same speed but add `and` in between each number. 1 and 2 and 3 and 4 and.
+* Now add `e` (pronounced ee) and `a` (pronounced ah) on either side of the and. 1 e & a 2 e & a 3 e & a 4 e & a
+* Now clap your hands on only the beats (the numbers) whilst continuing to count the subdivisions.
+* Now ALSO clap on the `and` of 3.
+* Now ALSO clap on the `e` and `and` and `a` of 4.
+
+You should now be counting like this (with the claps highlighted) `1` e & a `2` e & a `3` e `&` a `4` `e` `&` `a`.
+
+This is why musicians count. To learn rhythms and to communicate rhythms. `Where is that note you are playing?` - `It's on the 'a' of 3`.
+
+### How does this translate to the metronome in the app?
+
+The metronome in the app takes a string of numbers.
+* 0 = No sound
+* 1 = Accented click sound to emphasise beginning of the bar.
+* 2 = Regular click sound.
+* 3 = Helper sound. This is what makes Fill Master unique. We can place a helper sound on any sub beat to help the user pick out a certain part of the bar.
+
+In 4/4 timing:
 
 | Count: | 1 | e | & | a | 2 | e | & | a | 3 | e | & | a | 4 | e | & | a |
 | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - |
-| Quarter Notes: | 1 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | 0 |
-| Eighth Notes: | 1 | 0 | 2 | 0 | 2 | 0 | 2 | 0 | 2 | 0 | 2 | 0 | 2 | 0 | 2 | 0 |
-| 16th Notes: | 1 | 2 | 2 | 2 | 2 | 2 | 1 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 |
+| **Quarter Notes**: _default_ | 1 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | 0 |
+| **Eighth Notes**: _first subdivision_ | 1 | 0 | 2 | 0 | 2 | 0 | 2 | 0 | 2 | 0 | 2 | 0 | 2 | 0 | 2 | 0 |
+| **16th Notes**:  _second subdivision_ | 1 | 2 | 2 | 2 | 2 | 2 | 1 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 |
+
+_Note: The above diagram is based on the metronome subdivision setting of 4. i.e. There are 4 notes per beat. We actually default to 8 which allows for a third subdivision. The result is essentially the same but with extra 0s between each beat. If you look at the 'pattern' folder in 'tests' this may help you break down what's happening inside our interface with the metronome._
+
+# GLOSSARY
+
+## Time signature: 
+Examples: 4/4 , 7/8 , 9/16
+
+* The first number is the number of beats per bar (a section of music).
+* The second number is the beat value.
+
+4/4 = 4 beats per bar. Each beat is worth a quarter note.
+
+7/8 = 7 beats per bar. Each beat is worth an 8th note.
+
+9/16 = 9 beats per bar. Each beat is worth a 16th note.
+
+_Note: 4/4, 4/8 and 4/16 all sound identical. Whoever transcribes the music may favour one over the other for legibility._
+
+## bpm
+Beats Per Minute.
+
+Whether you are in 4/4 or 5/8 at 100bpm, you are playing 100 beats per minute. If you are simply playing a click track, they would sound identical. Musically though they would differ as you would (for example) put an accent on (i.e. hit a bit harder) the first beat of each bar, so every 4 notes or every 5 notes respectively would have an emphasis. You would also perhaps have a guitar riff that loops every 4 notes or every 5 notes. These will sound pretty different.
+
+Of course 50bpm would be half the speed and 200bpm twice the speed. But it is also possible to stay at 100bpm but just play twice as many notes in the same space and it will sound twice as fast.
+
+For example. If you count the beats in 4/4 as 1, 2, 3, 4. If you then put an AND between them and count the numbers at the same bpm. 1 AND 2 AND 3 AND 4 AND, your music will now sound twice as fast but you have not changed the BPM because the beats are only where you count the numbers. This is called subdivision.
+
+## Subdivision
+See BPM explanation above.
