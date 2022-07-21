@@ -48,3 +48,13 @@ All other components including those you may class as a container live in the 'c
 This project uses the react-pro-metronome (RPM) library. It has been imported into the source as the npm version is no longer maintained and has missing audio files. The audio files would have been replaced regardless, as a special tone is used for the fill start. RPM works perfectly as it uses howler.js (which implements the Web Audio API) for a stable tempo. RPM is also easy to interact with, using strings to abstract interaction with the metronome pulses. Metronome.tsx handles interaction with RPM.
 
 RPM is written in javascript and at some point in the future we may update this to typescript and strip out any unused code, but its not a priority as it works perfectly right now. It should remain isolated at least until we have plenty of UI tests in place. This will allow us to focus on implementing new features to FillMaster. The test file in the RPM directory 'tests/index.js' should be named 'tests/index.test.js'; this was changed as there was conflicts with Jest when ts-jest was added so it was renamed so that the test skips. Before any changes to RPM happen, this test must be reinstated and compatibility issues fixed.
+
+## Music Counting Basics
+
+In standard 4/4 timing:
+
+| Count: | 1 | e | & | a | 2 | e | & | a | 3 | e | & | a | 4 | e | & | a |
+| - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - |
+| Quarter Notes: | 1 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | 0 |
+| Eighth Notes: | 1 | 0 | 2 | 0 | 2 | 0 | 2 | 0 | 2 | 0 | 2 | 0 | 2 | 0 | 2 | 0 |
+| 16th Notes: | 1 | 2 | 2 | 2 | 2 | 2 | 1 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 |
