@@ -5,7 +5,7 @@ import {
   SubDivision,
 } from './models-interfaces';
 
-class Pattern {
+abstract class Pattern {
   protected subDivision: SubDivision;
 
   protected defaultPatternSettings: IPatternSettings = {
@@ -36,6 +36,8 @@ class Pattern {
       timeSignature: DEFAULT_TIME_SIGNATURE,
     };
   };
+
+  abstract getMetronomeString(): string;
 
   getDefaultPatternSettings(): IPatternSettings | IPatternHelperSettings {
     return { ...this.defaultPatternSettings };
