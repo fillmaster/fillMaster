@@ -1,4 +1,4 @@
-import { IPatternHelperSettings, MetronomeSounds } from './models-interfaces';
+import { IPatternHelperSettings, MetronomeSounds, PlayHelperOn } from './models-interfaces';
 import Pattern from './pattern';
 import {
   getBlankString,
@@ -11,29 +11,32 @@ import {
 class MetronomePattern extends Pattern {
   private static instance: MetronomePattern;
 
-  // https://stackoverflow.com/questions/49699067/property-has-no-initializer-and-is-not-definitely-assigned-in-the-construc
-  public override patternSettings!: IPatternHelperSettings;
-
-  protected override defaultPatternSettings: IPatternHelperSettings = {
-    playNotes: 'quarterNotes',
-    timeSignature: { beats: '4', division: '4' },
-    playHelperOn: { beat: '3', subBeat: '0' },
-  };
+  private playHelperOn: PlayHelperOn = { beat: '2', subBeat: '0' };
 
   // constructor is necessary to keep it private
-  private constructor(patternSettings?: IPatternHelperSettings) {
+  private constructor(patternSettings?: IPatternHelperSettings, playHelperOn?: PlayHelperOn) {
     super(patternSettings);
+    this.playHelperOn = playHelperOn
+      ? { ...this.getDefaultPlayHelperOn(), ...playHelperOn }
+      : this.getDefaultPlayHelperOn();
   }
 
-  public static getInstance(patternSettings?: IPatternHelperSettings): MetronomePattern {
+  public static getInstance(
+    patternSettings?: IPatternHelperSettings,
+    playHelperOn?: PlayHelperOn
+  ): MetronomePattern {
     if (!MetronomePattern.instance) {
-      MetronomePattern.instance = new MetronomePattern(patternSettings);
+      MetronomePattern.instance = new MetronomePattern(patternSettings, playHelperOn);
     }
     return MetronomePattern.instance;
   }
 
+  getDefaultPlayHelperOn(): PlayHelperOn {
+    return { ...this.playHelperOn };
+  }
+
   getMetronomeStringWithFill(): string {
-    const { beat, subBeat } = this.patternSettings.playHelperOn;
+    const { beat, subBeat } = this.playHelperOn;
 
     const metronomeString = this.createMetronomeString();
     const fillIndex = getIndexForFillCharacter(beat, this.subDivision, subBeat);
@@ -45,8 +48,8 @@ class MetronomePattern extends Pattern {
     return metronomeFillString;
   }
 
-  setPatternSettings(patternSettings: IPatternHelperSettings): void {
-    this.patternSettings = patternSettings;
+  setPlayHelperOn(playHelperOn: PlayHelperOn): void {
+    this.playHelperOn = playHelperOn;
   }
 
   public getMetronomeString = () => {

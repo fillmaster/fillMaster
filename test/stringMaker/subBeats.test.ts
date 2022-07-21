@@ -13,9 +13,9 @@ describe('Test fill start on the e of 2', () => {
     patternMaker.setSubDivision(4);
     patternMaker.setPatternSettings({
       playNotes: 'quarterNotes',
-      playHelperOn: { beat: '2', subBeat: '1' },
       timeSignature: { beats: '4', division: '4' },
     });
+    patternMaker.setPlayHelperOn({ beat: '2', subBeat: '1' });
     const pattern = patternMaker.getMetronomeStringWithFill();
     assert.equal(pattern, '1000230020002000');
     assert.equal(pattern.length, 16);
@@ -34,9 +34,9 @@ describe('Test fill start on the e of 2', () => {
     patternMaker.setSubDivision(8);
     patternMaker.setPatternSettings({
       playNotes: 'quarterNotes',
-      playHelperOn: { beat: '2', subBeat: '2' },
       timeSignature: { beats: '4', division: '4' },
     });
+    patternMaker.setPlayHelperOn({ beat: '2', subBeat: '2' });
     const pattern = patternMaker.getMetronomeStringWithFill();
     assert.equal(pattern, '10000000203000002000000020000000');
     assert.equal(pattern.length, 32);
