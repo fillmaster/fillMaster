@@ -62,8 +62,8 @@ const Metronome = ({
         beats: timeSignatureTop as BeatsPerBar,
         division: timeSignatureBottom as MeasureDivision,
       },
-      playHelperOn: { beat: fillStart as BeatPosition, subBeat: '0' },
     });
+    patternMaker.setPlayHelperOn({ beat: fillStart as BeatPosition, subBeat: '0' });
     setMetronomeString(patternMaker.getMetronomeString());
   }, [noteDivision, fillStart, timeSignatureTop, timeSignatureBottom]);
 
