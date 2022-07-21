@@ -1,3 +1,4 @@
+import MetronomeStringBuilder from './metronomeStringBuilder';
 import {
   DEFAULT_TIME_SIGNATURE,
   IPatternHelperSettings,
@@ -5,7 +6,7 @@ import {
   SubDivision,
 } from './models-interfaces';
 
-abstract class Pattern {
+abstract class Pattern extends MetronomeStringBuilder {
   protected subDivision: SubDivision;
 
   protected defaultPatternSettings: IPatternSettings = {
@@ -16,6 +17,7 @@ abstract class Pattern {
   protected patternSettings: IPatternSettings; // user provided settings
 
   public constructor(patternSettings?: IPatternSettings) {
+    super();
     this.patternSettings = patternSettings
       ? { ...this.getDefaultPatternSettings(), ...patternSettings }
       : this.getDefaultPatternSettings();
@@ -36,8 +38,6 @@ abstract class Pattern {
       timeSignature: DEFAULT_TIME_SIGNATURE,
     };
   };
-
-  public abstract getMetronomeString(): string;
 
   public getDefaultPatternSettings(): IPatternSettings | IPatternHelperSettings {
     return { ...this.defaultPatternSettings };
