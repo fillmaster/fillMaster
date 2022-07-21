@@ -99,7 +99,7 @@ In 4/4 timing:
 | **Eighth Notes**: _first subdivision_      | 1   | 0   | 2   | 0   | 2   | 0   | 2   | 0   | 2   | 0   | 2   | 0   | 2   | 0   | 2   | 0   |
 | **16th Notes**: _second subdivision_       | 1   | 2   | 2   | 2   | 2   | 2   | 2   | 2   | 2   | 2   | 2   | 2   | 2   | 2   | 2   | 2   |
 |                                            |
-| **Eighth Notes**: Helper sound on `Beat 4` | 1   | 0   | 2   | 0   | 2   | 0   | 2   | 0   | 2   | 0   | 2   | 0   | 3   | 0   | 2   | 0   |
+| **Eighth Notes**: Helper sound on `Beat 4` | 1   | 0   | 2   | 0   | 2   | 0   | 2   | 0   | 2   | 0   | 2   | 0   | `3` | 0   | 2   | 0   |
 
 _Note: The above diagram is based on the metronome subdivision setting of 4. i.e. There can be up to 4 notes per beat. We actually default to 8 which allows for a third subdivision. The result is essentially the same but with extra 0s between each beat. If you look at the 'pattern' folder in 'tests' this may help you break down what's happening inside our interface with the metronome._
 
