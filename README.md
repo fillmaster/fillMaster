@@ -92,11 +92,15 @@ In 4/4 timing:
 
 | Count: | 1 | e | & | a | 2 | e | & | a | 3 | e | & | a | 4 | e | & | a |
 | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - |
-| **Quarter Notes**: _default_ | 1 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | 0 |
+| **Quarter Notes**: _the beat_ | 1 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | 0 | 2 | 0 | 0 | 0 |
 | **Eighth Notes**: _first subdivision_ | 1 | 0 | 2 | 0 | 2 | 0 | 2 | 0 | 2 | 0 | 2 | 0 | 2 | 0 | 2 | 0 |
 | **16th Notes**:  _second subdivision_ | 1 | 2 | 2 | 2 | 2 | 2 | 1 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 | 2 |
 
-_Note: The above diagram is based on the metronome subdivision setting of 4. i.e. There are 4 notes per beat. We actually default to 8 which allows for a third subdivision. The result is essentially the same but with extra 0s between each beat. If you look at the 'pattern' folder in 'tests' this may help you break down what's happening inside our interface with the metronome._
+_Note: The above diagram is based on the metronome subdivision setting of 4. i.e. There can be up to 4 notes per beat. We actually default to 8 which allows for a third subdivision. The result is essentially the same but with extra 0s between each beat. If you look at the 'pattern' folder in 'tests' this may help you break down what's happening inside our interface with the metronome._
+
+In 5/4 timing. The above diagram would look the same but the count would go up to 5.
+
+In 4/8 timing. The above diagram would look the same but the `beat` would be called Eight Notes, the first subdivision 16ths and the second subdivision would be 32nd notes.
 
 # GLOSSARY
 
