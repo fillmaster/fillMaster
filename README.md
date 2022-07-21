@@ -49,7 +49,7 @@ This project uses the react-pro-metronome (RPM) library. It has been imported in
 
 RPM is written in javascript and at some point in the future we may update this to typescript and strip out any unused code, but its not a priority as it works perfectly right now. It should remain isolated at least until we have plenty of UI tests in place. This will allow us to focus on implementing new features to FillMaster. The test file in the RPM directory 'tests/index.js' should be named 'tests/index.test.js'; this was changed as there was conflicts with Jest when ts-jest was added so it was renamed so that the test skips. Before any changes to RPM happen, this test must be reinstated and compatibility issues fixed.
 
-## Music Counting Basics
+## Music Counting Basics and the Metronome Interface
 
 _This will hopefully help non-musicians working on the project or musicians who don't know much theory. It's also a guide for how we communicate with the metronome part of the app._
 
