@@ -214,3 +214,62 @@ describe('Test firstNoteOnly on and fill on beat 1', () => {
     assert.equal(pattern.length, 24);
   });
 });
+
+// Comparing 3/4 to other time signatures
+
+describe('Test pattern 3/4 against pattern 3/2', () => {
+  it('should return 100000002000000020000000', () => {
+    patternMaker.setSettings({
+      playNotes: 'quarterNotes',
+      playFillOn: { beat: '3', subBeat: '0' },
+      timeSignature: { beats: '3', division: '4' },
+    });
+    const patternQuarter = patternMaker.getMetronomeString();
+    patternMaker.setSettings({
+      playNotes: 'halfNotes',
+      playFillOn: { beat: '3', subBeat: '0' },
+      timeSignature: { beats: '3', division: '2' },
+    });
+    const patternHalf = patternMaker.getMetronomeString();
+    assert.equal(patternHalf, patternQuarter);
+    assert.equal(patternHalf.length, patternQuarter.length);
+  });
+});
+
+describe('Test pattern 3/4 against pattern 3/8', () => {
+  it('should return 100000002000000020000000', () => {
+    patternMaker.setSettings({
+      playNotes: 'quarterNotes',
+      playFillOn: { beat: '3', subBeat: '0' },
+      timeSignature: { beats: '3', division: '4' },
+    });
+    const patternQuarter = patternMaker.getMetronomeString();
+    patternMaker.setSettings({
+      playNotes: 'eighthNotes',
+      playFillOn: { beat: '3', subBeat: '0' },
+      timeSignature: { beats: '3', division: '8' },
+    });
+    const patternEighth = patternMaker.getMetronomeString();
+    assert.equal(patternEighth, patternQuarter);
+    assert.equal(patternEighth.length, patternQuarter.length);
+  });
+});
+
+describe('Test pattern 3/4 against pattern 3/16', () => {
+  it('should return 100000002000000020000000', () => {
+    patternMaker.setSettings({
+      playNotes: 'quarterNotes',
+      playFillOn: { beat: '3', subBeat: '0' },
+      timeSignature: { beats: '3', division: '4' },
+    });
+    const patternQuarter = patternMaker.getMetronomeString();
+    patternMaker.setSettings({
+      playNotes: 'sixteenthNotes',
+      playFillOn: { beat: '3', subBeat: '0' },
+      timeSignature: { beats: '3', division: '16' },
+    });
+    const patternSixteenth = patternMaker.getMetronomeString();
+    assert.equal(patternSixteenth, patternQuarter);
+    assert.equal(patternSixteenth.length, patternQuarter.length);
+  });
+});
