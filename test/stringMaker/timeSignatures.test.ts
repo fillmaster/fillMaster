@@ -218,7 +218,7 @@ describe('Test firstNoteOnly on and fill on beat 1', () => {
 // Comparing 3/4 to other time signatures
 
 describe('Test pattern 3/4 against pattern 3/2', () => {
-  it('should return 100000002000000020000000', () => {
+  it('should match both patterns', () => {
     patternMaker.setSettings({
       playNotes: 'quarterNotes',
       playFillOn: { beat: '3', subBeat: '0' },
@@ -237,7 +237,7 @@ describe('Test pattern 3/4 against pattern 3/2', () => {
 });
 
 describe('Test pattern 3/4 against pattern 3/8', () => {
-  it('should return 100000002000000020000000', () => {
+  it('should match both patterns', () => {
     patternMaker.setSettings({
       playNotes: 'quarterNotes',
       playFillOn: { beat: '3', subBeat: '0' },
@@ -256,7 +256,7 @@ describe('Test pattern 3/4 against pattern 3/8', () => {
 });
 
 describe('Test pattern 3/4 against pattern 3/16', () => {
-  it('should return 100000002000000020000000', () => {
+  it('should match both patterns', () => {
     patternMaker.setSettings({
       playNotes: 'quarterNotes',
       playFillOn: { beat: '3', subBeat: '0' },
@@ -271,5 +271,39 @@ describe('Test pattern 3/4 against pattern 3/16', () => {
     const patternSixteenth = patternMaker.getMetronomeString();
     assert.equal(patternSixteenth, patternQuarter);
     assert.equal(patternSixteenth.length, patternQuarter.length);
+  });
+});
+
+// Tests for 1/4
+
+describe('Test pattern 1/4 against pattern 1/2', () => {
+  it('should match both patterns', () => {
+    patternMaker.setSettings({
+      playNotes: 'quarterNotes',
+      playFillOn: { beat: '3', subBeat: '0' },
+      timeSignature: { beats: '1', division: '4' },
+    });
+    const patternQuarter = patternMaker.getMetronomeString();
+    patternMaker.setSettings({
+      playNotes: 'halfNotes',
+      playFillOn: { beat: '3', subBeat: '0' },
+      timeSignature: { beats: '1', division: '2' },
+    });
+    const patternHalf = patternMaker.getMetronomeString();
+    assert.equal(patternHalf, patternQuarter);
+    assert.equal(patternHalf.length, patternQuarter.length);
+  });
+});
+
+describe('Test eighthNotes on and fill on beat 1', () => {
+  it('should return 100020002000200020002000', () => {
+    patternMaker.setSettings({
+      playNotes: 'eighthNotes',
+      playFillOn: { beat: '1', subBeat: '0' },
+      timeSignature: { beats: '3', division: '4' },
+    });
+    const pattern = patternMaker.getMetronomeStringWithFill();
+    assert.equal(pattern, '300020002000200020002000');
+    assert.equal(pattern.length, 24);
   });
 });
